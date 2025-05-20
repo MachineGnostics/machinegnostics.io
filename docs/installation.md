@@ -1,0 +1,103 @@
+# Installation Guide
+
+Machine Gnostics is distributed as a standard Python package and is designed for easy installation and integration into your data science workflow. The library has been tested on macOS with Python 3.11 and is fully compatible with standard data science libraries such as NumPy, pandas, and SciPy.
+
+---
+
+## 1. Create a Python Virtual Environment
+
+It is best practice to use a virtual environment to manage your project dependencies and avoid conflicts with other Python packages.
+
+```bash
+# Create a new virtual environment named 'machine-gnostics-env'
+python3 -m venv machinegnostics-env
+
+# Activate the environment (macOS/Linux)
+source machine-gnostics-env/bin/activate
+
+# (On Windows, use: machine-gnostics-env\Scripts\activate)
+```
+
+---
+
+## 2. Install Machine Gnostics
+
+Install the Machine Gnostics library using pip:
+
+```bash
+pip install machinegnostics
+```
+
+This command will install Machine Gnostics and automatically resolve its dependencies.
+
+---
+
+## 3. (Optional) Install Standard Data Science Libraries
+
+If you do not already have them, install the most common data science libraries:
+
+```bash
+pip install numpy pandas scipy
+```
+
+---
+
+## 4. Verify Installation
+
+You can verify that Machine Gnostics and its dependencies are installed correctly by importing them in a Python session:
+
+```python
+import machinegnostics
+import numpy
+
+print("All libraries imported successfully!")
+```
+
+---
+
+## 5. Quick Usage Example
+
+Machine Gnostics is designed to be as simple to use as other machine learning libraries. You can call its functions and classes directly after installation.
+
+```python
+import machinegnostics as mg
+import numpy as np
+from mg.models import RobustRegressor
+
+# Example data
+X = np.array([[1], [2], [3], [4]])
+y = np.array([2, 4, 6, 8])
+
+# Create and fit a robust polynomial regression model
+model = RobustRegressor(degree=1)
+model.fit(X, y)
+
+# Make predictions
+y_pred = model.predict(X)
+
+print("Predictions:", y_pred)
+```
+
+---
+
+## 6. Platform and Environment
+
+- **Operating System:** Tested on macOS (Apple Silicon and Intel)
+- **Python Version:** 3.11 recommended
+- **Dependencies:** Compatible with NumPy, pandas, SciPy, and other standard data science libraries
+
+---
+
+## 7. Troubleshooting
+
+- zEnsure your virtual environment is activated before installing or running Machine Gnostics.
+- If you encounter issues, try upgrading pip:
+  ```bash
+  pip install --upgrade pip
+  ```
+
+- For further help, consult the [official documentation](https://github.com/MachineGnostics) or open an issue on the GitHub repository.
+
+---
+
+Machine Gnostics is designed for simplicity and reliability, making robust machine learning accessible for all Python users.
