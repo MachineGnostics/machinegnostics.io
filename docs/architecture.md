@@ -2,7 +2,7 @@
 
 This diagram presents the conceptual architecture of the **Machine Gnostics** paradigm. Unlike traditional machine learning rooted in statistical theory, this new approach is built on the foundation of **Mathematical Gnostics (MG)**—a finite, deterministic, and physically inspired framework.
 
-<img src="images/mg1.png" alt="Machine Gnostics" width="300"/>
+![Machine Gnostics Architecture](images/mg1.png)
 
 ---
 
