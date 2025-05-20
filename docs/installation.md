@@ -96,7 +96,7 @@ print("Predictions:", y_pred)
   pip install --upgrade pip
   ```
 
-- For further help, consult the [official documentation](https://github.com/MachineGnostics) or open an issue on the GitHub repository.
+- For further help, [consult](https://machinegnostics.info/contact/) us or open an issue on the [GitHub repository](https://github.com/MachineGnostics/machinegnostics).
 
 ---
 
