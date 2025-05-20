@@ -1,3 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://machinegnostics.info/</loc>
+         <lastmod>2025-05-20</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/architecture/</loc>
+         <lastmod>2025-05-20</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/contact/</loc>
+         <lastmod>2025-05-20</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/foundation/</loc>
+         <lastmod>2025-05-20</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/installation/</loc>
+         <lastmod>2025-05-20</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/usage/</loc>
+         <lastmod>2025-05-20</lastmod>
+    </url>
 </urlset>
