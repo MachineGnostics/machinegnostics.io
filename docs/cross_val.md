@@ -12,20 +12,20 @@ Cross-validation is a robust technique for assessing the generalization performa
 
 ## Parameters
 
-| Parameter     | Type      | Default | Description                                                                 |
-|---------------|-----------|---------|-----------------------------------------------------------------------------|
-| `model`       | object    | —       | A machine learning model with `fit(X, y)` and `predict(X)` methods.         |
-| `X`           | array-like| —       | Feature matrix of shape `(n_samples, n_features)`.                          |
-| `y`           | array-like| —       | Target labels of shape `(n_samples,)`.                                      |
-| `k`           | int       | 5       | Number of folds for cross-validation.                                       |
-| `shuffle`     | bool      | True    | Whether to shuffle the dataset before splitting into folds.                 |
-| `random_seed` | int/None  | None    | Seed for reproducible shuffling (ignored if `shuffle=False`).               |
+| Parameter       | Type       | Default | Description                                                             |
+| --------------- | ---------- | ------- | ----------------------------------------------------------------------- |
+| `model`       | object     | —      | A machine learning model with `fit(X, y)` and `predict(X)` methods. |
+| `X`           | array-like | —      | Feature matrix of shape `(n_samples, n_features)`.                    |
+| `y`           | array-like | —      | Target labels of shape `(n_samples,)`.                                |
+| `k`           | int        | 5       | Number of folds for cross-validation.                                   |
+| `shuffle`     | bool       | True    | Whether to shuffle the dataset before splitting into folds.             |
+| `random_seed` | int/None   | None    | Seed for reproducible shuffling (ignored if `shuffle=False`).         |
 
 ---
 
 ## Attributes
 
-- **folds**: `list of tuple`  
+- **folds**: `list of tuple`
   List of `(train_indices, test_indices)` for each fold.
 
 ---
@@ -33,21 +33,20 @@ Cross-validation is a robust technique for assessing the generalization performa
 ## Methods
 
 ### `split()`
+
 Splits the dataset into `k` folds.
 
-- **Returns**:  
-  `folds`: list of tuple  
+- **Returns**:
+  `folds`: list of tuple
   Each tuple contains `(train_indices, test_indices)` for a fold.
 
 ### `evaluate(scoring_func)`
+
 Performs k-fold cross-validation and returns evaluation scores.
 
-- **Parameters**:  
-  `scoring_func`: callable  
-  A function that takes `y_true` and `y_pred` and returns a numeric score (e.g., `mean_squared_error`, `accuracy_score`).
-
-- **Returns**:  
-  `scores`: list of float  
+- **Parameters**:`scoring_func`: callableA function that takes `y_true` and `y_pred` and returns a numeric score (e.g., `mean_squared_error`, `accuracy_score`).
+- **Returns**:
+  `scores`: list of float
   Evaluation scores for each fold.
 
 ---
@@ -56,7 +55,7 @@ Performs k-fold cross-validation and returns evaluation scores.
 
 ```python
 from machinegnostics.models import CrossValidator, LinearRegressor
-from sklearn.metrics import mean_squared_error
+from machinegnostics.metircs import mean_squared_error
 import numpy as np
 
 # Generate random data
@@ -86,7 +85,7 @@ print("Mean Score:", np.mean(scores))
 
 ## License
 
-Machine Gnostics - Machine Gnostics Library  
+Machine Gnostics - Machine Gnostics Library
 Copyright (C) 2025  Machine Gnostics Team
 
 This work is licensed under the terms of the GNU General Public License version 3.0.
