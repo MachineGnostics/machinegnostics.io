@@ -12,13 +12,13 @@
         <meta name="author" content="Nirmal Parmar">
       
       
-        <link rel="canonical" href="https://machinegnostics.info/foundation/">
+        <link rel="canonical" href="https://machinegnostics.info/lin_reg/">
       
       
-        <link rel="prev" href="../installation/">
+        <link rel="prev" href="../architecture/">
       
       
-        <link rel="next" href="../architecture/">
+        <link rel="next" href="../poly_reg/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Foundation - Machine Gnostics</title>
+        <title>Linear Regressor - Machine Gnostics</title>
       
     
     
@@ -86,7 +86,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#foundations-of-mathematical-gnostics" class="md-skip">
+        <a href="#linearregressor-robust-linear-regression-with-machine-gnostics" class="md-skip">
           Skip to content
         </a>
       
@@ -121,7 +121,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Foundation
+              Linear Regressor
             
           </span>
         </div>
@@ -281,32 +281,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Foundation
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../foundation/" class="md-nav__link">
         
   
   
@@ -317,131 +295,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#key-differences-between-statistics-and-gnostics" class="md-nav__link">
-    <span class="md-ellipsis">
-      Key Differences Between Statistics and Gnostics
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Key Differences Between Statistics and Gnostics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-focus-on-the-individual-event" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. Focus on the Individual Event
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-treatment-of-data-and-uncertainty" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Treatment of Data and Uncertainty
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-mathematical-and-physical-foundations" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Mathematical and Physical Foundations
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-aggregation-and-analysis" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Aggregation and Analysis
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#scientific-bases-a-comparative-diagram" class="md-nav__link">
-    <span class="md-ellipsis">
-      Scientific Bases: A Comparative Diagram
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#approaches-to-data-uncertainty" class="md-nav__link">
-    <span class="md-ellipsis">
-      Approaches to Data Uncertainty
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#paradigm-shift-from-statistics-to-gnostics" class="md-nav__link">
-    <span class="md-ellipsis">
-      Paradigm Shift: From Statistics to Gnostics
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#principles-of-the-gnostic-paradigm" class="md-nav__link">
-    <span class="md-ellipsis">
-      Principles of the Gnostic Paradigm
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-adopt-the-gnostic-approach" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why Adopt the Gnostic Approach?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#further-reading" class="md-nav__link">
-    <span class="md-ellipsis">
-      Further Reading
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -472,18 +325,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
@@ -499,7 +354,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Models
@@ -510,10 +365,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../lin_reg/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Linear Regressor
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -524,6 +401,149 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fitx-y" class="md-nav__link">
+    <span class="md-ellipsis">
+      fit(X, y)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#predictx" class="md-nav__link">
+    <span class="md-ellipsis">
+      predict(X)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#save_modelpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      save_model(path)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load_modelpath" class="md-nav__link">
+    <span class="md-ellipsis">
+      load_model(path)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example-usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example Usage
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#training-history" class="md-nav__link">
+    <span class="md-ellipsis">
+      Training History
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    <span class="md-ellipsis">
+      License
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1134,46 +1154,82 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#key-differences-between-statistics-and-gnostics" class="md-nav__link">
+  <a href="#overview" class="md-nav__link">
     <span class="md-ellipsis">
-      Key Differences Between Statistics and Gnostics
+      Overview
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Key Differences Between Statistics and Gnostics">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Key Features
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-focus-on-the-individual-event" class="md-nav__link">
+  <a href="#fitx-y" class="md-nav__link">
     <span class="md-ellipsis">
-      1. Focus on the Individual Event
+      fit(X, y)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-treatment-of-data-and-uncertainty" class="md-nav__link">
+  <a href="#predictx" class="md-nav__link">
     <span class="md-ellipsis">
-      2. Treatment of Data and Uncertainty
+      predict(X)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-mathematical-and-physical-foundations" class="md-nav__link">
+  <a href="#save_modelpath" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Mathematical and Physical Foundations
+      save_model(path)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-aggregation-and-analysis" class="md-nav__link">
+  <a href="#load_modelpath" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Aggregation and Analysis
+      load_model(path)
     </span>
   </a>
   
@@ -1185,54 +1241,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#scientific-bases-a-comparative-diagram" class="md-nav__link">
+  <a href="#example-usage" class="md-nav__link">
     <span class="md-ellipsis">
-      Scientific Bases: A Comparative Diagram
+      Example Usage
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#approaches-to-data-uncertainty" class="md-nav__link">
+  <a href="#training-history" class="md-nav__link">
     <span class="md-ellipsis">
-      Approaches to Data Uncertainty
+      Training History
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#paradigm-shift-from-statistics-to-gnostics" class="md-nav__link">
+  <a href="#notes" class="md-nav__link">
     <span class="md-ellipsis">
-      Paradigm Shift: From Statistics to Gnostics
+      Notes
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#principles-of-the-gnostic-paradigm" class="md-nav__link">
+  <a href="#license" class="md-nav__link">
     <span class="md-ellipsis">
-      Principles of the Gnostic Paradigm
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#why-adopt-the-gnostic-approach" class="md-nav__link">
-    <span class="md-ellipsis">
-      Why Adopt the Gnostic Approach?
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#further-reading" class="md-nav__link">
-    <span class="md-ellipsis">
-      Further Reading
+      License
     </span>
   </a>
   
@@ -1257,79 +1295,178 @@
   
 
 
-<h1 id="foundations-of-mathematical-gnostics">Foundations of Mathematical Gnostics</h1>
-<p>Mathematical Gnostics (MG) offers a fundamentally different approach to data analysis and uncertainty compared to traditional mathematical statistics. Understanding these differences is crucial for users of the Machine Gnostics library, as it shapes the philosophy, algorithms, and practical outcomes of gnostic-based data analysis.</p>
+<h1 id="linearregressor-robust-linear-regression-with-machine-gnostics">LinearRegressor: Robust Linear Regression with Machine Gnostics</h1>
+<p><strong>LinearRegressor</strong> is a robust linear regression model built on the Machine Gnostics framework. Unlike traditional statistical models that rely on probabilistic assumptions, this model uses algebraic and geometric structures to provide deterministic, resilient, and interpretable regression for real-world data.</p>
 <hr />
-<h2 id="key-differences-between-statistics-and-gnostics">Key Differences Between Statistics and Gnostics</h2>
-<h3 id="1-focus-on-the-individual-event">1. Focus on the Individual Event</h3>
+<h2 id="overview">Overview</h2>
+<p>The Machine Gnostics LinearRegressor is designed for robust regression tasks, especially where data may contain outliers, noise, or non-Gaussian distributions. It leverages the core principles of Mathematical Gnostics (MG) to deliver reliable results even in challenging scenarios.</p>
 <ul>
-<li><strong>Statistics:</strong> Traditional statistics investigates the regularities and properties of large collections of uncertain events, relying on the Law of Large Numbers and the Central Limit Theorem. The theory is built for infinite or very large sample sizes, and results for finite datasets are often extrapolated from these infinite models.</li>
-<li><strong>Gnostics:</strong>
-  MG concentrates on the uncertainty of a single event. It builds mathematical and physical models that directly address finite (even small) collections of uncertain events. This approach is more natural for real-world scenarios, where data is always finite.</li>
+<li><strong>Deterministic &amp; Finite:</strong> No randomness or probability; all computations are reproducible.</li>
+<li><strong>Event-Level Modeling:</strong> Handles uncertainty and error at the level of individual data events.</li>
+<li><strong>Algebraic Inference:</strong> Utilizes gnostic algebra and error geometry for robust learning.</li>
+<li><strong>Resilient:</strong> Designed to be robust against outliers, corrupted data, and distributional shifts.</li>
+<li><strong>Flexible:</strong> Supports numpy arrays, pandas DataFrames, and pyspark DataFrames.</li>
+<li><strong>mlflow Integration:</strong> For experiment tracking and deployment.</li>
+<li><strong>Easy Model Persistence:</strong> Save and load models with joblib.</li>
 </ul>
 <hr />
-<h3 id="2-treatment-of-data-and-uncertainty">2. Treatment of Data and Uncertainty</h3>
+<h2 id="key-features">Key Features</h2>
 <ul>
-<li><strong>Statistics:</strong> Assumes the existence of a mean and standard deviation for an underlying probability distribution. Data is often treated as samples from an idealized random process, and analysis is based on population-level properties.</li>
-<li><strong>Gnostics:</strong>
-  Treats each data point as an image of a real, existing event governed by the laws of nature. MG respects the actual values of the data, following the principle: <strong>“Let data speak for themselves.”</strong> The weight or importance of each data item is determined by its own individual error, not by its class or family.</li>
+<li><strong>Fits a linear regression model (polynomial degree = 1)</strong></li>
+<li><strong>Least squares estimation for coefficient calculation</strong></li>
+<li><strong>Robust to outliers and non-Gaussian noise</strong></li>
+<li><strong>Training history tracking for analysis and visualization</strong></li>
+<li><strong>Customizable loss functions and scaling strategies</strong></li>
 </ul>
 <hr />
-<h3 id="3-mathematical-and-physical-foundations">3. Mathematical and Physical Foundations</h3>
+<h2 id="parameters">Parameters</h2>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>max_iter</code></td>
+<td>int</td>
+<td>100</td>
+<td>Maximum number of training iterations.</td>
+</tr>
+<tr>
+<td><code>tol</code></td>
+<td>float</td>
+<td>1e-3</td>
+<td>Convergence threshold for loss or coefficient changes.</td>
+</tr>
+<tr>
+<td><code>mg_loss</code></td>
+<td>str</td>
+<td>'hi'</td>
+<td>Type of gnostic loss:<code>'hi'</code> (estimation relevance), <code>'hj'</code> (irrelevance).</td>
+</tr>
+<tr>
+<td><code>early_stopping</code></td>
+<td>bool or int</td>
+<td>True</td>
+<td>Enables early stopping or sets window size.</td>
+</tr>
+<tr>
+<td><code>verbose</code></td>
+<td>bool</td>
+<td>False</td>
+<td>Prints progress and debug information.</td>
+</tr>
+<tr>
+<td><code>scale</code></td>
+<td>{'auto', float}</td>
+<td>'auto'</td>
+<td>Scaling strategy for the gnostic loss.</td>
+</tr>
+<tr>
+<td><code>history</code></td>
+<td>bool</td>
+<td>True</td>
+<td>Records training history at each iteration.</td>
+</tr>
+<tr>
+<td><code>data_form</code></td>
+<td>str</td>
+<td>'a'</td>
+<td>Input data form:<code>'a'</code> (additive), <code>'m'</code> (multiplicative).</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="attributes">Attributes</h2>
 <ul>
-<li><strong>Statistics:</strong> Relies primarily on Euclidean geometry and Newtonian mechanics, with mathematical theory of measure as its foundation.</li>
-<li><strong>Gnostics:</strong>
-  Utilizes Riemannian geometry and Einstein’s relativistic mechanics, along with vector bi-algebra and thermodynamics. MG also introduces quantification theory as a foundational measurement theory.</li>
+<li><strong>coefficients</strong>: <code>ndarray</code>Final learned regression coefficients.</li>
+<li><strong>weights</strong>: <code>ndarray</code>Final sample weights after convergence.</li>
+<li><strong>_history</strong>: <code>list of dict</code>
+  Training history, including iteration, loss, coefficients, rentropy, and weights.</li>
 </ul>
 <hr />
-<h3 id="4-aggregation-and-analysis">4. Aggregation and Analysis</h3>
+<h2 id="methods">Methods</h2>
+<h3 id="fitx-y"><code>fit(X, y)</code></h3>
+<p>Fits the model to training data using polynomial expansion and gnostic loss minimization.</p>
 <ul>
-<li><strong>Statistics:</strong> Aggregates observed data additively, focusing on population-level summaries.</li>
-<li><strong>Gnostics:</strong>
-  Suggests that additive aggregation should be applied to the parameters of the Ideal Gnostic Cycle, not directly to the observed data.</li>
+<li><strong>X</strong>: array-like, shape (n_samples, n_features)Input features (numpy, pandas, or pyspark DataFrame).</li>
+<li><strong>y</strong>: array-like, shape (n_samples,)
+  Target values.</li>
+</ul>
+<h3 id="predictx"><code>predict(X)</code></h3>
+<p>Predicts output values for new input samples using the trained model.</p>
+<ul>
+<li><strong>X</strong>: array-like, shape (n_samples, n_features)Input features for prediction.</li>
+<li><strong>Returns</strong>:
+  <code>y_pred</code>: ndarray, shape (n_samples,)
+  Predicted target values.</li>
+</ul>
+<h3 id="save_modelpath"><code>save_model(path)</code></h3>
+<p>Saves the trained model to disk using joblib.</p>
+<ul>
+<li><strong>path</strong>: str
+  Directory path to save the model.</li>
+</ul>
+<h3 id="load_modelpath"><code>load_model(path)</code></h3>
+<p>Loads a previously saved model from disk.</p>
+<ul>
+<li><strong>path</strong>: strDirectory path where the model is saved.</li>
+<li><strong>Returns</strong>:
+  Instance of <code>LinearRegressor</code> with loaded parameters.</li>
 </ul>
 <hr />
-<h2 id="scientific-bases-a-comparative-diagram">Scientific Bases: A Comparative Diagram</h2>
-<p><img alt="Scientific Bases of Two Theories" src="../images/img2.png" /></p>
-<p><em>Figure: The scientific foundations of statistics (left) and gnostics (right) span mathematics, physics, geometry, and measurement theory, but differ fundamentally in their approach and underlying principles. [Pavel Kovanic, </em>Mathematical Gnostics<em> (2023)]</em></p>
+<h2 id="example-usage">Example Usage</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegressor</span>
+
+<span class="c1"># Initialize the model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegressor</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">mg_loss</span><span class="o">=</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Fit the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Predict</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Access coefficients</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coefficients</span><span class="p">)</span>
+
+<span class="c1"># Save the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">&quot;my_model_dir/&quot;</span><span class="p">)</span>
+
+<span class="c1"># Load the model</span>
+<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">LinearRegressor</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;my_model_dir/&quot;</span><span class="p">)</span>
+</code></pre></div>
 <hr />
-<h2 id="approaches-to-data-uncertainty">Approaches to Data Uncertainty</h2>
-<p><img alt="Comparison of Two Approaches to Data Uncertainty" src="../images/img1.png" /></p>
-<p><em>Figure: Statistics builds its theory for infinite sample sizes and extrapolates results for finite datasets. Gnostics, in contrast, constructs its theory directly for finite (even single) events, providing a more natural fit for real-world data. [Pavel Kovanic, </em>Mathematical Gnostics<em> (2023)]</em></p>
-<hr />
-<h2 id="paradigm-shift-from-statistics-to-gnostics">Paradigm Shift: From Statistics to Gnostics</h2>
-<p>Mathematical gnostics represents a <strong>paradigm shift</strong> in how we approach data variability and analysis:</p>
+<h2 id="training-history">Training History</h2>
+<p>The model records training history at each iteration, accessible via <code>model._history</code>.Each entry contains:</p>
 <ul>
-<li><strong>Statistics</strong> is rooted in the behavior of large numbers and infinite limits, often requiring extrapolation to address finite datasets.</li>
-<li><strong>Gnostics</strong> is designed for the finite world, modeling uncertainty at the level of individual events and small datasets.</li>
+<li><code>iteration</code>: Iteration number</li>
+<li><code>h_loss</code>: Gnostic loss value</li>
+<li><code>coefficients</code>: Regression coefficients at this iteration</li>
+<li><code>rentropy</code>: Rentropy value</li>
+<li><code>weights</code>: Sample weights at this iteration</li>
 </ul>
-<p>This shift requires a new way of thinking, much like moving from Newtonian to Einsteinian physics. While statistics is easily demonstrated with simple experiments (like coin tosses), the power of gnostics is revealed through its algorithms and their performance on real-world, finite data.</p>
+<p>This enables detailed analysis and visualization of the training process.</p>
 <hr />
-<h2 id="principles-of-the-gnostic-paradigm">Principles of the Gnostic Paradigm</h2>
-<ol>
-<li><strong>Concentration on Individual Events:</strong> MG focuses on the regularities and uncertainty of individual events, not just large populations.</li>
-<li><strong>Respect for Data Values:</strong> Data is taken as it is, with each value carrying its own information and uncertainty.</li>
-<li><strong>Use of Advanced Geometry and Mechanics:</strong> MG employs Riemannian geometry and relativistic mechanics, providing a richer mathematical framework for modeling uncertainty.</li>
-<li><strong>Individual Error Weighting:</strong>
-   The importance of each data point is determined by its own error, not by group-level properties.</li>
-</ol>
-<hr />
-<h2 id="why-adopt-the-gnostic-approach">Why Adopt the Gnostic Approach?</h2>
+<h2 id="notes">Notes</h2>
 <ul>
-<li><strong>Natural Fit for Finite Data:</strong> Real-world data is always finite. MG provides tools and theory that are directly applicable without relying on extrapolation from infinite models.</li>
-<li><strong>Robustness:</strong> By focusing on individual data points and their uncertainties, MG offers greater resilience to outliers and corrupted data.</li>
-<li><strong>Paradigm-Changing Power:</strong>
-  MG overcomes many limitations of traditional statistics, especially in cases where statistical assumptions break down.</li>
+<li>The model is robust to outliers and suitable for datasets with non-Gaussian noise.</li>
+<li>Supports integration with mlflow for experiment tracking and deployment.</li>
+<li>For more information, visit: <a href="https://machinegnostics.info/">https://machinegnostics.info/</a></li>
+<li>Source code: <a href="https://github.com/MachineGnostics/machinegnostics">https://github.com/MachineGnostics/machinegnostics</a></li>
 </ul>
 <hr />
-<h2 id="further-reading">Further Reading</h2>
-<p>For a deeper dive into the foundations and applications of mathematical gnostics, see:</p>
-<ul>
-<li>Pavel Kovanic, <em>Mathematical Gnostics</em> (2023)</li>
-<li>Pavel Kovanic &amp; M.B. Humber, <em>The Economics of Information: Mathematical Gnostics for Data Analysis</em> (2015)</li>
-</ul>
+<h2 id="license">License</h2>
+<p>Machine Gnostics - Machine Gnostics Library
+Copyright (C) 2025  Machine Gnostics Team</p>
+<p>This work is licensed under the terms of the GNU General Public License version 3.0.</p>
+<p><strong>Author:</strong> Nirmal Parmar
+<strong>Date:</strong> 2025-10-01</p>
 <hr />
-<p>Mathematical Gnostics is a new paradigm for data analysis—one that respects the individuality of data, leverages advanced mathematics, and is designed for the finite, real world.</p>
 
 
 
@@ -1361,7 +1498,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../installation/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Installation">
+          <a href="../architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Architecture">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1371,20 +1508,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Installation
+                Architecture
               </div>
             </div>
           </a>
         
         
           
-          <a href="../architecture/" class="md-footer__link md-footer__link--next" aria-label="Next: Architecture">
+          <a href="../poly_reg/" class="md-footer__link md-footer__link--next" aria-label="Next: Polynomial Regressor">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Architecture
+                Polynomial Regressor
               </div>
             </div>
             <div class="md-footer__button md-icon">
