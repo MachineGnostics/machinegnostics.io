@@ -1182,9 +1182,9 @@
 python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>machinegnostics-env
 
 <span class="c1"># Activate the environment (macOS/Linux)</span>
-<span class="nb">source</span><span class="w"> </span>machine-gnostics-env/bin/activate
+<span class="nb">source</span><span class="w"> </span>machinegnostics-env/bin/activate
 
-<span class="c1"># (On Windows, use: machine-gnostics-env\Scripts\activate)</span>
+<span class="c1"># (On Windows, use: machinegnostics-env\Scripts\activate)</span>
 </code></pre></div>
 <hr />
 <h2 id="2-install-machine-gnostics">2. Install Machine Gnostics</h2>
@@ -1208,9 +1208,8 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
 <hr />
 <h2 id="5-quick-usage-example">5. Quick Usage Example</h2>
 <p>Machine Gnostics is designed to be as simple to use as other machine learning libraries. You can call its functions and classes directly after installation.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">machinegnostics</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mg</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mg.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">RobustRegressor</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">RobustRegressor</span>
 
 <span class="c1"># Example data</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
@@ -1236,15 +1235,11 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
 <h2 id="7-troubleshooting">7. Troubleshooting</h2>
 <ul>
 <li>zEnsure your virtual environment is activated before installing or running Machine Gnostics.</li>
-<li>
-<p>If you encounter issues, try upgrading pip:
-  <div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
-</code></pre></div></p>
-</li>
-<li>
-<p>For further help, <a href="https://machinegnostics.info/contact/">consult</a> us or open an issue on the <a href="https://github.com/MachineGnostics/machinegnostics">GitHub repository</a>.</p>
-</li>
+<li>If you encounter issues, try upgrading pip:</li>
 </ul>
+<p><div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</code></pre></div>
+- For further help, <a href="https://machinegnostics.info/contact/">consult</a> us or open an issue on the <a href="https://github.com/MachineGnostics/machinegnostics">GitHub repository</a>.</p>
 <hr />
 <p>Machine Gnostics is designed for simplicity and reliability, making robust machine learning accessible for all Python users.</p>
 
