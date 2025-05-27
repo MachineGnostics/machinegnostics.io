@@ -13,9 +13,9 @@ It is best practice to use a virtual environment to manage your project dependen
 python3 -m venv machinegnostics-env
 
 # Activate the environment (macOS/Linux)
-source machine-gnostics-env/bin/activate
+source machinegnostics-env/bin/activate
 
-# (On Windows, use: machine-gnostics-env\Scripts\activate)
+# (On Windows, use: machinegnostics-env\Scripts\activate)
 ```
 
 ---
@@ -60,9 +60,8 @@ print("All libraries imported successfully!")
 Machine Gnostics is designed to be as simple to use as other machine learning libraries. You can call its functions and classes directly after installation.
 
 ```python
-import machinegnostics as mg
 import numpy as np
-from mg.models import RobustRegressor
+from machinegnostics.models import RobustRegressor
 
 # Example data
 X = np.array([[1], [2], [3], [4]])
@@ -92,10 +91,10 @@ print("Predictions:", y_pred)
 
 - zEnsure your virtual environment is activated before installing or running Machine Gnostics.
 - If you encounter issues, try upgrading pip:
+
   ```bash
   pip install --upgrade pip
   ```
-
 - For further help, [consult](https://machinegnostics.info/contact/) us or open an issue on the [GitHub repository](https://github.com/MachineGnostics/machinegnostics).
 
 ---
