@@ -25,7 +25,6 @@ nav:
   - Installation: installation.md
   - Foundation: foundation.md
   - Architecture: architecture.md
-  # - Usage: usage.md
   - Models:
     - Linear Regressor: lin_reg.md
     - Polynomial Regressor: poly_reg.md
@@ -49,7 +48,7 @@ nav:
     - Gnostic EvalMet: evalmet.md
   - Magnet:
     - Neural Networks: magnet.md
-
+  - Examples: examples.md
   - Contact: contact.md
 
 markdown_extensions:
