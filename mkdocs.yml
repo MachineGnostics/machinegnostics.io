@@ -10,6 +10,10 @@ theme:
     scheme: slate  # Optional but highly recommended theme
   features:
     - navigation.footer
+  custom_dir: overrides
+
+repo_url: https://github.com/MachineGnostics/machinegnostics
+repo_name: Machine Gnostics
 
 extra:
   social:
@@ -21,15 +25,50 @@ nav:
   - Installation: installation.md
   - Foundation: foundation.md
   - Architecture: architecture.md
-  - Usage: usage.md
+  # - Usage: usage.md
+  - Models:
+    - Linear Regressor: lin_reg.md
+    - Polynomial Regressor: poly_reg.md
+    - Logistic Regressor: log_reg.md
+    - Cross Validation: cross_val.md
+    - Train Test Split: train_test_split.md
+  - Metrics:
+    - Accuracy: accuracy.md
+    - Precision: precision.md
+    - Recall: recall.md
+    - F1 Score: f1_score.md
+    - Classification Report: classification_report.md
+    - Mean Absolute Error: mae.md
+    - Mean Squared Error: mse.md
+    - Root Mean Squared Error: rmse.md
+    - Gnostic R2 Score: r2_score.md
+    - Gnostic Correlation: g_correlation.md
+    - Gnostic Relevance: g_relevance.md
+    - Gnostic DivI: divI.md
+    - Gnostic GMMFE: gmmfe.md
+    - Gnostic EvalMet: evalmet.md
+  - Magnet:
+    - Neural Networks: magnet.md
+
   - Contact: contact.md
 
 markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
-
+  - pymdownx.arithmatex:
+      generic: true
+  
 extra:
   analytics:
     provider: google
     property: G-CKN0D75GBF
+  social:
+  - icon: fontawesome/brands/github
+    link: https://github.com/MachineGnostics/machinegnostics
+    name: Machine Gnostics
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+# Prepare a detailed documentation for website. prepare markdown
