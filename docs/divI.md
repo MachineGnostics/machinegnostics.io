@@ -87,7 +87,7 @@ print(result)  # Output: 0.06666666666666667
 
 ## License
 
-Machine Gnostic - Machine Gnostics Library
+Machine Gnostic - Machine Gnostics Library    
 Copyright (C) 2025  Machine Gnosticsg Team
 
 This work is licensed under the terms of the GNU General Public License version 3.0.

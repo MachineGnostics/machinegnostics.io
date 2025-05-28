@@ -145,7 +145,7 @@ Machine Gnostic Polynomial Regression example notebooks:
 
 ---
 
-## Notes
+!!! note "Note"
 
 - The model is robust to outliers and suitable for datasets with non-Gaussian noise.
 - Supports integration with mlflow for experiment tracking and deployment.

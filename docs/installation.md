@@ -30,45 +30,35 @@ pip install machinegnostics
 
 This command will install Machine Gnostics and automatically resolve its dependencies.
 
----
-
-## 3. (Optional) Install Standard Data Science Libraries
-
-If you do not already have them, install the most common data science libraries:
-
-```bash
-pip install numpy pandas scipy
-```
 
 ---
 
-## 4. Verify Installation
+## 3. Verify Installation
 
 You can verify that Machine Gnostics and its dependencies are installed correctly by importing them in a Python session:
 
 ```python
 import machinegnostics
-import numpy
 
 print("All libraries imported successfully!")
 ```
 
 ---
 
-## 5. Quick Usage Example
+## 4. Quick Usage Example
 
 Machine Gnostics is designed to be as simple to use as other machine learning libraries. You can call its functions and classes directly after installation.
 
 ```python
 import numpy as np
-from machinegnostics.models import RobustRegressor
+from machinegnostics.models import LinearRegressor
 
 # Example data
 X = np.array([[1], [2], [3], [4]])
 y = np.array([2, 4, 6, 8])
 
 # Create and fit a robust polynomial regression model
-model = RobustRegressor(degree=1)
+model = LinearRegressor()
 model.fit(X, y)
 
 # Make predictions
@@ -79,7 +69,7 @@ print("Predictions:", y_pred)
 
 ---
 
-## 6. Platform and Environment
+## 5. Platform and Environment
 
 - **Operating System:** Tested on macOS (Apple Silicon and Intel)
 - **Python Version:** 3.11 recommended
@@ -87,15 +77,16 @@ print("Predictions:", y_pred)
 
 ---
 
-## 7. Troubleshooting
+## 6. Troubleshooting
 
-- zEnsure your virtual environment is activated before installing or running Machine Gnostics.
+- Ensure your virtual environment is activated before installing or running Machine Gnostics.
 - If you encounter issues, try upgrading pip:
 
   ```bash
   pip install --upgrade pip
   ```
-- For further help, [consult](https://machinegnostics.info/contact/) us or open an issue on the [GitHub repository](https://github.com/MachineGnostics/machinegnostics).
+!!! note "Help"
+    - For further help, [consult](https://machinegnostics.info/contact/) us or open an issue on the [GitHub repository](https://github.com/MachineGnostics/machinegnostics).
 
 ---
 

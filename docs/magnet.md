@@ -9,10 +9,9 @@
 - **Algebraic Inference:** Utilizes gnostic algebra and error geometry for robust, interpretable learning.
 - **Resilient Architecture:** Designed to be robust against outliers, corrupted data, and distributional shifts.
 
-## Status
-
-Magnet is currently under development.  
-**Coming soon:** Detailed documentation, architecture diagrams, and implementation guides.
+!!! note "Status"
+    Magnet is currently under development.  
+    **Coming soon:** Detailed documentation, architecture diagrams, and implementation guides.
 
 ---
 

@@ -71,13 +71,13 @@ print("y_test:", y_test)
 
 ---
 
-## Notes
+!!! note "Note"
 
-- If `y` is not provided, only `X` will be split and `y_train`, `y_test` will be `None`.
-- If `test_size` is a float, it must be between 0.0 and 1.0 (exclusive).
-- If `test_size` is an int, it must be between 1 and `len(X) - 1`.
-- Setting `shuffle=False` will split the data in order, without randomization.
-- Use `random_seed` for reproducible splits.
+    - If `y` is not provided, only `X` will be split and `y_train`, `y_test` will be `None`.
+    - If `test_size` is a float, it must be between 0.0 and 1.0 (exclusive).
+    - If `test_size` is an int, it must be between 1 and `len(X) - 1`.
+    - Setting `shuffle=False` will split the data in order, without randomization.
+    - Use `random_seed` for reproducible splits.
 
 ---
 

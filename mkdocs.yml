@@ -2,7 +2,9 @@ site_name: Machine Gnostics
 site_url: https://machinegnostics.info
 site_description: A python library for machine learning and data science based on non-statistical methods.
 site_author: Nirmal Parmar
-copyright: Copyright © 2023 Machine Gnostics
+copyright: 
+  Copyright © 2025 Machine Gnostics, Dr. Nirmal Parmar  -   
+  <a href="#__consent">Change cookie settings</a>
 theme:
   name: material
   logo: images/logo.png
@@ -11,7 +13,8 @@ theme:
   features:
     - navigation.footer
   custom_dir: overrides
-
+plugins:
+  - privacy
 repo_url: https://github.com/MachineGnostics/machinegnostics
 repo_name: Machine Gnostics
 
@@ -23,8 +26,10 @@ extra:
 nav:
   - Home: index.md
   - Installation: installation.md
-  - Foundation: foundation.md
-  - Architecture: architecture.md
+  - Foundation: 
+      - Concept: foundation.md
+      - Principles: principles.md
+      - Architecture: architecture.md
   - Models:
     - Linear Regressor: lin_reg.md
     - Polynomial Regressor: poly_reg.md
@@ -66,6 +71,13 @@ extra:
   - icon: fontawesome/brands/github
     link: https://github.com/MachineGnostics/machinegnostics
     name: Machine Gnostics
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

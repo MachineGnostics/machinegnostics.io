@@ -10,7 +10,7 @@ This diagram presents the conceptual architecture of the **Machine Gnostics** pa
 
 ---
 
-## 1. DATA (Base Layer)
+## 1. DATA
 
 The foundation of Machine Gnostics is **DATA**, interpreted differently from statistical frameworks:
 
@@ -44,9 +44,9 @@ MAGCAL is the computational engine that enables gnostic inference:
 
 This layer maps to familiar components of ML pipelines but with MG-specific logic:
 
-- **Models:** Trained using MAGCAL with finite-event inference.
+- **Models:** Developed on the principles of Mathematical Gnostics.
 - **Metrics:** Evaluate using **gnostic loss functions** and **event-level error propagation**.
-- **Magnet:** A novel neural architecture based on **Mathematical Gnostics**, avoiding probabilistic backpropagation and inspired by algebraic learning.
+- **Magnet:** A novel neural architecture based on **Mathematical Gnostics**
 
 ---
 
@@ -59,25 +59,26 @@ Despite its theoretical novelty, Machine Gnostics fits smoothly into modern ML w
 
 ---
 
-## 6. Machine Gnostics (Integration Layer)
+## 6. Machine Gnostics (Integration Layer for Machine Learning)
 
 This layer unifies all components into a working system:
 
-- Integrates **MAGCAL**, **Magnet**, and MG-based components.
+- **MAGCAL** is a Mathematical Gnostics based engine.
 - Functions as a **complete ML framework** based on a deterministic, finite, and algebraic paradigm.
 - Enables seamless data-to-model pipelines rooted in the principles of Mathematical Gnostics.
 
 ---
 
 ## Summary
+!!! info "Quick Understanding"
 
-| Traditional ML (Statistics)        | Machine Gnostics                         |
-|------------------------------------|------------------------------------------|
-| Based on probability theory        | Based on deterministic finite theory     |
-| Relies on large datasets           | Works directly with small datasets       |
-| Uses averages and distributions    | Uses individual error and event modeling |
-| Rooted in Euclidean geometry       | Rooted in Riemannian geometry & physics  |
-| Vulnerable to outliers             | Robust to real-world irregularities      |
+    | Traditional ML (Statistics)        | Machine Gnostics                         |
+    |------------------------------------|------------------------------------------|
+    | Based on probability theory        | Based on deterministic finite theory     |
+    | Relies on large datasets           | Works directly with small datasets       |
+    | Uses averages and distributions    | Uses individual error and event modeling |
+    | Rooted in Euclidean geometry       | Rooted in Riemannian geometry & physics  |
+    | Vulnerable to outliers             | Robust to real-world irregularities      |
 
 ---
 

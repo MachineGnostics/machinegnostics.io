@@ -74,12 +74,12 @@ print("Mean Score:", np.mean(scores))
 
 ---
 
-## Notes
+!!! note "Note"
 
-- The model is re-initialized and trained from scratch for each fold.
-- Supports any model with `fit` and `predict` methods.
-- Works with any scoring function that accepts `y_true` and `y_pred`.
-- Shuffling with a fixed `random_seed` ensures reproducible splits.
+    - The model is re-initialized and trained from scratch for each fold.
+    - Supports any model with `fit` and `predict` methods.
+    - Works with any scoring function that accepts `y_true` and `y_pred`.
+    - Shuffling with a fixed `random_seed` ensures reproducible splits.
 
 ---
 
