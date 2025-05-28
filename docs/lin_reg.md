@@ -128,6 +128,18 @@ This enables detailed analysis and visualization of the training process.
 
 ---
 
+## Example
+
+Machine Gnostic Linear Regression example notebooks: 
+
+- [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_wine_data_linreg.ipynb)
+
+- [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_1_small_data_linreg.ipynb)
+
+![Linear Regression](./plots/lin_reg.png "Linear Regression")
+
+---
+
 ## Notes
 
 - The model is robust to outliers and suitable for datasets with non-Gaussian noise.

@@ -130,6 +130,19 @@ The model records training history at each iteration, accessible via `model._his
 
 This enables detailed analysis and visualization of the training process.
 
+
+---
+
+## Example
+
+Machine Gnostic Polynomial Regression example notebooks: 
+
+- [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_1_small_data_polyreg.ipynb)
+
+- [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_wine_data_polyreg.ipynb)
+
+![Polynomial Regression](./plots/reg3.png "Polynomial Regression")
+
 ---
 
 ## Notes
