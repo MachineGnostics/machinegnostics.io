@@ -46,8 +46,8 @@
       
         
         
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        
+        <link rel="stylesheet" href="../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -63,7 +63,7 @@
 
 <script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-CKN0D75GBF"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-CKN0D75GBF",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-CKN0D75GBF",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
   
-    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+    <script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
   
 
     
@@ -132,46 +132,6 @@
     
     
     
-    
-      
-      
-        <label class="md-header__button md-icon" for="__search">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        </label>
-        <div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
-      <label class="md-search__icon md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
-      </label>
-      <nav class="md-search__options" aria-label="Search">
-        
-        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
-          
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        </button>
-      </nav>
-      
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list" role="presentation"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-      
     
     
       <div class="md-header__source">
@@ -330,45 +290,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-optional-install-standard-data-science-libraries" class="md-nav__link">
+  <a href="#3-verify-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      3. (Optional) Install Standard Data Science Libraries
+      3. Verify Installation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-verify-installation" class="md-nav__link">
+  <a href="#4-quick-usage-example" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Verify Installation
+      4. Quick Usage Example
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-quick-usage-example" class="md-nav__link">
+  <a href="#5-platform-and-environment" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Quick Usage Example
+      5. Platform and Environment
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-platform-and-environment" class="md-nav__link">
+  <a href="#6-troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Platform and Environment
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Troubleshooting
+      6. Troubleshooting
     </span>
   </a>
   
@@ -388,9 +339,20 @@
   
   
   
-    <li class="md-nav__item">
-      <a href="../foundation/" class="md-nav__link">
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
   
   
   <span class="md-ellipsis">
@@ -399,13 +361,64 @@
   </span>
   
 
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Foundation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../foundation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Concept
+    
+  </span>
+  
+
       </a>
     </li>
   
 
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../principles/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Principles
     
-      
-      
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
   
@@ -425,6 +438,14 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
       
       
@@ -441,10 +462,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
   
   
@@ -457,8 +478,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Models
           </label>
@@ -601,10 +622,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   
@@ -617,8 +638,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Metrics
           </label>
@@ -968,10 +989,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
             
   
   
@@ -984,8 +1005,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_7">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             Magnet
           </label>
@@ -1110,45 +1131,36 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-optional-install-standard-data-science-libraries" class="md-nav__link">
+  <a href="#3-verify-installation" class="md-nav__link">
     <span class="md-ellipsis">
-      3. (Optional) Install Standard Data Science Libraries
+      3. Verify Installation
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-verify-installation" class="md-nav__link">
+  <a href="#4-quick-usage-example" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Verify Installation
+      4. Quick Usage Example
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-quick-usage-example" class="md-nav__link">
+  <a href="#5-platform-and-environment" class="md-nav__link">
     <span class="md-ellipsis">
-      5. Quick Usage Example
+      5. Platform and Environment
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-platform-and-environment" class="md-nav__link">
+  <a href="#6-troubleshooting" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Platform and Environment
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-troubleshooting" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Troubleshooting
+      6. Troubleshooting
     </span>
   </a>
   
@@ -1193,30 +1205,24 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
 </code></pre></div>
 <p>This command will install Machine Gnostics and automatically resolve its dependencies.</p>
 <hr />
-<h2 id="3-optional-install-standard-data-science-libraries">3. (Optional) Install Standard Data Science Libraries</h2>
-<p>If you do not already have them, install the most common data science libraries:</p>
-<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>numpy<span class="w"> </span>pandas<span class="w"> </span>scipy
-</code></pre></div>
-<hr />
-<h2 id="4-verify-installation">4. Verify Installation</h2>
+<h2 id="3-verify-installation">3. Verify Installation</h2>
 <p>You can verify that Machine Gnostics and its dependencies are installed correctly by importing them in a Python session:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">machinegnostics</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All libraries imported successfully!&quot;</span><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="5-quick-usage-example">5. Quick Usage Example</h2>
+<h2 id="4-quick-usage-example">4. Quick Usage Example</h2>
 <p>Machine Gnostics is designed to be as simple to use as other machine learning libraries. You can call its functions and classes directly after installation.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">RobustRegressor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegressor</span>
 
 <span class="c1"># Example data</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">]])</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
 
 <span class="c1"># Create and fit a robust polynomial regression model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">RobustRegressor</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegressor</span><span class="p">()</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># Make predictions</span>
@@ -1225,21 +1231,26 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predictions:&quot;</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
 </code></pre></div>
 <hr />
-<h2 id="6-platform-and-environment">6. Platform and Environment</h2>
+<h2 id="5-platform-and-environment">5. Platform and Environment</h2>
 <ul>
 <li><strong>Operating System:</strong> Tested on macOS (Apple Silicon and Intel)</li>
 <li><strong>Python Version:</strong> 3.11 recommended</li>
 <li><strong>Dependencies:</strong> Compatible with NumPy, pandas, SciPy, and other standard data science libraries</li>
 </ul>
 <hr />
-<h2 id="7-troubleshooting">7. Troubleshooting</h2>
+<h2 id="6-troubleshooting">6. Troubleshooting</h2>
 <ul>
-<li>zEnsure your virtual environment is activated before installing or running Machine Gnostics.</li>
+<li>Ensure your virtual environment is activated before installing or running Machine Gnostics.</li>
 <li>If you encounter issues, try upgrading pip:</li>
 </ul>
-<p><div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
 </code></pre></div>
-- For further help, <a href="https://machinegnostics.info/contact/">consult</a> us or open an issue on the <a href="https://github.com/MachineGnostics/machinegnostics">GitHub repository</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Help</p>
+<ul>
+<li>For further help, <a href="https://machinegnostics.info/contact/">consult</a> us or open an issue on the <a href="https://github.com/MachineGnostics/machinegnostics">GitHub repository</a>.</li>
+</ul>
+</div>
 <hr />
 <p>Machine Gnostics is designed for simplicity and reliability, making robust machine learning accessible for all Python users.</p>
 
@@ -1290,13 +1301,13 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
         
         
           
-          <a href="../foundation/" class="md-footer__link md-footer__link--next" aria-label="Next: Foundation">
+          <a href="../foundation/" class="md-footer__link md-footer__link--next" aria-label="Next: Concept">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Foundation
+                Concept
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -1313,7 +1324,7 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2023 Machine Gnostics
+      Copyright © 2025 Machine Gnostics, Dr. Nirmal Parmar  - <a href="#__consent">Change cookie settings</a>
     </div>
   
   
@@ -1346,6 +1357,81 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
     </div>
     
     
+      <div class="md-consent" data-md-component="consent" id="__consent" hidden>
+        <div class="md-consent__overlay"></div>
+        <aside class="md-consent__inner">
+          <form class="md-consent__form md-grid md-typeset" name="consent">
+            
+
+
+  
+
+
+<h4>Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<input class="md-toggle" type="checkbox" id="__settings" >
+<div class="md-consent__settings">
+  <ul class="task-list">
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="analytics" checked>
+      <span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+  </li>
+
+      
+    
+    
+      
+        
+  
+  
+    
+    
+  
+  <li class="task-list-item">
+    <label class="task-list-control">
+      <input type="checkbox" name="github" checked>
+      <span class="task-list-indicator"></span>
+      GitHub
+    </label>
+  </li>
+
+      
+    
+    
+  </ul>
+</div>
+<div class="md-consent__controls">
+  
+    
+      <button class="md-button md-button--primary">Accept</button>
+    
+    
+    
+  
+    
+    
+    
+      <label class="md-button" for="__settings">Manage settings</label>
+    
+  
+</div>
+          </form>
+        </aside>
+      </div>
+      <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+    
     
       
       <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
@@ -1353,7 +1439,7 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
     
       <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
-        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../assets/external/cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>
