@@ -33,7 +33,7 @@ The Machine Gnostics RobustRegressor fits a polynomial regression function to yo
 
 | Parameter          | Type            | Default | Description                                                                   |
 | ------------------ | --------------- | ------- | ----------------------------------------------------------------------------- |
-| `degree`         | int             | 1       | Degree of the polynomial for feature expansion (must be >= 1).                |
+| `degree`         | int             | 2       | Degree of the polynomial for feature expansion (must be > 1).                |
 | `max_iter`       | int             | 100     | Maximum number of training iterations.                                        |
 | `tol`            | float           | 1e-3    | Convergence threshold for loss or coefficient changes.                        |
 | `mg_loss`        | str             | 'hi'    | Type of gnostic loss:`'hi'` (estimation relevance), `'hj'` (irrelevance). |
@@ -147,10 +147,10 @@ Machine Gnostic Polynomial Regression example notebooks:
 
 !!! note "Note"
 
-- The model is robust to outliers and suitable for datasets with non-Gaussian noise.
-- Supports integration with mlflow for experiment tracking and deployment.
-- For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
-- Source code: [https://github.com/MachineGnostics/machinegnostics](https://github.com/MachineGnostics/machinegnostics)
+    - The model is robust to outliers and suitable for datasets with non-Gaussian noise.
+    - Supports integration with mlflow for experiment tracking and deployment.
+    - For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
+    - Source code: [https://github.com/MachineGnostics/machinegnostics](https://github.com/MachineGnostics/machinegnostics)
 
 ---
 
