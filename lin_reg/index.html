@@ -1502,15 +1502,11 @@
 <hr />
 <h2 id="attributes">Attributes</h2>
 <ul>
-<li><strong>coefficients</strong>: <code>np.ndarray</code><br />
-  Fitted linear regression coefficients.</li>
-<li><strong>weights</strong>: <code>np.ndarray</code><br />
-  Final sample weights after robust fitting.</li>
-<li><strong>params</strong>: <code>list of dict</code><br />
-  Parameter snapshots (loss, weights, gnostic properties) at each iteration.</li>
-<li><strong>_history</strong>: <code>list</code><br />
-  Internal optimization history (if enabled).</li>
-<li><strong>degree, max_iter, tol, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics</strong>:<br />
+<li><strong>coefficients</strong>: <code>np.ndarray</code>Fitted linear regression coefficients.</li>
+<li><strong>weights</strong>: <code>np.ndarray</code>Final sample weights after robust fitting.</li>
+<li><strong>params</strong>: <code>list of dict</code>Parameter snapshots (loss, weights, gnostic properties) at each iteration.</li>
+<li><strong>_history</strong>: <code>list</code>Internal optimization history (if enabled).</li>
+<li><strong>degree, max_iter, tol, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics</strong>:
   Configuration parameters as set at initialization.</li>
 </ul>
 <hr />
@@ -1518,52 +1514,49 @@
 <h3 id="fitx-y"><code>fit(X, y)</code></h3>
 <p>Fits the linear regressor to input features <code>X</code> and targets <code>y</code> using robust, gnostic loss minimization. Iteratively optimizes coefficients and sample weights, optionally recording history.</p>
 <ul>
-<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
-  Input features.</li>
-<li><strong>y</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code><br />
+<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code>Input features.</li>
+<li><strong>y</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code>
   Target values.</li>
 </ul>
-<p><strong>Returns:</strong><br />
+<p><strong>Returns:</strong>
 <code>self</code> (fitted model instance)</p>
 <hr />
 <h3 id="predictx"><code>predict(X)</code></h3>
 <p>Predicts target values for new input features using the trained model.</p>
 <ul>
-<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
+<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code>
   Input features for prediction.</li>
 </ul>
-<p><strong>Returns:</strong><br />
-<code>y_pred</code>: <code>np.ndarray</code>, shape <code>(n_samples,)</code><br />
+<p><strong>Returns:</strong>
+<code>y_pred</code>: <code>np.ndarray</code>, shape <code>(n_samples,)</code>
 Predicted target values.</p>
 <hr />
 <h3 id="scorex-y-casei"><code>score(X, y, case='i')</code></h3>
 <p>Computes the robust (gnostic) R² score for the linear regressor model.</p>
 <ul>
-<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
-  Input features for scoring.</li>
-<li><strong>y</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code><br />
-  True target values.</li>
-<li><strong>case</strong>: <code>str</code>, default <code>'i'</code><br />
+<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code>Input features for scoring.</li>
+<li><strong>y</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code>True target values.</li>
+<li><strong>case</strong>: <code>str</code>, default <code>'i'</code>
   Specifies the case or variant of the R² score to compute.</li>
 </ul>
-<p><strong>Returns:</strong><br />
-<code>score</code>: <code>float</code><br />
+<p><strong>Returns:</strong>
+<code>score</code>: <code>float</code>
 Robust R² score of the model on the provided data.</p>
 <hr />
 <h3 id="save_modelpath"><code>save_model(path)</code></h3>
 <p>Saves the trained model to disk using joblib.</p>
 <ul>
-<li><strong>path</strong>: str<br />
+<li><strong>path</strong>: str
   Directory path to save the model.</li>
 </ul>
 <hr />
 <h3 id="load_modelpath"><code>load_model(path)</code></h3>
 <p>Loads a previously saved model from disk.</p>
 <ul>
-<li><strong>path</strong>: str<br />
+<li><strong>path</strong>: str
   Directory path where the model is saved.</li>
 </ul>
-<p><strong>Returns:</strong><br />
+<p><strong>Returns:</strong>
 Instance of <code>LogisticRegressor</code> with loaded parameters.</p>
 <hr />
 <h2 id="example-usage">Example Usage</h2>
@@ -1614,10 +1607,10 @@ Instance of <code>LogisticRegressor</code> with loaded parameters.</p>
 </ul>
 <hr />
 <h2 id="license">License</h2>
-<p>Machine Gnostics - Machine Gnostics Library<br />
+<p>Machine Gnostics - Machine Gnostics Library
 Copyright (C) 2025  Machine Gnostics Team</p>
 <p>This work is licensed under the terms of the GNU General Public License version 3.0.</p>
-<p><strong>Author:</strong> Nirmal Parmar<br />
+<p><strong>Author:</strong> Nirmal Parmar
 <strong>Date:</strong> 2025-05-01</p>
 <hr />
 
