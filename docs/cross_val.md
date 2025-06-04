@@ -74,20 +74,23 @@ print("Mean Score:", np.mean(scores))
 
 ---
 
-!!! note "Note"
+## Notes
 
-    - The model is re-initialized and trained from scratch for each fold.
-    - Supports any model with `fit` and `predict` methods.
-    - Works with any scoring function that accepts `y_true` and `y_pred`.
-    - Shuffling with a fixed `random_seed` ensures reproducible splits.
+- The model is re-initialized and trained from scratch for each fold.
+- Supports any model with `fit` and `predict` methods.
+- Works with any scoring function that accepts `y_true` and `y_pred`.
+- Shuffling with a fixed `random_seed` ensures reproducible splits.
 
 ---
 
 ## License
 
-Machine Gnostics - Machine Gnostics Library
+Machine Gnostics - Machine Gnostics Library  
 Copyright (C) 2025  Machine Gnostics Team
 
 This work is licensed under the terms of the GNU General Public License version 3.0.
+
+**Author:** Nirmal Parmar  
+**Date:** 2025-05-01
 
 ---

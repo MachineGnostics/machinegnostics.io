@@ -71,15 +71,17 @@ print("y_test:", y_test)
 
 ---
 
-!!! note "Note"
+## Notes
 
-    - If `y` is not provided, only `X` will be split and `y_train`, `y_test` will be `None`.
-    - If `test_size` is a float, it must be between 0.0 and 1.0 (exclusive).
-    - If `test_size` is an int, it must be between 1 and `len(X) - 1`.
-    - Setting `shuffle=False` will split the data in order, without randomization.
-    - Use `random_seed` for reproducible splits.
+- If `y` is not provided, only `X` will be split and `y_train`, `y_test` will be `None`.
+- If `test_size` is a float, it must be between 0.0 and 1.0 (exclusive).
+- If `test_size` is an int, it must be between 1 and `len(X) - 1`.
+- Setting `shuffle=False` will split the data in order, without randomization.
+- Use `random_seed` for reproducible splits.
 
 ---
+
+## License
 
 ## License
 
@@ -87,5 +89,8 @@ Machine Gnostics - Machine Gnostics Library
 Copyright (C) 2025  Machine Gnostics Team
 
 This work is licensed under the terms of the GNU General Public License version 3.0.
+
+**Author:** Nirmal Parmar  
+**Date:** 2025-05-01
 
 ---

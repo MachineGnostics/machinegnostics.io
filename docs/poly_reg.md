@@ -1,102 +1,135 @@
-# RobustRegressor: Polynomial Robust Regression with Machine Gnostics
+# PolynomialRegressor: Robust Polynomial Regression with Machine Gnostics
 
-**RobustRegressor** is a polynomial regression model built on the Machine Gnostics framework. It is designed for robust, interpretable regression in the presence of outliers, noise, and non-Gaussian data distributions. Unlike traditional statistical models, RobustRegressor leverages algebraic and geometric principles from Mathematical Gnostics to deliver deterministic, resilient, and event-level modeling.
+The `PolynomialRegressor` is a robust polynomial regression model built on the principles of Mathematical Gnostics. It is designed to provide deterministic, interpretable, and resilient regression in the presence of outliers, noise, and non-Gaussian data distributions. Unlike traditional statistical models, this regressor leverages algebraic and geometric concepts from Mathematical Gnostics, focusing on event-level modeling and robust loss minimization.
 
 ---
 
 ## Overview
 
-The Machine Gnostics RobustRegressor fits a polynomial regression function to your data, using a gnostic-based weighting scheme to minimize the influence of outliers and corrupted samples. It iteratively optimizes regression coefficients by minimizing a custom gnostic loss (such as `'hi'` or `'hj'`), making it highly robust for real-world applications.
-
-- **Robust to Outliers:** Handles heavy-tailed and non-Gaussian distributions.
-- **Polynomial Feature Expansion:** Supports configurable polynomial degrees.
-- **Gnostic Loss Minimization:** Iterative, event-level loss minimization.
-- **Custom Weighting:** Dynamically adjusts sample influence.
-- **Early Stopping & Convergence:** Monitors loss and entropy for efficient training.
-- **mlflow Integration:** For experiment tracking and deployment.
-- **Easy Model Persistence:** Save and load models with joblib.
+- **Robust to Outliers:** Uses gnostic loss functions and adaptive weights to minimize the influence of outliers and corrupted samples.
+- **Polynomial Feature Expansion:** Supports configurable polynomial degrees for flexible modeling.
+- **Iterative Optimization:** Employs iterative fitting with early stopping and convergence checks.
+- **Custom Gnostic Loss:** Minimizes a user-selected gnostic loss (`'hi'`, `'hj'`, etc.) for event-level robustness.
+- **Detailed Training History:** Optionally records loss, weights, entropy, and gnostic characteristics at each iteration.
+- **Easy Integration:** Compatible with numpy arrays and supports model persistence.
 
 ---
 
 ## Key Features
 
-- **Polynomial regression (configurable degree)**
-- **Gnostic-based iterative loss minimization**
-- **Custom weighting and scaling strategies**
-- **Early stopping and convergence control**
+- **Robust regression using gnostic loss functions**
+- **Flexible polynomial degree (linear and higher-order)**
+- **Adaptive sample weighting**
+- **Early stopping and convergence tolerance**
 - **Training history tracking for analysis and visualization**
-- **Robust to outliers and non-Gaussian noise**
+- **Handles non-Gaussian noise and outliers**
+- **Compatible with numpy arrays**
 
 ---
 
 ## Parameters
 
-| Parameter          | Type            | Default | Description                                                                   |
-| ------------------ | --------------- | ------- | ----------------------------------------------------------------------------- |
-| `degree`         | int             | 2       | Degree of the polynomial for feature expansion (must be > 1).                |
-| `max_iter`       | int             | 100     | Maximum number of training iterations.                                        |
-| `tol`            | float           | 1e-3    | Convergence threshold for loss or coefficient changes.                        |
-| `mg_loss`        | str             | 'hi'    | Type of gnostic loss:`'hi'` (estimation relevance), `'hj'` (irrelevance). |
-| `early_stopping` | bool or int     | True    | Enables early stopping or sets window size.                                   |
-| `verbose`        | bool            | False   | Prints progress and debug information.                                        |
-| `scale`          | {'auto', float} | 'auto'  | Scaling strategy for the gnostic loss.                                        |
-| `history`        | bool            | True    | Records training history at each iteration.                                   |
-| `data_form`      | str             | 'a'     | Input data form:`'a'` (additive), `'m'` (multiplicative).                 |
+| Parameter                | Type                | Default   | Description                                                                 |
+|--------------------------|---------------------|-----------|-----------------------------------------------------------------------------|
+| `degree`                 | int                 | 2         | Degree of the polynomial to fit.                                            |
+| `scale`                  | {'auto', int, float}| 'auto'    | Scaling method or value for input features.                                 |
+| `max_iter`               | int                 | 100       | Maximum number of optimization iterations.                                  |
+| `tol`                    | float               | 1e-3      | Tolerance for convergence.                                                  |
+| `mg_loss`                | str                 | 'hi'      | Gnostic loss function to use (`'hi'`, `'fi'`, etc.).                        |
+| `early_stopping`         | bool                | True      | Whether to stop early if convergence is detected.                           |
+| `verbose`                | bool                | False     | If True, prints progress and diagnostics during fitting.                    |
+| `data_form`              | str                 | 'a'       | Internal data representation format.                                        |
+| `gnostic_characteristics`| bool                | True      | If True, computes and records gnostic properties (fi, hi, etc.).            |
+| `history`                | bool                | True      | If True, records the optimization history for analysis.                     |
 
 ---
 
 ## Attributes
 
-- **coefficients**: `ndarray`Final learned polynomial regression coefficients.
-- **weights**: `ndarray`Final sample weights after convergence.
-- **_history**: `list of dict`
-  Training history, including iteration, loss, coefficients, rentropy, and weights.
+- **coefficients**: `np.ndarray`  
+  Fitted polynomial regression coefficients.
+- **weights**: `np.ndarray`  
+  Final sample weights after robust fitting.
+- **params**: `list of dict`  
+  Parameter snapshots (loss, weights, gnostic properties) at each iteration.
+- **_history**: `list`  
+  Internal optimization history (if enabled).
+- **degree, max_iter, tol, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics**:  
+  Configuration parameters as set at initialization.
 
 ---
 
 ## Methods
 
 ### `fit(X, y)`
+Fits the polynomial regressor to input features `X` and targets `y` using robust, gnostic loss minimization. Iteratively optimizes coefficients and sample weights, optionally recording history.
 
-Fits the model to training data using polynomial expansion and gnostic loss minimization.
-
-- **X**: array-like, shape (n_samples,) or (n_samples, 1)Input features (numpy, pandas, or pyspark DataFrame).
-- **y**: array-like, shape (n_samples,)
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
+  Input features.
+- **y**: `np.ndarray`, shape `(n_samples,)`  
   Target values.
 
+**Returns:**  
+`self` (fitted model instance)
+
+---
+
 ### `predict(X)`
+Predicts target values for new input features using the trained model.
 
-Predicts output values for new input samples using the trained model.
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
+  Input features for prediction.
 
-- **X**: array-like, shape (n_samples,) or (n_samples, 1)Input features for prediction.
-- **Returns**:
-  `y_pred`: ndarray, shape (n_samples,)
-  Predicted target values.
+**Returns:**  
+`y_pred`: `np.ndarray`, shape `(n_samples,)`  
+Predicted target values.
+
+---
+
+### `score(X, y, case='i')`
+Computes the robust (gnostic) R² score for the polynomial regressor model.
+
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
+  Input features for scoring.
+- **y**: `np.ndarray`, shape `(n_samples,)`  
+  True target values.
+- **case**: `str`, default `'i'`  
+  Specifies the case or variant of the R² score to compute.
+
+**Returns:**  
+`score`: `float`  
+Robust R² score of the model on the provided data.
+
+---
 
 ### `save_model(path)`
 
 Saves the trained model to disk using joblib.
 
-- **path**: str
+- **path**: str  
   Directory path to save the model.
+
+---
 
 ### `load_model(path)`
 
 Loads a previously saved model from disk.
 
-- **path**: strDirectory path where the model is saved.
-- **Returns**:
-  Instance of `RobustRegressor` with loaded parameters.
+- **path**: str  
+  Directory path where the model is saved.
+
+**Returns:**  
+Instance of `LogisticRegressor` with loaded parameters.
 
 ---
 
 ## Example Usage
 
 ```python
-from machinegnostics.models import RobustRegressor
+from machinegnostics.models.regression import PolynomialRegressor
 
 # Initialize the model
-model = RobustRegressor(degree=2, mg_loss='hi', verbose=True)
+model = PolynomialRegressor(degree=2, mg_loss='hi', verbose=True)
 
 # Fit the model
 model.fit(X_train, y_train)
@@ -104,53 +137,47 @@ model.fit(X_train, y_train)
 # Predict
 y_pred = model.predict(X_test)
 
+# Score
+r2 = model.score(X_test, y_test)
+print(f'Robust R2 score: {r2}')
+
 # Access coefficients and weights
 print("Coefficients:", model.coefficients)
 print("Weights:", model.weights)
-
-# Save the model
-model.save_model("./my_model")
-
-# Load the model
-loaded = RobustRegressor.load_model("./my_model")
-y_pred2 = loaded.predict(X_test)
 ```
 
 ---
 
 ## Training History
 
-The model records training history at each iteration, accessible via `model._history`.Each entry contains:
+If `history=True`, the model records detailed training history at each iteration, accessible via `model.params` and `model._history`. Each entry contains:
 
 - `iteration`: Iteration number
-- `h_loss`: Gnostic loss value
+- `loss`: Gnostic loss value
 - `coefficients`: Regression coefficients at this iteration
-- `rentropy`: Rentropy value
+- `rentropy`: Rentropy value (residual entropy)
 - `weights`: Sample weights at this iteration
+- `gnostic_characteristics`: (if enabled) fi, hi, etc.
 
-This enables detailed analysis and visualization of the training process.
-
+This enables in-depth analysis and visualization of the training process.
 
 ---
 
-## Example
-
-Machine Gnostic Polynomial Regression example notebooks: 
+## Example Notebooks
 
 - [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_1_small_data_polyreg.ipynb)
-
 - [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_wine_data_polyreg.ipynb)
 
-![Polynomial Regression](./plots/reg3.png "Polynomial Regression")
+![Polynomial and Linear Regression](./plots/poly-reg1.png" Polynomial and Linear Regression Comparison")
 
 ---
 
-!!! note "Note"
+## Notes
 
-    - The model is robust to outliers and suitable for datasets with non-Gaussian noise.
-    - Supports integration with mlflow for experiment tracking and deployment.
-    - For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
-    - Source code: [https://github.com/MachineGnostics/machinegnostics](https://github.com/MachineGnostics/machinegnostics)
+- The model is robust to outliers and suitable for datasets with non-Gaussian noise.
+- Implements advanced machine learning techniques based on Mathematical Gnostics.
+- For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
+- Source code: [https://github.com/MachineGnostics/machinegnostics](https://github.com/MachineGnostics/machinegnostics)
 
 ---
 
@@ -161,7 +188,7 @@ Copyright (C) 2025  Machine Gnostics Team
 
 This work is licensed under the terms of the GNU General Public License version 3.0.
 
-**Author:** Nirmal Parmar
-**Date:** 2025-10-01
+**Author:** Nirmal Parmar  
+**Date:** 2025-05-01
 
 ---

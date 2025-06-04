@@ -25,7 +25,11 @@ source machinegnostics-env/bin/activate
 Install the Machine Gnostics library using pip:
 
 ```bash
+# main installation
 pip install machinegnostics
+
+# temporary test installation
+pip install -i https://test.pypi.org/simple/ machinegnostics
 ```
 
 This command will install Machine Gnostics and automatically resolve its dependencies.
