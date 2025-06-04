@@ -56,7 +56,7 @@ All four variables (\( f_j, h_j, f_i, h_i \)) are called **gnostic characteristi
 
 ---
 
-### 3. Information and Entropy
+### 3. Information
 
 - **Ii**: *Estimating information*  
   Information estimate for the data.
@@ -76,10 +76,7 @@ All four variables (\( f_j, h_j, f_i, h_i \)) are called **gnostic characteristi
   Quantifies the entropy content.
 
 - **re**: *Residual entropy*  
-  The remaining entropy after estimation.
-
-- **rentropy**: *Residual entropy*  
-  Another term for residual entropy, representing the difference between quantification and estimation entropy.
+  The remaining entropy after estimation, representing the difference between quantification and estimation entropy.
 
 ---
 
