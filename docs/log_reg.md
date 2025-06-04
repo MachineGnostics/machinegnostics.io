@@ -182,7 +182,6 @@ This enables detailed analysis and visualization of the training process.
 - For best results, ensure input features are appropriately scaled and encoded.
 - Supports integration with MLflow for experiment tracking and deployment.
 - For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
-- Source code: [https://github.com/MachineGnostics/machinegnostics](https://github.com/MachineGnostics/machinegnostics)
 
 ---
 

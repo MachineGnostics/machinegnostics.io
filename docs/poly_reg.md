@@ -168,7 +168,7 @@ This enables in-depth analysis and visualization of the training process.
 - [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_1_small_data_polyreg.ipynb)
 - [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_wine_data_polyreg.ipynb)
 
-![Polynomial and Linear Regression](./plots/poly-reg1.png" Polynomial and Linear Regression Comparison")
+![Polynomial Regression](./plots/poly-reg1.png "Polynomial Regression")
 
 ---
 
@@ -177,7 +177,6 @@ This enables in-depth analysis and visualization of the training process.
 - The model is robust to outliers and suitable for datasets with non-Gaussian noise.
 - Implements advanced machine learning techniques based on Mathematical Gnostics.
 - For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
-- Source code: [https://github.com/MachineGnostics/machinegnostics](https://github.com/MachineGnostics/machinegnostics)
 
 ---
 
