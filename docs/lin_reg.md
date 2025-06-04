@@ -32,31 +32,27 @@ The Machine Gnostics LinearRegressor is designed for robust regression tasks, es
 
 ## Parameters
 
-| Parameter                | Type                | Default   | Description                                                                 |
-|--------------------------|---------------------|-----------|-----------------------------------------------------------------------------|
-| `scale`                  | {'auto', int, float}| 'auto'    | Scaling method or value for input features.                                 |
-| `max_iter`               | int                 | 100       | Maximum number of optimization iterations.                                  |
-| `tol`                    | float               | 1e-3      | Tolerance for convergence.                                                  |
-| `mg_loss`                | str                 | 'hi'      | Gnostic loss function to use (`'hi'`, `'fi'`, etc.).                        |
-| `early_stopping`         | bool                | True      | Whether to stop early if convergence is detected.                           |
-| `verbose`                | bool                | False     | If True, prints progress and diagnostics during fitting.                    |
-| `data_form`              | str                 | 'a'       | Internal data representation format.                                        |
-| `gnostic_characteristics`| bool                | True      | If True, computes and records gnostic properties (fi, hi, etc.).            |
-| `history`                | bool                | True      | If True, records the optimization history for analysis.                     |
+| Parameter                   | Type                 | Default | Description                                                      |
+| --------------------------- | -------------------- | ------- | ---------------------------------------------------------------- |
+| `scale`                   | {'auto', int, float} | 'auto'  | Scaling method or value for input features.                      |
+| `max_iter`                | int                  | 100     | Maximum number of optimization iterations.                       |
+| `tol`                     | float                | 1e-3    | Tolerance for convergence.                                       |
+| `mg_loss`                 | str                  | 'hi'    | Gnostic loss function to use (`'hi'`, `'fi'`, etc.).         |
+| `early_stopping`          | bool                 | True    | Whether to stop early if convergence is detected.                |
+| `verbose`                 | bool                 | False   | If True, prints progress and diagnostics during fitting.         |
+| `data_form`               | str                  | 'a'     | Internal data representation format.                             |
+| `gnostic_characteristics` | bool                 | True    | If True, computes and records gnostic properties (fi, hi, etc.). |
+| `history`                 | bool                 | True    | If True, records the optimization history for analysis.          |
 
 ---
 
 ## Attributes
 
-- **coefficients**: `np.ndarray`  
-  Fitted linear regression coefficients.
-- **weights**: `np.ndarray`  
-  Final sample weights after robust fitting.
-- **params**: `list of dict`  
-  Parameter snapshots (loss, weights, gnostic properties) at each iteration.
-- **_history**: `list`  
-  Internal optimization history (if enabled).
-- **degree, max_iter, tol, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics**:  
+- **coefficients**: `np.ndarray`Fitted linear regression coefficients.
+- **weights**: `np.ndarray`Final sample weights after robust fitting.
+- **params**: `list of dict`Parameter snapshots (loss, weights, gnostic properties) at each iteration.
+- **_history**: `list`Internal optimization history (if enabled).
+- **degree, max_iter, tol, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics**:
   Configuration parameters as set at initialization.
 
 ---
@@ -67,12 +63,11 @@ The Machine Gnostics LinearRegressor is designed for robust regression tasks, es
 
 Fits the linear regressor to input features `X` and targets `y` using robust, gnostic loss minimization. Iteratively optimizes coefficients and sample weights, optionally recording history.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
-  Input features.
-- **y**: `np.ndarray`, shape `(n_samples,)`  
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`Input features.
+- **y**: `np.ndarray`, shape `(n_samples,)`
   Target values.
 
-**Returns:**  
+**Returns:**
 `self` (fitted model instance)
 
 ---
@@ -81,11 +76,11 @@ Fits the linear regressor to input features `X` and targets `y` using robust, gn
 
 Predicts target values for new input features using the trained model.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`
   Input features for prediction.
 
-**Returns:**  
-`y_pred`: `np.ndarray`, shape `(n_samples,)`  
+**Returns:**
+`y_pred`: `np.ndarray`, shape `(n_samples,)`
 Predicted target values.
 
 ---
@@ -94,15 +89,13 @@ Predicted target values.
 
 Computes the robust (gnostic) R² score for the linear regressor model.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
-  Input features for scoring.
-- **y**: `np.ndarray`, shape `(n_samples,)`  
-  True target values.
-- **case**: `str`, default `'i'`  
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`Input features for scoring.
+- **y**: `np.ndarray`, shape `(n_samples,)`True target values.
+- **case**: `str`, default `'i'`
   Specifies the case or variant of the R² score to compute.
 
-**Returns:**  
-`score`: `float`  
+**Returns:**
+`score`: `float`
 Robust R² score of the model on the provided data.
 
 ---
@@ -111,7 +104,7 @@ Robust R² score of the model on the provided data.
 
 Saves the trained model to disk using joblib.
 
-- **path**: str  
+- **path**: str
   Directory path to save the model.
 
 ---
@@ -120,10 +113,10 @@ Saves the trained model to disk using joblib.
 
 Loads a previously saved model from disk.
 
-- **path**: str  
+- **path**: str
   Directory path where the model is saved.
 
-**Returns:**  
+**Returns:**
 Instance of `LogisticRegressor` with loaded parameters.
 
 ---
@@ -187,12 +180,12 @@ This enables in-depth analysis and visualization of the training process.
 
 ## License
 
-Machine Gnostics - Machine Gnostics Library  
+Machine Gnostics - Machine Gnostics Library
 Copyright (C) 2025  Machine Gnostics Team
 
 This work is licensed under the terms of the GNU General Public License version 3.0.
 
-**Author:** Nirmal Parmar  
+**Author:** Nirmal Parmar
 **Date:** 2025-05-01
 
 ---
