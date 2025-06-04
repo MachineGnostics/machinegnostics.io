@@ -344,6 +344,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mg_arguments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Definations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -608,9 +631,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#example-notebooks" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Example Notebooks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
     </span>
   </a>
   
@@ -1166,6 +1198,28 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1307,9 +1361,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#example-notebooks" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Example Notebooks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
     </span>
   </a>
   
@@ -1344,29 +1407,30 @@
 
 
 <h1 id="logisticregressor-robust-logistic-regression-with-machine-gnostics">LogisticRegressor: Robust Logistic Regression with Machine Gnostics</h1>
-<p><strong>LogisticRegressor</strong> is a robust, flexible logistic regression model built on the Machine Gnostics framework. It is designed for binary classification tasks and is resilient to outliers, heavy-tailed distributions, and non-Gaussian noise. The model supports polynomial feature expansion, robust weighting, early stopping, and seamless MLflow integration for experiment tracking and deployment.</p>
+<p><strong>LogisticRegressor</strong> is a robust and flexible binary classification model built on the Machine Gnostics framework. It is designed to handle outliers, heavy-tailed distributions, and non-Gaussian noise, making it suitable for real-world data challenges. The model supports polynomial feature expansion, robust weighting, early stopping, and seamless MLflow integration for experiment tracking and deployment.</p>
 <hr />
 <h2 id="overview">Overview</h2>
-<p>The Machine Gnostics LogisticRegressor brings deterministic, event-level modeling to binary classification. It leverages gnostic algebra and geometry to provide robust, interpretable, and reproducible results, even in challenging real-world scenarios.</p>
+<p>Machine Gnostics LogisticRegressor brings deterministic, event-level modeling to binary classification. By leveraging gnostic algebra and geometry, it provides robust, interpretable, and reproducible results, even in challenging scenarios.</p>
+<p><strong>Highlights:</strong></p>
 <ul>
-<li><strong>Robust to Outliers:</strong> Gnostic weighting minimizes the influence of noisy or corrupted samples.</li>
-<li><strong>Polynomial Feature Expansion:</strong> Configurable degree for flexible, nonlinear decision boundaries.</li>
+<li><strong>Outlier Robustness:</strong> Gnostic weighting reduces the impact of noisy or corrupted samples.</li>
+<li><strong>Polynomial Feature Expansion:</strong> Configurable degree for nonlinear decision boundaries.</li>
 <li><strong>Flexible Probability Output:</strong> Choose between gnostic-based or standard sigmoid probabilities.</li>
-<li><strong>Early Stopping &amp; Convergence:</strong> Monitors loss and entropy for efficient training.</li>
-<li><strong>MLflow Integration:</strong> For experiment tracking, reproducibility, and deployment.</li>
-<li><strong>Easy Model Persistence:</strong> Save and load models with joblib.</li>
+<li><strong>Early Stopping:</strong> Efficient training via monitoring of loss and entropy.</li>
+<li><strong>MLflow Integration:</strong> Supports experiment tracking and deployment.</li>
+<li><strong>Model Persistence:</strong> Save and load models easily with joblib.</li>
 </ul>
 <hr />
 <h2 id="key-features">Key Features</h2>
 <ul>
-<li><strong>Robust to outliers and non-Gaussian noise</strong></li>
-<li><strong>Polynomial feature expansion (configurable degree)</strong></li>
-<li><strong>Flexible probability output: gnostic or sigmoid</strong></li>
-<li><strong>Customizable scaling of data (auto or manual)</strong></li>
-<li><strong>Early stopping based on residual entropy or log loss</strong></li>
-<li><strong>Full training history tracking (loss, entropy, coefficients, weights)</strong></li>
-<li><strong>MLflow integration for model tracking and deployment</strong></li>
-<li><strong>Save and load model using joblib</strong></li>
+<li>Robust to outliers and non-Gaussian noise</li>
+<li>Polynomial feature expansion (configurable degree)</li>
+<li>Flexible probability output: gnostic or sigmoid</li>
+<li>Customizable data scaling (auto or manual)</li>
+<li>Early stopping based on residual entropy or log loss</li>
+<li>Full training history tracking (loss, entropy, coefficients, weights)</li>
+<li>MLflow integration for model tracking and deployment</li>
+<li>Save and load model using joblib</li>
 </ul>
 <hr />
 <h2 id="parameters">Parameters</h2>
@@ -1432,16 +1496,18 @@
 <td><code>data_form</code></td>
 <td>str</td>
 <td>'a'</td>
-<td>Input data form:<code>'a'</code> (additive), <code>'m'</code> (multiplicative).</td>
+<td>Input data form: <code>'a'</code> (additive), <code>'m'</code> (multiplicative).</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="attributes">Attributes</h2>
 <ul>
-<li><strong>coefficients</strong>: <code>ndarray</code>Final learned polynomial regression coefficients.</li>
-<li><strong>weights</strong>: <code>ndarray</code>Final sample weights after convergence.</li>
-<li><strong>_history</strong>: <code>list of dict</code>
+<li><strong>coefficients</strong>: <code>ndarray</code><br />
+  Final learned polynomial regression coefficients.</li>
+<li><strong>weights</strong>: <code>ndarray</code><br />
+  Final sample weights after convergence.</li>
+<li><strong>_history</strong>: <code>list of dict</code><br />
   Training history, including loss, entropy, coefficients, and weights at each iteration.</li>
 </ul>
 <hr />
@@ -1449,40 +1515,49 @@
 <h3 id="fitx-y"><code>fit(X, y)</code></h3>
 <p>Fits the model to training data using polynomial expansion and robust loss minimization.</p>
 <ul>
-<li><strong>X</strong>: array-like, pandas.DataFrame, or numpy.ndarray of shape (n_samples, n_features)Training input samples.</li>
-<li><strong>y</strong>: array-like or numpy.ndarray of shape (n_samples,)Target binary labels (0 or 1).</li>
-<li><strong>Returns</strong>:
-  <code>self</code>: LogisticRegressor (for method chaining)</li>
+<li><strong>X</strong>: array-like, pandas.DataFrame, or numpy.ndarray of shape <code>(n_samples, n_features)</code><br />
+  Training input samples.</li>
+<li><strong>y</strong>: array-like or numpy.ndarray of shape <code>(n_samples,)</code><br />
+  Target binary labels (0 or 1).</li>
 </ul>
+<p><strong>Returns:</strong><br />
+<code>self</code> (for method chaining)</p>
+<hr />
 <h3 id="predictx"><code>predict(X)</code></h3>
 <p>Predicts class labels (0 or 1) for new input samples using the trained model.</p>
 <ul>
-<li><strong>X</strong>: array-like, pandas.DataFrame, or numpy.ndarray of shape (n_samples, n_features)Input samples for prediction.</li>
-<li><strong>Returns</strong>:
-  <code>y_pred</code>: numpy.ndarray of shape (n_samples,)
-  Predicted binary class labels.</li>
+<li><strong>X</strong>: array-like, pandas.DataFrame, or numpy.ndarray of shape <code>(n_samples, n_features)</code><br />
+  Input samples for prediction.</li>
 </ul>
+<p><strong>Returns:</strong><br />
+<code>y_pred</code>: numpy.ndarray of shape <code>(n_samples,)</code><br />
+Predicted binary class labels.</p>
+<hr />
 <h3 id="predict_probax"><code>predict_proba(X)</code></h3>
 <p>Predicts probabilities for new input samples using the trained model.</p>
 <ul>
-<li><strong>X</strong>: array-like, pandas.DataFrame, or numpy.ndarray of shape (n_samples, n_features)Input samples for probability prediction.</li>
-<li><strong>Returns</strong>:
-  <code>proba</code>: numpy.ndarray of shape (n_samples,)
-  Predicted probabilities for the positive class (label 1).</li>
+<li><strong>X</strong>: array-like, pandas.DataFrame, or numpy.ndarray of shape <code>(n_samples, n_features)</code><br />
+  Input samples for probability prediction.</li>
 </ul>
+<p><strong>Returns:</strong><br />
+<code>proba</code>: numpy.ndarray of shape <code>(n_samples,)</code><br />
+Predicted probabilities for the positive class (label 1).</p>
+<hr />
 <h3 id="save_modelpath"><code>save_model(path)</code></h3>
 <p>Saves the trained model to disk using joblib.</p>
 <ul>
-<li><strong>path</strong>: str
+<li><strong>path</strong>: str<br />
   Directory path to save the model.</li>
 </ul>
+<hr />
 <h3 id="load_modelpath"><code>load_model(path)</code></h3>
 <p>Loads a previously saved model from disk.</p>
 <ul>
-<li><strong>path</strong>: strDirectory path where the model is saved.</li>
-<li><strong>Returns</strong>:
-  Instance of <code>LogisticRegressor</code> with loaded parameters.</li>
+<li><strong>path</strong>: str<br />
+  Directory path where the model is saved.</li>
 </ul>
+<p><strong>Returns:</strong><br />
+Instance of <code>LogisticRegressor</code> with loaded parameters.</p>
 <hr />
 <h2 id="example-usage">Example Usage</h2>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">LogisticRegressor</span>
@@ -1512,7 +1587,7 @@
 </code></pre></div>
 <hr />
 <h2 id="training-history">Training History</h2>
-<p>The model records training history at each iteration, accessible via <code>model._history</code>.Each entry contains:</p>
+<p>If <code>history=True</code>, the model records training history at each iteration, accessible via <code>model._history</code>. Each entry contains:</p>
 <ul>
 <li><code>iteration</code>: Iteration number</li>
 <li><code>loss</code>: Loss value (gnostic or log loss)</li>
@@ -1522,20 +1597,14 @@
 </ul>
 <p>This enables detailed analysis and visualization of the training process.</p>
 <hr />
-<h2 id="example">Example</h2>
-<p>Machine Gnostic Logistic Regression example notebooks: </p>
+<h2 id="example-notebooks">Example Notebooks</h2>
 <ul>
-<li>
-<p><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_3_moon_data_logreg.ipynb">Example 1</a></p>
-</li>
-<li>
-<p><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_4_logreg_mlflow.ipynb">Example 2</a></p>
-</li>
+<li><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_3_moon_data_logreg.ipynb">Example 1</a></li>
+<li><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_4_logreg_mlflow.ipynb">Example 2</a></li>
 </ul>
 <p><img alt="Logistic Regression" src="../plots/log_reg.png" title="Logistic Regression" /></p>
 <hr />
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<h2 id="notes">Notes</h2>
 <ul>
 <li>The model supports numpy arrays, pandas DataFrames, and pyspark DataFrames as input.</li>
 <li>For best results, ensure input features are appropriately scaled and encoded.</li>
@@ -1543,14 +1612,13 @@
 <li>For more information, visit: <a href="https://machinegnostics.info/">https://machinegnostics.info/</a></li>
 <li>Source code: <a href="https://github.com/MachineGnostics/machinegnostics">https://github.com/MachineGnostics/machinegnostics</a></li>
 </ul>
-</div>
 <hr />
 <h2 id="license">License</h2>
 <p>Machine Gnostics - Machine Gnostics Library<br />
 Copyright (C) 2025  Machine Gnostics Team</p>
 <p>This work is licensed under the terms of the GNU General Public License version 3.0.</p>
-<p><strong>Author:</strong> Nirmal Parmar
-<strong>Date:</strong> 2025-10-01</p>
+<p><strong>Author:</strong> Nirmal Parmar<br />
+<strong>Date:</strong> 2025-05-01</p>
 <hr />
 
 
@@ -1623,7 +1691,7 @@ Copyright (C) 2025  Machine Gnostics Team</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2025 Machine Gnostics, Dr. Nirmal Parmar  - <a href="#__consent">Change cookie settings</a>
+      Copyright © 2025 Machine Gnostics, Nirmal Parmar  - <a href="#__consent">Change cookie settings</a>
     </div>
   
   

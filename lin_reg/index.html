@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://machinegnostics.info/lin_reg/">
       
       
-        <link rel="prev" href="../architecture/">
+        <link rel="prev" href="../mg_arguments/">
       
       
         <link rel="next" href="../poly_reg/">
@@ -344,6 +344,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mg_arguments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Definations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -512,6 +535,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scorex-y-casei" class="md-nav__link">
+    <span class="md-ellipsis">
+      score(X, y, case='i')
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save_modelpath" class="md-nav__link">
     <span class="md-ellipsis">
       save_model(path)
@@ -553,9 +585,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#example-notebooks" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Example Notebooks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
     </span>
   </a>
   
@@ -1157,6 +1198,28 @@
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    References
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -1248,6 +1311,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scorex-y-casei" class="md-nav__link">
+    <span class="md-ellipsis">
+      score(X, y, case='i')
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#save_modelpath" class="md-nav__link">
     <span class="md-ellipsis">
       save_model(path)
@@ -1289,9 +1361,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#example" class="md-nav__link">
+  <a href="#example-notebooks" class="md-nav__link">
     <span class="md-ellipsis">
-      Example
+      Example Notebooks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes
     </span>
   </a>
   
@@ -1342,11 +1423,13 @@
 <hr />
 <h2 id="key-features">Key Features</h2>
 <ul>
-<li><strong>Fits a linear regression model (polynomial degree = 1)</strong></li>
-<li><strong>Least squares estimation for coefficient calculation</strong></li>
+<li><strong>Fits a linear regression model</strong></li>
 <li><strong>Robust to outliers and non-Gaussian noise</strong></li>
+<li><strong>Iterative optimization with early stopping and convergence tolerance</strong></li>
+<li><strong>Adaptive sample weighting using gnostic loss</strong></li>
 <li><strong>Training history tracking for analysis and visualization</strong></li>
 <li><strong>Customizable loss functions and scaling strategies</strong></li>
+<li><strong>Compatible with numpy arrays for input/output</strong></li>
 </ul>
 <hr />
 <h2 id="parameters">Parameters</h2>
@@ -1361,99 +1444,133 @@
 </thead>
 <tbody>
 <tr>
+<td><code>scale</code></td>
+<td>{'auto', int, float}</td>
+<td>'auto'</td>
+<td>Scaling method or value for input features.</td>
+</tr>
+<tr>
 <td><code>max_iter</code></td>
 <td>int</td>
 <td>100</td>
-<td>Maximum number of training iterations.</td>
+<td>Maximum number of optimization iterations.</td>
 </tr>
 <tr>
 <td><code>tol</code></td>
 <td>float</td>
 <td>1e-3</td>
-<td>Convergence threshold for loss or coefficient changes.</td>
+<td>Tolerance for convergence.</td>
 </tr>
 <tr>
 <td><code>mg_loss</code></td>
 <td>str</td>
 <td>'hi'</td>
-<td>Type of gnostic loss:<code>'hi'</code> (estimation relevance), <code>'hj'</code> (irrelevance).</td>
+<td>Gnostic loss function to use (<code>'hi'</code>, <code>'fi'</code>, etc.).</td>
 </tr>
 <tr>
 <td><code>early_stopping</code></td>
-<td>bool or int</td>
+<td>bool</td>
 <td>True</td>
-<td>Enables early stopping or sets window size.</td>
+<td>Whether to stop early if convergence is detected.</td>
 </tr>
 <tr>
 <td><code>verbose</code></td>
 <td>bool</td>
 <td>False</td>
-<td>Prints progress and debug information.</td>
-</tr>
-<tr>
-<td><code>scale</code></td>
-<td>{'auto', float}</td>
-<td>'auto'</td>
-<td>Scaling strategy for the gnostic loss.</td>
-</tr>
-<tr>
-<td><code>history</code></td>
-<td>bool</td>
-<td>True</td>
-<td>Records training history at each iteration.</td>
+<td>If True, prints progress and diagnostics during fitting.</td>
 </tr>
 <tr>
 <td><code>data_form</code></td>
 <td>str</td>
 <td>'a'</td>
-<td>Input data form:<code>'a'</code> (additive), <code>'m'</code> (multiplicative).</td>
+<td>Internal data representation format.</td>
+</tr>
+<tr>
+<td><code>gnostic_characteristics</code></td>
+<td>bool</td>
+<td>True</td>
+<td>If True, computes and records gnostic properties (fi, hi, etc.).</td>
+</tr>
+<tr>
+<td><code>history</code></td>
+<td>bool</td>
+<td>True</td>
+<td>If True, records the optimization history for analysis.</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="attributes">Attributes</h2>
 <ul>
-<li><strong>coefficients</strong>: <code>ndarray</code>Final learned regression coefficients.</li>
-<li><strong>weights</strong>: <code>ndarray</code>Final sample weights after convergence.</li>
-<li><strong>_history</strong>: <code>list of dict</code>
-  Training history, including iteration, loss, coefficients, rentropy, and weights.</li>
+<li><strong>coefficients</strong>: <code>np.ndarray</code><br />
+  Fitted linear regression coefficients.</li>
+<li><strong>weights</strong>: <code>np.ndarray</code><br />
+  Final sample weights after robust fitting.</li>
+<li><strong>params</strong>: <code>list of dict</code><br />
+  Parameter snapshots (loss, weights, gnostic properties) at each iteration.</li>
+<li><strong>_history</strong>: <code>list</code><br />
+  Internal optimization history (if enabled).</li>
+<li><strong>degree, max_iter, tol, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics</strong>:<br />
+  Configuration parameters as set at initialization.</li>
 </ul>
 <hr />
 <h2 id="methods">Methods</h2>
 <h3 id="fitx-y"><code>fit(X, y)</code></h3>
-<p>Fits the model to training data using polynomial expansion and gnostic loss minimization.</p>
+<p>Fits the linear regressor to input features <code>X</code> and targets <code>y</code> using robust, gnostic loss minimization. Iteratively optimizes coefficients and sample weights, optionally recording history.</p>
 <ul>
-<li><strong>X</strong>: array-like, shape (n_samples, n_features)Input features (numpy, pandas, or pyspark DataFrame).</li>
-<li><strong>y</strong>: array-like, shape (n_samples,)
+<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
+  Input features.</li>
+<li><strong>y</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code><br />
   Target values.</li>
 </ul>
+<p><strong>Returns:</strong><br />
+<code>self</code> (fitted model instance)</p>
+<hr />
 <h3 id="predictx"><code>predict(X)</code></h3>
-<p>Predicts output values for new input samples using the trained model.</p>
+<p>Predicts target values for new input features using the trained model.</p>
 <ul>
-<li><strong>X</strong>: array-like, shape (n_samples, n_features)Input features for prediction.</li>
-<li><strong>Returns</strong>:
-  <code>y_pred</code>: ndarray, shape (n_samples,)
-  Predicted target values.</li>
+<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
+  Input features for prediction.</li>
 </ul>
+<p><strong>Returns:</strong><br />
+<code>y_pred</code>: <code>np.ndarray</code>, shape <code>(n_samples,)</code><br />
+Predicted target values.</p>
+<hr />
+<h3 id="scorex-y-casei"><code>score(X, y, case='i')</code></h3>
+<p>Computes the robust (gnostic) R² score for the linear regressor model.</p>
+<ul>
+<li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
+  Input features for scoring.</li>
+<li><strong>y</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code><br />
+  True target values.</li>
+<li><strong>case</strong>: <code>str</code>, default <code>'i'</code><br />
+  Specifies the case or variant of the R² score to compute.</li>
+</ul>
+<p><strong>Returns:</strong><br />
+<code>score</code>: <code>float</code><br />
+Robust R² score of the model on the provided data.</p>
+<hr />
 <h3 id="save_modelpath"><code>save_model(path)</code></h3>
 <p>Saves the trained model to disk using joblib.</p>
 <ul>
-<li><strong>path</strong>: str
+<li><strong>path</strong>: str<br />
   Directory path to save the model.</li>
 </ul>
+<hr />
 <h3 id="load_modelpath"><code>load_model(path)</code></h3>
 <p>Loads a previously saved model from disk.</p>
 <ul>
-<li><strong>path</strong>: strDirectory path where the model is saved.</li>
-<li><strong>Returns</strong>:
-  Instance of <code>LinearRegressor</code> with loaded parameters.</li>
+<li><strong>path</strong>: str<br />
+  Directory path where the model is saved.</li>
 </ul>
+<p><strong>Returns:</strong><br />
+Instance of <code>LogisticRegressor</code> with loaded parameters.</p>
 <hr />
 <h2 id="example-usage">Example Usage</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegressor</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegressor</span>
 
 <span class="c1"># Initialize the model</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegressor</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">mg_loss</span><span class="o">=</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegressor</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">mg_loss</span><span class="o">=</span><span class="s1">&#39;hi&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="c1"># Fit the model</span>
 <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -1461,55 +1578,48 @@
 <span class="c1"># Predict</span>
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 
-<span class="c1"># Access coefficients</span>
+<span class="c1"># Score</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Robust R2 score: </span><span class="si">{</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Access coefficients and weights</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefficients:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">coefficients</span><span class="p">)</span>
-
-<span class="c1"># Save the model</span>
-<span class="n">model</span><span class="o">.</span><span class="n">save_model</span><span class="p">(</span><span class="s2">&quot;my_model_dir/&quot;</span><span class="p">)</span>
-
-<span class="c1"># Load the model</span>
-<span class="n">loaded_model</span> <span class="o">=</span> <span class="n">LinearRegressor</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">&quot;my_model_dir/&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weights:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="training-history">Training History</h2>
-<p>The model records training history at each iteration, accessible via <code>model._history</code>.Each entry contains:</p>
+<p>If <code>history=True</code>, the model records detailed training history at each iteration, accessible via <code>model.params</code> and <code>model._history</code>. Each entry contains:</p>
 <ul>
 <li><code>iteration</code>: Iteration number</li>
-<li><code>h_loss</code>: Gnostic loss value</li>
+<li><code>loss</code>: Gnostic loss value</li>
 <li><code>coefficients</code>: Regression coefficients at this iteration</li>
-<li><code>rentropy</code>: Rentropy value</li>
+<li><code>rentropy</code>: Rentropy value (residual entropy)</li>
 <li><code>weights</code>: Sample weights at this iteration</li>
+<li><code>gnostic_characteristics</code>: (if enabled) fi, hi, etc.</li>
 </ul>
-<p>This enables detailed analysis and visualization of the training process.</p>
+<p>This enables in-depth analysis and visualization of the training process.</p>
 <hr />
-<h2 id="example">Example</h2>
-<p>Machine Gnostic Linear Regression example notebooks: </p>
+<h2 id="example-notebooks">Example Notebooks</h2>
 <ul>
-<li>
-<p><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_wine_data_linreg.ipynb">Example 1</a></p>
-</li>
-<li>
-<p><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_1_small_data_linreg.ipynb">Example 2</a></p>
-</li>
+<li><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_wine_data_linreg.ipynb">Example 1</a></li>
+<li><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_1_small_data_linreg.ipynb">Example 2</a></li>
 </ul>
 <p><img alt="Linear Regression" src="../plots/lin_reg.png" title="Linear Regression" /></p>
 <hr />
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<h2 id="notes">Notes</h2>
 <ul>
 <li>The model is robust to outliers and suitable for datasets with non-Gaussian noise.</li>
 <li>Supports integration with mlflow for experiment tracking and deployment.</li>
 <li>For more information, visit: <a href="https://machinegnostics.info/">https://machinegnostics.info/</a></li>
 <li>Source code: <a href="https://github.com/MachineGnostics/machinegnostics">https://github.com/MachineGnostics/machinegnostics</a></li>
 </ul>
-</div>
 <hr />
 <h2 id="license">License</h2>
-<p>Machine Gnostics - Machine Gnostics Library
+<p>Machine Gnostics - Machine Gnostics Library<br />
 Copyright (C) 2025  Machine Gnostics Team</p>
 <p>This work is licensed under the terms of the GNU General Public License version 3.0.</p>
-<p><strong>Author:</strong> Nirmal Parmar
-<strong>Date:</strong> 2025-10-01</p>
+<p><strong>Author:</strong> Nirmal Parmar<br />
+<strong>Date:</strong> 2025-05-01</p>
 <hr />
 
 
@@ -1542,7 +1652,7 @@ Copyright (C) 2025  Machine Gnostics Team</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../architecture/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Architecture">
+          <a href="../mg_arguments/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Definations">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1552,7 +1662,7 @@ Copyright (C) 2025  Machine Gnostics Team</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Architecture
+                Definations
               </div>
             </div>
           </a>
@@ -1582,7 +1692,7 @@ Copyright (C) 2025  Machine Gnostics Team</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright © 2025 Machine Gnostics, Dr. Nirmal Parmar  - <a href="#__consent">Change cookie settings</a>
+      Copyright © 2025 Machine Gnostics, Nirmal Parmar  - <a href="#__consent">Change cookie settings</a>
     </div>
   
   
