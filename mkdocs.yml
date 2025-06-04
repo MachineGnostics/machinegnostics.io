@@ -5,6 +5,7 @@ site_author: Nirmal Parmar
 copyright: 
   Copyright © 2025 Machine Gnostics, Nirmal Parmar  -   
   <a href="#__consent">Change cookie settings</a>
+
 theme:
   name: material
   logo: images/logo.png
@@ -12,9 +13,15 @@ theme:
     scheme: slate  # Optional but highly recommended theme
   features:
     - navigation.footer
+    - navigation.tabs
+    - navigation.sections
   custom_dir: overrides
+
 plugins:
   - privacy
+  - search
+  - mike
+
 repo_url: https://github.com/MachineGnostics/machinegnostics
 repo_name: Machine Gnostics
 
@@ -23,6 +30,9 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/MachineGnostics
       name: GitHub
+  version:
+    provider: mike
+
 nav:
   - Home: index.md
   - Installation: installation.md
