@@ -82,10 +82,7 @@ This layer unifies all components into a working system:
 
 ---
 
-## Further Reading
-
-- Pavel Kovanic, _Mathematical Gnostics_ (2023)
-- P. Kovanic & M.B. Humber, _The Economics of Information_ (2015)
+## [References](https://machinegnostics.info/references/)
 
 > Machine Gnostics is not just an alternative—it is a **new foundation** for AI, capable of **rational, robust, and interpretable** data modeling.
 

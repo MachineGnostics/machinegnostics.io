@@ -63,12 +63,3 @@ print(mean_absolute_error(y_true, y_pred))  # Output: 0.3333333333333333
 - MAE is robust to outliers but does not penalize large errors as strongly as mean squared error (MSE).
 
 ---
-
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
----

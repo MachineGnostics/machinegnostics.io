@@ -180,13 +180,6 @@ This enables in-depth analysis and visualization of the training process.
 
 ---
 
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
 **Author:** Nirmal Parmar  
 **Date:** 2025-05-01
 

@@ -62,14 +62,4 @@ print(mean_squared_error(y_true, y_pred))  # Output: 0.3333333333333333
 - Both `y_true` and `y_pred` must have the same shape and must not be empty.
 - MSE penalizes larger errors more than MAE (mean absolute error), making it sensitive to outliers.
 
-
----
-
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
 ---

@@ -28,3 +28,5 @@ Machine Gnostics offers a comprehensive suite of tools for robust analysis:
 - 🧪 **Scientifically Validated** – Tested on real-world problems across multiple domains including thermodynamics, materials science, and engineering
 
 ## [References](https://machinegnostics.info/references/)
+
+## License [GNU v3.0](https://github.com/MachineGnostics/machinegnostics/blob/main/LICENSE)

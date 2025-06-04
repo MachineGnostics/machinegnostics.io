@@ -3,14 +3,27 @@ site_url: https://machinegnostics.info
 site_description: A python library for machine learning and data science based on non-statistical methods.
 site_author: Nirmal Parmar
 copyright: 
-  Copyright © 2025 Machine Gnostics, Nirmal Parmar  -   
-  <a href="#__consent">Change cookie settings</a>
+  Copyright © 2025 Machine Gnostics & Nirmal Parmar |  
+  <a href="https://github.com/MachineGnostics/machinegnostics/blob/main/LICENSE"> GNU v3.0 License  |</a>   
+  <a href="#__consent">Change cookie settings   |</a>
+  <a href="https://machinegnostics.info/contact/">Contact us</a>
 
 theme:
   name: material
   logo: images/logo.png
   palette:
-    scheme: slate  # Optional but highly recommended theme
+    - scheme: slate
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light modee
+    - scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
   features:
     - navigation.footer
     - navigation.tabs

@@ -75,12 +75,3 @@ print(recall_score(df['true'], df['pred'], average='binary'))  # Output: 1.0
 
 
 ---
-
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
----

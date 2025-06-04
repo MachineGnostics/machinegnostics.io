@@ -92,11 +92,3 @@ Avg/Total            0.80      0.60      0.67          5
 
 ---
 
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
----

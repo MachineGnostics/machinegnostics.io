@@ -88,10 +88,3 @@ print(result)  # Example output: 0.98
 - RobR2 is particularly useful for robust regression and model evaluation in the presence of outliers.
 
 ---
-
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.

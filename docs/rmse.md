@@ -63,14 +63,4 @@ print(root_mean_squared_error(y_true, y_pred))  # Output: 0.5773502691896257
 - RMSE is sensitive to outliers due to the squaring of errors.
 - RMSE is in the same units as the target variable, making it easy to interpret.
 
-
----
-
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
 ---

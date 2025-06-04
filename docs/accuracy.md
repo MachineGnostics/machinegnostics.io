@@ -62,12 +62,3 @@ print(accuracy_score(df['true'], df['pred']))  # Output: 0.6666666666666666
 - The accuracy metric is most informative when the dataset is balanced. For imbalanced datasets, consider additional metrics such as precision, recall, or F1 score.
 
 ---
-
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
----

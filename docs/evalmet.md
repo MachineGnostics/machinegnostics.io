@@ -70,17 +70,3 @@ print(result)
 
 ---
 
-## References
-
-- Kovanic P., Humber M.B (2015) *The Economics of Information - Mathematical Gnostics for Data Analysis*
-
----
-
-## License
-
-Machine Gnostics - Machine Gnostics Library   
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
----

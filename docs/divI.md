@@ -78,18 +78,3 @@ print(result)  # Output: 0.06666666666666667
 - In the context of model evaluation, DivI is often used alongside other criteria such as Robust R-squared (RobR2) and the Geometric Mean of Multiplicative Fitting Errors (GMMFE) to provide a comprehensive assessment of model performance.
 
 ---
-
-## References
-
-- Kovanic P., Humber M.B (2015) *The Economics of Information - Mathematical Gnostics for Data Analysis*
-
----
-
-## License
-
-Machine Gnostic - Machine Gnostics Library    
-Copyright (C) 2025  Machine Gnosticsg Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
----

@@ -71,17 +71,3 @@ print(corr_matrix)
 - The output is a DataFrame with appropriate column and index names if the input was pandas.
 
 ---
-
-## References
-- Kovanic P., Humber M.B (2015) *The Economics of Information - Mathematical Gnostics for Data Analysis*, Chapter 24
-
----
-
-## License
-
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.  
-
----

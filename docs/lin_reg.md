@@ -166,7 +166,7 @@ This enables in-depth analysis and visualization of the training process.
 - [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_wine_data_linreg.ipynb)
 - [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_1_small_data_linreg.ipynb)
 
-![Linear Regression](./plots/lin_reg.png "Linear Regression")
+![Linear Regression](./plots/lin_reg1.png "Linear Regression")
 
 ---
 
@@ -178,14 +178,7 @@ This enables in-depth analysis and visualization of the training process.
 
 ---
 
-## License
-
-Machine Gnostics - Machine Gnostics Library
-Copyright (C) 2025  Machine Gnostics Team
-
-This work is licensed under the terms of the GNU General Public License version 3.0.
-
-**Author:** Nirmal Parmar
+**Author:** Nirmal Parmar   
 **Date:** 2025-05-01
 
 ---
