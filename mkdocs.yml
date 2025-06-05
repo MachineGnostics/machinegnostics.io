@@ -50,7 +50,7 @@ extra:
 
 nav:
   - Home: index.md
-  - Installation: mg/installation.md
+  - Installation: installation.md
   - Foundation: 
       - Concept: mg/foundation.md
       - Principles: mg/principles.md
