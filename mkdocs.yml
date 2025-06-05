@@ -34,6 +34,8 @@ plugins:
   - privacy
   - search
   - mike
+  - git-revision-date-localized
+  - awesome-pages
 
 repo_url: https://github.com/MachineGnostics/machinegnostics
 repo_name: Machine Gnostics
@@ -48,38 +50,38 @@ extra:
 
 nav:
   - Home: index.md
-  - Installation: installation.md
+  - Installation: mg/installation.md
   - Foundation: 
-      - Concept: foundation.md
-      - Principles: principles.md
-      - Architecture: architecture.md
-      - Definations: mg_arguments.md
+      - Concept: mg/foundation.md
+      - Principles: mg/principles.md
+      - Architecture: mg/architecture.md
+      - Definations: mg/mg_arguments.md
   - Models:
-    - Linear Regressor: lin_reg.md
-    - Polynomial Regressor: poly_reg.md
-    - Logistic Regressor: log_reg.md
-    - Cross Validation: cross_val.md
-    - Train Test Split: train_test_split.md
+    - Linear Regressor: models/reg/lin_reg.md
+    - Polynomial Regressor: models/reg/poly_reg.md
+    - Logistic Regressor: models/cls/log_reg.md
+    - Cross Validation: models/sup/cross_val.md
+    - Train Test Split: models/sup/train_test_split.md
   - Metrics:
-    - Accuracy: accuracy.md
-    - Precision: precision.md
-    - Recall: recall.md
-    - F1 Score: f1_score.md
-    - Classification Report: classification_report.md
-    - Mean Absolute Error: mae.md
-    - Mean Squared Error: mse.md
-    - Root Mean Squared Error: rmse.md
-    - Gnostic R2 Score: r2_score.md
-    - Gnostic Correlation: g_correlation.md
-    - Gnostic Relevance: g_relevance.md
-    - Gnostic DivI: divI.md
-    - Gnostic GMMFE: gmmfe.md
-    - Gnostic EvalMet: evalmet.md
+    - Accuracy: metrics/accuracy.md
+    - Precision: metrics/precision.md
+    - Recall: metrics/recall.md
+    - F1 Score: metrics/f1_score.md
+    - Classification Report: metrics/classification_report.md
+    - Mean Absolute Error: metrics/mae.md
+    - Mean Squared Error: metrics/mse.md
+    - Root Mean Squared Error: metrics/rmse.md
+    - Gnostic R2 Score: metrics/r2_score.md
+    - Gnostic Correlation: metrics/g_correlation.md
+    - Gnostic Relevance: metrics/g_relevance.md
+    - Gnostic DivI: metrics/divI.md
+    - Gnostic GMMFE: metrics/gmmfe.md
+    - Gnostic EvalMet: metrics/evalmet.md
   - Magnet:
-    - Neural Networks: magnet.md
-  - Examples: examples.md
+    - Neural Networks: magnet/magnet.md
+  - Examples: mg/examples.md
   - Contact: contact.md
-  - References: references.md
+  - References: ref/references.md
 
 markdown_extensions:
   - admonition

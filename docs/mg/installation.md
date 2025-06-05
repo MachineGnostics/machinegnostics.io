@@ -44,7 +44,7 @@ You can verify that Machine Gnostics and its dependencies are installed correctl
 ```python
 import machinegnostics
 
-print("All libraries imported successfully!")
+print("imported successfully!")
 ```
 
 ---
@@ -55,7 +55,7 @@ Machine Gnostics is designed to be as simple to use as other machine learning li
 
 ```python
 import numpy as np
-from machinegnostics.models import LinearRegressor
+from machinegnostics.models.regression import LinearRegressor
 
 # Example data
 X = np.array([[1], [2], [3], [4]])

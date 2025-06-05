@@ -166,7 +166,7 @@ This enables in-depth analysis and visualization of the training process.
 - [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_wine_data_linreg.ipynb)
 - [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_1_small_data_linreg.ipynb)
 
-![Linear Regression](./plots/lin_reg1.png "Linear Regression")
+![Linear Regression](../../plots/lin_reg1.png "Linear Regression")
 
 ---
 

@@ -172,7 +172,7 @@ This enables detailed analysis and visualization of the training process.
 - [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_3_moon_data_logreg.ipynb)
 - [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_4_logreg_mlflow.ipynb)
 
-![Logistic Regression](./plots/log_reg.png "Logistic Regression")
+![Logistic Regression](../../plots/log_reg.png "Logistic Regression")
 
 ---
 

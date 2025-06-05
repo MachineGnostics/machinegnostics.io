@@ -40,7 +40,7 @@ Mathematical Gnostics (MG) offers a fundamentally different approach to data ana
 
 ## Scientific Bases: A Comparative Diagram
 
-![Scientific Bases of Two Theories](images/img2.png)
+![Scientific Bases of Two Theories](../images/img2.png)
 
 *Figure: The scientific foundations of statistics (left) and gnostics (right) span mathematics, physics, geometry, and measurement theory, but differ fundamentally in their approach and underlying principles. [Pavel Kovanic, *Mathematical Gnostics* (2023)]*
 
@@ -48,7 +48,7 @@ Mathematical Gnostics (MG) offers a fundamentally different approach to data ana
 
 ## Approaches to Data Uncertainty
 
-![Comparison of Two Approaches to Data Uncertainty](images/img1.png)
+![Comparison of Two Approaches to Data Uncertainty](../images/img1.png)
 
 *Figure: Statistics builds its theory for infinite sample sizes and extrapolates results for finite datasets. Gnostics, in contrast, constructs its theory directly for finite (even single) events, providing a more natural fit for real-world data. [Pavel Kovanic, *Mathematical Gnostics* (2023)]*
 
@@ -93,4 +93,4 @@ For a deeper dive into the foundations and applications of mathematical gnostics
 
 ---
 
-Mathematical Gnostics is a new paradigm for data analysis—one that respects the individuality of data, leverages advanced mathematics, and is designed for the finite, real world.
+> Mathematical Gnostics is a new paradigm for data analysis—one that respects the individuality of data, leverages advanced mathematics, and is designed for the finite, real world.

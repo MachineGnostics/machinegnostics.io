@@ -168,7 +168,7 @@ This enables in-depth analysis and visualization of the training process.
 - [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_1_small_data_polyreg.ipynb)
 - [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_wine_data_polyreg.ipynb)
 
-![Polynomial Regression](./plots/poly-reg1.png "Polynomial Regression")
+![Polynomial Regression](../../plots/poly-reg1.png "Polynomial Regression")
 
 ---
 
