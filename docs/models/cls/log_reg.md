@@ -125,7 +125,7 @@ Instance of `LogisticRegressor` with loaded parameters.
 ## Example Usage
 
 ```python
-from machinegnostics.models import LogisticRegressor
+from machinegnostics.models.classification import LogisticRegressor
 
 # Initialize the model
 model = LogisticRegressor(degree=2, proba='gnostic', verbose=True)
