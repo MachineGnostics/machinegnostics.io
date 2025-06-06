@@ -1,6 +1,6 @@
 # LogisticRegressor: Robust Logistic Regression with Machine Gnostics
 
-**LogisticRegressor** is a robust and flexible binary classification model built on the Machine Gnostics framework. It is designed to handle outliers, heavy-tailed distributions, and non-Gaussian noise, making it suitable for real-world data challenges. The model supports polynomial feature expansion, robust weighting, early stopping, and seamless MLflow integration for experiment tracking and deployment.
+The `LogisticRegressor` is a robust and flexible binary classification model built on the Machine Gnostics framework. It is designed to handle outliers, heavy-tailed distributions, and non-Gaussian noise, making it suitable for real-world data challenges. The model supports polynomial feature expansion, robust weighting, early stopping, and seamless MLflow integration for experiment tracking and deployment.
 
 ---
 
