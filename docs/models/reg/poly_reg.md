@@ -119,7 +119,7 @@ Loads a previously saved model from disk.
   Directory path where the model is saved.
 
 **Returns:**  
-Instance of `LogisticRegressor` with loaded parameters.
+Instance of `PolynomialRegressor` with loaded parameters.
 
 ---
 
