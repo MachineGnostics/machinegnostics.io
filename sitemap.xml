@@ -2,118 +2,118 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://machinegnostics.info/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/contact/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/installation/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/magnet/magnet/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/accuracy/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/classification_report/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/divI/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/evalmet/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/f1_score/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_correlation/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_relevance/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/gmmfe/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/mae/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/mse/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/precision/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/r2_score/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/recall/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/rmse/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/architecture/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/examples/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/foundation/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/mg_arguments/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/principles/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/cls/log_reg/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/reg/lin_reg/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/reg/poly_reg/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/sup/cross_val/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/sup/train_test_split/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/ref/references/</loc>
-         <lastmod>2025-06-05</lastmod>
+         <lastmod>2025-06-06</lastmod>
     </url>
 </urlset>
