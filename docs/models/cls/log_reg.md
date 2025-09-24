@@ -45,6 +45,7 @@ Machine Gnostics LogisticRegressor brings deterministic, event-level modeling to
 | `proba`            | {'gnostic','sigmoid'}| 'gnostic' | Probability output mode.                                      |
 | `verbose`          | bool                 | False     | Prints progress and debug information.                        |
 | `data_form`        | str                  | 'a'       | Input data form: `'a'` (additive), `'m'` (multiplicative).    |
+| `verbose`           | bool                  | True      | Print detailed progress, warnings, and results                   |
 
 ---
 

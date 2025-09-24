@@ -6,7 +6,7 @@ If you have any questions, suggestions, or issues related to **Machine Gnostics*
 
 **Contact Person**  
 **Dr. Nirmal Parmar**  
-📧 [machinegnostics@gmail.com](mailto:machinegnostics@gmail.com)
+📧 [info.machinegnostics@gmail.com](mailto:machinegnostics@gmail.com)
 
 ---
 

@@ -41,7 +41,7 @@ The `PolynomialRegressor` is a robust polynomial regression model built on the p
 | `data_form`              | str                 | 'a'       | Internal data representation format.                                        |
 | `gnostic_characteristics`| bool                | True      | If True, computes and records gnostic properties (fi, hi, etc.).            |
 | `history`                | bool                | True      | If True, records the optimization history for analysis.                     |
-
+| `verbose`           | bool                  | True      | Print detailed progress, warnings, and results                   |
 ---
 
 ## Attributes

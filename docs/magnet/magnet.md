@@ -1,17 +1,25 @@
 # Magnet: Machine Gnostic Neural Network
 
-**Magnet** is the Machine Gnostic (Neural) Network, a novel architecture inspired by the principles of Mathematical Gnostics (MG). Unlike traditional neural networks that rely on probabilistic backpropagation and statistical learning, Magnet is built on a deterministic, finite, and algebraic foundation.
+**Magnet** is a next-generation neural network architecture inspired by Mathematical Gnostics (MG). Unlike traditional neural networks that rely on probabilistic backpropagation, Magnet is built on a deterministic, finite, and algebraic foundation—offering new possibilities for robust, interpretable learning.
 
-## Key Features
+## What Makes Magnet Unique?
 
-- **Deterministic Learning:** No reliance on probability or randomness; all computations are finite and reproducible.
-- **Event-Level Modeling:** Handles uncertainty and error at the level of individual data events, not populations.
-- **Algebraic Inference:** Utilizes gnostic algebra and error geometry for robust, interpretable learning.
-- **Resilient Architecture:** Designed to be robust against outliers, corrupted data, and distributional shifts.
+- **Deterministic Learning:** All computations are finite, reproducible, and free from randomness.
+- **Event-Level Modeling:** Uncertainty and error are handled at the level of individual data events, not just populations.
+- **Algebraic Inference:** Magnet leverages gnostic algebra and error geometry for transparent, explainable results.
+- **Resilient Architecture:** Designed to withstand outliers, corrupted data, and distributional shifts.
 
-!!! note "Status"
-    Magnet is currently under development.  
-    **Coming soon:** Detailed documentation, architecture diagrams, and implementation guides.
+## Roadmap & Collaboration
+
+Magnet is currently under active development.  
+**Coming soon:**  
+- Detailed documentation and architecture diagrams  
+- Implementation guides and code examples  
+- Benchmarks and comparison studies
+
+!!! tip "NOTE"
+    **We welcome collaboration and new ideas!**  
+    If you’re interested in contributing, sharing feedback, or exploring partnerships, please reach out—your insights can help shape the future of Machine Gnostic neural networks.
 
 ---
 
@@ -19,5 +27,10 @@ Stay tuned for updates as we bring the next generation of neural networks to Mac
 
 ---
 
-Machine Gnostics - Machine Gnostics Library  
-Copyright (C) 2025  Machine Gnostics Team
+**Suggestions for future additions:**
+
+- Add a high-level diagram or conceptual illustration of Magnet’s architecture.
+- Include a “Vision” or “Goals” section describing what Magnet aims to solve compared to existing neural networks.
+- Provide a link or contact for collaboration (email, GitHub, etc.).
+- List planned features or modules (e.g., layers, activation functions, training methods).
+- Share any preliminary results or benchmarks if available.

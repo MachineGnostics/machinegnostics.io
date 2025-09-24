@@ -1,6 +1,6 @@
-# Main Arguments and Concepts in Machine Gnostics ML Models
+# Glossary
 
-This document provides definitions and explanations for the main arguments and variables used in Machine Gnostics machine learning and deep learning models. Understanding these concepts will help users grasp the unique characteristics of the Machine Gnostics library, which is based on the non-statistical paradigm of Mathematical Gnostics.
+This document provides definitions and explanations for the main arguments and variables used in Machine Gnostics data analytics, machine learning and deep learning models. Understanding these concepts will help users grasp the unique characteristics of the Machine Gnostics library, which is based on the non-statistical paradigm of Mathematical Gnostics.
 
 ---
 
@@ -16,7 +16,7 @@ This document provides definitions and explanations for the main arguments and v
 
 ## Key Arguments and Gnostic Characteristics
 
-### 1. Gnostic Characteristics
+### 1. Gnostic Geometries
 
 These are the fundamental variables used to describe data in the gnostic framework. They are divided into two main spaces:
 
@@ -25,7 +25,7 @@ These are the fundamental variables used to describe data in the gnostic framewo
 - **Estimating Space (E-space, i):**  
   Describes the estimation of variability and relevance.
 
-#### Quantifying Characteristics
+#### Quantifying Geometry
 
 - **fj**: *Quantifying data variability*  
   Measures the variability present in the data.
@@ -33,7 +33,7 @@ These are the fundamental variables used to describe data in the gnostic framewo
 - **hj**: *Quantifying irrelevance*  
   Measures the irrelevance or error due to variability.
 
-#### Estimating Characteristics
+#### Estimating Geometry
 
 - **fi**: *Estimating data variability*  
   Provides an estimation of the data's variability.
@@ -91,4 +91,4 @@ All four variables (\( f_j, h_j, f_i, h_i \)) are called **gnostic characteristi
 
 ## Further reading
 
-For more detailed mathematical background, see the foundational texts on [Mathematical Gnostics](https://machinegnostics.info/references/) and the documentation of the Machine Gnostics library.
+For more detailed mathematical background, see the foundational texts on [Mathematical Gnostics](../ref/references.md) and the documentation of the Machine Gnostics library.

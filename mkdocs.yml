@@ -50,18 +50,42 @@ extra:
 
 nav:
   - Home: index.md
+  - History: history.md
   - Installation: installation.md
-  - Foundation: 
-      - Concept: mg/foundation.md
+  - Learn: 
+      - Concept: mg/concepts.md
       - Principles: mg/principles.md
+      - GDF: mg/gdf.md
       - Architecture: mg/architecture.md
-      - Definations: mg/mg_arguments.md
-  - Models:
+      - Glossary: mg/mg_arguments.md
+  - Tutorials:
+    - Quick Start: tutorials/getting_started.md
+    - Data Preprocessing: tutorials/data_preprocessing.md
+    - Supervised Learning: tutorials/supervised_learning.md
+    - Examples: mg/examples.md
+  - Data Analysis:
+    - Models: da/da_models.md
+    - EGDF: da/egdf.md
+    - ELDF: da/eldf.md
+    - QGDF: da/qgdf.md
+    - QLDF: da/qldf.md
+    - Cluster Analysis: da/cluster_analysis.md
+    - Interval Analysis: da/interval_analysis.md
+    - Data Homogeneity: da/homogeneity.md
+    - Data Scedasticity: da/scedasticity.md
+    - Data Membership: da/membership.md
+    - Data Interval: da/data_interval.md
+    - Data Cluster: da/data_cluster.md
+    - Z0 Estimator: da/z0_estimator.md
+  - Machine Learning:
+    - Models: models/ml_models.md
     - Linear Regressor: models/reg/lin_reg.md
     - Polynomial Regressor: models/reg/poly_reg.md
     - Logistic Regressor: models/cls/log_reg.md
     - Cross Validation: models/sup/cross_val.md
     - Train Test Split: models/sup/train_test_split.md
+  - Deep Learning:
+    - Magnet: magnet/magnet.md
   - Metrics:
     - Accuracy: metrics/accuracy.md
     - Precision: metrics/precision.md
@@ -76,12 +100,10 @@ nav:
     - Gnostic Relevance: metrics/g_relevance.md
     - Gnostic DivI: metrics/divI.md
     - Gnostic GMMFE: metrics/gmmfe.md
-    - Gnostic EvalMet: metrics/evalmet.md
-  - Magnet:
-    - Neural Networks: magnet/magnet.md
-  - Examples: mg/examples.md
-  - Contact: contact.md
+    - Gnostic EvalMet: metrics/evalmet.md 
   - References: ref/references.md
+  - Contact: contact.md
+
 
 markdown_extensions:
   - admonition

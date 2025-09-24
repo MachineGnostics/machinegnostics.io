@@ -2,11 +2,35 @@
 
 This diagram presents the conceptual architecture of the **Machine Gnostics** paradigm. Unlike traditional machine learning rooted in statistical theory, this new approach is built on the foundation of **Mathematical Gnostics (MG)**—a finite, deterministic, and physically inspired framework.
 
-![Machine Gnostics Architecture](../images/mg1.png)
-<!-- <p align="center">
-  <img src="images/mg1.png" alt="Machine Gnostics Architecture" width="300"/>
-</p> -->
-
+```
+                              +----------------------+
+                              |        DATA          |
+                              +----------------------+
+                                        |
+                +--------------------------------------------------+
+                |                 MACHINE GNOSTICS                 |
+                |                                                  |
+                |  +----------------------+                        |
+                |  | Mathematical Gnostics|                        |
+                |  +----------------------+                        |
+                |            |                                     |
+                |  +----------------------+                        |
+                |  |       MAGCAL         |                        |
+                |  +----------------------+                        |
+                |            |                                     |
+                |  +----------------------+                        |
+                |  | mlflow Integration   |                        |
+                |  +----------------------+                        |
+                |            |                                     |
+                |  +--------+   +--------+   +--------+            |
+                |  | Models |<->| Metrics|<->| Magnet |            |
+                |  +--------+   +--------+   +--------+            |
+                +--------------------------------------------------+
+                                      |
+                                  +--------+
+                                  |  USER  |
+                                  +--------+
+```
 
 ---
 

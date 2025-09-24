@@ -1,6 +1,6 @@
 # Installation Guide
 
-Machine Gnostics is distributed as a standard Python package and is designed for easy installation and integration into your data science workflow. The library has been tested on macOS with Python 3.11 and is fully compatible with standard data science libraries such as NumPy, pandas, and SciPy.
+Machine Gnostics is distributed as a standard Python package and is designed for easy installation and integration into your data science workflow. The library has been tested on macOS with Python 3.11 and is fully compatible with standard data science libraries.
 
 ---
 
@@ -9,11 +9,11 @@ Machine Gnostics is distributed as a standard Python package and is designed for
 It is best practice to use a virtual environment to manage your project dependencies and avoid conflicts with other Python packages.
 
 ```bash
-# Create a new virtual environment named 'machine-gnostics-env'
-python3 -m venv machinegnostics-env
+# Create a new virtual environment named 'mag-env'
+python3 -m venv mg-env
 
 # Activate the environment (macOS/Linux)
-source machinegnostics-env/bin/activate
+source mg-env/bin/activate
 
 # (On Windows, use: machinegnostics-env\Scripts\activate)
 ```
@@ -27,9 +27,6 @@ Install the Machine Gnostics library using pip:
 ```bash
 # main installation
 pip install machinegnostics
-
-# temporary test installation
-pip install -i https://test.pypi.org/simple/ machinegnostics
 ```
 
 This command will install Machine Gnostics and automatically resolve its dependencies.
@@ -42,9 +39,14 @@ This command will install Machine Gnostics and automatically resolve its depende
 You can verify that Machine Gnostics and its dependencies are installed correctly by importing them in a Python session:
 
 ```python
+
+# check import
 import machinegnostics
 
 print("imported successfully!")
+
+# check with pip
+pip show machinegnostics
 ```
 
 ---
@@ -75,7 +77,7 @@ print("Predictions:", y_pred)
 
 ## 5. Platform and Environment
 
-- **Operating System:** Tested on macOS (Apple Silicon and Intel)
+- **Operating System:** Tested on macOS and Windows 11
 - **Python Version:** 3.11 recommended
 - **Dependencies:** Compatible with NumPy, pandas, SciPy, and other standard data science libraries
 
@@ -90,7 +92,7 @@ print("Predictions:", y_pred)
   pip install --upgrade pip
   ```
 !!! note "Help"
-    - For further help, [consult](https://machinegnostics.info/contact/) us or open an issue on the [GitHub repository](https://github.com/MachineGnostics/machinegnostics).
+    - For further help, [consult](contact) us or open an issue on the [GitHub repository](https://github.com/MachineGnostics/machinegnostics).
 
 ---
 
