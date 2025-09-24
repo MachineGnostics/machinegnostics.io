@@ -12,26 +12,27 @@ Accuracy is defined as the proportion of correct predictions among the total num
 
 ## Parameters
 
-| Parameter | Type                | Description                                                                 |
-|-----------|---------------------|-----------------------------------------------------------------------------|
-| `y_true`  | array-like or pandas Series | Ground truth (correct) target values. Shape: (n_samples,)           |
+| Parameter   | Type                        | Description                                                              |
+| ----------- | --------------------------- | ------------------------------------------------------------------------ |
+| `y_true`  | array-like or pandas Series | Ground truth (correct) target values. Shape: (n_samples,)                |
 | `y_pred`  | array-like or pandas Series | Estimated target values as returned by a classifier. Shape: (n_samples,) |
+| `verbose` | bool                        | Print detailed progress, warnings, and results                           |
 
-- Both `y_true` and `y_pred` can be numpy arrays, lists, or pandas Series.  
+- Both `y_true` and `y_pred` can be numpy arrays, lists, or pandas Series.
 - If a pandas DataFrame is passed, a `ValueError` is raised (select a column instead).
 
 ---
 
 ## Returns
 
-- **accuracy**: `float`  
+- **accuracy**: `float`
   The accuracy score as a float in the range [0, 1].
 
 ---
 
 ## Raises
 
-- **ValueError**  
+- **ValueError**
   - If `y_true` or `y_pred` is a pandas DataFrame (must select a column).
   - If the shapes of `y_true` and `y_pred` do not match.
 
@@ -50,7 +51,7 @@ print(accuracy_score(y_true, y_pred))  # Output: 0.8
 # Example 2: Using pandas Series
 import pandas as pd
 df = pd.DataFrame({'true': [1, 0, 1], 'pred': [1, 1, 1]})
-print(accuracy_score(df['true'], df['pred']))  # Output: 0.6666666666666666
+print(accuracy_score(df['true'], df['pred']))
 ```
 
 ---

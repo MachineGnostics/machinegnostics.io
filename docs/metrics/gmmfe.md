@@ -35,10 +35,11 @@ GMMFE is particularly valuable when comparing models across datasets with differ
 
 ## Parameters
 
-| Parameter | Type       | Description                                                     |
-| --------- | ---------- | --------------------------------------------------------------- |
-| `y`     | np.ndarray | Observed data (ground truth). 1D array of numerical values.     |
-| `y_fit` | np.ndarray | Fitted data (model predictions). 1D array, same shape as `y`. |
+| Parameter   | Type       | Description                                                     |
+| ----------- | ---------- | --------------------------------------------------------------- |
+| `y`       | np.ndarray | Observed data (ground truth). 1D array of numerical values.     |
+| `y_fit`   | np.ndarray | Fitted data (model predictions). 1D array, same shape as `y`. |
+| `verbose` | bool       | Print detailed progress, warnings, and results                  |
 
 ---
 
@@ -66,7 +67,7 @@ from machinegnostics.metrics import gmmfe
 y = np.array([1.0, 2.0, 3.0, 4.0])
 y_fit = np.array([1.1, 1.9, 3.2, 3.8])
 result = gmmfe(y, y_fit)
-print(result)  # Output: 0.06666666666666667
+print(result)
 ```
 
 ---
@@ -86,3 +87,7 @@ print(result)  # Output: 0.06666666666666667
 
 ---
 
+**Author:** Nirmal Parmar		
+**Date:** 2025-09-24
+
+---

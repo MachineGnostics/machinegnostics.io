@@ -24,11 +24,12 @@ A higher EvalMet value indicates a better model fit, balancing explained varianc
 
 ## Parameters
 
-| Parameter | Type       | Default | Description                                                                                               |
-| --------- | ---------- | ------- | --------------------------------------------------------------------------------------------------------- |
-| `y`     | np.ndarray | —      | Observed data (ground truth). 1D array of numerical values.                                               |
-| `y_fit` | np.ndarray | —      | Fitted data (model predictions). 1D array, same shape as `y`.                                           |
-| `w`     | np.ndarray | None    | Optional weights for data points. 1D array, same shape as `y`. If not provided, equal weights are used. |
+| Parameter   | Type       | Default                                        | Description                                                                                               |
+| ----------- | ---------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `y`       | np.ndarray | —                                             | Observed data (ground truth). 1D array of numerical values.                                               |
+| `y_fit`   | np.ndarray | —                                             | Fitted data (model predictions). 1D array, same shape as `y`.                                           |
+| `w`       | np.ndarray | None                                           | Optional weights for data points. 1D array, same shape as `y`. If not provided, equal weights are used. |
+| `verbose` | bool       | Print detailed progress, warnings, and results |                                                                                                           |
 
 ---
 
@@ -70,3 +71,7 @@ print(result)
 
 ---
 
+**Author:** Nirmal Parmar	
+**Date:** 2025-09-24
+
+---

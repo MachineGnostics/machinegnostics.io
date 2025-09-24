@@ -35,10 +35,11 @@ DivI is particularly useful in robust model evaluation, as it is less sensitive 
 
 ## Parameters
 
-| Parameter | Type       | Description                                                     |
-| --------- | ---------- | --------------------------------------------------------------- |
-| `y`     | np.ndarray | Observed data (ground truth). 1D array of numerical values.     |
-| `y_fit` | np.ndarray | Fitted data (model predictions). 1D array, same shape as `y`. |
+| Parameter   | Type       | Description                                                     |
+| ----------- | ---------- | --------------------------------------------------------------- |
+| `y`       | np.ndarray | Observed data (ground truth). 1D array of numerical values.     |
+| `y_fit`   | np.ndarray | Fitted data (model predictions). 1D array, same shape as `y`. |
+| `verbose` | bool       | Print detailed progress, warnings, and results                  |
 
 ---
 
@@ -66,7 +67,7 @@ from machinegnostics.metrics import divI
 y = np.array([1.0, 2.0, 3.0, 4.0])
 y_fit = np.array([1.1, 1.9, 3.2, 3.8])
 result = divI(y, y_fit)
-print(result)  # Output: 0.06666666666666667
+print(result)
 ```
 
 ---
@@ -76,5 +77,10 @@ print(result)  # Output: 0.06666666666666667
 - DivI is calculated using gnostic characteristics, providing a robust way to measure divergence between distributions.
 - The metric is especially useful for model evaluation in real-world scenarios where data may be noisy or contain outliers.
 - In the context of model evaluation, DivI is often used alongside other criteria such as Robust R-squared (RobR2) and the Geometric Mean of Multiplicative Fitting Errors (GMMFE) to provide a comprehensive assessment of model performance.
+
+---
+
+**Author:** Nirmal Parmar	
+**Date:** 2025-09-24
 
 ---

@@ -28,6 +28,7 @@ It also computes weighted averages across all classes.
 | `digits`        | int                         | 2       | Number of digits for formatting output.                                                             |
 | `output_dict`   | bool                        | False   | If True, return output as a dict. If False, return as a formatted string.                           |
 | `zero_division` | {0, 1, 'warn'}              | 0       | Value to return when there is a zero division (no predicted samples for a class).                   |
+| `verbose`           | bool                  | True      | Print detailed progress, warnings, and results                   |
 
 ---
 

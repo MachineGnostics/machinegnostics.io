@@ -29,11 +29,12 @@ If weights are not provided, equal weights are assumed.
 
 ## Parameters
 
-| Parameter | Type               | Description                                                                                       |
-| --------- | ------------------ | ------------------------------------------------------------------------------------------------- |
-| `y`     | np.ndarray         | Observed data (ground truth). 1D array of numerical values.                                       |
-| `y_fit` | np.ndarray         | Fitted data (model predictions). 1D array, same shape as `y`.                                   |
-| `w`     | np.ndarray or None | Optional weights for data points. 1D array, same shape as `y`. If None, equal weights are used. |
+| Parameter   | Type               | Description                                                                                       |
+| ----------- | ------------------ | ------------------------------------------------------------------------------------------------- |
+| `y`       | np.ndarray         | Observed data (ground truth). 1D array of numerical values.                                       |
+| `y_fit`   | np.ndarray         | Fitted data (model predictions). 1D array, same shape as `y`.                                   |
+| `w`       | np.ndarray or None | Optional weights for data points. 1D array, same shape as `y`. If None, equal weights are used. |
+| `verbose` | bool               | Print detailed progress, warnings, and results                                                    |
 
 ---
 
@@ -64,7 +65,7 @@ y_fit = np.array([1.1, 1.9, 3.2, 3.8])
 w = np.array([1.0, 1.0, 1.0, 1.0])
 
 result = robr2(y, y_fit, w)
-print(result)  # Example output: 0.98
+print(result)
 ```
 
 ---
@@ -86,5 +87,10 @@ print(result)  # Example output: 0.98
 
 - If weights are not provided, the metric defaults to equal weighting for all data points.
 - RobR2 is particularly useful for robust regression and model evaluation in the presence of outliers.
+
+---
+
+**Author:** Nirmal Parmar   
+**Date:** 2025-09-24
 
 ---

@@ -20,6 +20,7 @@ This metric is especially important in scenarios where false positives are more 
 | `y_pred`  | array-like or pandas Series                    | —       | Estimated target values as returned by a classifier. Shape: (n_samples,)              |
 | `average` | {'binary', 'micro', 'macro', 'weighted', None} | 'binary' | Determines the type of averaging performed on the data. See below for details.        |
 | `labels`  | array-like or None                             | None     | List of labels to include. If None, uses sorted unique labels from y_true and y_pred. |
+| `verbose` | bool                                           | True     | Print detailed progress, warnings, and results                                        |
 
 ### Averaging Options
 
@@ -56,12 +57,12 @@ from machinegnostics.metrics import precision_score
 # Example 1: Macro-averaged precision for multiclass
 y_true = [0, 1, 2, 2, 0]
 y_pred = [0, 0, 2, 2, 0]
-print(precision_score(y_true, y_pred, average='macro'))  # Output: 0.8333333333333333
+print(precision_score(y_true, y_pred, average='macro'))
 
 # Example 2: Binary precision with pandas Series
 import pandas as pd
 df = pd.DataFrame({'true': [1, 0, 1], 'pred': [1, 1, 1]})
-print(precision_score(df['true'], df['pred'], average='binary'))  # Output: 0.6666666666666666
+print(precision_score(df['true'], df['pred'], average='binary')) 
 ```
 
 ---
@@ -74,4 +75,3 @@ print(precision_score(df['true'], df['pred'], average='binary'))  # Output: 0.66
 - For imbalanced datasets, consider using `average='weighted'` to account for class support.
 
 ---
-

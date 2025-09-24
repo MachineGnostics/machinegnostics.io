@@ -1,43 +1,42 @@
-# gcorrelation: Gnostic Correlation Metric
+# correlation: Gnostic Correlation Metric
 
-The `gcorrelation` function computes the Gnostic correlation coefficient between two data samples using robust irrelevance-based weighting. This metric provides a robust alternative to the classical Pearson correlation, making it less sensitive to outliers and non-normal data distributions.
+The `correlation` function computes the Gnostic correlation coefficient between two data samples. This metric is based on gnostic theory, providing robust and interpretable estimates of correlation that are resilient to uncertainty, noise, and outliers.
 
 ---
 
 ## Overview
 
-Gnostic correlation leverages irrelevance functions to construct robust weights for each data point, following the gnostic framework described by Kovanic & Humber (2015). This approach allows for a more reliable measure of association between variables, especially in the presence of noise or outliers.
+Gnostic correlation generalizes classical correlation by leveraging irrelevance measures from gnostic theory.
 
-- **Robust to outliers:** Uses irrelevance-based weighting.
-- **No normality assumption:** Works well with non-Gaussian data.
-- **Flexible:** Supports both 1D and 2D data (column-wise correlation).
+- **Estimating irrelevances** are aggregated as trigonometric sines (case `'i'`).
+- **Quantifying irrelevances** are aggregated as hyperbolic sines (case `'j'`).
+
+Both approaches converge to linear error in cases of weak uncertainty, but provide robust diagnostics in challenging data scenarios. The metric is designed to reflect true relationships in your data, even when classical methods may fail.
 
 ---
 
 ## Parameters
 
-| Parameter | Type         | Description                                                                 |
-|-----------|-------------|-----------------------------------------------------------------------------|
-| `data_1`  | np.ndarray, pandas Series, or DataFrame | First data sample (1D or 2D). Each column is treated as a variable. |
-| `data_2`  | np.ndarray, pandas Series, or DataFrame | Second data sample (must have same number of rows as `data_1`).     |
+| Parameter   | Type       | Description                                                                                    |
+| ----------- | ---------- | ---------------------------------------------------------------------------------------------- |
+| `data_1`  | np.ndarray | First data sample (1D numpy array, no NaN/Inf).                                                |
+| `data_2`  | np.ndarray | Second data sample (1D numpy array, no NaN/Inf).                                               |
+| `case`    | str        | Geometry type:`'i'` for estimation (EGDF), `'j'` for quantifying (QGDF). Default: `'i'`. |
+| `verbose` | bool       | If True, enables detailed logging for debugging. Default:`False`.                            |
 
 ---
 
 ## Returns
 
-- **float, np.ndarray, or pandas.DataFrame**  
-  The calculated Gnostic correlation coefficient(s):
-  - If both inputs are 1D: returns a float.
-  - If either input is 2D: returns a correlation matrix (np.ndarray or pandas DataFrame if input was pandas).
+- **float**
+  The Gnostic correlation coefficient between the two data samples.
 
 ---
 
 ## Raises
 
 - **ValueError**
-  - If input arrays have different lengths.
-  - If inputs are empty or not numpy arrays/pandas Series/DataFrame.
-  - If input shapes are incompatible.
+  If input arrays are not the same length, are empty, contain NaN/Inf, are not 1D, or if `case` is not `'i'` or `'j'`.
 
 ---
 
@@ -45,29 +44,39 @@ Gnostic correlation leverages irrelevance functions to construct robust weights 
 
 ```python
 import numpy as np
-from machinegnostics.metrics import gcorrelation
+from machinegnostics.metrics import correlation
 
-# Example 1: 1D arrays (robust analog of Pearson correlation)
-x = np.array([1.0, 2.0, 3.0, 4.0, 5.0])
-y = np.array([0.9, 2.1, 2.9, 4.2, 4.8])
-gcor = gcorrelation(x, y)
-print(f"Estimation correlation: {gcor:.3f}")  # Output: Estimation correlation: 0.999
+# Example 1: Compute correlation for two simple datasets
+data_1 = np.array([1, 2, 3, 4, 5])
+data_2 = np.array([5, 4, 3, 2, 1])
+corr = correlation(data_1, data_2, case='i', verbose=False)
+print(f"Correlation (case='i'): {corr}")
 
-# Example 2: DataFrames (column-wise correlation matrix)
-import pandas as pd
-df1 = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})
-df2 = pd.DataFrame({'c': [1, 2, 1], 'd': [6, 5, 4]})
-corr_matrix = gcorrelation(df1, df2)
-print(corr_matrix)
+# Example 2: Using quantifying geometry
+corr_j = correlation(data_1, data_2, case='j', verbose=True)
+print(f"Correlation (case='j'): {corr_j}")
 ```
 
 ---
 
 ## Notes
 
-- The location parameter is set by the mean (can be replaced by G-median for higher robustness).
-- The geometric mean of the weights is used as the "best" weighting vector.
-- For 2D arrays or DataFrames, the function computes the correlation for each pair of columns.
-- The output is a DataFrame with appropriate column and index names if the input was pandas.
+- The metric is robust to data uncertainty, noise, and outliers.
+- Input data must be preprocessed and cleaned for optimal results.
+- If data homogeneity is not met, the function automatically adjusts scale parameters for better reliability.
+- The Gnostic correlation uses irrelevance measures rather than classical means, providing deeper insight into data relationships.
+- Supports both estimation and quantification geometries for flexible analysis.
+
+---
+
+## Gnostic vs. Classical Correlation
+
+> **Note:**
+> Unlike classical correlation metrics that rely on statistical means and linear relationships, the Gnostic correlation uses irrelevance measures derived from gnostic theory. This approach is assumption-free and designed to reveal true data relationships, even in the presence of outliers or non-normal distributions.
+
+---
+
+**Author:** Nirmal Parmar		
+**Date:** 2025-09-24
 
 ---
