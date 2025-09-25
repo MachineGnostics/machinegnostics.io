@@ -50,14 +50,14 @@ extra:
 
 nav:
   - Home: index.md
-  - History: history.md
-  - Installation: installation.md
+  - History: stories/history.md
   - Learn: 
       - Concept: mg/concepts.md
       - Principles: mg/principles.md
       - GDF: mg/gdf.md
       - Architecture: mg/architecture.md
       - Glossary: mg/mg_arguments.md
+  - Installation: installation.md
   - Tutorials:
     - Quick Start: tutorials/getting_started.md
     - Data Preprocessing: tutorials/data_preprocessing.md
@@ -139,5 +139,4 @@ extra:
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
-
-# Prepare a detailed documentation for website. prepare markdown
+  - javascripts/cookie-consent.js
