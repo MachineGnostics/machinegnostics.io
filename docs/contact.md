@@ -3,10 +3,10 @@
 If you have any questions, suggestions, or issues related to **Machine Gnostics**, feel free to reach out. We welcome feedback from the community and are happy to assist you.
 
 ---
-
-**Contact Person**  
-**Dr. Nirmal Parmar**  
-📧 [info.machinegnostics@gmail.com](mailto:machinegnostics@gmail.com)
+!!! question "Contact"
+    **Contact Person**  
+    **Dr. Nirmal Parmar**  
+    📧 [info.machinegnostics@gmail.com](mailto:machinegnostics@gmail.com)
 
 ---
 

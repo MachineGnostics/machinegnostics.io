@@ -7,7 +7,42 @@
   </div>
 </div>
 
-> Machine Gnostics: Laws of Nature, Encoded—For Everyone!
+!!! success "Machine Gnostics"
+    Laws of Nature, Encoded—For Everyone!
+
+
+```mermaid
+graph LR
+    Entropy["Entropy"]
+    Curvature["Space Curvature"]
+    Bounds["[0, ∞] Bounds"]
+    Laws["Laws of Nature"]
+    MG["Machine Gnostics"]
+    AI["**AI** built with 'Laws of Nature'"]
+    Universe["Universe"]
+
+    Universe --> Entropy
+    Universe --> Curvature
+    Universe --> Bounds
+
+    Entropy --> Laws
+    Curvature --> Laws
+    Bounds --> Laws
+
+    Laws --> MG
+    Laws -.-> AI
+    MG --> AI
+
+    %% Help center Laws visually
+    Entropy -.-> MG
+    Curvature -.-> MG
+    Bounds -.-> MG
+
+    style Universe stroke-width:2px
+    style Laws stroke-width:3px
+    style MG stroke-width:2px
+    style AI stroke-width:2px
+```
 
 Machine Gnostics is an open-source initiative that seeks to redefine the mathematical underpinnings of machine learning. While most conventional ML libraries are grounded in probabilistic and statistical frameworks, Machine Gnostics explores alternative paradigms—drawing from deterministic algebra, information theory, and geometric methods. This approach opens new avenues for building robust, interpretable, and reliable analysis tools that can withstand the limitations of traditional models.
 
@@ -61,10 +96,10 @@ See the Concepts page for a deep dive into the science and philosophy behind MG.
 
 ## Real-World Impact
 
-- **Testimonials:**Hear from scientists and engineers who have solved unsolvable problems with MG.See Testimonials & History.
+- **Testimonials:**Hear from scientists and engineers who have solved unsolvable problems with MG.See [Testimonials](/stories/history/#testimonials) & [History](/stories/history/#historical-background).
 - **Case Studies:**
   Explore real applications in thermodynamics, environmental science, and more.
-  See Examples.
+  See [Examples](/tutorials/getting_started.md).
 
 ---
 

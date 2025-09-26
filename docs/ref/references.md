@@ -1,4 +1,4 @@
-!!! tip "Machine Gnostics Publications"
+!!! info "Machine Gnostics Publications"
     Publications on Machine Gnostics will be available soon. This website is designed to provide the essential fundamentals to help you get started.
 
     Below is a curated list of key publications where the concept of Mathematical Gnostics is introduced, explained, and applied in research and practice.

@@ -113,14 +113,27 @@ nav:
   - References: ref/references.md
   - Contact: contact.md
 
-
 markdown_extensions:
+  - attr_list
   - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.details
   - pymdownx.superfences
+  # - pymdownx:inlinehilite
+  # - pymdownx:snippets
   - pymdownx.arithmatex:
       generic: true
-  
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format 
+
 extra:
   analytics:
     provider: google
@@ -128,7 +141,13 @@ extra:
   social:
   - icon: fontawesome/brands/github
     link: https://github.com/MachineGnostics/machinegnostics
-    name: Machine Gnostics
+    name: Machine Gnostics on GitHub
+  - icon: fontawesome/brands/discord
+    link: https://discord.gg/BzXfaV56
+    name: Join us on Discord
+  - icon: fontawesome/brands/linkedin
+    link: https://www.linkedin.com/company/109036022/
+    name: Machine Gnostics on LinkedIn
   consent:
     title: Cookie consent
     description: >- 

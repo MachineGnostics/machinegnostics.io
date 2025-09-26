@@ -78,7 +78,7 @@ print(mean_j)
 
 ---
 
-**Authors:** Nirmal Parmar
+**Authors:** Nirmal Parmar	
 **Date:** 2025-09-24
 
 ---

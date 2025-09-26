@@ -10,21 +10,11 @@ It is best practice to use a virtual environment to manage your project dependen
 
 === "macOS & Linux"
 
-    ```bash
-    # Create a new virtual environment named 'mg-env'
-    python3 -m venv mg-env
-    # Activate the environment
-    source mg-env/bin/activate
-    ```
+    ``bash     # Create a new virtual environment named 'mg-env'     python3 -m venv mg-env     # Activate the environment     source mg-env/bin/activate     ``
 
 === "Windows"
 
-    ```cmd
-    # Create a new virtual environment named 'mg-env'
-    python -m venv mg-env
-    # Activate the environment
-    mg-env\Scripts\activate
-    ```
+    ``cmd     # Create a new virtual environment named 'mg-env'     python -m venv mg-env     # Activate the environment     mg-env\Scripts\activate     ``
 
 ---
 
@@ -34,15 +24,11 @@ Install the Machine Gnostics library using pip:
 
 === "macOS & Linux"
 
-    ```bash
-    pip install machinegnostics
-    ```
+    ``bash     pip install machinegnostics     ``
 
 === "Windows"
 
-    ```cmd
-    pip install machinegnostics
-    ```
+    ``cmd     pip install machinegnostics     ``
 
 This command will install Machine Gnostics and automatically resolve its dependencies.
 
@@ -62,15 +48,11 @@ You can also check the installation with pip:
 
 === "macOS & Linux"
 
-    ```bash
-    pip show machinegnostics
-    ```
+    ``bash     pip show machinegnostics     ``
 
 === "Windows"
 
-    ```cmd
-    pip show machinegnostics
-    ```
+    ``cmd     pip show machinegnostics     ``
 
 ---
 
@@ -90,7 +72,7 @@ Machine Gnostics is designed to be as simple to use as other machine learning li
     print(egdf.params)
     ```
 
-!!! example "Linear Regression"
+!!! example "Polynomial Regression"
     ```python
         import numpy as np
         from machinegnostics.models.regression import PolynomialRegressor
@@ -127,6 +109,8 @@ Machine Gnostics is designed to be as simple to use as other machine learning li
         plt.grid(True, alpha=0.3)
         plt.show()
     ```
+Please find step by step tutorial [here](../docs/tutorials).
+
 
 ## 5. Platform and Environment
 
@@ -143,49 +127,33 @@ Machine Gnostics is designed to be as simple to use as other machine learning li
 
 === "Windows"
 
-    ```cmd
-    mg-env\Scripts\activate
-    # or for conda
-    conda activate myenv
-    ```
+    ``cmd     mg-env\Scripts\activate     # or for conda     conda activate myenv     ``
 
 === "macOS/Linux"
 
-    ```bash
-    source mg-env/bin/activate
-    # or for conda
-    conda activate myenv
-    ```
+    ``bash     source mg-env/bin/activate     # or for conda     conda activate myenv     ``
 
 - **Check Your Python Version:**
   Ensure you are using Python 3.8 or newer.
 
 === "Windows"
 
-    ```cmd
-    python --version
-    ```
+    ``cmd     python --version     ``
 
 === "macOS/Linux"
 
-    ```bash
-    python3 --version
-    ```
+    ``bash     python3 --version     ``
 
 - **Upgrade pip:**
   An outdated pip can cause installation errors. Upgrade pip before installing:
 
 === "Windows"
 
-    ```cmd
-    pip install --upgrade pip
-    ```
+    ``cmd     pip install --upgrade pip     ``
 
 === "macOS/Linux"
 
-    ```bash
-    pip install --upgrade pip
-    ```
+    ``bash     pip install --upgrade pip     ``
 
 - **Install from a Clean Environment:**If you encounter conflicts, try creating a fresh virtual environment and reinstalling.
 - **Check Your Internet Connection:**Download errors often result from network issues. Make sure you are connected.

@@ -1,36 +1,78 @@
+
 # Machine Gnostics Architecture
 
 This diagram presents the conceptual architecture of the **Machine Gnostics** paradigm. Unlike traditional machine learning rooted in statistical theory, this new approach is built on the foundation of **Mathematical Gnostics (MG)**—a finite, deterministic, and physically inspired framework.
 
+
+
+**High-level Block Diagram:**
+```mermaid
+flowchart TD
+    subgraph EXT[" "]
+        DATA(["DATA"])
+        USER(["USER"])
+    end
+    subgraph MG_SYS["Machine Gnostics Architecture"]
+        IFACE1["Machine Gnostics Interface"]
+        MGTheory["Mathematical Gnostics"]
+        MAGCAL["MAGCAL"]
+        Models["Models"]
+        Metrics["Metrics"]
+        Magnet["Magnet"]
+        MLFlow["mlflow Integration"]
+        IFACE2["Machine Gnostics Interface"]
+    end
+    DATA --> IFACE1
+    IFACE1 --> MGTheory
+    MGTheory --> MAGCAL
+    MAGCAL --> Models
+    MAGCAL --> Metrics
+    MAGCAL --> Magnet
+    Models <--> Metrics
+    Metrics <--> Magnet
+    Models --> MLFlow
+    Metrics --> MLFlow
+    Magnet --> MLFlow
+    MLFlow --> IFACE2
+    IFACE2 --> USER
 ```
-                              +----------------------+
-                              |        DATA          |
-                              +----------------------+
-                                        |
-                +--------------------------------------------------+
-                |                 MACHINE GNOSTICS                 |
-                |                                                  |
-                |  +----------------------+                        |
-                |  | Mathematical Gnostics|                        |
-                |  +----------------------+                        |
-                |            |                                     |
-                |  +----------------------+                        |
-                |  |       MAGCAL         |                        |
-                |  +----------------------+                        |
-                |            |                                     |
-                |  +----------------------+                        |
-                |  | mlflow Integration   |                        |
-                |  +----------------------+                        |
-                |            |                                     |
-                |  +--------+   +--------+   +--------+            |
-                |  | Models |<->| Metrics|<->| Magnet |            |
-                |  +--------+   +--------+   +--------+            |
-                +--------------------------------------------------+
-                                      |
-                                  +--------+
-                                  |  USER  |
-                                  +--------+
-```
+
+<!-- **Sequence Diagram:**
+```mermaid
+sequenceDiagram
+    participant DATA as DATA
+    participant IFACE1 as MG Interface (Input)
+    participant MGTheory as Mathematical Gnostics
+    participant MAGCAL as MAGCAL
+    participant Models as Models
+    participant Metrics as Metrics
+    participant Magnet as Magnet
+    participant MLFlow as mlflow Integration
+    participant IFACE2 as MG Interface (Output)
+    participant USER as USER
+
+    DATA->>IFACE1: Provide data
+    IFACE1->>MGTheory: Pass data for theory-based processing
+    MGTheory->>MAGCAL: Deterministic calculations
+    MAGCAL->>Models: Model training/inference
+    MAGCAL->>Metrics: Metric calculation
+    MAGCAL->>Magnet: Neural network operations
+    Models->>Metrics: Evaluate predictions
+    Magnet->>Metrics: Evaluate predictions
+    Models->>MLFlow: Log/track model
+    Metrics->>MLFlow: Log/track metrics
+    Magnet->>MLFlow: Log/track neural net
+    MLFlow->>IFACE2: Prepare results
+    IFACE2->>USER: Deliver results
+``` -->
+
+
+**Glossary:**
+
+- **MAGCAL**: Mathematical Gnostics Calculations and Data Analysis Models
+- **Models**: Machine Learning Models
+- **Magnet**: Machine Gnostics Neural Networks
+- **Metrics**: Machine Gnostics and Statistical Metrics
 
 ---
 

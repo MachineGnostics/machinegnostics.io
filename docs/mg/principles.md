@@ -66,14 +66,13 @@ Below are the core principles of advanced data analysis as practiced in Machine 
 - **Transparency:** By letting the data decide, results are more interpretable and trustworthy.
 
 ---
+!!! success "Summary for New Users"
 
-## Summary for New Users
-
-- **Don’t force your data into ill-fitting models.**
-- **Use all your data, including outliers and incomplete points, with justified weighting.**
-- **Let the data reveal its own structure, uncertainty, and relationships.**
-- **Prefer robust, information-theoretic methods when possible.**
-- **Be open-minded and critical—let the data, not your expectations, drive your analysis.**
+    - **Don’t force your data into ill-fitting models.**
+    - **Use all your data, including outliers and incomplete points, with justified weighting.**
+    - **Let the data reveal its own structure, uncertainty, and relationships.**
+    - **Prefer robust, information-theoretic methods when possible.**
+    - **Be open-minded and critical—let the data, not your expectations, drive your analysis.**
 
 Machine Gnostics provides a principled, robust, and data-centric foundation for advanced data analysis in machine learning and data science.
 
