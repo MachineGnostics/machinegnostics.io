@@ -8,8 +8,7 @@ The `IntervalAnalysis` class provides robust, adaptive, and diagnostic interval 
 
 IntervalAnalysis orchestrates the complete process of fitting GDFs, checking homogeneity, and computing robust data intervals using the DataIntervals engine. It is designed for reliability, diagnostics, and adaptive interval estimation in scientific and engineering data analysis.
 
-**Gnostic vs. Statistical Interval Analysis:**  
-Gnostic interval analysis does not rely on probabilistic or statistical assumptions. Instead, it uses algebraic and geometric properties of the data and distribution functions, providing deterministic, reproducible, and interpretable intervals even for small, noisy, or non-Gaussian datasets. This is fundamentally different from classical statistical interval estimation, which depends on distributional assumptions and sampling theory.
+**Gnostic vs. Statistical Interval Analysis:**Gnostic interval analysis does not rely on probabilistic or statistical assumptions. Instead, it uses algebraic and geometric properties of the data and distribution functions, providing deterministic, reproducible, and interpretable intervals even for small, noisy, or non-Gaussian datasets. This is fundamentally different from classical statistical interval estimation, which depends on distributional assumptions and sampling theory.
 
 - **Assumption-Free:** No parametric or probabilistic assumptions.
 - **Robust:** Handles outliers, heterogeneity, and bounded/unbounded domains.
@@ -34,42 +33,42 @@ Gnostic interval analysis does not rely on probabilistic or statistical assumpti
 
 ## Parameters
 
-| Parameter                | Type                  | Default   | Description                                                      |
-|--------------------------|-----------------------|-----------|------------------------------------------------------------------|
-| `DLB`                    | float or None         | None      | Data Lower Bound (absolute minimum, optional)                    |
-| `DUB`                    | float or None         | None      | Data Upper Bound (absolute maximum, optional)                    |
-| `LB`                     | float or None         | None      | Lower Probable Bound (practical lower limit, optional)           |
-| `UB`                     | float or None         | None      | Upper Probable Bound (practical upper limit, optional)           |
-| `S`                      | float or 'auto'       | 'auto'    | Scale parameter for distribution                                 |
-| `z0_optimize`            | bool                  | True      | Optimize central parameter Z0 during fitting                     |
-| `tolerance`              | float                 | 1e-9      | Convergence tolerance for optimization                           |
-| `data_form`              | str                   | 'a'       | Data form: 'a' (additive), 'm' (multiplicative)                  |
-| `n_points`               | int                   | 500       | Number of points for distribution evaluation                     |
-| `homogeneous`            | bool                  | True      | Assume data homogeneity (enables homogeneity testing)            |
-| `catch`                  | bool                  | True      | Store warnings/errors and intermediate results                   |
-| `weights`                | np.ndarray or None    | None      | Prior weights for data points                                    |
-| `wedf`                   | bool                  | False     | Use Weighted Empirical Distribution Function                     |
-| `opt_method`             | str                   | 'L-BFGS-B'| Optimization method (scipy.optimize)                             |
-| `verbose`                | bool                  | False     | Print detailed progress and diagnostics                          |
-| `max_data_size`          | int                   | 1000      | Max data size for smooth GDF generation                          |
-| `flush`                  | bool                  | True      | Flush intermediate arrays after fitting                          |
-| `dense_zone_fraction`    | float                 | 0.4       | Fraction of domain near Z0 for dense interval search             |
-| `dense_points_fraction`  | float                 | 0.7       | Fraction of search points in dense zone                          |
-| `convergence_window`     | int                   | 15        | Window size for convergence detection                            |
-| `convergence_threshold`  | float                 | 1e-6      | Threshold for Z0 convergence                                     |
-| `min_search_points`      | int                   | 30        | Minimum search points before checking convergence                |
-| `boundary_margin_factor` | float                 | 0.001     | Margin factor to avoid searching at boundaries                   |
-| `extrema_search_tolerance`| float                | 1e-6      | Tolerance for detecting extrema in Z0 variation                  |
-| `gdf_recompute`          | bool                  | False     | Recompute GDF for each candidate datum in interval search        |
-| `gnostic_filter`         | bool                  | False     | Apply gnostic clustering to filter outlier Z0 values             |
-| `cluster_bounds`         | bool                  | True      | Estimate cluster bounds using DataCluster                        |
-| `membership_bounds`      | bool                  | True      | Estimate membership bounds using DataMembership                  |
+| Parameter                    | Type               | Default    | Description                                               |
+| ---------------------------- | ------------------ | ---------- | --------------------------------------------------------- |
+| `DLB`                      | float or None      | None       | Data Lower Bound (absolute minimum, optional)             |
+| `DUB`                      | float or None      | None       | Data Upper Bound (absolute maximum, optional)             |
+| `LB`                       | float or None      | None       | Lower Probable Bound (practical lower limit, optional)    |
+| `UB`                       | float or None      | None       | Upper Probable Bound (practical upper limit, optional)    |
+| `S`                        | float or 'auto'    | 'auto'     | Scale parameter for distribution                          |
+| `z0_optimize`              | bool               | True       | Optimize central parameter Z0 during fitting              |
+| `tolerance`                | float              | 1e-9       | Convergence tolerance for optimization                    |
+| `data_form`                | str                | 'a'        | Data form: 'a' (additive), 'm' (multiplicative)           |
+| `n_points`                 | int                | 100        | Number of points for distribution evaluation              |
+| `homogeneous`              | bool               | True       | Assume data homogeneity (enables homogeneity testing)     |
+| `catch`                    | bool               | True       | Store warnings/errors and intermediate results            |
+| `weights`                  | np.ndarray or None | None       | Prior weights for data points                             |
+| `wedf`                     | bool               | False      | Use Weighted Empirical Distribution Function              |
+| `opt_method`               | str                | 'L-BFGS-B' | Optimization method (scipy.optimize)                      |
+| `verbose`                  | bool               | False      | Print detailed progress and diagnostics                   |
+| `max_data_size`            | int                | 1000       | Max data size for smooth GDF generation                   |
+| `flush`                    | bool               | True       | Flush intermediate arrays after fitting                   |
+| `dense_zone_fraction`      | float              | 0.4        | Fraction of domain near Z0 for dense interval search      |
+| `dense_points_fraction`    | float              | 0.7        | Fraction of search points in dense zone                   |
+| `convergence_window`       | int                | 15         | Window size for convergence detection                     |
+| `convergence_threshold`    | float              | 1e-6       | Threshold for Z0 convergence                              |
+| `min_search_points`        | int                | 30         | Minimum search points before checking convergence         |
+| `boundary_margin_factor`   | float              | 0.001      | Margin factor to avoid searching at boundaries            |
+| `extrema_search_tolerance` | float              | 1e-6       | Tolerance for detecting extrema in Z0 variation           |
+| `gdf_recompute`            | bool               | False      | Recompute GDF for each candidate datum in interval search |
+| `gnostic_filter`           | bool               | False      | Apply gnostic clustering to filter outlier Z0 values      |
+| `cluster_bounds`           | bool               | True       | Estimate cluster bounds using DataCluster                 |
+| `membership_bounds`        | bool               | True       | Estimate membership bounds using DataMembership           |
 
 ---
 
 ## Attributes
 
-- **params**: `dict`  
+- **params**: `dict`
   Stores all warnings, errors, and diagnostic information from the analysis.
 
 ---
@@ -80,12 +79,11 @@ Gnostic interval analysis does not rely on probabilistic or statistical assumpti
 
 Runs the complete interval analysis workflow on the input data.
 
-- **data**: `np.ndarray`, shape `(n_samples,)`  
-  1D numpy array of input data for interval analysis
-- **plot**: `bool` (optional)  
+- **data**: `np.ndarray`, shape `(n_samples,)`1D numpy array of input data for interval analysis
+- **plot**: `bool` (optional)
   If True, automatically generates diagnostic plots after fitting
 
-**Returns:**  
+**Returns:**
 `dict` — Estimated interval bounds and diagnostics
 
 ---
@@ -94,52 +92,52 @@ Runs the complete interval analysis workflow on the input data.
 
 Returns a dictionary of estimated interval results and bounds. Also called 'Data Certification'
 
-**Returns:**  
+**Returns:**
 `dict` — Contains keys such as `'LB', 'LSB', 'DLB', 'LCB', 'LSD', 'ZL', 'Z0L', 'Z0', 'Z0U', 'ZU', 'USD', 'UCB', 'DUB', 'USB', 'UB'`
 
-    - **LB**: Lower Bound  
+    -**LB**: Lower Bound
     The practical lower limit for the interval (may be set by user or inferred).
 
-    - **LSB**: Lower Sample (Membership) Bound  
+    -**LSB**: Lower Sample (Membership) Bound
     The lowest value for which data is homogeneous.
 
-    - **DLB**: Data Lower Bound  
+    -**DLB**: Data Lower Bound
     The absolute minimum value present in the data.
 
-    - **LCB**: Lower Cluster Bound  
+    -**LCB**: Lower Cluster Bound
     The lower edge of the main data cluster.
 
-    - **LSD**: Lower Standard Deviation Bound 
+    -**LSD**: Lower Standard Deviation Bound
     The lowest value as per gnostic standard deviation.
 
-    - **ZL**: Z0 Lower Interval  
+    -**ZL**: Z0 Lower Interval
     The lower bound of the typical interval.
 
-    - **Z0L**: Z0 Lower Bound  
+    -**Z0L**: Z0 Lower Bound
     The lower bound of the tolerance interval.
 
-    - **Z0**: Central Value (Gnostic Mean)  
+    -**Z0**: Central Value (Gnostic Mean)
     The central parameter of the distribution (gnostic mean).
 
-    - **Z0U**: Z0 Upper Bound  
+    -**Z0U**: Z0 Upper Bound
     The upper bound of the tolerance interval.
 
-    - **ZU**: Z0 Upper Interval  
+    -**ZU**: Z0 Upper Interval
     The upper bound of the typical interval.
 
-    - **USD**: Upper Support/Domain Bound  
+    -**USD**: Upper Support/Domain Bound
     The highest value in the support or domain of the fitted distribution.
 
-    - **UCB**: Upper Cluster Bound  
+    -**UCB**: Upper Cluster Bound
     The upper edge of the main data cluster.
 
-    - **DUB**: Data Upper Bound  
+    -**DUB**: Data Upper Bound
     The absolute maximum value present in the data.
 
-    - **USB**: Upper Sample (Membership) Bound  
+    -**USB**: Upper Sample (Membership) Bound
     The highest value for which data is homogeneous (membership analysis).
 
-    - **UB**: Upper Bound  
+    -**UB**: Upper Bound
     The practical upper limit for the interval (may be set by user or inferred).
 
 ---
@@ -148,12 +146,11 @@ Returns a dictionary of estimated interval results and bounds. Also called 'Data
 
 Visualizes the fitted GDFs and the estimated intervals.
 
-- **GDF**: `bool` (default: True)  
-  Plot the fitted ELDF (local distribution function)
-- **intervals**: `bool` (default: True)  
+- **GDF**: `bool` (default: True)Plot the fitted ELDF (local distribution function)
+- **intervals**: `bool` (default: True)
   Plot the estimated intervals and Z0 variation
 
-**Returns:**  
+**Returns:**
 None (displays plot)
 
 ---
@@ -190,7 +187,7 @@ ia.plot(GDF=True, intervals=True)
 
 ---
 
-**Author:** Nirmal Parmar  
+**Author:** Nirmal Parmar
 **Date:** 2025-09-24
 
 ---

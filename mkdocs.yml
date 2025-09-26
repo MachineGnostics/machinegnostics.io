@@ -59,10 +59,16 @@ nav:
       - Glossary: mg/mg_arguments.md
   - Installation: installation.md
   - Tutorials:
-    - Quick Start: tutorials/getting_started.md
-    - Data Preprocessing: tutorials/data_preprocessing.md
-    - Supervised Learning: tutorials/supervised_learning.md
-    - Examples: mg/examples.md
+    - Quick Start: tutorials/overview.md
+    - Gnostics Measures: tutorials/1_da_basics.md
+    - Gnostic Distributions: tutorials/2_da_gdf.md
+    - Gnostic Tests: tutorials/5_da_test.md
+    - Cluster Analysis: tutorials/3_da_ca.md
+    - Interval Analysis: tutorials/4_da_ia.md
+    - Linear Regression: tutorials/ml_lr_1.md
+    - Polynomial Regression: tutorials/ml_plr_1.md
+    - Logistic Regression: tutorials/ml_log_reg_1.md
+    - Notebook Examples: tutorials/examples.md
   - Data Analysis:
     - Models: da/da_models.md
     - EGDF: da/egdf.md

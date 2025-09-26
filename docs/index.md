@@ -1,15 +1,13 @@
 # Machine Gnostics
 
-<div style="display: flex; align-items: flex-start;">
-  <img src="images/mg3.jpg" alt="Machine Gnostics" width="300" style="margin-right: 20px;"/>
-  <div>
-    Welcome to <strong>Machine Gnostics</strong>, an innovative Python library designed to implement the principles of <strong>Mathematical Gnostics</strong> for robust data analysis, modeling, and inference. Unlike traditional statistical approaches that depend heavily on probabilistic assumptions, Machine Gnostics harnesses deterministic algebraic and geometric structures. This unique foundation enables the library to deliver exceptional resilience against outliers, noise, and corrupted data, making it a powerful tool for challenging real-world scenarios.
-  </div>
-</div>
+  Welcome to `<strong>`Machine Gnostics`</strong>`, an innovative Python library designed to implement the principles of `<strong>`Mathematical Gnostics`</strong>` for robust data analysis, modeling, and inference. Unlike traditional statistical approaches that depend heavily on probabilistic assumptions, Machine Gnostics harnesses deterministic algebraic and geometric structures. This unique foundation enables the library to deliver exceptional resilience against outliers, noise, and corrupted data, making it a powerful tool for challenging real-world scenarios.
+
+<p align="center">
+  <img src="images/mg3.jpg" alt="Machine Gnostics" width="400">
+</p>
 
 !!! success "Machine Gnostics"
     Laws of Nature, Encoded—For Everyone!
-
 
 ```mermaid
 graph LR
@@ -51,7 +49,6 @@ Machine Gnostics is an open-source initiative that seeks to redefine the mathema
 
     Machine Gnostics challenges the limitations of traditional, probabilistic models. Instead of relying on assumptions and large data samples, it encodes the very laws of nature—geometry, physics, entropy—into algorithms that extract truth from data, even when samples are small, noisy, or corrupted.
 
-
 ---
 
 ## Data Science Rooted in Nature
@@ -77,13 +74,10 @@ Machine Gnostics challenges the limitations of traditional, probabilistic models
 
 - **Advanced Gnostic Data Analysis:**
   Unlock sophisticated exploratory data analysis (EDA) with algorithms that reveal hidden structures, relationships, and patterns in your data. Designed for data scientists, analysts, and researchers, Machine Gnostics provides tools that go far beyond traditional statistics—enabling deeper, more meaningful insights for both small and complex datasets.
-
 - **Industry-Ready Machine Learning:**
   Enjoy seamless integration with standard machine learning workflows. Machine Gnostics models support familiar `fit` and `predict` methods, making them easy to adopt in any pipeline. With built-in MLflow integration, you can track, version, and deploy models effortlessly—bridging the gap between research and real-world industry applications.
-
 - **Next-Generation Deep Learning (MAGNET):**
   Prepare for the future with MAGNET (Machine Gnostics Networks), our upcoming deep learning framework. Rooted in the gnostic theorem and the laws of nature, MAGNET will offer a new paradigm for building robust, interpretable neural networks. Stay tuned as we develop this groundbreaking extension to the Machine Gnostics ecosystem.
-
 
 ---
 
@@ -124,11 +118,9 @@ Machine Gnostics is open source and community-driven.
 
 ---
 
-
 ### [License: GNU v3.0](https://github.com/MachineGnostics/machinegnostics/blob/main/LICENSE)
 
 ---
-
 
 <!-- ## Overview
 

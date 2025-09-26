@@ -74,40 +74,40 @@ Machine Gnostics is designed to be as simple to use as other machine learning li
 
 !!! example "Polynomial Regression"
     ```python
-        import numpy as np
-        from machinegnostics.models.regression import PolynomialRegressor
+    import numpy as np
+    from machinegnostics.models.regression import PolynomialRegressor
 
     # Example data
-        X = np.array([0., 0.4, 0.8, 1.2, 1.6, 2. ])
-        y = np.array([17.89408548, 69.61586934, -7.19890572, 9.37670866, -10.55673099, 16.57855348])
+    X = np.array([0., 0.4, 0.8, 1.2, 1.6, 2. ])
+    y = np.array([17.89408548, 69.61586934, -7.19890572, 9.37670866, -10.55673099, 16.57855348])
 
     # Create and fit a robust polynomial regression model
-        model = PolynomialRegressor(degree=2)
-        model.fit(X, y)
+    model = PolynomialRegressor(degree=2)
+    model.fit(X, y)
 
     model_lr = LinearRegressor()
-        model_lr.fit(X, y)
+    model_lr.fit(X, y)
 
     # Make predictions
-        y_pred = model.predict(X)
-        y_pred_lr = model_lr.predict(X)
+    y_pred = model.predict(X)
+    y_pred_lr = model_lr.predict(X)
 
     print("Predictions:", y_pred)
 
     # coefficients
-        print("Coefficients:", model.coefficients)
+    print("Coefficients:", model.coefficients)
 
     # x vs y, y_pred plot
-        import matplotlib.pyplot as plt
-        plt.scatter(X, y, color='blue', label='Data')
-        plt.plot(X, y_pred, color='red', label='Polynomial Prediction')
-        plt.plot(X, y_pred_lr, color='green', label='Linear Prediction')
-        plt.xlabel('X')
-        plt.ylabel('y')
-        plt.title('Polynomial and Linear Regression')
-        plt.legend()
-        plt.grid(True, alpha=0.3)
-        plt.show()
+    import matplotlib.pyplot as plt
+    plt.scatter(X, y, color='blue', label='Data')
+    plt.plot(X, y_pred, color='red', label='Polynomial Prediction')
+    plt.plot(X, y_pred_lr, color='green', label='Linear Prediction')
+    plt.xlabel('X')
+    plt.ylabel('y')
+    plt.title('Polynomial and Linear Regression')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.show()
     ```
 Please find step by step tutorial [here](../docs/tutorials).
 
