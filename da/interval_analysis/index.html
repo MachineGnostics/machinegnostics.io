@@ -791,12 +791,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorials/data_preprocessing.md" class="md-nav__link">
+      <a href="../../tutorials/1_da_basics/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Data Preprocessing
+    Gnostics Measures
     
   </span>
   
@@ -814,12 +814,12 @@
   
   
     <li class="md-nav__item">
-      <a href="../../tutorials/supervised_learning.md" class="md-nav__link">
+      <a href="../../tutorials/2_da_gdf/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Supervised Learning
+    Gnostic Distributions
     
   </span>
   
@@ -837,12 +837,150 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mg/examples/" class="md-nav__link">
+      <a href="../../tutorials/5_da_test/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
-    Examples
+    Gnostic Tests
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/3_da_ca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cluster Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/4_da_ia/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interval Analysis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/ml_lr_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Regression
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/ml_plr_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polynomial Regression
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/ml_log_reg_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logistic Regression
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorials/examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notebook Examples
     
   </span>
   
@@ -2382,8 +2520,7 @@
 <hr />
 <h2 id="overview">Overview</h2>
 <p>IntervalAnalysis orchestrates the complete process of fitting GDFs, checking homogeneity, and computing robust data intervals using the DataIntervals engine. It is designed for reliability, diagnostics, and adaptive interval estimation in scientific and engineering data analysis.</p>
-<p><strong>Gnostic vs. Statistical Interval Analysis:</strong><br />
-Gnostic interval analysis does not rely on probabilistic or statistical assumptions. Instead, it uses algebraic and geometric properties of the data and distribution functions, providing deterministic, reproducible, and interpretable intervals even for small, noisy, or non-Gaussian datasets. This is fundamentally different from classical statistical interval estimation, which depends on distributional assumptions and sampling theory.</p>
+<p><strong>Gnostic vs. Statistical Interval Analysis:</strong>Gnostic interval analysis does not rely on probabilistic or statistical assumptions. Instead, it uses algebraic and geometric properties of the data and distribution functions, providing deterministic, reproducible, and interpretable intervals even for small, noisy, or non-Gaussian datasets. This is fundamentally different from classical statistical interval estimation, which depends on distributional assumptions and sampling theory.</p>
 <ul>
 <li><strong>Assumption-Free:</strong> No parametric or probabilistic assumptions.</li>
 <li><strong>Robust:</strong> Handles outliers, heterogeneity, and bounded/unbounded domains.</li>
@@ -2466,7 +2603,7 @@ Gnostic interval analysis does not rely on probabilistic or statistical assumpti
 <tr>
 <td><code>n_points</code></td>
 <td>int</td>
-<td>500</td>
+<td>100</td>
 <td>Number of points for distribution evaluation</td>
 </tr>
 <tr>
@@ -2588,7 +2725,7 @@ Gnostic interval analysis does not rely on probabilistic or statistical assumpti
 <hr />
 <h2 id="attributes">Attributes</h2>
 <ul>
-<li><strong>params</strong>: <code>dict</code><br />
+<li><strong>params</strong>: <code>dict</code>
   Stores all warnings, errors, and diagnostic information from the analysis.</li>
 </ul>
 <hr />
@@ -2596,73 +2733,71 @@ Gnostic interval analysis does not rely on probabilistic or statistical assumpti
 <h3 id="fitdata-plotfalse"><code>fit(data, plot=False)</code></h3>
 <p>Runs the complete interval analysis workflow on the input data.</p>
 <ul>
-<li><strong>data</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code><br />
-  1D numpy array of input data for interval analysis</li>
-<li><strong>plot</strong>: <code>bool</code> (optional)<br />
+<li><strong>data</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code>1D numpy array of input data for interval analysis</li>
+<li><strong>plot</strong>: <code>bool</code> (optional)
   If True, automatically generates diagnostic plots after fitting</li>
 </ul>
-<p><strong>Returns:</strong><br />
+<p><strong>Returns:</strong>
 <code>dict</code> — Estimated interval bounds and diagnostics</p>
 <hr />
 <h3 id="results"><code>results()</code></h3>
 <p>Returns a dictionary of estimated interval results and bounds. Also called 'Data Certification'</p>
-<p><strong>Returns:</strong><br />
+<p><strong>Returns:</strong>
 <code>dict</code> — Contains keys such as <code>'LB', 'LSB', 'DLB', 'LCB', 'LSD', 'ZL', 'Z0L', 'Z0', 'Z0U', 'ZU', 'USD', 'UCB', 'DUB', 'USB', 'UB'</code></p>
-<div class="language-text highlight"><pre><span></span><code>- **LB**: Lower Bound  
+<div class="language-text highlight"><pre><span></span><code>-**LB**: Lower Bound
 The practical lower limit for the interval (may be set by user or inferred).
 
-- **LSB**: Lower Sample (Membership) Bound  
+-**LSB**: Lower Sample (Membership) Bound
 The lowest value for which data is homogeneous.
 
-- **DLB**: Data Lower Bound  
+-**DLB**: Data Lower Bound
 The absolute minimum value present in the data.
 
-- **LCB**: Lower Cluster Bound  
+-**LCB**: Lower Cluster Bound
 The lower edge of the main data cluster.
 
-- **LSD**: Lower Standard Deviation Bound 
+-**LSD**: Lower Standard Deviation Bound
 The lowest value as per gnostic standard deviation.
 
-- **ZL**: Z0 Lower Interval  
+-**ZL**: Z0 Lower Interval
 The lower bound of the typical interval.
 
-- **Z0L**: Z0 Lower Bound  
+-**Z0L**: Z0 Lower Bound
 The lower bound of the tolerance interval.
 
-- **Z0**: Central Value (Gnostic Mean)  
+-**Z0**: Central Value (Gnostic Mean)
 The central parameter of the distribution (gnostic mean).
 
-- **Z0U**: Z0 Upper Bound  
+-**Z0U**: Z0 Upper Bound
 The upper bound of the tolerance interval.
 
-- **ZU**: Z0 Upper Interval  
+-**ZU**: Z0 Upper Interval
 The upper bound of the typical interval.
 
-- **USD**: Upper Support/Domain Bound  
+-**USD**: Upper Support/Domain Bound
 The highest value in the support or domain of the fitted distribution.
 
-- **UCB**: Upper Cluster Bound  
+-**UCB**: Upper Cluster Bound
 The upper edge of the main data cluster.
 
-- **DUB**: Data Upper Bound  
+-**DUB**: Data Upper Bound
 The absolute maximum value present in the data.
 
-- **USB**: Upper Sample (Membership) Bound  
+-**USB**: Upper Sample (Membership) Bound
 The highest value for which data is homogeneous (membership analysis).
 
-- **UB**: Upper Bound  
+-**UB**: Upper Bound
 The practical upper limit for the interval (may be set by user or inferred).
 </code></pre></div>
 <hr />
 <h3 id="plotgdftrue-intervalstrue"><code>plot(GDF=True, intervals=True)</code></h3>
 <p>Visualizes the fitted GDFs and the estimated intervals.</p>
 <ul>
-<li><strong>GDF</strong>: <code>bool</code> (default: True)<br />
-  Plot the fitted ELDF (local distribution function)</li>
-<li><strong>intervals</strong>: <code>bool</code> (default: True)<br />
+<li><strong>GDF</strong>: <code>bool</code> (default: True)Plot the fitted ELDF (local distribution function)</li>
+<li><strong>intervals</strong>: <code>bool</code> (default: True)
   Plot the estimated intervals and Z0 variation</li>
 </ul>
-<p><strong>Returns:</strong><br />
+<p><strong>Returns:</strong>
 None (displays plot)</p>
 <hr />
 <h2 id="example-usage">Example Usage</h2>
@@ -2692,7 +2827,7 @@ None (displays plot)</p>
 <li>All warnings and errors are stored in the <code>params</code> attribute for later inspection.</li>
 </ul>
 <hr />
-<p><strong>Author:</strong> Nirmal Parmar<br />
+<p><strong>Author:</strong> Nirmal Parmar
 <strong>Date:</strong> 2025-09-24</p>
 <hr />
 
@@ -2715,7 +2850,7 @@ None (displays plot)</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 24, 2025 14:55:44 UTC">September 24, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 26, 2025 21:08:20 UTC">September 26, 2025</span>
   </span>
 
     
