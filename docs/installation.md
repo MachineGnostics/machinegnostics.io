@@ -73,23 +73,24 @@ pip show machinegnostics
 
 Machine Gnostics is designed to be as simple to use as other machine learning libraries. You can call its functions and classes directly after installation.
 
-```python
-import numpy as np
-from machinegnostics.models.regression import LinearRegressor
+!!! example "Quick Usage"
+    ```python
+    import numpy as np
+    from machinegnostics.models.regression import LinearRegressor
 
-# Example data
-X = np.array([[1], [2], [3], [4]])
-y = np.array([2, 4, 6, 8])
+    # Example data
+    X = np.array([[1], [2], [3], [4]])
+    y = np.array([2, 4, 6, 8])
 
-# Create and fit a robust polynomial regression model
-model = LinearRegressor()
-model.fit(X, y)
+    # Create and fit a robust polynomial regression model
+    model = LinearRegressor()
+    model.fit(X, y)
 
-# Make predictions
-y_pred = model.predict(X)
+    # Make predictions
+    y_pred = model.predict(X)
 
-print("Predictions:", y_pred)
-```
+    print("Predictions:", y_pred)
+    ```
 
 ---
 
