@@ -77,25 +77,29 @@ nav:
       - Google Colab: tutorials/colab.md
   - Data Analysis:
     - Models: da/da_models.md
-    - EGDF: da/egdf.md
-    - ELDF: da/eldf.md
-    - QGDF: da/qgdf.md
-    - QLDF: da/qldf.md
-    - Cluster Analysis: da/cluster_analysis.md
-    - Interval Analysis: da/interval_analysis.md
-    - Data Homogeneity: da/homogeneity.md
-    - Data Scedasticity: da/scedasticity.md
-    - Data Membership: da/membership.md
-    - Data Interval: da/data_interval.md
-    - Data Cluster: da/data_cluster.md
-    - Z0 Estimator: da/z0_estimator.md
+    - Distributions Functions:
+      - EGDF: da/egdf.md
+      - ELDF: da/eldf.md
+      - QGDF: da/qgdf.md
+      - QLDF: da/qldf.md
+    - Data Analysis:
+      - Cluster Analysis: da/cluster_analysis.md
+      - Interval Analysis: da/interval_analysis.md
+      - Data Homogeneity: da/homogeneity.md
+      - Data Scedasticity: da/scedasticity.md
+      - Data Membership: da/membership.md
+      - Data Interval: da/data_interval.md
+      - Data Cluster: da/data_cluster.md
+      - Z0 Estimator: da/z0_estimator.md
   - Machine Learning:
     - Models: models/ml_models.md
-    - Linear Regressor: models/reg/lin_reg.md
-    - Polynomial Regressor: models/reg/poly_reg.md
-    - Logistic Regressor: models/cls/log_reg.md
-    - Cross Validation: models/sup/cross_val.md
-    - Train Test Split: models/sup/train_test_split.md
+    - Supervised Learning:
+      - Linear Regressor: models/reg/lin_reg.md
+      - Polynomial Regressor: models/reg/poly_reg.md
+      - Logistic Regressor: models/cls/log_reg.md
+    - Utils:
+      - Cross Validation: models/sup/cross_val.md
+      - Train Test Split: models/sup/train_test_split.md
   - Deep Learning:
     - Magnet: magnet/magnet.md
   - Metrics:
