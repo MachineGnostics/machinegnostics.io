@@ -1,9 +1,9 @@
 # Machine Gnostics
 
-  Welcome to `<strong>`Machine Gnostics`</strong>`, an innovative Python library designed to implement the principles of `<strong>`Mathematical Gnostics`</strong>` for robust data analysis, modeling, and inference. Unlike traditional statistical approaches that depend heavily on probabilistic assumptions, Machine Gnostics harnesses deterministic algebraic and geometric structures. This unique foundation enables the library to deliver exceptional resilience against outliers, noise, and corrupted data, making it a powerful tool for challenging real-world scenarios.
+  Welcome to `Machine Gnostics`, an innovative Python library designed to implement the principles of Mathematical Gnostics for robust data analysis, modeling, and inference. Unlike traditional statistical approaches that depend heavily on probabilistic assumptions, Machine Gnostics harnesses deterministic algebraic and geometric structures. This unique foundation enables the library to deliver exceptional resilience against outliers, noise, and corrupted data, making it a powerful tool for challenging real-world scenarios.
 
 <p align="center">
-  <img src="images/mg3.jpg" alt="Machine Gnostics" width="400">
+  <img src="images/mg3.jpg" alt="Machine Gnostics" width="300">
 </p>
 
 !!! success "Machine Gnostics"
@@ -93,7 +93,7 @@ See the Concepts page for a deep dive into the science and philosophy behind MG.
 - **Testimonials:**Hear from scientists and engineers who have solved unsolvable problems with MG.See [Testimonials](/stories/history/#testimonials) & [History](/stories/history/#historical-background).
 - **Case Studies:**
   Explore real applications in thermodynamics, environmental science, and more.
-  See [Examples](/tutorials/getting_started.md).
+  See [Examples](tutorials/overview/#getting-started).
 
 ---
 
@@ -108,13 +108,13 @@ Machine Gnostics is open source and community-driven.
 
 ## Learn More
 
-- [Concept](/docs/mg/concepts.md)
-- [Principles](/docs/mg/principles.md)
-- [Architecture](/docs/mg/architecture.md)
-- [Gnostic Distribution Functions](/docs/mg/gdf.md)
-- [Glossary](/docs/mg/mg_arguments.md)
+- [Concept](mg/concepts.md)
+- [Principles](mg/principles.md)
+- [Architecture](mg/architecture.md)
+- [Gnostic Distribution Functions](mg/gdf.md)
+- [Glossary](mg/mg_arguments.md)
 - [References](ref/references.md)
-- [Tutorial](/docs/tutorials/)
+- [Tutorial](tutorials/overview.md)
 
 ---
 

@@ -236,7 +236,7 @@ Avg/Total            0.94      0.94      0.94       300
 - Set `proba='gnostics'` for robust probability estimation.
 - Adjust the `degree` parameter for nonlinear decision boundaries.
 - Enable `early_stopping` for efficient training.
-- For more advanced usage and parameter tuning, see the [API Reference](../models/ml_models.md).
+- For more advanced usage and parameter tuning, see the [API Reference](../models/cls/log_reg.md).
 
 ---
 

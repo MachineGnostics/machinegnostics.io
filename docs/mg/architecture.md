@@ -5,13 +5,12 @@ This diagram presents the conceptual architecture of the **Machine Gnostics** pa
 
 
 
-**High-level Block Diagram:**
+**High-level Architecture Diagram:**
+<div align="center">
 ```mermaid
 flowchart TD
-    subgraph EXT[" "]
-        DATA(["DATA"])
-        USER(["USER"])
-    end
+    DATA["INPUT"]
+    USER["OUTPUT"]
     subgraph MG_SYS["Machine Gnostics Architecture"]
         IFACE1["Machine Gnostics Interface"]
         MGTheory["Mathematical Gnostics"]
@@ -36,7 +35,7 @@ flowchart TD
     MLFlow --> IFACE2
     IFACE2 --> USER
 ```
-
+</div>
 <!-- **Sequence Diagram:**
 ```mermaid
 sequenceDiagram
@@ -148,7 +147,7 @@ This layer unifies all components into a working system:
 
 ---
 
-## [References](https://machinegnostics.info/references/)
+## [References](../ref/references.md)
 
 > Machine Gnostics is not just an alternative—it is a **new foundation** for AI, capable of **rational, robust, and interpretable** data modeling.
 

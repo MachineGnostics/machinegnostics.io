@@ -27,6 +27,8 @@ The EGDF provides a robust global estimate of the distribution function for your
     print(egdf.params)
     ```
 
+![1758961903929](image/2_da_gdf/1758961903929.png)
+
 ---
 
 ## ELDF - Estimating Local Distribution Function
@@ -49,7 +51,6 @@ The ELDF focuses on local properties of the data distribution, providing detaile
     # check parameters
     print(eldf.params)
     ```
-
 
 ![1758901497585](image/2_da_gdf/1758901497585.png)
 
@@ -75,7 +76,6 @@ QGDF quantifies global distribution characteristics, useful for uncertainty quan
     # check parameters
     print(qgdf.params)
     ```
-
 
 ![1758901509960](image/2_da_gdf/1758901509960.png)
 

@@ -175,7 +175,7 @@ This enables in-depth analysis and visualization of the training process.
 
 - The model is robust to outliers and suitable for datasets with non-Gaussian noise.
 - Supports integration with mlflow for experiment tracking and deployment.
-- For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
+<!-- - For more information, check [Tutorials](../../tutorials/overview.md). -->
 
 ---
 

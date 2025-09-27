@@ -79,9 +79,7 @@ except ValueError as e:
 
 ---
 
-**Author:** Nirmal Parmar	
+**Author:** Nirmal Parmar
 **Date:** 2025-09-24
 
 ---
-
-Let me know if you want this added to your documentation file!

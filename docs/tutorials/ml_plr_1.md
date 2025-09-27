@@ -192,7 +192,7 @@ The gnostic mean is a robust, assumption-free measure designed to provide deeper
 - Adjust the `degree` parameter for higher-order polynomial fits.
 - Use the `loss` parameter to select different gnostic loss functions for event-level robustness.
 - Enable `record_history=True` to analyze training dynamics and convergence.
-- For more advanced usage and parameter tuning, see the [API Reference](../models/ml_models.md).
+- For more advanced usage and parameter tuning, see the [API Reference](../models/reg/poly_reg.md).
 
 ---
 

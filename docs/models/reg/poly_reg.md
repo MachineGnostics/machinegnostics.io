@@ -176,7 +176,7 @@ This enables in-depth analysis and visualization of the training process.
 
 - The model is robust to outliers and suitable for datasets with non-Gaussian noise.
 - Implements advanced machine learning techniques based on Mathematical Gnostics.
-- For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
+<!-- - For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/) -->
 
 ---
 

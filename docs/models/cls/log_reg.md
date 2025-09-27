@@ -182,7 +182,7 @@ This enables detailed analysis and visualization of the training process.
 - The model supports numpy arrays, pandas DataFrames, and pyspark DataFrames as input.
 - For best results, ensure input features are appropriately scaled and encoded.
 - Supports integration with MLflow for experiment tracking and deployment.
-- For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/)
+<!-- - For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/) -->
 
 ---
 

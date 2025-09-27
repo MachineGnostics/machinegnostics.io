@@ -54,21 +54,27 @@ nav:
   - Learn: 
       - Concept: mg/concepts.md
       - Principles: mg/principles.md
-      - GDF: mg/gdf.md
+      - Distributions Functions: mg/gdf.md
       - Architecture: mg/architecture.md
       - Glossary: mg/mg_arguments.md
   - Installation: installation.md
   - Tutorials:
     - Quick Start: tutorials/overview.md
-    - Gnostics Measures: tutorials/1_da_basics.md
-    - Gnostic Distributions: tutorials/2_da_gdf.md
-    - Gnostic Tests: tutorials/5_da_test.md
-    - Cluster Analysis: tutorials/3_da_ca.md
-    - Interval Analysis: tutorials/4_da_ia.md
-    - Linear Regression: tutorials/ml_lr_1.md
-    - Polynomial Regression: tutorials/ml_plr_1.md
-    - Logistic Regression: tutorials/ml_log_reg_1.md
-    - Notebook Examples: tutorials/examples.md
+    - Data Analysis:
+      - Data Analysis Models: da/da_models.md
+      - Gnostics Measures: tutorials/1_da_basics.md
+      - Gnostic Distributions: tutorials/2_da_gdf.md
+      - Gnostic Tests: tutorials/5_da_test.md
+      - Cluster Analysis: tutorials/3_da_ca.md
+      - Interval Analysis: tutorials/4_da_ia.md
+    - Machine Learning:
+      - Machine Learning Models: models/ml_models.md
+      - Linear Regression: tutorials/ml_lr_1.md
+      - Polynomial Regression: tutorials/ml_plr_1.md
+      - Logistic Regression: tutorials/ml_log_reg_1.md
+    - Notebook Examples:
+      - GitHub: tutorials/examples.md
+      - Google Colab: tutorials/colab.md
   - Data Analysis:
     - Models: da/da_models.md
     - EGDF: da/egdf.md
