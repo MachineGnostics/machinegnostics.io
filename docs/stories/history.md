@@ -1,6 +1,5 @@
 # From Mathematical Gnostics to Machine Gnostics: A History
 
-
 ## Introduction
 
 Mathematical Gnostics is a unique approach to understanding data uncertainty—one that challenges conventional statistical thinking. Rather than viewing uncertainty as indeterministic or purely random, Mathematical Gnostics treats every data point as the result of measurable, material causes, even if not all influencing factors are directly observable. This philosophy underpins the Machine Gnostics library, which brings these ideas into the realm of modern data analysis and machine learning.
@@ -15,7 +14,7 @@ The origins of Mathematical Gnostics trace back to the early 1980s, when Pavel K
 
 Key milestones in the development of Mathematical Gnostics include:
 
-- As a new paradigm of data variability, the mathematical gnostics has been developing since the end of 1970s, 20th and applied in a number of research projects.
+- As a new paradigm of data variability, the mathematical gnostics has been developing since the end of 1970s, 20th century and applied in a number of research projects.
 - The first printed publications in 1984 and presentation at an international conference.
 - Practical applications in economics and financial analysis, leading to a series of books and publications.
 - The creation of early gnostic software, which was initially limited to the author’s own work and implemented in R.
@@ -23,11 +22,9 @@ Key milestones in the development of Mathematical Gnostics include:
 - International collaborations, notably with American professor M.B. Humber, resulting in a co-authored book and further dissemination of the theory.
 - Application of gnostic methods in environmental and medical research, including participation in major European Union projects.
 
-
 For more information on the history and development of mathematical gnostics, visit: [math-gnostics.eu](https://www.math-gnostics.eu/history/)
 
 ---
-
 
 ## Sources of Inspiration
 
@@ -45,13 +42,10 @@ The development of Mathematical Gnostics was inspired by both the limitations of
 
 These inspirations, drawn from the natural sciences, provide a robust and universal foundation for understanding data uncertainty—making Mathematical Gnostics a powerful alternative to classical statistics.
 
-> “Let data speak for themselves.”  
+> “Let data speak for themselves.”
 > This guiding principle reflects the core philosophy of Mathematical Gnostics: to extract maximum information from data, relying on the data values themselves, and to model uncertainty in a way that is consistent with the laws of nature.
 
-
-
 ---
-
 
 ## The Birth of Machine Gnostics
 
@@ -69,7 +63,7 @@ The journey from Mathematical Gnostics to Machine Gnostics marks a significant s
 
 Looking ahead, the vision for Machine Gnostics is ambitious: to become a universal framework for data analysis, machine learning, and, ultimately, deep learning. By remaining open source and community-driven, Machine Gnostics invites collaboration, innovation, and critical feedback from scientists, engineers, and thinkers worldwide. Together, we can continue to push the boundaries of what is possible in data-driven discovery.
 
---- 
+---
 
 ## Testimonials
 
@@ -97,7 +91,6 @@ Over time, I learned how to use the custom-made scripts that Zdeněk had coded; 
 I’m especially proud that our Ph.D. student, Nirmal Parmar, who has since soared toward his own horizons, embraced this theory and made it his own. He’s now exploring how to combine machine learning with mathematical gnostics. It won’t be smooth sailing. The theory is complex and the project ambitious. But I am confident that, with more successful implementations, it will reach a broader audience and gain recognition in both the scientific and industrial communities for its profound usefulness.
 
 ---
-
 
 ## Acknowledgments
 
