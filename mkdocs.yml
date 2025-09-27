@@ -11,6 +11,7 @@ copyright:
 theme:
   name: material
   logo: images/logo.png
+  favicon: images/logo.png
   palette:
     - scheme: slate
       primary: teal
@@ -28,6 +29,7 @@ theme:
     - navigation.footer
     - navigation.tabs
     - navigation.sections
+    - navigation.top
   custom_dir: overrides
 
 plugins:
