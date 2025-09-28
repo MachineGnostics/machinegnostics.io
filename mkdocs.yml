@@ -30,11 +30,24 @@ theme:
     - navigation.tabs
     - navigation.sections
     - navigation.top
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.instant.preview
+    - navigation.instant.prefetch
+    - navigation.tracking
+    - navigation.tabs.sticky
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
   custom_dir: overrides
+  language: en
 
 plugins:
   - privacy
   - search
+  # - search.suggest
+  # - search.highlight
+  # - search.share
   - mike
   - git-revision-date-localized
   - awesome-pages
@@ -132,6 +145,8 @@ nav:
   - Contact: contact.md
 
 markdown_extensions:
+  - toc:
+      permalink: true
   - attr_list
   - admonition
   - pymdownx.highlight:
