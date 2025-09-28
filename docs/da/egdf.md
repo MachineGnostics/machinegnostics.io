@@ -49,7 +49,7 @@ EGDF is designed for robust probability and density estimation, especially when 
 | `homogeneous`     | bool                  | True      | Assume data homogeneity                                          |
 | `catch`           | bool                  | True      | Store intermediate results (memory usage)                        |
 | `weights`         | np.ndarray or None    | None      | Prior weights for data points                                    |
-| `wedf`            | bool                  | True      | Use Weighted Empirical Distribution Function                     |
+| `wedf`            | bool                  | False     | Use Weighted Empirical Distribution Function                     |
 | `opt_method`      | str                   | 'L-BFGS-B'| Optimization method (scipy.optimize)                             |
 | `verbose`         | bool                  | False     | Print progress and diagnostics                                   |
 | `max_data_size`   | int                   | 1000      | Max data size for smooth EGDF generation                         |
