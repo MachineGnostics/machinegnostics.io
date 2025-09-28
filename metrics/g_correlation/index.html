@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2401,15 +2403,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
       Parameters
@@ -2420,51 +2413,6 @@
       
         <li class="md-nav__item">
   <a href="#returns" class="md-nav__link">
-    <span class="md-ellipsis">
-      Returns
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notes-best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      Notes &amp; Best Practices
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#error-handling" class="md-nav__link">
-    <span class="md-ellipsis">
-      Error Handling
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#returns_1" class="md-nav__link">
     <span class="md-ellipsis">
       Returns
     </span>
@@ -2857,15 +2805,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      Usage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#parameters" class="md-nav__link">
     <span class="md-ellipsis">
       Parameters
@@ -2876,51 +2815,6 @@
       
         <li class="md-nav__item">
   <a href="#returns" class="md-nav__link">
-    <span class="md-ellipsis">
-      Returns
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notes-best-practices" class="md-nav__link">
-    <span class="md-ellipsis">
-      Notes &amp; Best Practices
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#error-handling" class="md-nav__link">
-    <span class="md-ellipsis">
-      Error Handling
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#references" class="md-nav__link">
-    <span class="md-ellipsis">
-      References
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#parameters_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      Parameters
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#returns_1" class="md-nav__link">
     <span class="md-ellipsis">
       Returns
     </span>
@@ -2983,71 +2877,18 @@
   
 
 
-<h1 id="correlation-gnostic-correlation-metric">correlation: Gnostic Correlation Metric</h1>
-<p>The Gnostic correlation metric provides a robust, assumption-free measure of association between two data samples. Unlike traditional correlation coefficients, which rely on statistical means and are sensitive to outliers, the Gnostic approach leverages the principles of Mathematical Gnostics to deliver reliable results even in the presence of noise, outliers, or non-Gaussian data.</p>
+<h1 id="correlation-gnostic-correlation-metric">correlation: Gnostic Correlation Metric<a class="headerlink" href="#correlation-gnostic-correlation-metric" title="Permanent link">&para;</a></h1>
+<p>The <code>correlation</code> function computes the Gnostic correlation coefficient between two data samples. This metric provides a robust, assumption-free measure of association, leveraging Mathematical Gnostics to deliver reliable results even in the presence of noise, outliers, or non-Gaussian data.</p>
 <hr />
-<h2 id="overview">Overview</h2>
-<p>The <code>correlation</code> function computes the Gnostic correlation coefficient between two arrays, using either estimation geometry (EGDF) or quantifying geometry (QGDF). This metric is designed to be resilient to data uncertainty and is meaningful for both small and large datasets.</p>
-<hr />
-<h2 id="usage">Usage</h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Example 1: Compute correlation for two simple datasets</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">correlation</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">corr</span> <span class="o">=</span> <span class="n">correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation (case=&#39;i&#39;): </span><span class="si">{</span><span class="n">corr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Example 2: For multi-column X</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">]])</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">corr</span> <span class="o">=</span> <span class="n">correlation</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation for column </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">corr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span></code></pre></div>
-<hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
+<p>The Gnostic correlation metric measures the association between two arrays using either estimation geometry (EGDF) or quantifying geometry (QGDF):</p>
 <ul>
-<li><strong>X</strong> (<code>np.ndarray</code>): Feature data sample. Should be a 1D array or a single column from a 2D array, with no NaN or Inf values.</li>
-<li><strong>y</strong> (<code>np.ndarray</code>): Target data sample. Must be a 1D array, with no NaN or Inf values.</li>
-<li><strong>case</strong> (<code>str</code>, default <code>'i'</code>):</li>
-<li><code>'i'</code>: Use estimation geometry (EGDF)</li>
-<li><code>'j'</code>: Use quantifying geometry (QGDF)</li>
-<li><strong>verbose</strong> (<code>bool</code>, default <code>False</code>): If <code>True</code>, enables detailed logging for debugging.</li>
+<li><strong>Case <code>'i'</code></strong>: Uses estimation geometry (EGDF) for correlation.</li>
+<li><strong>Case <code>'j'</code></strong>: Uses quantifying geometry (QGDF) for correlation.</li>
 </ul>
+<p>Unlike classical correlation coefficients, the Gnostic approach is resilient to data uncertainty and is meaningful for both small and large datasets.</p>
 <hr />
-<h2 id="returns">Returns</h2>
-<ul>
-<li><strong>float</strong>: The Gnostic correlation coefficient between the two data samples.</li>
-</ul>
-<hr />
-<h2 id="notes-best-practices">Notes &amp; Best Practices</h2>
-<ul>
-<li>If <code>X</code> has more than one column, pass each column separately (e.g., <code>X[:, i]</code>).</li>
-<li>Both <code>X</code> and <code>y</code> must be 1D arrays of the same length, with no missing or infinite values.</li>
-<li>The metric is robust to outliers and provides meaningful estimates even for small or noisy datasets.</li>
-<li>If data homogeneity is not met, the function will adjust parameters and issue a warning for best results.</li>
-<li>For optimal results, ensure your data is preprocessed and cleaned.</li>
-</ul>
-<hr />
-<h2 id="error-handling">Error Handling</h2>
-<p>The function will raise a <code>ValueError</code> if:</p>
-<ul>
-<li>The input arrays are not of the same length, are empty, or contain NaN/Inf values.</li>
-<li>The <code>case</code> argument is not <code>'i'</code> or <code>'j'</code>.</li>
-</ul>
-<hr />
-<h2 id="references">References</h2>
-<ul>
-<li>See the <a href="https://machinegnostics.info/">Machine Gnostics documentation</a> for more details on Gnostic metrics and their theoretical foundation.</li>
-</ul>
-<hr />
-<p><strong>Author:</strong> Dr. Nirmal Parmar
-<strong>Project:</strong> Machine Gnostics</p>
-<p>Both approaches converge to linear error in cases of weak uncertainty, but provide robust diagnostics in challenging data scenarios. The metric is designed to reflect true relationships in your data, even when classical methods may fail.</p>
-<hr />
-<h2 id="parameters_1">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3058,71 +2899,76 @@
 </thead>
 <tbody>
 <tr>
-<td><code>data_1</code></td>
-<td>np.ndarray</td>
-<td>First data sample (1D numpy array, no NaN/Inf).</td>
+<td><code>X</code></td>
+<td>array-like</td>
+<td>Feature data sample (1D array or single column from 2D array, no NaN/Inf).</td>
 </tr>
 <tr>
-<td><code>data_2</code></td>
-<td>np.ndarray</td>
-<td>Second data sample (1D numpy array, no NaN/Inf).</td>
+<td><code>y</code></td>
+<td>array-like</td>
+<td>Target data sample (1D array, no NaN/Inf).</td>
 </tr>
 <tr>
 <td><code>case</code></td>
 <td>str</td>
-<td>Geometry type:<code>'i'</code> for estimation (EGDF), <code>'j'</code> for quantifying (QGDF). Default: <code>'i'</code>.</td>
+<td><code>'i'</code> for estimation geometry, <code>'j'</code> for quantifying geometry. Default: <code>'i'</code>.</td>
 </tr>
 <tr>
 <td><code>verbose</code></td>
 <td>bool</td>
-<td>If True, enables detailed logging for debugging. Default:<code>False</code>.</td>
+<td>If True, enables detailed logging for debugging. Default: <code>False</code>.</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="returns_1">Returns</h2>
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>float</strong>
+<li><strong>float</strong><br />
   The Gnostic correlation coefficient between the two data samples.</li>
 </ul>
 <hr />
-<h2 id="raises">Raises</h2>
+<h2 id="raises">Raises<a class="headerlink" href="#raises" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>ValueError</strong>
-  If input arrays are not the same length, are empty, contain NaN/Inf, are not 1D, or if <code>case</code> is not <code>'i'</code> or <code>'j'</code>.</li>
+<li><strong>TypeError</strong><br />
+  If <code>X</code> or <code>y</code> are not array-like.</li>
+<li><strong>ValueError</strong><br />
+  If input arrays are empty, contain NaN/Inf, are not 1D, have mismatched shapes, or if <code>case</code> is not <code>'i'</code> or <code>'j'</code>.</li>
 </ul>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">correlation</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1"># Example 1: Compute correlation for two simple datasets</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">data_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">data_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">corr</span> <span class="o">=</span> <span class="n">correlation</span><span class="p">(</span><span class="n">data_1</span><span class="p">,</span> <span class="n">data_2</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation (case=&#39;i&#39;): </span><span class="si">{</span><span class="n">corr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="c1"># Example 2: Using quantifying geometry</span>
-</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">corr_j</span> <span class="o">=</span> <span class="n">correlation</span><span class="p">(</span><span class="n">data_1</span><span class="p">,</span> <span class="n">data_2</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s1">&#39;j&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation (case=&#39;j&#39;): </span><span class="si">{</span><span class="n">corr_j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">correlation</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Example 1: Simple 1D arrays</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">corr</span> <span class="o">=</span> <span class="n">correlation</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">case</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Example 2: Multi-column X</span>
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">50</span><span class="p">]])</span>
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">corr</span> <span class="o">=</span> <span class="n">correlation</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">y</span><span class="p">)</span>
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Correlation for column </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">corr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The metric is robust to data uncertainty, noise, and outliers.</li>
-<li>Input data must be preprocessed and cleaned for optimal results.</li>
-<li>If data homogeneity is not met, the function automatically adjusts scale parameters for better reliability.</li>
-<li>The Gnostic correlation uses irrelevance measures rather than classical means, providing deeper insight into data relationships.</li>
-<li>Supports both estimation and quantification geometries for flexible analysis.</li>
+<li>Both <code>X</code> and <code>y</code> must be 1D arrays of the same length, with no missing or infinite values.</li>
+<li>For multi-column <code>X</code>, pass each column separately (e.g., <code>X[:, i]</code>).</li>
+<li>The metric is robust to outliers and provides meaningful estimates even for small or noisy datasets.</li>
+<li>If data homogeneity is not met, the function will adjust parameters and issue a warning for best results.</li>
+<li>For optimal results, ensure your data is preprocessed and cleaned.</li>
 </ul>
 <hr />
-<h2 id="gnostic-vs-classical-correlation">Gnostic vs. Classical Correlation</h2>
+<h2 id="gnostic-vs-classical-correlation">Gnostic vs. Classical Correlation<a class="headerlink" href="#gnostic-vs-classical-correlation" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Note:</strong>
 Unlike classical correlation metrics that rely on statistical means and linear relationships, the Gnostic correlation uses irrelevance measures derived from gnostic theory. This approach is assumption-free and designed to reveal true data relationships, even in the presence of outliers or non-normal distributions.</p>
 </blockquote>
 <hr />
-<p><strong>Author:</strong> Nirmal Parmar <br />
+<p><strong>Author:</strong> Nirmal Parmar<br />
 <strong>Date:</strong> 2025-09-24</p>
 <hr />
 
@@ -3145,7 +2991,7 @@ Unlike classical correlation metrics that rely on statistical means and linear r
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 27, 2025 09:43:02 UTC">September 27, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 28, 2025 08:40:14 UTC">September 28, 2025</span>
   </span>
 
     
@@ -3271,6 +3117,8 @@ Unlike classical correlation metrics that rely on statistical means and linear r
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3349,7 +3197,7 @@ Unlike classical correlation metrics that rely on statistical means and linear r
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

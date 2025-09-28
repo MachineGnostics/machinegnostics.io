@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -3021,10 +3023,10 @@
   
 
 
-<h1 id="polynomialregressor-robust-polynomial-regression-with-machine-gnostics">PolynomialRegressor: Robust Polynomial Regression with Machine Gnostics</h1>
+<h1 id="polynomialregressor-robust-polynomial-regression-with-machine-gnostics">PolynomialRegressor: Robust Polynomial Regression with Machine Gnostics<a class="headerlink" href="#polynomialregressor-robust-polynomial-regression-with-machine-gnostics" title="Permanent link">&para;</a></h1>
 <p>The <code>PolynomialRegressor</code> is a robust polynomial regression model built on the principles of Mathematical Gnostics. It is designed to provide deterministic, interpretable, and resilient regression in the presence of outliers, noise, and non-Gaussian data distributions. Unlike traditional statistical models, this regressor leverages algebraic and geometric concepts from Mathematical Gnostics, focusing on event-level modeling and robust loss minimization.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Robust to Outliers:</strong> Uses gnostic loss functions and adaptive weights to minimize the influence of outliers and corrupted samples.</li>
 <li><strong>Polynomial Feature Expansion:</strong> Supports configurable polynomial degrees for flexible modeling.</li>
@@ -3034,7 +3036,7 @@
 <li><strong>Easy Integration:</strong> Compatible with numpy arrays and supports model persistence.</li>
 </ul>
 <hr />
-<h2 id="key-features">Key Features</h2>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Robust regression using gnostic loss functions</strong></li>
 <li><strong>Flexible polynomial degree (linear and higher-order)</strong></li>
@@ -3045,7 +3047,7 @@
 <li><strong>Compatible with numpy arrays</strong></li>
 </ul>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3130,7 +3132,7 @@
 </tr>
 </tbody>
 </table>
-<h2 id="attributes">Attributes</h2>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>coefficients</strong>: <code>np.ndarray</code><br />
   Fitted polynomial regression coefficients.</li>
@@ -3144,8 +3146,8 @@
   Configuration parameters as set at initialization.</li>
 </ul>
 <hr />
-<h2 id="methods">Methods</h2>
-<h3 id="fitx-y"><code>fit(X, y)</code></h3>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="fitx-y"><code>fit(X, y)</code><a class="headerlink" href="#fitx-y" title="Permanent link">&para;</a></h3>
 <p>Fits the polynomial regressor to input features <code>X</code> and targets <code>y</code> using robust, gnostic loss minimization. Iteratively optimizes coefficients and sample weights, optionally recording history.</p>
 <ul>
 <li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
@@ -3156,7 +3158,7 @@
 <p><strong>Returns:</strong><br />
 <code>self</code> (fitted model instance)</p>
 <hr />
-<h3 id="predictx"><code>predict(X)</code></h3>
+<h3 id="predictx"><code>predict(X)</code><a class="headerlink" href="#predictx" title="Permanent link">&para;</a></h3>
 <p>Predicts target values for new input features using the trained model.</p>
 <ul>
 <li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
@@ -3166,7 +3168,7 @@
 <code>y_pred</code>: <code>np.ndarray</code>, shape <code>(n_samples,)</code><br />
 Predicted target values.</p>
 <hr />
-<h3 id="scorex-y-casei"><code>score(X, y, case='i')</code></h3>
+<h3 id="scorex-y-casei"><code>score(X, y, case='i')</code><a class="headerlink" href="#scorex-y-casei" title="Permanent link">&para;</a></h3>
 <p>Computes the robust (gnostic) R² score for the polynomial regressor model.</p>
 <ul>
 <li><strong>X</strong>: <code>np.ndarray</code>, shape <code>(n_samples, n_features)</code><br />
@@ -3180,14 +3182,14 @@ Predicted target values.</p>
 <code>score</code>: <code>float</code><br />
 Robust R² score of the model on the provided data.</p>
 <hr />
-<h3 id="save_modelpath"><code>save_model(path)</code></h3>
+<h3 id="save_modelpath"><code>save_model(path)</code><a class="headerlink" href="#save_modelpath" title="Permanent link">&para;</a></h3>
 <p>Saves the trained model to disk using joblib.</p>
 <ul>
 <li><strong>path</strong>: str<br />
   Directory path to save the model.</li>
 </ul>
 <hr />
-<h3 id="load_modelpath"><code>load_model(path)</code></h3>
+<h3 id="load_modelpath"><code>load_model(path)</code><a class="headerlink" href="#load_modelpath" title="Permanent link">&para;</a></h3>
 <p>Loads a previously saved model from disk.</p>
 <ul>
 <li><strong>path</strong>: str<br />
@@ -3196,7 +3198,7 @@ Robust R² score of the model on the provided data.</p>
 <p><strong>Returns:</strong><br />
 Instance of <code>PolynomialRegressor</code> with loaded parameters.</p>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models.regression</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolynomialRegressor</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Initialize the model</span>
@@ -3217,7 +3219,7 @@ Instance of <code>PolynomialRegressor</code> with loaded parameters.</p>
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Weights:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">weights</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="training-history">Training History</h2>
+<h2 id="training-history">Training History<a class="headerlink" href="#training-history" title="Permanent link">&para;</a></h2>
 <p>If <code>history=True</code>, the model records detailed training history at each iteration, accessible via <code>model.params</code> and <code>model._history</code>. Each entry contains:</p>
 <ul>
 <li><code>iteration</code>: Iteration number</li>
@@ -3229,14 +3231,14 @@ Instance of <code>PolynomialRegressor</code> with loaded parameters.</p>
 </ul>
 <p>This enables in-depth analysis and visualization of the training process.</p>
 <hr />
-<h2 id="example-notebooks">Example Notebooks</h2>
+<h2 id="example-notebooks">Example Notebooks<a class="headerlink" href="#example-notebooks" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_1_small_data_polyreg.ipynb">Example 1</a></li>
 <li><a href="https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_wine_data_polyreg.ipynb">Example 2</a></li>
 </ul>
 <p><img alt="Polynomial Regression" src="../../../plots/poly-reg1.png" title="Polynomial Regression" /></p>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The model is robust to outliers and suitable for datasets with non-Gaussian noise.</li>
 <li>Implements advanced machine learning techniques based on Mathematical Gnostics.</li>
@@ -3393,6 +3395,8 @@ Instance of <code>PolynomialRegressor</code> with loaded parameters.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3471,7 +3475,7 @@ Instance of <code>PolynomialRegressor</code> with loaded parameters.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>

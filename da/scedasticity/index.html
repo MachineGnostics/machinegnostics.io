@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2913,10 +2915,10 @@
   
 
 
-<h1 id="datascedasticity-gnostic-homoscedasticity-and-heteroscedasticity-test-machine-gnostics">DataScedasticity: Gnostic Homoscedasticity and Heteroscedasticity Test (Machine Gnostics)</h1>
+<h1 id="datascedasticity-gnostic-homoscedasticity-and-heteroscedasticity-test-machine-gnostics">DataScedasticity: Gnostic Homoscedasticity and Heteroscedasticity Test (Machine Gnostics)<a class="headerlink" href="#datascedasticity-gnostic-homoscedasticity-and-heteroscedasticity-test-machine-gnostics" title="Permanent link">&para;</a></h1>
 <p>The <code>DataScedasticity</code> class provides a gnostic approach to testing for homoscedasticity and heteroscedasticity in data, using gnostic variance and gnostic linear regression. Unlike classical statistical tests, this method is based on the principles of the Machine Gnostics framework and is designed for robust, interpretable diagnostics.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>DataScedasticity analyzes the spread of residuals from a gnostic linear regression model by splitting the data at the median of the independent variable and comparing the gnostic variances of squared residuals in each half. This approach is fundamentally different from classical tests (e.g., Breusch-Pagan, White's test), focusing on gnostic variance and regression rather than least squares and probabilistic assumptions.</p>
 <ul>
 <li><strong>Gnostic Variance:</strong> Measures uncertainty and spread according to gnostic principles.</li>
@@ -2925,7 +2927,7 @@
 <li><strong>Split Residuals:</strong> Compares variance in residuals before and after the median of the independent variable.</li>
 </ul>
 <hr />
-<h2 id="key-features">Key Features</h2>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Gnostic variance and regression for scedasticity analysis</strong></li>
 <li><strong>No reliance on classical statistical assumptions</strong></li>
@@ -2935,7 +2937,7 @@
 <li><strong>Detailed logging and parameter tracking</strong></li>
 </ul>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3003,7 +3005,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="attributes">Attributes</h2>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>x</strong>: <code>np.ndarray</code><br />
   Independent variable data.</li>
@@ -3021,8 +3023,8 @@
   True if data is homoscedastic under gnostic test, else False.</li>
 </ul>
 <hr />
-<h2 id="methods">Methods</h2>
-<h3 id="fitx-y"><code>fit(x, y)</code></h3>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="fitx-y"><code>fit(x, y)</code><a class="headerlink" href="#fitx-y" title="Permanent link">&para;</a></h3>
 <p>Fits the gnostic linear regression model to the data and assesses scedasticity.</p>
 <ul>
 <li><strong>x</strong>: <code>np.ndarray</code><br />
@@ -3033,7 +3035,7 @@
 <p><strong>Returns:</strong><br />
 <code>bool</code> — True if data is homoscedastic under the gnostic test, False if heteroscedastic.</p>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.magcal</span><span class="w"> </span><span class="kn">import</span> <span class="n">DataScedasticity</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -3046,7 +3048,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Variance ratio: </span><span class="si">{</span><span class="n">sced</span><span class="o">.</span><span class="n">variance_ratio</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>This is not a standard statistical test; results may differ from classical methods.</li>
 <li>Gnostic variance and regression are designed for robust, interpretable diagnostics.</li>
@@ -3202,6 +3204,8 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3280,7 +3284,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

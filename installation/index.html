@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2852,10 +2854,10 @@
   
 
 
-<h1 id="installation-guide">Installation Guide</h1>
+<h1 id="installation-guide">Installation Guide<a class="headerlink" href="#installation-guide" title="Permanent link">&para;</a></h1>
 <p>Machine Gnostics is distributed as a standard Python package and is designed for easy installation and integration into your data science workflow. The library has been tested on macOS with Python 3.11 and is fully compatible with standard data science libraries.</p>
 <hr />
-<h2 id="1-create-a-python-virtual-environment">1. Create a Python Virtual Environment</h2>
+<h2 id="1-create-a-python-virtual-environment">1. Create a Python Virtual Environment<a class="headerlink" href="#1-create-a-python-virtual-environment" title="Permanent link">&para;</a></h2>
 <p>It is best practice to use a virtual environment to manage your project dependencies and avoid conflicts with other Python packages.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">macOS &amp; Linux</label><label for="__tabbed_1_2">Windows</label></div>
 <div class="tabbed-content">
@@ -2878,7 +2880,7 @@
 </div>
 </div>
 <hr />
-<h2 id="2-install-machine-gnostics">2. Install Machine Gnostics</h2>
+<h2 id="2-install-machine-gnostics">2. Install Machine Gnostics<a class="headerlink" href="#2-install-machine-gnostics" title="Permanent link">&para;</a></h2>
 <p>Install the Machine Gnostics library using pip:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">macOS &amp; Linux</label><label for="__tabbed_2_2">Windows</label></div>
 <div class="tabbed-content">
@@ -2894,7 +2896,7 @@
 </div>
 <p>This command will install Machine Gnostics and automatically resolve its dependencies.</p>
 <hr />
-<h2 id="3-verify-installation">3. Verify Installation</h2>
+<h2 id="3-verify-installation">3. Verify Installation<a class="headerlink" href="#3-verify-installation" title="Permanent link">&para;</a></h2>
 <p>You can verify that Machine Gnostics and its dependencies are installed correctly by importing them in a Python session:</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># check import</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">machinegnostics</span>
@@ -2914,7 +2916,7 @@
 </div>
 </div>
 <hr />
-<h2 id="4-quick-usage-example">4. Quick Usage Example</h2>
+<h2 id="4-quick-usage-example">4. Quick Usage Example<a class="headerlink" href="#4-quick-usage-example" title="Permanent link">&para;</a></h2>
 <p>Machine Gnostics is designed to be as simple to use as other machine learning libraries. You can call its functions and classes directly after installation.</p>
 <div class="admonition example">
 <p class="admonition-title">Gnostic Distribution Function</p>
@@ -2967,14 +2969,14 @@
 </span></code></pre></div>
 </div>
 <p>Please find step by step tutorial <a href="/tutorials/overview/">here</a>.</p>
-<h2 id="5-platform-and-environment">5. Platform and Environment</h2>
+<h2 id="5-platform-and-environment">5. Platform and Environment<a class="headerlink" href="#5-platform-and-environment" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Operating System:</strong> Tested on macOS and Windows 11</li>
 <li><strong>Python Version:</strong> 3.11 recommended</li>
 <li><strong>Dependencies:</strong> Compatible with NumPy, pandas, SciPy, and other standard data science libraries</li>
 </ul>
 <hr />
-<h2 id="6-troubleshooting">6. Troubleshooting</h2>
+<h2 id="6-troubleshooting">6. Troubleshooting<a class="headerlink" href="#6-troubleshooting" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Activate Your Environment:</strong>
   Always activate your virtual environment before installing or running Machine Gnostics.</li>
@@ -3187,6 +3189,8 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3265,7 +3269,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.13a4f30d.min.js"></script>

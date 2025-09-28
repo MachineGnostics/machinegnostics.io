@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2967,10 +2969,10 @@
   
 
 
-<h1 id="datacluster-advanced-cluster-boundary-detection-for-gnostic-distribution-functions-machine-gnostics">DataCluster: Advanced Cluster Boundary Detection for Gnostic Distribution Functions (Machine Gnostics)</h1>
+<h1 id="datacluster-advanced-cluster-boundary-detection-for-gnostic-distribution-functions-machine-gnostics">DataCluster: Advanced Cluster Boundary Detection for Gnostic Distribution Functions (Machine Gnostics)<a class="headerlink" href="#datacluster-advanced-cluster-boundary-detection-for-gnostic-distribution-functions-machine-gnostics" title="Permanent link">&para;</a></h1>
 <p>The <code>DataCluster</code> class identifies main cluster boundaries (LCB and UCB) from probability density functions of Gnostic Distribution Functions (GDFs): ELDF, EGDF, QLDF, and QGDF. It uses normalized PDF analysis, derivative-based methods, and shape detection algorithms for robust cluster identification.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>DataCluster provides automated, robust cluster boundary detection for GDFs. It adapts its algorithm based on the type of GDF, using derivative thresholds, valley detection, and slope analysis to find the main cluster region. The class is designed for scientific, engineering, and data science applications where interpretable cluster boundaries are needed.</p>
 <ul>
 <li><strong>Supports All GDF Types:</strong> ELDF, EGDF, QLDF, QGDF.</li>
@@ -2982,7 +2984,7 @@
 <li><strong>Visualization:</strong> Plots PDF, boundaries, and derivative analysis.</li>
 </ul>
 <hr />
-<h2 id="key-features">Key Features</h2>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Automated cluster boundary detection for GDFs</strong></li>
 <li><strong>PDF normalization and robust derivative analysis</strong></li>
@@ -2992,7 +2994,7 @@
 <li><strong>Visualization of PDF, boundaries, and cluster regions</strong></li>
 </ul>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3036,7 +3038,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="attributes">Attributes</h2>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>LCB</strong>: <code>float or None</code>Cluster Lower Boundary (left boundary of main cluster)</li>
 <li><strong>UCB</strong>: <code>float or None</code>Cluster Upper Boundary (right boundary of main cluster)</li>
@@ -3049,8 +3051,8 @@
   Indicates whether clustering analysis has been completed</li>
 </ul>
 <hr />
-<h2 id="methods">Methods</h2>
-<h3 id="fitplotfalse"><code>fit(plot=False)</code></h3>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="fitplotfalse"><code>fit(plot=False)</code><a class="headerlink" href="#fitplotfalse" title="Permanent link">&para;</a></h3>
 <p>Performs cluster boundary detection analysis.</p>
 <ul>
 <li><strong>plot</strong>: <code>bool</code> (optional)
@@ -3059,12 +3061,12 @@
 <p><strong>Returns:</strong>
 <code>Tuple[float or None, float or None]</code> — The detected LCB and UCB values. Returns None for a bound if it cannot be determined.</p>
 <hr />
-<h3 id="results"><code>results()</code></h3>
+<h3 id="results"><code>results()</code><a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
 <p>Returns a comprehensive cluster analysis results dictionary.</p>
 <p><strong>Returns:</strong>
 <code>dict</code> — Contains LCB, UCB, cluster width, GDF type, Z0, S_opt, method details, errors, and warnings.</p>
 <hr />
-<h3 id="plotfigsize12-8"><code>plot(figsize=(12, 8))</code></h3>
+<h3 id="plotfigsize12-8"><code>plot(figsize=(12, 8))</code><a class="headerlink" href="#plotfigsize12-8" title="Permanent link">&para;</a></h3>
 <p>Creates a visualization of the PDF, detected boundaries, and derivative analysis.</p>
 <ul>
 <li><strong>figsize</strong>: <code>tuple</code> (default: (12, 8))
@@ -3073,7 +3075,7 @@
 <p><strong>Returns:</strong>
 None (displays plot)</p>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.magcal</span><span class="w"> </span><span class="kn">import</span> <span class="n">ELDF</span><span class="p">,</span> <span class="n">DataCluster</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -3091,7 +3093,7 @@ None (displays plot)</p>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cluster width: </span><span class="si">{</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;cluster_width&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Clustering works best with local distribution functions (ELDF, QLDF).</li>
 <li>Global functions (EGDF, QGDF) have limited clustering effectiveness due to uniqueness constraints.</li>
@@ -3100,7 +3102,7 @@ None (displays plot)</p>
 <li>Errors and warnings are tracked in the results dictionary.</li>
 </ul>
 <hr />
-<h2 id="references">References</h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Gnostic Distribution Function theory and cluster analysis methods (see mathematical gnostics literature).</li>
 </ul>
@@ -3254,6 +3256,8 @@ None (displays plot)</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3332,7 +3336,7 @@ None (displays plot)</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

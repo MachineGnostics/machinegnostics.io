@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2949,10 +2951,10 @@
   
 
 
-<h1 id="intervalanalysis-marginal-interval-analysis-machine-gnostics">IntervalAnalysis: Marginal Interval Analysis (Machine Gnostics)</h1>
+<h1 id="intervalanalysis-marginal-interval-analysis-machine-gnostics">IntervalAnalysis: Marginal Interval Analysis (Machine Gnostics)<a class="headerlink" href="#intervalanalysis-marginal-interval-analysis-machine-gnostics" title="Permanent link">&para;</a></h1>
 <p>The <code>IntervalAnalysis</code> class provides robust, adaptive, and diagnostic interval estimation for Gnostic Distribution Functions (GDFs) such as ELDF, EGDF, QLDF, and QGDF. It estimates meaningful data intervals (tolerance, typical intervals) based on the behavior of the GDF's central parameter (Z0) as the data is extended, enforcing ordering constraints and providing detailed diagnostics.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>IntervalAnalysis orchestrates the complete process of fitting GDFs, checking homogeneity, and computing robust data intervals using the DataIntervals engine. It is designed for reliability, diagnostics, and adaptive interval estimation in scientific and engineering data analysis.</p>
 <p><strong>Gnostic vs. Statistical Interval Analysis:</strong>Gnostic interval analysis does not rely on probabilistic or statistical assumptions. Instead, it uses algebraic and geometric properties of the data and distribution functions, providing deterministic, reproducible, and interpretable intervals even for small, noisy, or non-Gaussian datasets. This is fundamentally different from classical statistical interval estimation, which depends on distributional assumptions and sampling theory.</p>
 <ul>
@@ -2964,7 +2966,7 @@
 <li><strong>Memory-Efficient:</strong> Optional flushing of intermediate arrays.</li>
 </ul>
 <hr />
-<h2 id="key-features">Key Features</h2>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>End-to-end interval estimation for GDFs</strong></li>
 <li><strong>Automatic homogeneity testing and diagnostics</strong></li>
@@ -2975,7 +2977,7 @@
 <li><strong>Deterministic and reproducible results</strong></li>
 </ul>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3157,14 +3159,14 @@
 </tbody>
 </table>
 <hr />
-<h2 id="attributes">Attributes</h2>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>params</strong>: <code>dict</code>
   Stores all warnings, errors, and diagnostic information from the analysis.</li>
 </ul>
 <hr />
-<h2 id="methods">Methods</h2>
-<h3 id="fitdata-plotfalse"><code>fit(data, plot=False)</code></h3>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="fitdata-plotfalse"><code>fit(data, plot=False)</code><a class="headerlink" href="#fitdata-plotfalse" title="Permanent link">&para;</a></h3>
 <p>Runs the complete interval analysis workflow on the input data.</p>
 <ul>
 <li><strong>data</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code>1D numpy array of input data for interval analysis</li>
@@ -3174,7 +3176,7 @@
 <p><strong>Returns:</strong>
 <code>dict</code> — Estimated interval bounds and diagnostics</p>
 <hr />
-<h3 id="results"><code>results()</code></h3>
+<h3 id="results"><code>results()</code><a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
 <p>Returns a dictionary of estimated interval results and bounds. Also called 'Data Certification'</p>
 <p><strong>Returns:</strong>
 <code>dict</code> — Contains keys such as <code>'LB', 'LSB', 'DLB', 'LCB', 'LSD', 'ZL', 'Z0L', 'Z0', 'Z0U', 'ZU', 'USD', 'UCB', 'DUB', 'USB', 'UB'</code></p>
@@ -3224,7 +3226,7 @@ The highest value for which data is homogeneous (membership analysis).
 The practical upper limit for the interval (may be set by user or inferred).
 </code></pre></div>
 <hr />
-<h3 id="plotgdftrue-intervalstrue"><code>plot(GDF=True, intervals=True)</code></h3>
+<h3 id="plotgdftrue-intervalstrue"><code>plot(GDF=True, intervals=True)</code><a class="headerlink" href="#plotgdftrue-intervalstrue" title="Permanent link">&para;</a></h3>
 <p>Visualizes the fitted GDFs and the estimated intervals.</p>
 <ul>
 <li><strong>GDF</strong>: <code>bool</code> (default: True)Plot the fitted ELDF (local distribution function)</li>
@@ -3234,7 +3236,7 @@ The practical upper limit for the interval (may be set by user or inferred).
 <p><strong>Returns:</strong>
 None (displays plot)</p>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.magcal</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntervalAnalysis</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -3252,7 +3254,7 @@ None (displays plot)</p>
 </span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="n">ia</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">GDF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">intervals</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Gnostic interval analysis is fundamentally different from statistical interval analysis: it does not rely on probability or sampling theory, but on algebraic and geometric properties of the data and distribution functions.</li>
 <li>Homogeneity of the data is checked automatically; warnings are issued if violated.</li>
@@ -3410,6 +3412,8 @@ None (displays plot)</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3488,7 +3492,7 @@ None (displays plot)</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

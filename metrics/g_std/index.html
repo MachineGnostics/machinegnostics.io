@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2875,16 +2877,16 @@
   
 
 
-<h1 id="std-gnostic-standard-deviation-metric">std: Gnostic Standard Deviation Metric</h1>
+<h1 id="std-gnostic-standard-deviation-metric">std: Gnostic Standard Deviation Metric<a class="headerlink" href="#std-gnostic-standard-deviation-metric" title="Permanent link">&para;</a></h1>
 <p>The <code>std</code> function computes the Gnostic standard deviation of a data sample. This metric uses gnostic theory to provide robust, assumption-free estimates of data dispersion, leveraging irrelevance and fidelity measures for deeper insight into uncertainty and structure.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Gnostic standard deviation generalizes classical standard deviation by using irrelevance and fidelity measures:
 - <strong>Case <code>'i'</code></strong>: Estimates standard deviation using the estimating geometry.
 - <strong>Case <code>'j'</code></strong>: Quantifies standard deviation using the quantifying geometry.</p>
 <p>Both approaches are robust to outliers and non-normal data, providing reliable diagnostics in challenging scenarios. The function returns lower and upper bounds for the standard deviation.</p>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2940,13 +2942,13 @@
 </tbody>
 </table>
 <hr />
-<h2 id="returns">Returns</h2>
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>tuple</strong><br />
   Lower and upper bounds of the Gnostic standard deviation.</li>
 </ul>
 <hr />
-<h2 id="raises">Raises</h2>
+<h2 id="raises">Raises<a class="headerlink" href="#raises" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>TypeError</strong><br />
   If input is not a numpy array, or if <code>S</code> is not a float or <code>'auto'</code>.</li>
@@ -2954,7 +2956,7 @@
   If input is not 1D, is empty, contains NaN/Inf, or if <code>case</code>/<code>data_form</code> is invalid.</li>
 </ul>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">machinegnostics</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mg</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -2968,7 +2970,7 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">std_lb_j</span><span class="p">,</span> <span class="n">std_ub_j</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The function uses mean and variance from gnostic theory to compute lower and upper bounds for standard deviation.</li>
 <li>Input data must be 1D, cleaned, and free of NaN/Inf.</li>
@@ -2977,7 +2979,7 @@
 <li>If <code>S='auto'</code>, the function optimizes the scaling parameter using EGDF.</li>
 </ul>
 <hr />
-<h2 id="gnostic-vs-classical-standard-deviation">Gnostic vs. Classical Standard Deviation</h2>
+<h2 id="gnostic-vs-classical-standard-deviation">Gnostic vs. Classical Standard Deviation<a class="headerlink" href="#gnostic-vs-classical-standard-deviation" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Note:</strong><br />
 Unlike classical standard deviation metrics that use statistical means and variances, the Gnostic standard deviation is computed using irrelevance and fidelity measures from gnostic theory. This approach is assumption-free and designed to reveal the true diagnostic properties of your data.</p>
@@ -3132,6 +3134,8 @@ Unlike classical standard deviation metrics that use statistical means and varia
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3210,7 +3214,7 @@ Unlike classical standard deviation metrics that use statistical means and varia
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

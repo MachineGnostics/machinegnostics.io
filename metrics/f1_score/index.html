@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2887,14 +2889,14 @@
   
 
 
-<h1 id="f1_score-classification-f1-score-metric">f1_score: Classification F1 Score Metric</h1>
+<h1 id="f1_score-classification-f1-score-metric">f1_score: Classification F1 Score Metric<a class="headerlink" href="#f1_score-classification-f1-score-metric" title="Permanent link">&para;</a></h1>
 <p>The <code>f1_score</code> function computes the F1 score for classification models, supporting both binary and multiclass settings. The F1 score is the harmonic mean of precision and recall, providing a balanced measure that is especially useful when classes are imbalanced.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The F1 score combines precision and recall into a single metric by taking their harmonic mean.</p>
 <p>This metric is particularly important when you want to balance the trade-off between precision and recall, such as in information retrieval, medical diagnosis, and fraud detection.</p>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2937,7 +2939,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="averaging-options">Averaging Options</h3>
+<h3 id="averaging-options">Averaging Options<a class="headerlink" href="#averaging-options" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>'binary'</strong>: Only report results for the positive class (default for binary classification).</li>
 <li><strong>'micro'</strong>: Calculate metrics globally by counting the total true positives, false negatives, and false positives.</li>
@@ -2946,13 +2948,13 @@
 <li><strong>None</strong>: Return the F1 score for each class as an array.</li>
 </ul>
 <hr />
-<h2 id="returns">Returns</h2>
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>f1</strong>: <code>float</code> or <code>array of floats</code>
   F1 score(s). Returns a float if <code>average</code> is not None, otherwise returns an array of F1 values for each class.</li>
 </ul>
 <hr />
-<h2 id="raises">Raises</h2>
+<h2 id="raises">Raises<a class="headerlink" href="#raises" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>ValueError</strong></li>
 <li>If <code>y_true</code> or <code>y_pred</code> is a pandas DataFrame (must select a column).</li>
@@ -2961,7 +2963,7 @@
 <li>If <code>average</code> is not a recognized option.</li>
 </ul>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">f1_score</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Example 1: Macro-averaged F1 for multiclass</span>
@@ -2975,7 +2977,7 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">f1_score</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;true&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;pred&#39;</span><span class="p">],</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;binary&#39;</span><span class="p">))</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The function supports input as numpy arrays, lists, or pandas Series.</li>
 <li>If you pass a pandas DataFrame, you must select a column (e.g., <code>df['col']</code>), not the whole DataFrame.</li>
@@ -3129,6 +3131,8 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3207,7 +3211,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

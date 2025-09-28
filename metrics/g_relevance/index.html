@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2875,18 +2877,18 @@
   
 
 
-<h1 id="hc-gnostic-characteristics-hc-metric">hc: Gnostic Characteristics (Hc) Metric</h1>
+<h1 id="hc-gnostic-characteristics-hc-metric">hc: Gnostic Characteristics (Hc) Metric<a class="headerlink" href="#hc-gnostic-characteristics-hc-metric" title="Permanent link">&para;</a></h1>
 <p>The <code>hc</code> function computes the Gnostic Characteristics (Hc) metric for a set of true and predicted values. This metric evaluates the relevance or irrelevance of predictions using gnostic theory, providing robust, assumption-free diagnostics for model performance.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>The Hc metric measures the gnostic relevance or irrelevance between true and predicted values:</p>
 <ul>
-<li><strong>Case <code>'i'</code></strong>: Estimates gnostic relevance. Values close to zero indicate less relevance. Range: [0, 1].</li>
-<li><strong>Case <code>'j'</code></strong>: Estimates gnostic irrelevance. Values close to 1 indicate less irrelevance. Range: [1, ∞).</li>
+<li><strong>Case <code>'i'</code></strong>: Estimates gnostic relevance. Values close to one indicate less relevance. Range: [0, 1].</li>
+<li><strong>Case <code>'j'</code></strong>: Estimates gnostic irrelevance. Values close to 1 indicate less irrelevance. Range: [0, ∞).</li>
 </ul>
 <p>Unlike classical metrics, Hc uses gnostic algebra to provide deeper insight into the relationship between predictions and actual outcomes, especially in the presence of outliers or non-normal data.</p>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2919,20 +2921,20 @@
 </tbody>
 </table>
 <hr />
-<h2 id="returns">Returns</h2>
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>float</strong>
   The calculated Hc value (normalized sum of squared gnostic characteristics).</li>
 </ul>
 <hr />
-<h2 id="raises">Raises</h2>
+<h2 id="raises">Raises<a class="headerlink" href="#raises" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>TypeError</strong>If <code>y_true</code> or <code>y_pred</code> are not array-like.</li>
 <li><strong>ValueError</strong>
   If inputs are empty, contain NaN/Inf, are not 1D, have mismatched shapes, or if <code>case</code> is not <code>'i'</code> or <code>'j'</code>.</li>
 </ul>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">mango.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">hc</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Example 1: Using lists</span>
@@ -2949,7 +2951,7 @@
 </span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb">print</span><span class="p">(</span><span class="n">hc_value</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The function supports input as lists, tuples, or numpy arrays.</li>
 <li>Both <code>y_true</code> and <code>y_pred</code> must be 1D, have the same shape, and must not be empty or contain NaN/Inf.</li>
@@ -2957,13 +2959,13 @@
 <li>The Hc metric is robust to outliers and non-normal data, providing more reliable diagnostics than classical metrics.</li>
 </ul>
 <hr />
-<h2 id="gnostic-vs-classical-metrics">Gnostic vs. Classical Metrics</h2>
+<h2 id="gnostic-vs-classical-metrics">Gnostic vs. Classical Metrics<a class="headerlink" href="#gnostic-vs-classical-metrics" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Note:</strong>
 Unlike traditional metrics that use statistical means, the Hc metric is computed using gnostic algebra and characteristics. This approach is assumption-free and designed to reveal the true diagnostic properties of your data and model predictions.</p>
 </blockquote>
 <hr />
-<p><strong>Author:</strong> Nirmal Parmar <br />
+<p><strong>Author:</strong> Nirmal Parmar
 <strong>Date:</strong> 2025-09-24</p>
 <hr />
 
@@ -2986,7 +2988,7 @@ Unlike traditional metrics that use statistical means, the Hc metric is computed
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 24, 2025 15:50:40 UTC">September 24, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 28, 2025 08:40:14 UTC">September 28, 2025</span>
   </span>
 
     
@@ -3112,6 +3114,8 @@ Unlike traditional metrics that use statistical means, the Hc metric is computed
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3190,7 +3194,7 @@ Unlike traditional metrics that use statistical means, the Hc metric is computed
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

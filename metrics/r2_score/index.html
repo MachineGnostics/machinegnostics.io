@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2911,13 +2913,13 @@
   
 
 
-<h1 id="robr2-robust-r-squared-robr2-metric">robr2: Robust R-squared (RobR2) Metric</h1>
+<h1 id="robr2-robust-r-squared-robr2-metric">robr2: Robust R-squared (RobR2) Metric<a class="headerlink" href="#robr2-robust-r-squared-robr2-metric" title="Permanent link">&para;</a></h1>
 <p>The <code>robr2</code> function computes the Robust R-squared (RobR2) value for evaluating the goodness of fit between observed data and model predictions. Unlike the classical R-squared metric, RobR2 is robust to outliers and incorporates sample weights, making it ideal for noisy or irregular datasets.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Robust R-squared (RobR2) measures the proportion of variance in the observed data explained by the fitted data, while reducing sensitivity to outliers. This is achieved by using a weighted formulation, which allows for more reliable model evaluation in real-world scenarios where data may not be perfectly clean.</p>
 <hr />
-<h2 id="formula">Formula</h2>
+<h2 id="formula">Formula<a class="headerlink" href="#formula" title="Permanent link">&para;</a></h2>
 <div class="arithmatex">\[
 \text{RobR2} = 1 - \frac{\sum_i w_i (e_i - \bar{e})^2}{\sum_i w_i (y_i - \bar{y})^2}
 \]</div>
@@ -2930,7 +2932,7 @@
 </ul>
 <p>If weights are not provided, equal weights are assumed.</p>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2963,13 +2965,13 @@
 </tbody>
 </table>
 <hr />
-<h2 id="returns">Returns</h2>
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>float</strong>
   The computed Robust R-squared (RobR2) value. Ranges from 0 (no explanatory power) to 1 (perfect fit).</li>
 </ul>
 <hr />
-<h2 id="raises">Raises</h2>
+<h2 id="raises">Raises<a class="headerlink" href="#raises" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>ValueError</strong></li>
 <li>If <code>y</code> and <code>y_fit</code> do not have the same shape.</li>
@@ -2977,7 +2979,7 @@
 <li>If <code>y</code> or <code>y_fit</code> are not 1D arrays.</li>
 </ul>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">robr2</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -2989,18 +2991,18 @@
 </span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="comparison-with-classical-r-squared">Comparison with Classical R-squared</h2>
+<h2 id="comparison-with-classical-r-squared">Comparison with Classical R-squared<a class="headerlink" href="#comparison-with-classical-r-squared" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Classical R-squared</strong>: Assumes equal weights and is sensitive to outliers.</li>
 <li><strong>RobR2</strong>: Incorporates weights and is robust to outliers, making it more reliable for datasets with irregularities or noise.</li>
 </ul>
 <hr />
-<h2 id="references">References</h2>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Kovanic P., Humber M.B (2015) <em>The Economics of Information - Mathematical Gnostics for Data Analysis</em>, Chapter 19</li>
 </ul>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>If weights are not provided, the metric defaults to equal weighting for all data points.</li>
 <li>RobR2 is particularly useful for robust regression and model evaluation in the presence of outliers.</li>
@@ -3155,6 +3157,8 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3233,7 +3237,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

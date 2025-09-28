@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2913,13 +2915,13 @@
   
 
 
-<h1 id="crossvalidator-custom-k-fold-cross-validation">CrossValidator: Custom k-Fold Cross-Validation</h1>
+<h1 id="crossvalidator-custom-k-fold-cross-validation">CrossValidator: Custom k-Fold Cross-Validation<a class="headerlink" href="#crossvalidator-custom-k-fold-cross-validation" title="Permanent link">&para;</a></h1>
 <p>The <code>CrossValidator</code> class provides a simple, flexible implementation of k-fold cross-validation for evaluating machine learning models. It is designed to work with any model that implements <code>fit(X, y)</code> and <code>predict(X)</code> methods, and supports custom scoring functions for regression or classification tasks.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Cross-validation is a robust technique for assessing the generalization performance of machine learning models. The <code>CrossValidator</code> class splits your dataset into <code>k</code> folds, trains the model on <code>k-1</code> folds, and evaluates it on the remaining fold, repeating this process for each fold. The results are aggregated to provide a reliable estimate of model performance.</p>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2969,21 +2971,21 @@
 </tbody>
 </table>
 <hr />
-<h2 id="attributes">Attributes</h2>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>folds</strong>: <code>list of tuple</code>
   List of <code>(train_indices, test_indices)</code> for each fold.</li>
 </ul>
 <hr />
-<h2 id="methods">Methods</h2>
-<h3 id="split"><code>split()</code></h3>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="split"><code>split()</code><a class="headerlink" href="#split" title="Permanent link">&para;</a></h3>
 <p>Splits the dataset into <code>k</code> folds.</p>
 <ul>
 <li><strong>Returns</strong>:
   <code>folds</code>: list of tuple
   Each tuple contains <code>(train_indices, test_indices)</code> for a fold.</li>
 </ul>
-<h3 id="evaluatescoring_func"><code>evaluate(scoring_func)</code></h3>
+<h3 id="evaluatescoring_func"><code>evaluate(scoring_func)</code><a class="headerlink" href="#evaluatescoring_func" title="Permanent link">&para;</a></h3>
 <p>Performs k-fold cross-validation and returns evaluation scores.</p>
 <ul>
 <li><strong>Parameters</strong>:<code>scoring_func</code>: callableA function that takes <code>y_true</code> and <code>y_pred</code> and returns a numeric score (e.g., <code>mean_squared_error</code>, <code>accuracy_score</code>).</li>
@@ -2992,7 +2994,7 @@
   Evaluation scores for each fold.</li>
 </ul>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CrossValidator</span><span class="p">,</span> <span class="n">LinearRegressor</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.metircs</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -3011,7 +3013,7 @@
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean Score:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The model is re-initialized and trained from scratch for each fold.</li>
 <li>Supports any model with <code>fit</code> and <code>predict</code> methods.</li>
@@ -3168,6 +3170,8 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3246,7 +3250,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>

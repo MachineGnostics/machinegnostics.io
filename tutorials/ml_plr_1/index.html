@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2832,7 +2834,7 @@
   
 
 
-<h1 id="machine-gnostics-polynomial-regression">Machine Gnostics Polynomial Regression</h1>
+<h1 id="machine-gnostics-polynomial-regression">Machine Gnostics Polynomial Regression<a class="headerlink" href="#machine-gnostics-polynomial-regression" title="Permanent link">&para;</a></h1>
 <p>The <code>PolynomialRegressor</code> is a robust polynomial regression model built on the principles of Mathematical Gnostics. It is designed to provide deterministic, interpretable, and resilient regression in the presence of outliers, noise, and non-Gaussian data distributions. Unlike traditional statistical models, this regressor leverages algebraic and geometric concepts from Mathematical Gnostics, focusing on event-level modeling and robust loss minimization.</p>
 <p>Key Features:</p>
 <ul>
@@ -2844,7 +2846,7 @@
 <li>Easy Integration: Compatible with numpy arrays and supports model persistence.</li>
 </ul>
 <hr />
-<h2 id="1-basic-usage-robust-polynomial-regression">1. Basic Usage: Robust Polynomial Regression</h2>
+<h2 id="1-basic-usage-robust-polynomial-regression">1. Basic Usage: Robust Polynomial Regression<a class="headerlink" href="#1-basic-usage-robust-polynomial-regression" title="Permanent link">&para;</a></h2>
 <p>Let’s compare the Machine Gnostics PolynomialRegressor with standard polynomial regression on a dataset with outliers.</p>
 <div class="admonition example">
 <p class="admonition-title">Basic Polynomial Regression</p>
@@ -2937,7 +2939,7 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">Robust</span> <span class="n">MG</span> <span class="n">Regression</span><span class="p">:</span> <span class="mf">1.3305</span>
 </span></code></pre></div>
 <hr />
-<h2 id="2-custom-gnostic-loss-and-training-history">2. Custom Gnostic Loss and Training History</h2>
+<h2 id="2-custom-gnostic-loss-and-training-history">2. Custom Gnostic Loss and Training History<a class="headerlink" href="#2-custom-gnostic-loss-and-training-history" title="Permanent link">&para;</a></h2>
 <p>For advanced users, the <code>PolynomialRegressor</code> supports custom <a href="../../metrics/g_relevance/">gnostic loss</a> functions, adaptive weighting, and detailed training history for analysis and visualization.</p>
 <div class="admonition example">
 <p class="admonition-title">Advanced: Custom Loss and Training History</p>
@@ -2950,7 +2952,7 @@
 </span></code></pre></div>
 </div>
 <hr />
-<h2 id="3-cross-validation-and-gnostic-mean-squared-error">3. Cross-Validation and Gnostic Mean Squared Error</h2>
+<h2 id="3-cross-validation-and-gnostic-mean-squared-error">3. Cross-Validation and Gnostic Mean Squared Error<a class="headerlink" href="#3-cross-validation-and-gnostic-mean-squared-error" title="Permanent link">&para;</a></h2>
 <p>Cross-validation is essential for evaluating model generalization. Machine Gnostics provides a <code>CrossValidator</code> for robust, assumption-free validation, and a gnostic version of mean squared error (MSE) that uses the gnostic mean instead of the statistical mean.</p>
 <p>The gnostic mean is a robust, assumption-free measure designed to provide deeper insight and reliability, especially in the presence of outliers or non-normal data. This ensures that error metrics reflect the true structure and diagnostic properties of your data, in line with the principles of Mathematical Gnostics.</p>
 <div class="admonition example">
@@ -3001,7 +3003,7 @@
 <li>Use gnostic metrics for deeper, more reliable diagnostics in challenging data scenarios.</li>
 </ul>
 <hr />
-<h2 id="tips">Tips</h2>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use <code>PolynomialRegressor</code> for robust polynomial regression, especially when data may contain outliers or non-Gaussian noise.</li>
 <li>Adjust the <code>degree</code> parameter for higher-order polynomial fits.</li>
@@ -3158,6 +3160,8 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3236,7 +3240,7 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -3013,12 +3015,12 @@
   
 
 
-<h1 id="principles-of-advanced-data-analysis-in-machine-gnostics">Principles of Advanced Data Analysis in Machine Gnostics</h1>
+<h1 id="principles-of-advanced-data-analysis-in-machine-gnostics">Principles of Advanced Data Analysis in Machine Gnostics<a class="headerlink" href="#principles-of-advanced-data-analysis-in-machine-gnostics" title="Permanent link">&para;</a></h1>
 <p>Machine Gnostics is grounded in the philosophy of <strong>Mathematical Gnostics</strong>, which emphasizes extracting the maximum information from data while respecting its objectivity and inherent structure. These principles are especially relevant for modern machine learning and data science, where robust, data-driven insights are crucial.</p>
 <p>Below are the core principles of advanced data analysis as practiced in Machine Gnostics, adapted for practical use in machine learning and data science:</p>
 <hr />
-<h2 id="key-principles">Key Principles</h2>
-<h3 id="1-respect-the-objectivity-of-data">1. Respect the Objectivity of Data</h3>
+<h2 id="key-principles">Key Principles<a class="headerlink" href="#key-principles" title="Permanent link">&para;</a></h2>
+<h3 id="1-respect-the-objectivity-of-data">1. Respect the Objectivity of Data<a class="headerlink" href="#1-respect-the-objectivity-of-data" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Avoid imposing unjustified models:</strong> Do not force data into a priori statistical models or distributions without evidence.</li>
 <li><strong>Do not trim or discard outliers without justification:</strong> Outliers may contain valuable information about the system or process.</li>
@@ -3026,59 +3028,59 @@
 <li><strong>Use proper aggregation:</strong> Aggregate data in ways that respect the underlying structure and axioms of gnostic theory.</li>
 <li><strong>Respect data finiteness:</strong> Do not treat finite samples as if they were infinite populations.</li>
 </ul>
-<h3 id="2-make-use-of-all-available-data">2. Make Use of All Available Data</h3>
+<h3 id="2-make-use-of-all-available-data">2. Make Use of All Available Data<a class="headerlink" href="#2-make-use-of-all-available-data" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Include censored and incomplete data:</strong> Do not ignore data just because it is partially observed.</li>
 <li><strong>Weight outliers and inliers appropriately:</strong> Assign justified weights to suspected outliers and inliers (noise), rather than excluding them outright.</li>
 <li><strong>Exclude data only with evidence:</strong> Remove data points only if their impact is negligible or their origin is invalid.</li>
 <li><strong>Consider side effects:</strong> Be aware of and account for side effects caused by the processes generating the data.</li>
 </ul>
-<h3 id="3-let-the-data-decide">3. Let the Data Decide</h3>
+<h3 id="3-let-the-data-decide">3. Let the Data Decide<a class="headerlink" href="#3-let-the-data-decide" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Allow data to determine its own structure:</strong> Let the data reveal its group membership, homogeneity, bounds, and metric space.</li>
 <li><strong>Data-driven uncertainty:</strong> Evaluate uncertainty using the data’s own properties, not just statistical assumptions.</li>
 <li><strong>Interdependence and distribution:</strong> Let the data inform you about its interdependence, distribution, and density functions.</li>
 <li><strong>Separate uncertainty from variability:</strong> Distinguish between uncertainty and true variability in the data.</li>
 </ul>
-<h3 id="4-individualized-weighting">4. Individualized Weighting</h3>
+<h3 id="4-individualized-weighting">4. Individualized Weighting<a class="headerlink" href="#4-individualized-weighting" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Assign weights at the data point level:</strong> Each data item should be weighted based on its own value, not just the sample it belongs to.</li>
 </ul>
-<h3 id="5-use-statistical-methods-judiciously">5. Use Statistical Methods Judiciously</h3>
+<h3 id="5-use-statistical-methods-judiciously">5. Use Statistical Methods Judiciously<a class="headerlink" href="#5-use-statistical-methods-judiciously" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Justify statistical assumptions:</strong> Only use statistical methods when their assumptions are met by the data.</li>
 <li><strong>Embrace non-statistical methods:</strong> When statistical assumptions fail, use robust, non-statistical approaches.</li>
 </ul>
-<h3 id="6-prefer-robust-methods">6. Prefer Robust Methods</h3>
+<h3 id="6-prefer-robust-methods">6. Prefer Robust Methods<a class="headerlink" href="#6-prefer-robust-methods" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Robust estimation:</strong> Use robust estimation and identification methods over non-robust ones, especially in the presence of outliers or non-normal data.</li>
 <li><strong>Choose the right robustness:</strong> Select the type of robustness (inner/outer) appropriate for your task.</li>
 </ul>
-<h3 id="7-prefer-distributions-over-point-estimates">7. Prefer Distributions Over Point Estimates</h3>
+<h3 id="7-prefer-distributions-over-point-estimates">7. Prefer Distributions Over Point Estimates<a class="headerlink" href="#7-prefer-distributions-over-point-estimates" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Use distribution functions:</strong> Where possible, use full distributions rather than single-point estimates for data characteristics.</li>
 </ul>
-<h3 id="8-ensure-comparability">8. Ensure Comparability</h3>
+<h3 id="8-ensure-comparability">8. Ensure Comparability<a class="headerlink" href="#8-ensure-comparability" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Compare like with like:</strong> Only compare objects or samples that behave according to the same model.</li>
 </ul>
-<h3 id="9-seek-explanations-not-excuses">9. Seek Explanations, Not Excuses</h3>
+<h3 id="9-seek-explanations-not-excuses">9. Seek Explanations, Not Excuses<a class="headerlink" href="#9-seek-explanations-not-excuses" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Don’t blame randomness:</strong> Investigate and explain uncertainty using data and available information, rather than attributing everything to randomness.</li>
 </ul>
-<h3 id="10-apply-realistic-and-theoretically-sound-criteria">10. Apply Realistic and Theoretically Sound Criteria</h3>
+<h3 id="10-apply-realistic-and-theoretically-sound-criteria">10. Apply Realistic and Theoretically Sound Criteria<a class="headerlink" href="#10-apply-realistic-and-theoretically-sound-criteria" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Optimize using information/entropy:</strong> Use information-theoretic criteria for optimization and evaluation.</li>
 <li><strong>Follow optimal data transformation paths:</strong> Respect theoretically proven optimal methods for data transformation and estimation.</li>
 </ul>
-<h3 id="11-maintain-an-open-and-critical-mindset">11. Maintain an Open and Critical Mindset</h3>
+<h3 id="11-maintain-an-open-and-critical-mindset">11. Maintain an Open and Critical Mindset<a class="headerlink" href="#11-maintain-an-open-and-critical-mindset" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Avoid methodological conservatism:</strong> Be open to new methods and approaches.</li>
 <li><strong>Challenge expectations:</strong> Do not insist on preconceived outcomes or reject unexpected results without further analysis.</li>
 <li><strong>Prioritize thoughtful analysis:</strong> The best data treatment may require more effort and deeper thinking.</li>
 </ul>
 <hr />
-<h2 id="why-these-principles-matter-in-machine-learning-data-science">Why These Principles Matter in Machine Learning &amp; Data Science</h2>
+<h2 id="why-these-principles-matter-in-machine-learning-data-science">Why These Principles Matter in Machine Learning &amp; Data Science<a class="headerlink" href="#why-these-principles-matter-in-machine-learning-data-science" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Robustness:</strong> Machine Gnostics methods are designed to be robust to outliers, noise, and non-standard data distributions, making them ideal for real-world data.</li>
 <li><strong>Data-Driven:</strong> The approach lets the data guide the analysis, reducing bias from unjustified assumptions.</li>
@@ -3098,7 +3100,7 @@
 </div>
 <p>Machine Gnostics provides a principled, robust, and data-centric foundation for advanced data analysis in machine learning and data science.</p>
 <hr />
-<h2 id="references"><a href="https://machinegnostics.info/references/">References</a></h2>
+<h2 id="references"><a href="https://machinegnostics.info/references/">References</a><a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
 
 
 
@@ -3245,6 +3247,8 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3323,7 +3327,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2832,7 +2834,7 @@
   
 
 
-<h1 id="gnostic-tests">Gnostic Tests</h1>
+<h1 id="gnostic-tests">Gnostic Tests<a class="headerlink" href="#gnostic-tests" title="Permanent link">&para;</a></h1>
 <p>This tutorial covers advanced data diagnostics in the Machine Gnostics framework:</p>
 <ul>
 <li><strong>Data Homogeneity Test</strong>: Analyze if your data sample is homogeneous using EGDF and PDF analysis.</li>
@@ -2840,7 +2842,7 @@
 <li><strong>Data Membership Test</strong>: Check if a value can be considered a member of a homogeneous sample.</li>
 </ul>
 <hr />
-<h2 id="data-homogeneity-test">Data Homogeneity Test</h2>
+<h2 id="data-homogeneity-test">Data Homogeneity Test<a class="headerlink" href="#data-homogeneity-test" title="Permanent link">&para;</a></h2>
 <p>Analyze data homogeneity for EGDF objects using probability density function analysis.</p>
 <p>The homogeneity criterion is based on the mathematical properties and expected PDF behavior of EGDF according to gnostic theory principles. Homogeneous data should produce a distribution with a single density maximum, while non-homogeneous data will exhibit multiple maxima or negative density values.</p>
 <div class="admonition example">
@@ -2873,7 +2875,7 @@
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a> ...}
 </span></code></pre></div></p>
 <hr />
-<h2 id="data-scedasticity-test">Data Scedasticity Test</h2>
+<h2 id="data-scedasticity-test">Data Scedasticity Test<a class="headerlink" href="#data-scedasticity-test" title="Permanent link">&para;</a></h2>
 <p>Gnostic Scedasticity Test for Homoscedasticity and Heteroscedasticity</p>
 <p>This class provides a method to check for homoscedasticity and heteroscedasticity in data, inspired by fundamental principles rather than standard statistical tests. It uses gnostic variance and gnostic linear regression, which are based on the Machine Gnostics framework.</p>
 <div class="admonition example">
@@ -2893,7 +2895,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Is the data homoscedastic?  False
 </span></code></pre></div></p>
 <hr />
-<h2 id="data-membership-test">Data Membership Test</h2>
+<h2 id="data-membership-test">Data Membership Test<a class="headerlink" href="#data-membership-test" title="Permanent link">&para;</a></h2>
 <p>Test whether a value can be considered a member of a homogeneous data sample using the EGDF framework.</p>
 <div class="admonition example">
 <p class="admonition-title">Data Membership Test</p>
@@ -2913,7 +2915,7 @@
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Lower and Upper Sample Bounds to check Data Membership: LSB: -3, USB: 10.013
 </span></code></pre></div></p>
 <hr />
-<h2 id="tips">Tips</h2>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h2>
 <ul>
 <li>All diagnostic classes (<code>DataHomogeneity</code>, <code>DataScedasticity</code>, <code>DataMembership</code>) follow a similar API: create an object, fit your data, and inspect results.</li>
 <li>Use the <code>plot=True</code> option in <code>.fit()</code> for visual diagnostics where available.</li>
@@ -3068,6 +3070,8 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3146,7 +3150,7 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

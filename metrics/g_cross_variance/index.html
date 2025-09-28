@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2875,10 +2877,10 @@
   
 
 
-<h1 id="gnostic-cross-covariance-metric">Gnostic Cross-Covariance Metric</h1>
+<h1 id="gnostic-cross-covariance-metric">Gnostic Cross-Covariance Metric<a class="headerlink" href="#gnostic-cross-covariance-metric" title="Permanent link">&para;</a></h1>
 <p>The <code>cross_covariance</code> function computes the Gnostic cross-covariance between two data samples. This metric uses gnostic theory to provide robust, assumption-free estimates of relationships between datasets, even in the presence of noise or outliers. Argument names have changed: use <code>X</code> and <code>y</code> for input arrays.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Gnostic cross-covariance generalizes classical covariance by leveraging irrelevance measures from gnostic theory:</p>
 <ul>
 <li><strong>Estimating irrelevances</strong> are aggregated as trigonometric sines (case <code>'i'</code>).</li>
@@ -2886,7 +2888,7 @@
 </ul>
 <p>Both approaches converge to linear error in cases of weak uncertainty, but provide robust diagnostics in challenging data scenarios. The metric is computed as the mean product of irrelevances between two data samples.</p>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2919,20 +2921,20 @@
 </tbody>
 </table>
 <hr />
-<h2 id="returns">Returns</h2>
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>float</strong>
   The Gnostic cross-covariance between the two data samples.</li>
 </ul>
 <hr />
-<h2 id="raises">Raises</h2>
+<h2 id="raises">Raises<a class="headerlink" href="#raises" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>ValueError</strong>
   If input arrays are not the same length, are empty, contain NaN/Inf, are not 1D, or if <code>case</code> is not <code>'i'</code> or <code>'j'</code>.</li>
 </ul>
 <hr />
 <p>covar = cross_covariance(data_1, data_2, case='i', verbose=False)</p>
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">cross_covariance</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -2957,7 +2959,7 @@
 </span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>  <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><code>X</code> must be a 1D numpy array (single column). For multi-column X, pass each column separately (e.g., <code>X[:, i]</code>).</li>
 <li><code>y</code> must be a 1D numpy array.</li>
@@ -2969,7 +2971,7 @@
 <li>Supports both estimation and quantification geometries for flexible analysis.</li>
 </ul>
 <hr />
-<h2 id="gnostic-vs-classical-covariance">Gnostic vs. Classical Covariance</h2>
+<h2 id="gnostic-vs-classical-covariance">Gnostic vs. Classical Covariance<a class="headerlink" href="#gnostic-vs-classical-covariance" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Note:</strong>
 Unlike classical covariance metrics that rely on statistical means, the Gnostic cross-covariance uses irrelevance measures derived from gnostic theory. This approach is assumption-free and designed to reveal true relationships, even in the presence of outliers or non-normal distributions.</p>
@@ -3124,6 +3126,8 @@ Unlike classical covariance metrics that rely on statistical means, the Gnostic 
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3202,7 +3206,7 @@ Unlike classical covariance metrics that rely on statistical means, the Gnostic 
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

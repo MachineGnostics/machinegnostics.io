@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2832,7 +2834,7 @@
   
 
 
-<h1 id="machine-gnostics-logistic-regression">Machine Gnostics Logistic Regression</h1>
+<h1 id="machine-gnostics-logistic-regression">Machine Gnostics Logistic Regression<a class="headerlink" href="#machine-gnostics-logistic-regression" title="Permanent link">&para;</a></h1>
 <p>The <code>LogisticRegressor</code> is a robust and flexible binary classification model built on the Machine Gnostics framework. It is designed to handle outliers, heavy-tailed distributions, and non-Gaussian noise, making it suitable for real-world data challenges. The model supports polynomial feature expansion, robust weighting, early stopping, and seamless MLflow integration for experiment tracking and deployment.</p>
 <p>Key Features:</p>
 <ul>
@@ -2846,7 +2848,7 @@
 <li>Save and load model using joblib</li>
 </ul>
 <hr />
-<h2 id="1-overview">1. Overview</h2>
+<h2 id="1-overview">1. Overview<a class="headerlink" href="#1-overview" title="Permanent link">&para;</a></h2>
 <p>Machine Gnostics LogisticRegressor brings deterministic, event-level modeling to binary classification. By leveraging gnostic algebra and geometry, it provides robust, interpretable, and reproducible results, even in challenging scenarios.</p>
 <p>Highlights:</p>
 <ul>
@@ -2858,7 +2860,7 @@
 <li>Model Persistence: Save and load models easily with joblib.</li>
 </ul>
 <hr />
-<h2 id="2-gnostic-logistic-regression">2. Gnostic Logistic Regression</h2>
+<h2 id="2-gnostic-logistic-regression">2. Gnostic Logistic Regression<a class="headerlink" href="#2-gnostic-logistic-regression" title="Permanent link">&para;</a></h2>
 <p>Let’s see how to use the Machine Gnostics LogisticRegressor for robust binary classification on a synthetic dataset.</p>
 <div class="admonition example">
 <p class="admonition-title">Moon Data</p>
@@ -2968,7 +2970,7 @@
 </span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">Avg</span><span class="o">/</span><span class="n">Total</span>            <span class="mf">0.97</span>      <span class="mf">0.97</span>      <span class="mf">0.97</span>       <span class="mi">300</span>
 </span></code></pre></div>
 <hr />
-<h2 id="3-gnostic-probability-output">3. Gnostic Probability Output</h2>
+<h2 id="3-gnostic-probability-output">3. Gnostic Probability Output<a class="headerlink" href="#3-gnostic-probability-output" title="Permanent link">&para;</a></h2>
 <p>The <code>proba</code> argument in <code>LogisticRegressor</code> can be set to <code>'gnostics'</code> to use a gnostic-based probability estimation, which is more robust to outliers and non-Gaussian data.</p>
 <div class="admonition example">
 <p class="admonition-title">Advanced: Gnostic Probability Output</p>
@@ -3042,7 +3044,7 @@
 <li>Use gnostic probabilities for datasets with outliers or non-Gaussian noise for more reliable classification.</li>
 </ul>
 <hr />
-<h2 id="tips">Tips</h2>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Use <code>LogisticRegressor</code> for robust, interpretable binary classification, especially when data may contain outliers or non-Gaussian noise.</li>
 <li>Set <code>proba='gnostics'</code> for robust probability estimation.</li>
@@ -3199,6 +3201,8 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3277,7 +3281,7 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

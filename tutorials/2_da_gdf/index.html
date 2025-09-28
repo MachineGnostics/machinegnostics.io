@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2850,11 +2852,11 @@
   
 
 
-<h1 id="gnostic-distribution-functions">Gnostic Distribution Functions</h1>
+<h1 id="gnostic-distribution-functions">Gnostic Distribution Functions<a class="headerlink" href="#gnostic-distribution-functions" title="Permanent link">&para;</a></h1>
 <p>Gnostic Distribution Functions (GDF) are a new class of probability and density estimators designed for robust, flexible, and assumption-free data analysis. Unlike traditional statistical distributions, GDFs do not require any prior assumptions about the underlying data distribution. Instead, they allow the data to "speak for themselves," making them especially powerful for small, noisy, or uncertain datasets.</p>
 <p>More information available <a href="../../mg/gdf/">here</a>.</p>
 <hr />
-<h2 id="egdf-estimating-global-distribution-function">EGDF - Estimating Global Distribution Function</h2>
+<h2 id="egdf-estimating-global-distribution-function">EGDF - Estimating Global Distribution Function<a class="headerlink" href="#egdf-estimating-global-distribution-function" title="Permanent link">&para;</a></h2>
 <p>The EGDF provides a robust global estimate of the distribution function for your data.</p>
 <div class="admonition example">
 <p class="admonition-title">Estimating Global Distribution Function</p>
@@ -2875,7 +2877,7 @@
 </div>
 <p><img alt="1758961903929" src="../image/2_da_gdf/1758961903929.png" /></p>
 <hr />
-<h2 id="eldf-estimating-local-distribution-function">ELDF - Estimating Local Distribution Function</h2>
+<h2 id="eldf-estimating-local-distribution-function">ELDF - Estimating Local Distribution Function<a class="headerlink" href="#eldf-estimating-local-distribution-function" title="Permanent link">&para;</a></h2>
 <p>The ELDF focuses on local properties of the data distribution, providing detailed insight into local data behavior.</p>
 <div class="admonition example">
 <p class="admonition-title">Estimating Local Distribution Function</p>
@@ -2896,7 +2898,7 @@
 </div>
 <p><img alt="1758901497585" src="../image/2_da_gdf/1758901497585.png" /></p>
 <hr />
-<h2 id="qgdf-quantifying-global-distribution-function">QGDF - Quantifying Global Distribution Function</h2>
+<h2 id="qgdf-quantifying-global-distribution-function">QGDF - Quantifying Global Distribution Function<a class="headerlink" href="#qgdf-quantifying-global-distribution-function" title="Permanent link">&para;</a></h2>
 <p>QGDF quantifies global distribution characteristics, useful for uncertainty quantification and diagnostics.</p>
 <div class="admonition example">
 <p class="admonition-title">Quantifying Global Distribution Function</p>
@@ -2917,7 +2919,7 @@
 </div>
 <p><img alt="1758901509960" src="../image/2_da_gdf/1758901509960.png" /></p>
 <hr />
-<h2 id="qldf-quantifying-local-distribution-function">QLDF - Quantifying Local Distribution Function</h2>
+<h2 id="qldf-quantifying-local-distribution-function">QLDF - Quantifying Local Distribution Function<a class="headerlink" href="#qldf-quantifying-local-distribution-function" title="Permanent link">&para;</a></h2>
 <p>QLDF quantifies local distribution characteristics, providing fine-grained uncertainty and fidelity measures.</p>
 <div class="admonition example">
 <p class="admonition-title">Quantifying Local Distribution Function</p>
@@ -2938,7 +2940,7 @@
 </div>
 <p><img alt="1758901526431" src="../image/2_da_gdf/1758901526431.png" /></p>
 <hr />
-<h2 id="tips">Tips</h2>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h2>
 <ul>
 <li>All GDF classes (<code>EGDF</code>, <code>ELDF</code>, <code>QGDF</code>, <code>QLDF</code>) follow a similar API: create an object, fit your data, plot results, and inspect parameters.</li>
 <li>Use the <code>bounds=True</code> option in <code>.plot()</code> to visualize uncertainty bounds.</li>
@@ -3093,6 +3095,8 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3171,7 +3175,7 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

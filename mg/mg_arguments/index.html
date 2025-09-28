@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2953,10 +2955,10 @@
   
 
 
-<h1 id="glossary">Glossary</h1>
+<h1 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">&para;</a></h1>
 <p>This document provides definitions and explanations for the main arguments and variables used in Machine Gnostics data analytics, machine learning and deep learning models. Understanding these concepts will help users grasp the unique characteristics of the Machine Gnostics library, which is based on the non-statistical paradigm of Mathematical Gnostics.</p>
 <hr />
-<h2 id="core-concepts">Core Concepts</h2>
+<h2 id="core-concepts">Core Concepts<a class="headerlink" href="#core-concepts" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
 <p><strong>Machine Gnostics</strong><br />
@@ -2968,8 +2970,8 @@
 </li>
 </ul>
 <hr />
-<h2 id="key-arguments-and-gnostic-characteristics">Key Arguments and Gnostic Characteristics</h2>
-<h3 id="1-gnostic-geometries">1. Gnostic Geometries</h3>
+<h2 id="key-arguments-and-gnostic-characteristics">Key Arguments and Gnostic Characteristics<a class="headerlink" href="#key-arguments-and-gnostic-characteristics" title="Permanent link">&para;</a></h2>
+<h3 id="1-gnostic-geometries">1. Gnostic Geometries<a class="headerlink" href="#1-gnostic-geometries" title="Permanent link">&para;</a></h3>
 <p>These are the fundamental variables used to describe data in the gnostic framework. They are divided into two main spaces:</p>
 <ul>
 <li><strong>Quantifying Space (Q-space, j):</strong><br />
@@ -2977,7 +2979,7 @@
 <li><strong>Estimating Space (E-space, i):</strong><br />
   Describes the estimation of variability and relevance.</li>
 </ul>
-<h4 id="quantifying-geometry">Quantifying Geometry</h4>
+<h4 id="quantifying-geometry">Quantifying Geometry<a class="headerlink" href="#quantifying-geometry" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>fj</strong>: <em>Quantifying data variability</em><br />
@@ -2988,7 +2990,7 @@
   Measures the irrelevance or error due to variability.</p>
 </li>
 </ul>
-<h4 id="estimating-geometry">Estimating Geometry</h4>
+<h4 id="estimating-geometry">Estimating Geometry<a class="headerlink" href="#estimating-geometry" title="Permanent link">&para;</a></h4>
 <ul>
 <li>
 <p><strong>fi</strong>: <em>Estimating data variability</em><br />
@@ -3001,7 +3003,7 @@
 </ul>
 <p>All four variables (<span class="arithmatex">\( f_j, h_j, f_i, h_i \)</span>) are called <strong>gnostic characteristics</strong>.</p>
 <hr />
-<h3 id="2-probability-arguments">2. Probability Arguments</h3>
+<h3 id="2-probability-arguments">2. Probability Arguments<a class="headerlink" href="#2-probability-arguments" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>pi</strong>: <em>Estimating probability</em><br />
@@ -3013,7 +3015,7 @@
 </li>
 </ul>
 <hr />
-<h3 id="3-information">3. Information</h3>
+<h3 id="3-information">3. Information<a class="headerlink" href="#3-information" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>Ii</strong>: <em>Estimating information</em><br />
@@ -3025,7 +3027,7 @@
 </li>
 </ul>
 <hr />
-<h3 id="4-entropy">4. Entropy</h3>
+<h3 id="4-entropy">4. Entropy<a class="headerlink" href="#4-entropy" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
 <p><strong>ei</strong>: <em>Estimating entropy</em><br />
@@ -3041,13 +3043,13 @@
 </li>
 </ul>
 <hr />
-<h3 id="5-loss-functions">5. Loss Functions</h3>
+<h3 id="5-loss-functions">5. Loss Functions<a class="headerlink" href="#5-loss-functions" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Hc loss</strong>: <em>Gnostic mean relevance loss</em><br />
   A loss function based on gnostic relevance, where <span class="arithmatex">\( c \)</span> can be <span class="arithmatex">\( i \)</span> or <span class="arithmatex">\( j \)</span>.</li>
 </ul>
 <hr />
-<h2 id="further-reading">Further reading</h2>
+<h2 id="further-reading">Further reading<a class="headerlink" href="#further-reading" title="Permanent link">&para;</a></h2>
 <p>For more detailed mathematical background, see the foundational texts on <a href="../../ref/references/">Mathematical Gnostics</a> and the documentation of the Machine Gnostics library.</p>
 
 
@@ -3195,6 +3197,8 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3273,7 +3277,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

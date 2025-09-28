@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2868,14 +2870,14 @@
   
 
 
-<h1 id="machine-gnostics-measures">Machine Gnostics Measures</h1>
+<h1 id="machine-gnostics-measures">Machine Gnostics Measures<a class="headerlink" href="#machine-gnostics-measures" title="Permanent link">&para;</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>Why Machine Gnostics?</strong><br />
 Unlike classical statistics, which rely on probabilistic averages, Machine Gnostics computes measures like mean, median, standard deviation, and variance using irrelevance and fidelity from gnostic theory. This approach is assumption-free and robust to outliers, revealing the true diagnostic properties of your data.</p>
 </div>
 <hr />
-<h2 id="1-sample-data">1. Sample Data</h2>
+<h2 id="1-sample-data">1. Sample Data<a class="headerlink" href="#1-sample-data" title="Permanent link">&para;</a></h2>
 <p>Let’s start with a small dataset that includes an outlier, to see how Machine Gnostics handles challenging real-world data.</p>
 <div class="admonition example">
 <p class="admonition-title">Sample Data</p>
@@ -2887,7 +2889,7 @@ Unlike classical statistics, which rely on probabilistic averages, Machine Gnost
 </span></code></pre></div>
 </div>
 <hr />
-<h2 id="2-gnostic-mean">2. Gnostic Mean</h2>
+<h2 id="2-gnostic-mean">2. Gnostic Mean<a class="headerlink" href="#2-gnostic-mean" title="Permanent link">&para;</a></h2>
 <p>The gnostic mean is robust to outliers and does not assume a specific data distribution.</p>
 <div class="admonition example">
 <p class="admonition-title">Gnostic Mean</p>
@@ -2898,7 +2900,7 @@ Unlike classical statistics, which rely on probabilistic averages, Machine Gnost
 </span></code></pre></div>
 </div>
 <hr />
-<h2 id="3-gnostic-median">3. Gnostic Median</h2>
+<h2 id="3-gnostic-median">3. Gnostic Median<a class="headerlink" href="#3-gnostic-median" title="Permanent link">&para;</a></h2>
 <p>The gnostic median provides a robust central value, even for small or skewed samples.</p>
 <div class="admonition example">
 <p class="admonition-title">Gnostic Median</p>
@@ -2909,7 +2911,7 @@ Unlike classical statistics, which rely on probabilistic averages, Machine Gnost
 </span></code></pre></div>
 </div>
 <hr />
-<h2 id="4-gnostic-standard-deviation">4. Gnostic Standard Deviation</h2>
+<h2 id="4-gnostic-standard-deviation">4. Gnostic Standard Deviation<a class="headerlink" href="#4-gnostic-standard-deviation" title="Permanent link">&para;</a></h2>
 <p>Unlike classical standard deviation, the gnostic version returns a lower and upper bound, reflecting uncertainty more realistically.</p>
 <div class="admonition example">
 <p class="admonition-title">Gnostic Standard Deviation</p>
@@ -2920,7 +2922,7 @@ Unlike classical statistics, which rely on probabilistic averages, Machine Gnost
 </span></code></pre></div>
 </div>
 <hr />
-<h2 id="5-gnostic-variance">5. Gnostic Variance</h2>
+<h2 id="5-gnostic-variance">5. Gnostic Variance<a class="headerlink" href="#5-gnostic-variance" title="Permanent link">&para;</a></h2>
 <p>Gnostic variance is always between 0 and 1, as it is calculated using irrelevance rather than squared deviations.</p>
 <div class="admonition example">
 <p class="admonition-title">Gnostic Variance</p>
@@ -2931,7 +2933,7 @@ Unlike classical statistics, which rely on probabilistic averages, Machine Gnost
 </span></code></pre></div>
 </div>
 <hr />
-<h2 id="tips">Tips</h2>
+<h2 id="tips">Tips<a class="headerlink" href="#tips" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Robustness:</strong> Try changing or adding more outliers to your data and see how the gnostic measures respond compared to classical statistics.</li>
 <li><strong>Integration:</strong> All functions follow standard Python/NumPy conventions and can be used in data science workflows.</li>
@@ -3086,6 +3088,8 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3164,7 +3168,7 @@ Explore more tutorials and real-world examples in the <a href="../examples/">Exa
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

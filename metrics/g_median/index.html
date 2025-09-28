@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2875,10 +2877,10 @@
   
 
 
-<h1 id="median-gnostic-median-metric">median: Gnostic Median Metric</h1>
+<h1 id="median-gnostic-median-metric">median: Gnostic Median Metric<a class="headerlink" href="#median-gnostic-median-metric" title="Permanent link">&para;</a></h1>
 <p>The <code>median</code> function computes the Gnostic median (Global Estimate of Location) of a data sample. This metric uses gnostic theory to provide robust, assumption-free estimates of central tendency, leveraging irrelevance and fidelity measures for deeper insight into data structure and uncertainty.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>Gnostic median generalizes classical median by using irrelevance and fidelity measures:</p>
 <ul>
 <li><strong>Case <code>'i'</code></strong>: Estimates median using EGDF (Empirical Gnostics Distribution Function).</li>
@@ -2886,7 +2888,7 @@
 </ul>
 <p>Both approaches are robust to outliers and non-normal data, providing reliable diagnostics in challenging scenarios.</p>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -2942,20 +2944,20 @@
 </tbody>
 </table>
 <hr />
-<h2 id="returns">Returns</h2>
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>float</strong>
   The Gnostic median of the data.</li>
 </ul>
 <hr />
-<h2 id="raises">Raises</h2>
+<h2 id="raises">Raises<a class="headerlink" href="#raises" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>TypeError</strong>If input is not a numpy array, or if <code>S</code> is not a float or <code>'auto'</code>.</li>
 <li><strong>ValueError</strong>
   If input is not 1D, is empty, contains NaN/Inf, or if <code>case</code>/<code>data_form</code> is invalid.</li>
 </ul>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">machinegnostics</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mg</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -2969,7 +2971,7 @@
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">median_j</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>The function uses EGDF or QGDF to compute irrelevance and fidelity values, which are then used to estimate the median.</li>
 <li>Input data must be 1D, cleaned, and free of NaN/Inf.</li>
@@ -2977,7 +2979,7 @@
 <li>Scaling (<code>S</code>), optimization (<code>z0_optimize</code>), and data form (<code>data_form</code>) parameters allow for flexible analysis.</li>
 </ul>
 <hr />
-<h2 id="gnostic-vs-classical-median">Gnostic vs. Classical Median</h2>
+<h2 id="gnostic-vs-classical-median">Gnostic vs. Classical Median<a class="headerlink" href="#gnostic-vs-classical-median" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Note:</strong>
 Unlike classical median metrics that use statistical order statistics, the Gnostic median is computed using irrelevance and fidelity measures from gnostic theory. This approach is assumption-free and designed to reveal the true diagnostic properties of your data.</p>
@@ -3132,6 +3134,8 @@ Unlike classical median metrics that use statistical order statistics, the Gnost
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3210,7 +3214,7 @@ Unlike classical median metrics that use statistical order statistics, the Gnost
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>

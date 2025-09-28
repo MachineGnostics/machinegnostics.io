@@ -100,7 +100,9 @@
     
       
 
-<header class="md-header" data-md-component="header">
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
@@ -214,14 +216,8 @@
     
   </nav>
   
-</header>
     
-    <div class="md-container" data-md-component="container">
       
-      
-        
-          
-            
 <nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
@@ -446,7 +442,13 @@
     </ul>
   </div>
 </nav>
-          
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
         
       
       <main class="md-main" data-md-component="main">
@@ -2949,10 +2951,10 @@
   
 
 
-<h1 id="datahomogeneity-homogeneity-analysis-for-egdf-machine-gnostics">DataHomogeneity: Homogeneity Analysis for EGDF (Machine Gnostics)</h1>
+<h1 id="datahomogeneity-homogeneity-analysis-for-egdf-machine-gnostics">DataHomogeneity: Homogeneity Analysis for EGDF (Machine Gnostics)<a class="headerlink" href="#datahomogeneity-homogeneity-analysis-for-egdf-machine-gnostics" title="Permanent link">&para;</a></h1>
 <p>The <code>DataHomogeneity</code> class provides robust, numerical homogeneity analysis for Estimating Global Distribution Functions (EGDF) by examining the shape and characteristics of their probability density functions (PDF). It is designed to detect outliers, clusters, and non-homogeneous structure in data using gnostic theory principles.</p>
 <hr />
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
 <p>DataHomogeneity analyzes the fitted EGDF's PDF to determine if the underlying data is homogeneous. Homogeneity is defined by the presence of a single global maximum (unimodal PDF) and the absence of negative density values. The class uses robust peak detection, configurable smoothing, and comprehensive diagnostics to provide reliable results.</p>
 <p><strong>Gnostic vs. Statistical Homogeneity:</strong><br />
 Gnostic homogeneity analysis is based on the algebraic and geometric properties of the data and the EGDF, not on statistical or probabilistic assumptions. It is deterministic, reproducible, and sensitive to both outliers and clusters, making it fundamentally different from classical statistical homogeneity tests.</p>
@@ -2965,7 +2967,7 @@ Gnostic homogeneity analysis is based on the algebraic and geometric properties 
 <li><strong>Visualization:</strong> Built-in plotting for PDF and detected maxima.</li>
 </ul>
 <hr />
-<h2 id="key-features">Key Features</h2>
+<h2 id="key-features">Key Features<a class="headerlink" href="#key-features" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>Automatic EGDF validation and homogeneity testing</strong></li>
 <li><strong>Robust peak detection with configurable smoothing</strong></li>
@@ -2975,7 +2977,7 @@ Gnostic homogeneity analysis is based on the algebraic and geometric properties 
 <li><strong>Integration with EGDF parameter systems</strong></li>
 </ul>
 <hr />
-<h2 id="parameters">Parameters</h2>
+<h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
@@ -3031,7 +3033,7 @@ Gnostic homogeneity analysis is based on the algebraic and geometric properties 
 </tbody>
 </table>
 <hr />
-<h2 id="attributes">Attributes</h2>
+<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
 <ul>
 <li><strong>is_homogeneous</strong>: <code>bool or None</code><br />
   Primary analysis result (None before fit, True/False after analysis)</li>
@@ -3045,8 +3047,8 @@ Gnostic homogeneity analysis is based on the algebraic and geometric properties 
   Indicates if analysis has been completed</li>
 </ul>
 <hr />
-<h2 id="methods">Methods</h2>
-<h3 id="fitplotfalse"><code>fit(plot=False)</code></h3>
+<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
+<h3 id="fitplotfalse"><code>fit(plot=False)</code><a class="headerlink" href="#fitplotfalse" title="Permanent link">&para;</a></h3>
 <p>Performs comprehensive homogeneity analysis on the EGDF object.</p>
 <ul>
 <li><strong>plot</strong>: <code>bool</code> (optional)<br />
@@ -3055,12 +3057,12 @@ Gnostic homogeneity analysis is based on the algebraic and geometric properties 
 <p><strong>Returns:</strong><br />
 <code>bool</code> — True if data is homogeneous, False otherwise</p>
 <hr />
-<h3 id="results"><code>results()</code></h3>
+<h3 id="results"><code>results()</code><a class="headerlink" href="#results" title="Permanent link">&para;</a></h3>
 <p>Retrieves comprehensive homogeneity analysis results and metadata.</p>
 <p><strong>Returns:</strong><br />
 <code>dict</code> — Contains keys such as <code>'is_homogeneous', 'picks', 'z0', 'global_extremum_idx', 'analysis_parameters', 'gdf_parameters', 'errors', 'warnings'</code></p>
 <hr />
-<h3 id="plotfigsize12-8-titlenone"><code>plot(figsize=(12, 8), title=None)</code></h3>
+<h3 id="plotfigsize12-8-titlenone"><code>plot(figsize=(12, 8), title=None)</code><a class="headerlink" href="#plotfigsize12-8-titlenone" title="Permanent link">&para;</a></h3>
 <p>Visualizes the PDF, detected maxima, and homogeneity status.</p>
 <ul>
 <li><strong>figsize</strong>: <code>tuple</code> (default: (12, 8))<br />
@@ -3071,7 +3073,7 @@ Gnostic homogeneity analysis is based on the algebraic and geometric properties 
 <p><strong>Returns:</strong><br />
 None (displays plot)</p>
 <hr />
-<h2 id="example-usage">Example Usage</h2>
+<h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.magcal</span><span class="w"> </span><span class="kn">import</span> <span class="n">EGDF</span><span class="p">,</span> <span class="n">DataHomogeneity</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
@@ -3090,7 +3092,7 @@ None (displays plot)</p>
 </span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of maxima detected: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">[</span><span class="s1">&#39;picks&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </span></code></pre></div>
 <hr />
-<h2 id="notes">Notes</h2>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Only supports EGDF objects (not QGDF, ELDF, or QLDF)</li>
 <li>Homogeneity is defined by a single global maximum and no negative PDF values</li>
@@ -3249,6 +3251,8 @@ None (displays plot)</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
+      <div class="md-progress" data-md-component="progress" role="progressbar"></div>
+    
     
       <div class="md-consent" data-md-component="consent" id="__consent" hidden>
         <div class="md-consent__overlay"></div>
@@ -3327,7 +3331,7 @@ None (displays plot)</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
