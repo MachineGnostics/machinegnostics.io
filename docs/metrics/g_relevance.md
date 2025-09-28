@@ -8,8 +8,8 @@ The `hc` function computes the Gnostic Characteristics (Hc) metric for a set of 
 
 The Hc metric measures the gnostic relevance or irrelevance between true and predicted values:
 
-- **Case `'i'`**: Estimates gnostic relevance. Values close to zero indicate less relevance. Range: [0, 1].
-- **Case `'j'`**: Estimates gnostic irrelevance. Values close to 1 indicate less irrelevance. Range: [1, ∞).
+- **Case `'i'`**: Estimates gnostic relevance. Values close to one indicate less relevance. Range: [0, 1].
+- **Case `'j'`**: Estimates gnostic irrelevance. Values close to 1 indicate less irrelevance. Range: [0, ∞).
 
 Unlike classical metrics, Hc uses gnostic algebra to provide deeper insight into the relationship between predictions and actual outcomes, especially in the presence of outliers or non-normal data.
 
@@ -78,7 +78,7 @@ print(hc_value)
 
 ---
 
-**Author:** Nirmal Parmar	
+**Author:** Nirmal Parmar
 **Date:** 2025-09-24
 
 ---
