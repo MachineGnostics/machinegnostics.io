@@ -1,3 +1,5 @@
+
+
 # Contact
 
 **Welcome to the Machine Gnostics Community!**
@@ -22,7 +24,7 @@ Share your feedback and suggestions, report bugs or request features on GitHub, 
 
 ## Community Spotlight
 
-Biweekly, we publish informative articles that break down Machine Gnostics concepts and share them with the data science, engineering, and research community. We are also open to writing collaborations and new ideas—if you’d like to contribute or suggest a topic, let us know!
+Biweekly, we publish informative articles that break down Machine Gnostics concepts and share them with the data science and research community. We are also open to writing collaborations and new ideas—if you’d like to contribute or suggest a topic, let us know!
 
 ---
 
@@ -32,72 +34,74 @@ No question is too small! We’re here to help and learn together. Use the forms
 
 ---
 
+
 ## Social Platforms
 
 !!! tip "Contact Information"
     **Primary Contact:**
-
-    **Dr. Nirmal Parmar**
-    📧[info.machinegnostics@gmail.com](mailto:info.machinegnostics@gmail.com)
-
-    **Community & Social:**
+    
+    **Dr. Nirmal Parmar**  
+    📧 [info.machinegnostics@gmail.com](mailto:info.machinegnostics@gmail.com)
+    
+    **Community & Social:**  
     [Discord](https://discord.gg/BzXfaV56) &nbsp;|&nbsp; [LinkedIn](https://www.linkedin.com/company/109036022/) &nbsp;|&nbsp; [GitHub](https://github.com/MachineGnostics/machinegnostics)
+
 
 ---
 
 ## Subscribe for Newsletters, Latest Updates, and Tutorials
-
 !!! abstract "Subscribe"
-    `<h2>`Subscribe`</h2>`
+    <h2>Subscribe</h2>
 
-    `<form action="https://docs.google.com/forms/d/e/1FAIpQLSed1QSIQAgMtU6tgwqPlxa7fn_WJWEHbjjmSX_XUoIAdAPNXQ/formResponse" 
-        method="POST" target="_blank">`
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSed1QSIQAgMtU6tgwqPlxa7fn_WJWEHbjjmSX_XUoIAdAPNXQ/formResponse" 
+        method="POST" target="_blank">
 
-    `<label for="email">`Email:`</label><br>`
-    `<input type="email" name="entry.1359329156" id="email" required
-            style="border: 0.3px solid #58ba9bff; border-radius: 5px; padding: 8px; width: 97%;"><br>``<br>`
+    <label for="email">Email:</label><br>
+    <input type="email" name="entry.1359329156" id="email" required
+            style="border: 0.3px solid #58ba9bff; border-radius: 5px; padding: 8px; width: 97%;"><br><br>
 
-    `<div style="margin-top:10px;">`
-        `<button type="submit" style="padding: 10px 20px; border-radius: 5px; background-color: #58ba9bff; color: white; border: none; cursor: pointer;">`
+    <div style="margin-top:10px;">
+        <button type="submit" style="padding: 10px 20px; border-radius: 5px; background-color: #58ba9bff; color: white; border: none; cursor: pointer;">
         SUBSCRIBE
-        `</button>`
-    `</div>`
-    `</form>`
+        </button>
+    </div>
+    </form>
+
 
 ---
-
 <!-- https://forms.gle/QoSsTBRLjwS1deC57 -->
-
 <!-- https://docs.google.com/forms/d/e/1FAIpQLSefNdlWFuSyPACB9jqFm0H9jDjXyDiHTIRqeiw4uAudEfcG0g/viewform?usp=header -->
-
 ## Inquiry
 
 !!! question "Contact us"
-    `<h2>`Send a Question`</h2>`
+    <h2>Send a Question</h2>
 
-    `<form action="https://docs.google.com/forms/d/e/1FAIpQLSefNdlWFuSyPACB9jqFm0H9jDjXyDiHTIRqeiw4uAudEfcG0g/formResponse" 
-        method="POST" target="_blank">`
+    <form action="https://docs.google.com/forms/d/e/1FAIpQLSefNdlWFuSyPACB9jqFm0H9jDjXyDiHTIRqeiw4uAudEfcG0g/formResponse" 
+        method="POST" target="_blank">
 
-    `<label for="name">`Name:`</label><br>`
-    `<input type="text" name="entry.884681266" id="name" required
-            style="border: 0.3px solid #58ba9bff; border-radius: 5px; padding: 8px; width: 97%;"><br>``<br>`
+    <label for="name">Name:</label><br>
+    <input type="text" name="entry.884681266" id="name" required
+            style="border: 0.3px solid #58ba9bff; border-radius: 5px; padding: 8px; width: 97%;"><br><br>
 
-    `<label for="email">`Email:`</label><br>`
-    `<input type="email" name="entry.838410559" id="email" required
-            style="border: 0.3px solid #58ba9bff; border-radius: 5px; padding: 8px; width: 97%;"><br>``<br>`
+    <label for="email">Email:</label><br>
+    <input type="email" name="entry.838410559" id="email" required
+            style="border: 0.3px solid #58ba9bff; border-radius: 5px; padding: 8px; width: 97%;"><br><br>
 
-    `<label for="inquiry">`Your question:`</label><br>`
-    `<textarea name="entry.38873130" id="inquiry" rows="10" required
-                style="border: 0.3px solid #58ba9bff; border-radius: 5px; padding: 8px; width: 97%;"></textarea>``<br><br>`
+    <label for="inquiry">Your question:</label><br>
+    <textarea name="entry.38873130" id="inquiry" rows="10" required
+                style="border: 0.3px solid #58ba9bff; border-radius: 5px; padding: 8px; width: 97%;"></textarea><br><br>
 
-    `<div style="margin-top:10px;">`
-        `<button type="submit" style="padding: 10px 20px; border-radius: 5px; background-color: #58ba9bff; color: white; border: none; cursor: pointer;">`
+    <div style="margin-top:10px;">
+        <button type="submit" style="padding: 10px 20px; border-radius: 5px; background-color: #58ba9bff; color: white; border: none; cursor: pointer;">
         SEND
-        `</button>`
-    `</div>`
-    `</form>`
+        </button>
+    </div>
+    </form>
+
+
 
 ---
+
 
 ## Let’s Connect!
 
