@@ -14,12 +14,13 @@ The origins of Mathematical Gnostics trace back to the early 1980s, when Pavel K
 
 Key milestones in the development of Mathematical Gnostics include:
 
-- As a new paradigm of data variability, the mathematical gnostics has been developing since the end of 1970s, 20th century and applied in a number of research projects.
+- As a new paradigm of data variability, mathematical gnostics has been developing since the end of the 1970s and applied in a number of research projects.
 - The first printed publications in 1984 and presentation at an international conference.
 - Practical applications in economics and financial analysis, leading to a series of books and publications.
-- The creation of early gnostic software, which was initially limited to the author’s own work and implemented in R.
-- A significant step was taken by Z. Wagner, who developed an independent version of gnostic software in the Octave language. This software, while small and focused on data analysis, was primarily used within the TTSM team at the Institute of Chemical Processes of the Czech Academy of Sciences, and had very limited user documentation. Nevertheless, it supported research-level applications and contributed to a series of articles published in top journals.
-- International collaborations, notably with American professor M.B. Humber, resulting in a co-authored book and further dissemination of the theory.
+- International collaborations, notably with American professor M.B. Humber, resulting in a co-authored book (unfinished due to his passing) and further dissemination of the theory.
+- Early private implementations of gnostic software in several languages, including BASIC, C, S-PLUS, and limited C++ versions.
+- The first free/public software implementation in R, which may still be in use today.
+- A significant step was taken by Z. Wagner, who developed an independent version of gnostic software in the Octave language. This software was first applied to both offline and fully automatic online analysis of particle size distribution of atmospheric aerosol, and then used within the TTSM team at the Institute of Chemical Processes of the Czech Academy of Sciences. Although it had very limited user documentation, it supported research-level applications and contributed to a series of articles published in top journals.
 - Application of gnostic methods in environmental and medical research, including participation in major European Union projects.
 
 For more information on the history and development of mathematical gnostics, visit: [math-gnostics.eu](https://www.math-gnostics.eu/history/)
@@ -94,13 +95,19 @@ I’m especially proud that our Ph.D. student, Nirmal Parmar, who has since soar
 
 ## Acknowledgments
 
-The development of Mathematical Gnostics and its evolution into Machine Gnostics would not have been possible without the dedication and insight of many individuals. I would like to express my deepest gratitude to:
+!!! tip "Acknowledgments"
 
-- **Dr. Pavel Kovanic** (1942–2023), for his foundational work and vision in creating Mathematical Gnostics. His legacy continues to inspire this project and the broader scientific community. His guidance and pioneering spirit remain a guiding light for all who build upon his work.
-- **Dr. Magdalena Bendová**, my PhD supervisor, for her guidance, encouragement, and support throughout my research journey.
-- **Dr. Zdeněk Wagner**, my expert supervisor, whose expertise in Mathematical Gnostics and his development of the Octave software for data analysis were instrumental in my understanding of the field. His mentorship inspired me to extend these ideas further and integrate them with machine learning and artificial intelligence.
+    The development of Mathematical Gnostics and its evolution into Machine Gnostics would not have been possible without the dedication and insight of many individuals. I would like to express my deepest gratitude to:
 
-I am also grateful to all colleagues, collaborators, and students who have contributed ideas, feedback, and encouragement along the way. The open source community, with its spirit of sharing and innovation, continues to inspire the ongoing growth of this project.
+    -**Dr. Pavel Kovanic** (1942–2023), for his foundational work and vision in creating Mathematical Gnostics. His legacy continues to inspire this project and the broader scientific community. His guidance and pioneering spirit remain a guiding light for all who build upon his work.
+
+    -**Dr. Magdalena Bendová**, my PhD supervisor, for her guidance, encouragement, and support throughout my research journey.
+
+    -**Dr. Zdeněk Wagner**, my expert supervisor, whose expertise in Mathematical Gnostics and his development of the Octave software for data analysis were instrumental in my understanding of the field. His mentorship inspired me to extend these ideas further and integrate them with machine learning and artificial intelligence.
+
+    I am also grateful to all colleagues, collaborators, and students who have contributed ideas, feedback, and encouragement along the way. The open source community, with its spirit of sharing and innovation, continues to inspire the ongoing growth of this project.
+    
+    **Dr. Nirmal Parmar**
 
 If you are interested in contributing, collaborating, or simply learning more, we welcome you to join us on this journey.
 
