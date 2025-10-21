@@ -2,258 +2,258 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://machinegnostics.info/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/contact/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/installation/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/cluster_analysis/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/da_models/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/data_cluster/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/data_interval/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/egdf/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/eldf/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/homogeneity/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/interval_analysis/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/membership/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/qgdf/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/qldf/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/scedasticity/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/da/z0_estimator/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/magnet/magnet/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/accuracy/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/classification_report/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/confusion_matrix/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/divI/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/evalmet/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/f1_score/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_auto_corelation/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_auto_covariance/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_correlation/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_cross_variance/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_mean/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_median/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_relevance/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_std/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/g_variance/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/gmmfe/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/mae/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/mse/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/precision/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/r2/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/r2_score/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/recall/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/metrics/rmse/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/architecture/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/concepts/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/gdf/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/mg_arguments/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/mg/principles/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/ml_models/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/cls/log_reg/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/reg/lin_reg/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/reg/poly_reg/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/sup/cross_val/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/models/sup/train_test_split/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/ref/references/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/stories/history/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/1_da_basics/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/2_da_gdf/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/3_da_ca/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/4_da_ia/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/5_da_test/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/colab/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/examples/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/ml_log_reg_1/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/ml_lr_1/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/ml_plr_1/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
     <url>
          <loc>https://machinegnostics.info/tutorials/overview/</loc>
-         <lastmod>2025-09-30</lastmod>
+         <lastmod>2025-10-21</lastmod>
     </url>
 </urlset>
