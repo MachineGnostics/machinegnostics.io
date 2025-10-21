@@ -30,7 +30,8 @@ Biweekly, we publish informative articles that break down Machine Gnostics conce
 
 ## Have a Question or Idea?
 
-No question is too small! We’re here to help and learn together. Use the forms below or connect with us on social media.
+No question is too small. We're here to help and collaborate — please reach out using one of the options below:
+
 
 ---
 
@@ -44,13 +45,16 @@ No question is too small! We’re here to help and learn together. Use the forms
     📧 [info.machinegnostics@gmail.com](mailto:info.machinegnostics@gmail.com)
     
     **Community & Social:**  
-    [Discord](https://discord.gg/BzXfaV56) &nbsp;|&nbsp; [LinkedIn](https://www.linkedin.com/company/109036022/) &nbsp;|&nbsp; [GitHub](https://github.com/MachineGnostics/machinegnostics)
+    [Discord](https://discord.gg/BzXfaV56) &nbsp;|&nbsp; 
+    [LinkedIn](https://www.linkedin.com/company/109036022/) &nbsp;|&nbsp; 
+    [GitHub](https://github.com/MachineGnostics/machinegnostics) &nbsp;|&nbsp; 
+    [Instagram](https://www.instagram.com/machinegnostics)
 
 
 ---
 
 ## Subscribe for Newsletters, Latest Updates, and Tutorials
-!!! abstract "Subscribe"
+<!-- !!! abstract "Subscribe"
     <h2>Subscribe</h2>
 
     <form action="https://docs.google.com/forms/d/e/1FAIpQLSed1QSIQAgMtU6tgwqPlxa7fn_WJWEHbjjmSX_XUoIAdAPNXQ/formResponse" 
@@ -65,13 +69,51 @@ No question is too small! We’re here to help and learn together. Use the forms
         SUBSCRIBE
         </button>
     </div>
-    </form>
+    </form> -->
+
+<div class="admonition abstract">
+  <p class="admonition-title">Subscribe</p>
+
+  <form id="subscribe-form"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSed1QSIQAgMtU6tgwqPlxa7fn_WJWEHbjjmSX_XUoIAdAPNXQ/formResponse"
+        method="POST" target="_blank">
+
+    <label for="email">Your Email:</label><br>
+    <input type="email" name="entry.1359329156" id="email" required
+           style="border:0.3px solid #58ba9bff;border-radius:5px;padding:8px;width:97%;"><br><br>
+
+    <!-- Honeypot field -->
+    <div style="display:none;">
+      <label for="hp-field">Leave this field empty:</label>
+      <input type="text" name="hp-field" id="hp-field" autocomplete="off">
+    </div>
+
+    <div style="margin-top:10px;">
+      <button type="submit"
+              style="padding:10px 20px;border-radius:5px;background-color:#58ba9bff;
+                     color:white;border:none;cursor:pointer;">
+        SUBSCRIBE
+      </button>
+    </div>
+  </form>
+</div>
+
+<script>
+document.getElementById("subscribe-form").addEventListener("submit", function (e) {
+  const hp = document.getElementById("hp-field").value;
+  if (hp.trim() !== "") {
+    e.preventDefault();            // stop bots
+    console.warn("Spam blocked by honeypot");
+  }
+});
+</script>
+
 
 
 ---
 <!-- https://forms.gle/QoSsTBRLjwS1deC57 -->
 <!-- https://docs.google.com/forms/d/e/1FAIpQLSefNdlWFuSyPACB9jqFm0H9jDjXyDiHTIRqeiw4uAudEfcG0g/viewform?usp=header -->
-## Inquiry
+<!-- ## Inquiry
 
 !!! question "Contact us"
     <h2>Send a Question</h2>
@@ -99,8 +141,7 @@ No question is too small! We’re here to help and learn together. Use the forms
     </form>
 
 
-
----
+--- -->
 
 
 ## Let’s Connect!
@@ -108,6 +149,7 @@ No question is too small! We’re here to help and learn together. Use the forms
 - [Join our Discord](https://discord.gg/BzXfaV56) for real-time discussions.
 - [Follow us on LinkedIn](https://www.linkedin.com/company/109036022/) for professional updates.
 - [Star us on GitHub](https://github.com/MachineGnostics/machinegnostics) to support the project.
+- [Follow us on Instagram](https://www.instagram.com/machinegnostics) for quick updates.
 
 ---
 
