@@ -118,29 +118,31 @@ nav:
   - Deep Learning:
     - Magnet: magnet/magnet.md
   - Metrics:
-    - Accuracy: metrics/accuracy.md
-    - Precision: metrics/precision.md
-    - Recall: metrics/recall.md
-    - Confusion Matrix: metrics/confusion_matrix.md
-    - F1 Score: metrics/f1_score.md
-    - R2 Score: metrics/r2.md
-    - Classification Report: metrics/classification_report.md
-    - Gnostic Mean Absolute Error: metrics/mae.md
-    - Gnostic Mean Squared Error: metrics/mse.md
-    - Gnostic Root Mean Squared Error: metrics/rmse.md
-    - Gnostic R2 Score: metrics/r2_score.md
-    - Gnostic Correlation: metrics/g_correlation.md
-    - Gnostic Relevance: metrics/g_relevance.md
-    - Gnostic DivI: metrics/divI.md
-    - Gnostic GMMFE: metrics/gmmfe.md
-    - Gnostic EvalMet: metrics/evalmet.md 
-    - Gnostic Auto-Correlation: metrics/g_auto_corelation.md
-    - Gnostic Auto-Covariance: metrics/g_auto_covariance.md
-    - Gnostic Cross-Covariance: metrics/g_cross_variance.md
-    - Gnostic Variance: metrics/g_variance.md
-    - Gnostic Mean: metrics/g_mean.md
-    - Gnostic Median: metrics/g_median.md
-    - Gnostic Std: metrics/g_std.md
+    - Classical Metrics:
+      - Accuracy: metrics/accuracy.md
+      - Precision: metrics/precision.md
+      - Recall: metrics/recall.md
+      - Confusion Matrix: metrics/confusion_matrix.md
+      - F1 Score: metrics/f1_score.md
+      - R2 Score: metrics/r2.md
+      - Classification Report: metrics/classification_report.md
+    - Gnostic Metrics:
+      - Gnostic Mean Absolute Error: metrics/mae.md
+      - Gnostic Mean Squared Error: metrics/mse.md
+      - Gnostic Root Mean Squared Error: metrics/rmse.md
+      - Gnostic R2 Score: metrics/r2_score.md
+      - Gnostic Correlation: metrics/g_correlation.md
+      - Gnostic Relevance: metrics/g_relevance.md
+      - Gnostic DivI: metrics/divI.md
+      - Gnostic GMMFE: metrics/gmmfe.md
+      - Gnostic EvalMet: metrics/evalmet.md 
+      - Gnostic Auto-Correlation: metrics/g_auto_corelation.md
+      - Gnostic Auto-Covariance: metrics/g_auto_covariance.md
+      - Gnostic Cross-Covariance: metrics/g_cross_variance.md
+      - Gnostic Variance: metrics/g_variance.md
+      - Gnostic Mean: metrics/g_mean.md
+      - Gnostic Median: metrics/g_median.md
+      - Gnostic Std: metrics/g_std.md
   - References: ref/references.md
   - Contact: contact.md
 
@@ -184,6 +186,9 @@ extra:
   - icon: fontawesome/brands/python
     link: https://pypi.org/project/machinegnostics/
     name: Machine Gnostics on PyPI
+  - icon: fontawesome/brands/instagram
+    link: https://www.instagram.com/machinegnostics/
+    name: Machine Gnostics on Instagram
   consent:
     title: Cookie consent
     description: >- 
