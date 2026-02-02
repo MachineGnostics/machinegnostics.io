@@ -1,7 +1,7 @@
 
-# Gnostic Cross-Covariance Metric
+# cross_covariance: Gnostic Cross-Covariance Metric
 
-The `cross_covariance` function computes the Gnostic cross-covariance between two data samples. This metric uses gnostic theory to provide robust, assumption-free estimates of relationships between datasets, even in the presence of noise or outliers. Argument names have changed: use `X` and `y` for input arrays.
+The `cross_covariance` function computes the Gnostic cross-covariance between two data samples. This metric uses gnostic theory to provide robust, assumption-free estimates of relationships between datasets, even in the presence of noise or outliers.
 
 ---
 
@@ -41,8 +41,6 @@ Both approaches converge to linear error in cases of weak uncertainty, but provi
   If input arrays are not the same length, are empty, contain NaN/Inf, are not 1D, or if `case` is not `'i'` or `'j'`.
 
 ---
-
-covar = cross_covariance(data_1, data_2, case='i', verbose=False)
 
 ## Example Usage
 

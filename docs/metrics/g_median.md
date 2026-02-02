@@ -19,13 +19,13 @@ Both approaches are robust to outliers and non-normal data, providing reliable d
 
 | Parameter       | Type       | Description                                                                  | Default   |
 | --------------- | ---------- | ---------------------------------------------------------------------------- | --------- |
-| `data`        | np.ndarray | Input data array (1D, no NaN/Inf).                                           | Required  |
-| `case`        | str        | `'i'` for estimating median (EGDF), `'j'` for quantifying median (QGDF). | `'i'`   |
-| `S`           | float      | Scaling parameter for EGDF/QGDF.                                             | `1`     |
-| `z0_optimize` | bool       | Whether to optimize z0 in EGDF/QGDF.                                         | `True`  |
-| `data_form`   | str        | Data form for EGDF/QGDF:`'a'` for additive, `'m'` for multiplicative.    | `'a'`   |
-| `tolerance`   | float      | Tolerance for EGDF/QGDF fitting.                                             | `1e-6`  |
-| `verbose`     | bool       | If True, enables detailed logging for debugging.                             | `False` |
+| `data`          | np.ndarray | Input data array (1D, no NaN/Inf).                                           | Required  |
+| `case`          | str        | `'i'` for estimating median (EGDF), `'j'` for quantifying median (QGDF).     | `'i'`     |
+| `S`             | float/str  | Scaling parameter for EGDF/QGDF. Can be `float` or `'auto'`.                 | `'auto'`  |
+| `z0_optimize`   | bool       | Whether to optimize z0 in EGDF/QGDF.                                         | `True`    |
+| `data_form`     | str        | Data form for EGDF/QGDF: `'a'` for additive, `'m'` for multiplicative.       | `'a'`     |
+| `tolerance`     | float      | Tolerance for EGDF/QGDF fitting.                                             | `1e-6`    |
+| `verbose`       | bool       | If True, enables detailed logging for debugging.                             | `False`   |
 
 ---
 

@@ -22,6 +22,7 @@ Unlike classical correlation coefficients, the Gnostic approach is resilient to 
 | `X`       | array-like | Feature data sample (1D array or single column from 2D array, no NaN/Inf).  |
 | `y`       | array-like | Target data sample (1D array, no NaN/Inf).                                  |
 | `case`    | str        | `'i'` for estimation geometry, `'j'` for quantifying geometry. Default: `'i'`. |
+| `S`       | str        | Gnostic scale parameter. If `'auto'`, determines best scale based on homogeneity. Default: `'auto'`. |
 | `verbose` | bool       | If True, enables detailed logging for debugging. Default: `False`.           |
 
 ---

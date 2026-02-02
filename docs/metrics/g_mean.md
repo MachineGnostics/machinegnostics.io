@@ -19,13 +19,13 @@ Both approaches are robust to outliers and non-normal data, providing reliable d
 
 | Parameter       | Type       | Description                                                               | Default   |
 | --------------- | ---------- | ------------------------------------------------------------------------- | --------- |
-| `data`        | np.ndarray | Input data array (1D, no NaN/Inf).                                        | Required  |
-| `S`           | float/str  | Scaling parameter for ELDF/QLDF (`float` or `'auto'`).                | `1`     |
-| `case`        | str        | `'i'` for estimating mean (ELDF), `'j'` for quantifying mean (QLDF).  | `'i'`   |
-| `z0_optimize` | bool       | Whether to optimize z0 in ELDF/QLDF.                                      | `True`  |
-| `data_form`   | str        | Data form for ELDF/QLDF:`'a'` for additive, `'m'` for multiplicative. | `'a'`   |
-| `tolerance`   | float      | Tolerance for ELDF fitting.                                               | `1e-6`  |
-| `verbose`     | bool       | If True, enables detailed logging for debugging.                          | `False` |
+| `data`          | np.ndarray | Input data array (1D, no NaN/Inf).                                        | Required  |
+| `S`             | float/str  | Scaling parameter (`float` or `'auto'`). Suggested: [0.01, 2].            | `'auto'`  |
+| `case`          | str        | `'i'` for estimating mean (ELDF), `'j'` for quantifying mean (QLDF).      | `'i'`     |
+| `z0_optimize`   | bool       | Whether to optimize z0.                                                   | `True`    |
+| `data_form`     | str        | Data form: `'a'` for additive, `'m'` for multiplicative.                  | `'a'`     |
+| `tolerance`     | float      | Tolerance for ELDF/QLDF fitting.                                          | `1e-6`    |
+| `verbose`       | bool       | If True, enables detailed logging for debugging.                          | `False`   |
 
 ---
 

@@ -19,20 +19,20 @@ Both approaches are robust to outliers and non-normal data, providing reliable d
 
 | Parameter       | Type       | Description                                                                      | Default   |
 | --------------- | ---------- | -------------------------------------------------------------------------------- | --------- |
-| `data`        | np.ndarray | Input data array (1D, no NaN/Inf).                                               | Required  |
-| `case`        | str        | `'i'` for estimating variance (ELDF), `'j'` for quantifying variance (QLDF). | `'i'`   |
-| `S`           | float      | Scaling parameter for ELDF/QLDF.                                                 | `1`     |
-| `z0_optimize` | bool       | Whether to optimize z0 in ELDF/QLDF.                                             | `True`  |
-| `data_form`   | str        | Data form for ELDF/QLDF:`'a'` for additive, `'m'` for multiplicative.        | `'a'`   |
-| `tolerance`   | float      | Tolerance for ELDF fitting.                                                      | `1e-6`  |
-| `verbose`     | bool       | If True, enables detailed logging for debugging.                                 | `False` |
+| `data`          | np.ndarray | Input data array (1D, no NaN/Inf).                                               | Required  |
+| `case`          | str        | `'i'` for estimating variance (ELDF), `'j'` for quantifying variance (QLDF).      | `'i'`     |
+| `S`             | float/str  | Scaling parameter for ELDF. can be `float` or `'auto'`.  Suggested range: [0.01, 2].         | `'auto'`  |
+| `z0_optimize`   | bool       | Whether to optimize z0 in ELDF/QLDF.                                             | `True`    |
+| `data_form`     | str        | Data form for ELDF/QLDF:`'a'` for additive, `'m'` for multiplicative.            | `'a'`     |
+| `tolerance`     | float      | Tolerance for ELDF fitting.                                                      | `1e-6`    |
+| `verbose`       | bool       | If True, enables detailed logging for debugging.                                 | `False`   |
 
 ---
 
 ## Returns
 
-- **float**
-  The Gnostic variance of the data.
+- **float**  
+  Gnostic variance of the data.
 
 ---
 
@@ -54,10 +54,7 @@ import numpy as np
 data = np.array([1, 2, 3, 4, 5])
 var = mg.variance(data)
 print(var)
-
-# Example 2: Quantifying variance with QLDF
-var_j = mg.variance(data, case='j')
-print(var_j)
+# Output: 0.002685330177795109
 ```
 
 ---

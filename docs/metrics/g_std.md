@@ -7,6 +7,7 @@ The `std` function computes the Gnostic standard deviation of a data sample. Thi
 ## Overview
 
 Gnostic standard deviation generalizes classical standard deviation by using irrelevance and fidelity measures:
+
 - **Case `'i'`**: Estimates standard deviation using the estimating geometry.
 - **Case `'j'`**: Quantifies standard deviation using the quantifying geometry.
 
@@ -20,7 +21,7 @@ Both approaches are robust to outliers and non-normal data, providing reliable d
 |---------------|----------|-----------------------------------------------------------------------------------------------|--------------|
 | `data`        | np.ndarray | Input data array (1D, no NaN/Inf).                                                          | Required     |
 | `case`        | str      | `'i'` for estimating standard deviation, `'j'` for quantifying standard deviation.            | `'i'`        |
-| `S`           | float/str | Scaling parameter for ELDF. Can be `'auto'` to optimize using EGDF. Suggested range: [0.01, 2]. | `'auto'`     |
+| `S`           | float/str | Scaling parameter for EGDF. Can be `float` or `'auto'`. Suggested range: [0.01, 10].            | `'auto'`     |
 | `z0_optimize` | bool     | Whether to optimize z0 in ELDF.                                                               | `True`       |
 | `data_form`   | str      | Data form for ELDF: `'a'` for additive, `'m'` for multiplicative.                             | `'a'`        |
 | `tolerance`   | float    | Tolerance for ELDF fitting.                                                                   | `1e-6`       |
@@ -31,7 +32,7 @@ Both approaches are robust to outliers and non-normal data, providing reliable d
 ## Returns
 
 - **tuple**  
-  Lower and upper bounds of the Gnostic standard deviation.
+  Lower and upper bounds of the standard deviation range.
 
 ---
 
@@ -52,12 +53,12 @@ import numpy as np
 
 # Example 1: Compute gnostic standard deviation (default case)
 data = np.array([1, 2, 3, 4, 5])
-std_lb, std_ub = mg.std(data)
-print(std_lb, std_ub)
+std_vals = mg.std(data)
+print(std_vals)  # Returns (lb, ub)
 
 # Example 2: Quantifying standard deviation
-std_lb_j, std_ub_j = mg.std(data, case='j')
-print(std_lb_j, std_ub_j)
+std_vals_j = mg.std(data, case='j')
+print(std_vals_j)
 ```
 
 ---

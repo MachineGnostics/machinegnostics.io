@@ -19,17 +19,18 @@ Unlike classical metrics, Hc uses gnostic algebra to provide deeper insight into
 
 | Parameter   | Type       | Description                                                         |
 | ----------- | ---------- | ------------------------------------------------------------------- |
-| `y_true`  | array-like | True values (list, tuple, or numpy array).                          |
-| `y_pred`  | array-like | Predicted values (list, tuple, or numpy array).                     |
-| `case`    | str        | `'i'` for relevance, `'j'` for irrelevance. Default: `'i'`.   |
-| `verbose` | bool       | If True, enables detailed logging for debugging. Default:`False`. |
+| `y_true`    | array-like | True values (list, tuple, or numpy array).                          |
+| `y_pred`    | array-like | Predicted values (list, tuple, or numpy array).                     |
+| `case`      | str        | `'i'` for relevance, `'j'` for irrelevance. Default: `'i'`.         |
+| `S`         | float/str  | Gnostic scale parameter. Default: `'auto'`.                         |
+| `verbose`   | bool       | If True, enables detailed logging for debugging. Default: `False`.  |
 
 ---
 
 ## Returns
 
 - **float**
-  The calculated Hc value (normalized sum of squared gnostic characteristics).
+  The calculated Hc value (mean of squared gnostic characteristics).
 
 ---
 
@@ -44,7 +45,7 @@ Unlike classical metrics, Hc uses gnostic algebra to provide deeper insight into
 ## Example Usage
 
 ```python
-from mango.metrics import hc
+from machinegnostics.metrics import hc
 
 # Example 1: Using lists
 y_true = [1, 2, 3]
