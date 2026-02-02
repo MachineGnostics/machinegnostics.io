@@ -18,10 +18,10 @@ Machine Gnostics models are specialized classes and algorithms designed to analy
 
 <div class="grid cards" markdown>
 
--   **[EGDF](egdf.md)** (Empirical Gnostics Distribution Function)
--   **[ELDF](eldf.md)** (Empirical Likelihood Distribution Function)
--   **[QGDF](qgdf.md)** (Quantile Gnostics Distribution Function)
--   **[QLDF](qldf.md)** (Quantile Likelihood Distribution Function)
+-   **[EGDF](egdf.md)** (Estimating Global Distribution Function)
+-   **[ELDF](eldf.md)** (Estimating Local Distribution Function)
+-   **[QGDF](qgdf.md)** (Quantifying Global Distribution Function)
+-   **[QLDF](qldf.md)** (Quantifying Local Distribution Function)
 
 </div>
 
