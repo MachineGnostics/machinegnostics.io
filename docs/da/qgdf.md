@@ -147,7 +147,7 @@ Returns a dictionary of all fitted parameters and results.
 
 ---
 
-**Author:** Nirmal Parmar
+**Author:** Nirmal Parmar   
 **Date:** 2025-09-24
 
 ---
