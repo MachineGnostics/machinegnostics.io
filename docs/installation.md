@@ -11,21 +11,21 @@ It is best practice to use a virtual environment to manage your project dependen
 === "macOS & Linux"
 
     ```bash     
-    # Create a new virtual environment named 'mg-env'     
-    python3 -m venv mg-env
+    # Create a new virtual environment named '.mg-env'     
+    python3 -m venv .mg-env
 
     # Activate the environment     
-    source mg-env/bin/activate    
+    source .mg-env/bin/activate    
     ```
 
 === "Windows"
 
     ```cmd     
-    # Create a new virtual environment named 'mg-env'     
-    python -m venv mg-env     
+    # Create a new virtual environment named '.mg-env'     
+    python -m venv .mg-env     
 
     # Activate the environment     
-    mg-env\Scripts\activate     
+    .mg-env\Scripts\activate     
     ```
 
 ---
@@ -97,7 +97,7 @@ Machine Gnostics is designed to be as simple to use as other machine learning li
 
     ```python
     import numpy as np
-    from machinegnostics.models.regression import PolynomialRegressor
+    from machinegnostics.models import PolynomialRegressor
 
     # Example data
     X = np.array([0., 0.4, 0.8, 1.2, 1.6, 2. ])
@@ -150,7 +150,7 @@ Please find step by step tutorial [here](/tutorials/overview/).
 === "Windows"
 
     ```cmd     
-    mg-env\Scripts\activate     
+    .mg-env\Scripts\activate     
     # or for conda     
     conda activate myenv     
     ```
@@ -158,7 +158,7 @@ Please find step by step tutorial [here](/tutorials/overview/).
 === "macOS/Linux"
 
     ```bash     
-    source mg-env/bin/activate     
+    source .mg-env/bin/activate     
     # or for conda     
     conda activate myenv     
     ```
@@ -198,8 +198,10 @@ Please find step by step tutorial [here](/tutorials/overview/).
 - **Permission Issues:**If you see permission errors, avoid using `sudo pip install`. Instead, use a virtual environment.
 - **Still Stuck?**
 
-  - Double-check the [installation instructions](installation.md).
-  - [Contact us](contact.md) or open an issue on [GitHub](https://github.com/MachineGnostics/machinegnostics).
+
+    > Double-check the [installation instructions](installation.md).
+
+    > [Contact us](contact.md) or open an issue on [GitHub](https://github.com/MachineGnostics/machinegnostics).
 
 ---
 
