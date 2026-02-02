@@ -1,6 +1,6 @@
 # Models - Data Analysis (Machine Gnostics)
 
-## Welcome to Machine Gnostics Models
+## Welcome to Machine Gnostics Data Analysis Models
 
 Machine Gnostics provides a unified framework for robust, assumption-free data analysis using advanced statistical and gnostic theory principles. The "Models" section is your entry point to understanding the core analytical tools available in this library.
 
@@ -14,24 +14,47 @@ Machine Gnostics models are specialized classes and algorithms designed to analy
 
 ## Key Data Analysis Model Categories
 
-- **GDF Distributions**  
-  - EGDF (Empirical Gnostics Distribution Function)  
-  - ELDF (Empirical Likelihood Distribution Function)  
-  - QGDF (Quantile Gnostics Distribution Function)  
-  - QLDF (Quantile Likelihood Distribution Function)  
+### Gnostic Distribution Distributions (GDF)
+
+<div class="grid cards" markdown>
+
+-   **[EGDF](egdf.md)** (Empirical Gnostics Distribution Function)
+-   **[ELDF](eldf.md)** (Empirical Likelihood Distribution Function)
+-   **[QGDF](qgdf.md)** (Quantile Gnostics Distribution Function)
+-   **[QLDF](qldf.md)** (Quantile Likelihood Distribution Function)
+
+</div>
+
   These models provide flexible, non-parametric representations of data distributions, supporting both empirical and quantile-based analysis.
 
-- **Cluster Analysis**  
-  Tools for identifying natural groupings and structure in data, supporting unsupervised learning and exploratory analysis.
+### Data Analysis
 
-- **Interval Analysis**  
-  Methods for estimating confidence intervals, bounds, and diagnostic regions in data, with robust handling of outliers and non-normality.
+<div class="grid cards" markdown>
 
-- **Homogeneity & Scedasticity**  
-  Functions for assessing data uniformity, variance, and diagnostic properties, enabling deeper understanding of data quality and structure.
+-   **[Cluster Analysis](cluster_analysis.md)**
+    Tools for identifying natural groupings and structure in data, supporting unsupervised learning.
 
-- **Membership & Data Diagnostics**  
-  Algorithms for quantifying membership, relevance, and diagnostic scores for individual data points.
+-   **[Interval Analysis](interval_analysis.md)**
+    Methods for estimating confidence intervals, bounds, and diagnostic regions with robust handling of outliers.
+
+-   **[Homogeneity](homogeneity.md)**
+    Functions for assessing data uniformity, analyzing distribution consistency and structural regularity.
+
+-   **[Scedasticity](scedasticity.md)**
+    Functions for assessing data variance, volatility, and dispersion characteristics across the dataset.
+
+-   **[Membership](membership.md)**
+    Algorithms for quantifying membership relevance and diagnostic scores for individual data points.
+
+-   **[Data Cluster](data_cluster.md)**
+    Advanced boundary detection for identifying main clusters from probability density functions.
+
+-   **[Data Interval](data_interval.md)**
+    Robust interval estimation engine for adaptive scanning and extracting meaningful data ranges.
+
+</div>
+
+Each page provides a detailed overview, key features, parameters, example usage, and references.
 
 ---
 
@@ -42,9 +65,9 @@ Machine Gnostics models are specialized classes and algorithms designed to analy
 - **Diagnostic**: Built-in error estimation, entropy measures, and robust statistics.
 - **Extensible**: Easily integrates with existing Python data science workflows.
 
----
+<!-- --- -->
 
-## Getting Started
+<!-- ## Getting Started
 
 Explore the documentation for each model to learn about their features, usage patterns, and example workflows.  
 - [EGDF](egdf.md)  
@@ -57,10 +80,8 @@ Explore the documentation for each model to learn about their features, usage pa
 - [Scedasticity](scedasticity.md)  
 - [Membership](membership.md)  
 - [Data Cluster](data_cluster.md)  
-- [Data Interval](data_interval.md)  
-- [Z0 Estimator](z0_estimator.md)  
-
-Each page provides a detailed overview, key features, parameters, example usage, and references.
+- [Data Interval](data_interval.md)   -->
+<!-- - [Z0 Estimator](z0_estimator.md)   -->
 
 ---
 

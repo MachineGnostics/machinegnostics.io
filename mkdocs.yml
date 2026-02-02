@@ -64,14 +64,15 @@ extra:
     provider: mike
 
 nav:
-  - Home: index.md
-  - History: stories/history.md
-  - Learn: 
-      - Concept: mg/concepts.md
-      - Principles: mg/principles.md
-      - Distributions Functions: mg/gdf.md
-      - Architecture: mg/architecture.md
-      - Glossary: mg/mg_arguments.md
+  - Home: 
+    - Welcome: index.md
+    - History: stories/history.md
+    - Learn: 
+        - Concept: mg/concepts.md
+        - Principles: mg/principles.md
+        - Distributions Functions: mg/gdf.md
+        - Architecture: mg/architecture.md
+        - Glossary: mg/mg_arguments.md
   - Installation: installation.md
   - Tutorials:
     - Quick Start: tutorials/overview.md
@@ -90,6 +91,7 @@ nav:
     - Notebook Examples:
       - GitHub: tutorials/examples.md
       - Google Colab: tutorials/colab.md
+  # data analysis vertical
   - Data Analysis:
     - Models: da/da_models.md
     - Distributions Functions:
@@ -105,7 +107,8 @@ nav:
       - Data Membership: da/membership.md
       - Data Interval: da/data_interval.md
       - Data Cluster: da/data_cluster.md
-      - Z0 Estimator: da/z0_estimator.md
+      # - Z0 Estimator: da/z0_estimator.md # moved to non-public class
+  # machine learning vertical
   - Machine Learning:
     - Models: models/ml_models.md
     - Supervised Learning:
@@ -115,6 +118,7 @@ nav:
     - Utils:
       - Cross Validation: models/sup/cross_val.md
       - Train Test Split: models/sup/train_test_split.md
+  # deep learning vertical   
   - Deep Learning:
     - Magnet: magnet/magnet.md
   - Metrics:
@@ -150,6 +154,7 @@ markdown_extensions:
   - toc:
       permalink: true
   - attr_list
+  - md_in_html
   - admonition
   - pymdownx.highlight:
       anchor_linenums: true
@@ -200,3 +205,4 @@ extra:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/cookie-consent.js
+  - javascripts/vertical-colors.js
