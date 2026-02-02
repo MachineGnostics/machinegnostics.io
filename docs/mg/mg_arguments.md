@@ -83,7 +83,7 @@ All four variables (\( f_j, h_j, f_i, h_i \)) are called **gnostic characteristi
 ### 5. Loss Functions
 
 - **Hc loss**: *Gnostic mean relevance loss*  
-  A loss function based on gnostic relevance, where \( c \) can be \( i \) or \( j \).
+  A loss function based on gnostic relevance, where $c$ can be $i$ or $j$.
 
 ---
 
