@@ -108,6 +108,14 @@ nav:
       - Data Interval: da/data_interval.md
       - Data Cluster: da/data_cluster.md
       # - Z0 Estimator: da/z0_estimator.md # moved to non-public class
+    - Datasets:
+      - Animal Data: datasets/animal_data.md
+      - Anscombe Quartet: datasets/anscombe_data.md
+      - Classification Data: datasets/cls_data.md
+      - Forbes Data: datasets/forbes_data.md
+      - Moon Data: datasets/moon_data.md
+      - Regression Data: datasets/reg_data.md
+      - Stackloss Data: datasets/stackloss_data.md
   # machine learning vertical
   - Machine Learning:
     - Models: models/ml_models.md
