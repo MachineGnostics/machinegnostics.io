@@ -22,16 +22,16 @@ ELDF is optimized for local probability and density estimation, especially when 
 
 ## Key Features
 
-- **Fits a local distribution function to your data**
-- **Robust to outliers and inner noise**
-- **Supports weighted and unweighted samples**
-- **Automatic or manual bounds and scale selection**
-- **Additive ('a') and multiplicative ('m') data forms**
-- **Advanced optimization with customizable tolerance and solver**
-- **Visualization of ELDF, PDF, and bounds**
-- **Memory-efficient for large datasets**
-- **Detailed results and diagnostics**
-- **Variable scale parameter option for heteroscedasticity**
+- Fits a local distribution function to your data
+- Robust to outliers and inner noise
+- Supports weighted and unweighted samples
+- Automatic or manual bounds and scale selection
+- Additive ('a') and multiplicative ('m') data forms
+- Advanced optimization with customizable tolerance and solver
+- Visualization of ELDF, PDF, and bounds
+- Memory-efficient for large datasets
+- Detailed results and diagnostics
+- Variable scale parameter option for heteroscedasticity
 
 ---
 
@@ -45,6 +45,7 @@ ELDF is optimized for local probability and density estimation, especially when 
 | `UB`              | float or None         | None      | Upper Probable Bound (practical upper limit, optional)           |
 | `S`               | float or 'auto'       | 'auto'    | Scale parameter (auto-estimated or fixed value)                  |
 | `varS`            | bool                  | False     | Use variable scale parameter during optimization                 |
+| `minimum_varS`    | float                 | 0.1       | Minimum scale parameter value if varS is True                    |
 | `z0_optimize`     | bool                  | True      | Optimize location parameter Z0 during fitting                    |
 | `tolerance`       | float                 | 1e-9      | Convergence tolerance for optimization                           |
 | `data_form`       | str                   | 'a'       | Data form: 'a' (additive), 'm' (multiplicative)                  |
@@ -53,7 +54,7 @@ ELDF is optimized for local probability and density estimation, especially when 
 | `catch`           | bool                  | True      | Store intermediate results (memory usage)                        |
 | `weights`         | np.ndarray or None    | None      | Prior weights for data points                                    |
 | `wedf`            | bool                  | False     | Use Weighted Empirical Distribution Function                     |
-| `opt_method`      | str                   | 'L-BFGS-B'| Optimization method (scipy.optimize)                             |
+| `opt_method`      | str                   | 'Powell'  | Optimization method (scipy.optimize)                             |
 | `verbose`         | bool                  | False     | Print progress and diagnostics                                   |
 | `max_data_size`   | int                   | 1000      | Max data size for smooth ELDF generation                         |
 | `flush`           | bool                  | True      | Flush large arrays (memory management)                           |
@@ -116,28 +117,33 @@ Returns a dictionary of all fitted parameters and results.
 
 ## Example Usage
 
-```python
-import numpy as np
-from machinegnostics.magcal import ELDF
+=== "Python"
 
-# Example data
-data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
+    ```python
+    import numpy as np
+    from machinegnostics.magcal import ELDF
 
-# Initialize ELDF
-eldf = ELDF()
+    # Example data
+    data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
 
-# Fit the model
-eldf.fit(data)
+    # Initialize ELDF
+    eldf = ELDF()
 
-# Plot the results
-eldf.plot()
+    # Fit the model
+    eldf.fit(data)
 
-# Access fitted parameters
-results = eldf.results()
-print("Local scale parameter:", results['S_opt'])
-print("Distribution bounds:", results['LB'], results['UB'])
-```
+    # Plot the results
+    eldf.plot()
 
+    # Access fitted parameters
+    results = eldf.results()
+    print("Local scale parameter:", results['S_opt'])
+    print("Distribution bounds:", results['LB'], results['UB'])
+    ```
+
+=== "Output"
+
+    ![ELDF Plot](image/eldf/1770031665093.png)
 ---
 
 ## Notes

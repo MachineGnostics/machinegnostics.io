@@ -21,15 +21,15 @@ EGDF is designed for robust probability and density estimation, especially when 
 
 ## Key Features
 
-- **Fits a global distribution function to your data**
-- **Robust to outliers and inner noise**
-- **Supports weighted and unweighted samples**
-- **Automatic or manual bounds and scale selection**
-- **Additive ('a') and multiplicative ('m') data forms**
-- **Advanced optimization with customizable tolerance and solver**
-- **Visualization of EGDF, PDF, and bounds**
-- **Memory-efficient for large datasets**
-- **Detailed results and diagnostics**
+- Fits a global distribution function to your data
+- Robust to outliers and inner noise
+- Supports weighted and unweighted samples
+- Automatic or manual bounds and scale selection
+- Additive ('a') and multiplicative ('m') data forms
+- Advanced optimization with customizable tolerance and solver
+- Visualization of EGDF, PDF, and bounds
+- Memory-efficient for large datasets
+- Detailed results and diagnostics
 
 ---
 
@@ -50,7 +50,7 @@ EGDF is designed for robust probability and density estimation, especially when 
 | `catch`           | bool                  | True      | Store intermediate results (memory usage)                        |
 | `weights`         | np.ndarray or None    | None      | Prior weights for data points                                    |
 | `wedf`            | bool                  | False     | Use Weighted Empirical Distribution Function                     |
-| `opt_method`      | str                   | 'L-BFGS-B'| Optimization method (scipy.optimize)                             |
+| `opt_method`      | str                   | 'Powell'  | Optimization method (scipy.optimize)                             |
 | `verbose`         | bool                  | False     | Print progress and diagnostics                                   |
 | `max_data_size`   | int                   | 1000      | Max data size for smooth EGDF generation                         |
 | `flush`           | bool                  | True      | Flush large arrays (memory management)                           |
@@ -82,7 +82,7 @@ None (results stored in `params`)
 
 ---
 
-### `plot(plot_smooth=True, plot='both', bounds=False, extra_df=True, figsize=(12,8))`
+### `plot(plot_smooth=True, plot='both', bounds=True, extra_df=True, figsize=(12,8))`
 
 Visualizes the fitted EGDF and related plots.
 
@@ -113,27 +113,33 @@ Returns a dictionary of all fitted parameters and results.
 
 ## Example Usage
 
-```python
-import numpy as np
-from machinegnostics.magcal import EGDF
+=== "Python"
 
-# Example data
-data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
+    ```python
+    import numpy as np
+    from machinegnostics.magcal import EGDF
 
-# Initialize EGDF
-egdf = EGDF()
+    # Example data
+    data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
 
-# Fit the model
-egdf.fit(data)
+    # Initialize EGDF
+    egdf = EGDF()
 
-# Plot the results
-egdf.plot()
+    # Fit the model
+    egdf.fit(data)
 
-# Access fitted parameters
-results = egdf.results()
-print("Global scale parameter:", results['S_opt'])
-print("Distribution bounds:", results['LB'], results['UB'])
-```
+    # Plot the results
+    egdf.plot()
+
+    # Access fitted parameters
+    results = egdf.results()
+    print("Global scale parameter:", results['S_opt'])
+    print("Distribution bounds:", results['LB'], results['UB'])
+    ```
+
+=== "Output"
+
+    ![EGDF Plot](image/egdf/1770031196721.png)
 
 ---
 

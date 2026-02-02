@@ -22,16 +22,16 @@ QLDF is optimized for local quantification and density estimation, especially wh
 
 ## Key Features
 
-- **Fits a local quantifying distribution function to your data**
-- **Robust to inliers and dense clusters**
-- **Supports weighted and unweighted samples**
-- **Automatic or manual bounds and scale selection**
-- **Additive ('a') and multiplicative ('m') data forms**
-- **Advanced optimization with customizable tolerance and solver**
-- **Visualization of QLDF, PDF, and bounds**
-- **Memory-efficient for large datasets**
-- **Detailed results and diagnostics**
-- **Variable scale parameter option for heteroscedasticity**
+- Fits a local quantifying distribution function to your data
+- Robust to inliers and dense clusters
+- Supports weighted and unweighted samples
+- Automatic or manual bounds and scale selection
+- Additive ('a') and multiplicative ('m') data forms
+- Advanced optimization with customizable tolerance and solver
+- Visualization of QLDF, PDF, and bounds
+- Memory-efficient for large datasets
+- Detailed results and diagnostics
+- Variable scale parameter option for heteroscedasticity
 
 ---
 
@@ -43,8 +43,9 @@ QLDF is optimized for local quantification and density estimation, especially wh
 | `DUB`             | float or None         | None      | Data Upper Bound (absolute maximum, optional)                    |
 | `LB`              | float or None         | None      | Lower Probable Bound (practical lower limit, optional)           |
 | `UB`              | float or None         | None      | Upper Probable Bound (practical upper limit, optional)           |
-| `S`               | float or 'auto'       | 1         | Scale parameter (auto-estimated or fixed value)                  |
+| `S`               | float or 'auto'       | 'auto'    | Scale parameter (auto-estimated or fixed value)                  |
 | `varS`            | bool                  | False     | Use variable scale parameter during optimization                 |
+| `minimum_varS`    | float                 | 0.1       | Minimum scale parameter value if varS is True                    |
 | `z0_optimize`     | bool                  | True      | Optimize location parameter Z0 during fitting                    |
 | `tolerance`       | float                 | 1e-9      | Convergence tolerance for optimization                           |
 | `data_form`       | str                   | 'a'       | Data form: 'a' (additive), 'm' (multiplicative)                  |
@@ -53,7 +54,7 @@ QLDF is optimized for local quantification and density estimation, especially wh
 | `catch`           | bool                  | True      | Store intermediate results (memory usage)                        |
 | `weights`         | np.ndarray or None    | None      | Prior weights for data points                                    |
 | `wedf`            | bool                  | False     | Use Weighted Empirical Distribution Function                     |
-| `opt_method`      | str                   | 'L-BFGS-B'| Optimization method (scipy.optimize)                             |
+| `opt_method`      | str                   | 'Powell'  | Optimization method (scipy.optimize)                             |
 | `verbose`         | bool                  | False     | Print progress and diagnostics                                   |
 | `max_data_size`   | int                   | 1000      | Max data size for smooth QLDF generation                         |
 | `flush`           | bool                  | True      | Flush large arrays (memory management)                           |
@@ -116,28 +117,33 @@ Returns a dictionary of all fitted parameters and results.
 
 ## Example Usage
 
-```python
-import numpy as np
-from machinegnostics.magcal import QLDF
+=== "Python"
 
-# Example data
-data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
+    ```python
+    import numpy as np
+    from machinegnostics.magcal import QLDF
 
-# Initialize QLDF
-qldf = QLDF()
+    # Example data
+    data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
 
-# Fit the model
-qldf.fit(data)
+    # Initialize QLDF
+    qldf = QLDF()
 
-# Plot the results
-qldf.plot()
+    # Fit the model
+    qldf.fit(data)
 
-# Access fitted parameters
-results = qldf.results()
-print("Local scale parameter:", results['S_opt'])
-print("Distribution bounds:", results['LB'], results['UB'])
-```
+    # Plot the results
+    qldf.plot()
 
+    # Access fitted parameters
+    results = qldf.results()
+    print("Local scale parameter:", results['S_opt'])
+    print("Distribution bounds:", results['LB'], results['UB'])
+    ```
+
+=== "Output"
+
+    ![QLDF Plot](image/qldf/1770032051748.png)
 ---
 
 ## Notes

@@ -21,15 +21,15 @@ QGDF is optimized for global quantification and density estimation, especially w
 
 ## Key Features
 
-- **Fits a global quantifying distribution function to your data**
-- **Robust to inliers and dense clusters**
-- **Supports weighted and unweighted samples**
-- **Automatic or manual bounds and scale selection**
-- **Additive ('a') and multiplicative ('m') data forms**
-- **Advanced optimization with customizable tolerance and solver**
-- **Visualization of QGDF, PDF, and bounds**
-- **Memory-efficient for large datasets**
-- **Detailed results and diagnostics**
+- Fits a global quantifying distribution function to your data
+- Robust to inliers and dense clusters
+- Supports weighted and unweighted samples
+- Automatic or manual bounds and scale selection
+- Additive ('a') and multiplicative ('m') data forms
+- Advanced optimization with customizable tolerance and solver
+- Visualization of QGDF, PDF, and bounds
+- Memory-efficient for large datasets
+- Detailed results and diagnostics
 
 ---
 
@@ -50,7 +50,7 @@ QGDF is optimized for global quantification and density estimation, especially w
 | `catch`         | bool               | True       | Store intermediate results (memory usage)              |
 | `weights`       | np.ndarray or None | None       | Prior weights for data points                          |
 | `wedf`          | bool               | False      | Use Weighted Empirical Distribution Function           |
-| `opt_method`    | str                | 'L-BFGS-B' | Optimization method (scipy.optimize)                   |
+| `opt_method`    | str                | 'Powell' | Optimization method (scipy.optimize)                   |
 | `verbose`       | bool               | False      | Print progress and diagnostics                         |
 | `max_data_size` | int                | 1000       | Max data size for smooth QGDF generation               |
 | `flush`         | bool               | True       | Flush large arrays (memory management)                 |
@@ -80,7 +80,7 @@ None (results stored in `params`)
 
 ---
 
-### `plot(plot_smooth=True, plot='both', bounds=False, extra_df=True, figsize=(12,8))`
+### `plot(plot_smooth=True, plot='both', bounds=True, extra_df=True, figsize=(12,8))`
 
 Visualizes the fitted QGDF and related plots.
 
@@ -107,28 +107,33 @@ Returns a dictionary of all fitted parameters and results.
 
 ## Example Usage
 
-```python
-import numpy as np
-from machinegnostics.magcal import QGDF
+=== "Python"
 
-# Example data
-data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
+    ```python
+    import numpy as np
+    from machinegnostics.magcal import QGDF
 
-# Initialize QGDF
-qgdf = QGDF()
+    # Example data
+    data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
 
-# Fit the model
-qgdf.fit(data)
+    # Initialize QGDF
+    qgdf = QGDF()
 
-# Plot the results
-qgdf.plot()
+    # Fit the model
+    qgdf.fit(data)
 
-# Access fitted parameters
-results = qgdf.results()
-print("Global scale parameter:", results['S_opt'])
-print("Distribution bounds:", results['LB'], results['UB'])
-```
+    # Plot the results
+    qgdf.plot()
 
+    # Access fitted parameters
+    results = qgdf.results()
+    print("Global scale parameter:", results['S_opt'])
+    print("Distribution bounds:", results['LB'], results['UB'])
+    ```
+
+=== "Output"
+
+    ![QGDF Plot](image/qgdf/1770031894102.png)
 ---
 
 ## Notes
