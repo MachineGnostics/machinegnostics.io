@@ -1,4 +1,5 @@
-# Machine Gnostics
+# Machine Gnostics 
+[![PyPI version](https://badge.fury.io/py/machinegnostics.svg)](https://badge.fury.io/py/machinegnostics) [![Python Versions](https://img.shields.io/pypi/pyversions/machinegnostics.svg)](https://pypi.org/project/machinegnostics/) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Downloads](https://static.pepy.tech/badge/machinegnostics)](https://pepy.tech/project/machinegnostics) 
 
   Welcome to `Machine Gnostics`, an innovative Python library designed to implement the principles of Mathematical Gnostics for robust data analysis, modeling, and inference. Unlike traditional statistical approaches that depend heavily on probabilistic assumptions, Machine Gnostics harnesses deterministic algebraic and geometric structures. This unique foundation enables the library to deliver exceptional resilience against outliers, noise, and corrupted data, making it a powerful tool for challenging real-world scenarios.
 
@@ -108,17 +109,33 @@ Machine Gnostics is open source and community-driven.
 
 ## Learn More
 
-- [Concept](mg/concepts.md)
-- [Principles](mg/principles.md)
-- [Architecture](mg/architecture.md)
-- [Gnostic Distribution Functions](mg/gdf.md)
-- [Glossary](mg/mg_arguments.md)
-- [References](ref/references.md)
-- [Tutorial](tutorials/overview.md)
+<div class="grid cards" markdown>
 
----
+  -   :material-lightbulb: **Mathematical Gnostics**
+      [Core concepts](mg/concepts.md)
 
-### [License: GNU v3.0](https://github.com/MachineGnostics/machinegnostics/blob/main/LICENSE)
+  -   :material-scale-balance: **Gnostic**
+      [Fundamental principles](mg/principles.md)
+
+  -   :material-sitemap: **Machine Gnostics**
+      [Library architecture](mg/architecture.md)
+
+  -   :material-chart-bell-curve: **Gnostic**
+      [Distribution Functions](mg/gdf.md)
+
+  -   :material-book-open-variant: **Glossary**
+      [Terms & definitions](mg/mg_arguments.md)
+
+  -   :material-bookshelf: **References**
+      [Academic papers](ref/references.md)
+
+  -   :material-school: **Tutorials**
+      [Get started](tutorials/overview.md)
+
+  -   :material-school: **OSS**
+      [License: GNU v3.0](https://github.com/MachineGnostics/machinegnostics/blob/main/LICENSE)
+
+</div>
 
 ---
 
