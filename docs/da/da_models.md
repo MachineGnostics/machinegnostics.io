@@ -92,5 +92,3 @@ Explore the documentation for each model to learn about their features, usage pa
 - **Integrate models into your own analysis pipeline** for robust, diagnostic data science.
 
 ---
-
-If you want this saved as `models.md` in your documentation folder, let me know!
