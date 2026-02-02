@@ -1,60 +1,64 @@
 # PolynomialRegressor: Robust Polynomial Regression with Machine Gnostics
 
-The `PolynomialRegressor` is a robust polynomial regression model built on the principles of Mathematical Gnostics. It is designed to provide deterministic, interpretable, and resilient regression in the presence of outliers, noise, and non-Gaussian data distributions. Unlike traditional statistical models, this regressor leverages algebraic and geometric concepts from Mathematical Gnostics, focusing on event-level modeling and robust loss minimization.
+The `PolynomialRegressor` is a robust polynomial regression model built on the Machine Gnostics framework. Unlike traditional statistical models that rely on probabilistic assumptions, this model uses algebraic and geometric structures to provide deterministic, resilient, and interpretable regression for real-world data.
 
 ---
 
 ## Overview
 
-- **Robust to Outliers:** Uses gnostic loss functions and adaptive weights to minimize the influence of outliers and corrupted samples.
-- **Polynomial Feature Expansion:** Supports configurable polynomial degrees for flexible modeling.
-- **Iterative Optimization:** Employs iterative fitting with early stopping and convergence checks.
-- **Custom Gnostic Loss:** Minimizes a user-selected gnostic loss (`'hi'`, `'hj'`, etc.) for event-level robustness.
-- **Detailed Training History:** Optionally records loss, weights, entropy, and gnostic characteristics at each iteration.
-- **Easy Integration:** Compatible with numpy arrays and supports model persistence.
+The Machine Gnostics PolynomialRegressor is designed for robust regression tasks, especially where data may contain outliers, noise, or non-Gaussian distributions. It leverages the core principles of Mathematical Gnostics (MG) to deliver reliable results even in challenging scenarios.
+
+- **Deterministic & Finite:** No randomness or probability; all computations are reproducible.
+- **Event-Level Modeling:** Handles uncertainty and error at the level of individual data events.
+- **Algebraic Inference:** Utilizes gnostic algebra and error geometry for robust learning.
+- **Resilient:** Designed to be robust against outliers, corrupted data, and distributional shifts.
+- **Flexible:** Supports numpy arrays, pandas DataFrames, and pyspark DataFrames.
+- **mlflow Integration:** For experiment tracking and deployment.
+- **Easy Model Persistence:** Save and load models with joblib.
 
 ---
 
 ## Key Features
 
-- **Robust regression using gnostic loss functions**
-- **Flexible polynomial degree (linear and higher-order)**
-- **Adaptive sample weighting**
-- **Early stopping and convergence tolerance**
-- **Training history tracking for analysis and visualization**
-- **Handles non-Gaussian noise and outliers**
-- **Compatible with numpy arrays**
+- Fits a polynomial regression model
+- Flexible polynomial degree (linear and higher-order)
+- Robust to outliers and non-Gaussian noise
+- Iterative optimization with early stopping and convergence tolerance
+- Adaptive sample weighting using gnostic loss
+- Training history tracking for analysis and visualization
+- Customizable loss functions and scaling strategies
+- Compatible with numpy arrays for input/output
 
 ---
 
 ## Parameters
 
-| Parameter                | Type                | Default   | Description                                                                 |
-|--------------------------|---------------------|-----------|-----------------------------------------------------------------------------|
-| `degree`                 | int                 | 2         | Degree of the polynomial to fit.                                            |
-| `scale`                  | {'auto', int, float}| 'auto'    | Scaling method or value for input features.                                 |
-| `max_iter`               | int                 | 100       | Maximum number of optimization iterations.                                  |
-| `tol`                    | float               | 1e-3      | Tolerance for convergence.                                                  |
-| `mg_loss`                | str                 | 'hi'      | Gnostic loss function to use (`'hi'`, `'fi'`, etc.).                        |
-| `early_stopping`         | bool                | True      | Whether to stop early if convergence is detected.                           |
-| `verbose`                | bool                | False     | If True, prints progress and diagnostics during fitting.                    |
-| `data_form`              | str                 | 'a'       | Internal data representation format.                                        |
-| `gnostic_characteristics`| bool                | True      | If True, computes and records gnostic properties (fi, hi, etc.).            |
-| `history`                | bool                | True      | If True, records the optimization history for analysis.                     |
-| `verbose`           | bool                  | True      | Print detailed progress, warnings, and results                   |
+| Parameter | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `degree` | `int` | `2` | Degree of the polynomial to fit. |
+| `scale` | `str` \| `int` \| `float` | `'auto'` | Scaling method or value for input features. |
+| `max_iter` | `int` | `100` | Maximum number of optimization iterations. |
+| `tolerance` | `float` | `1e-2` | Tolerance for convergence. |
+| `mg_loss` | `str` | `'hi'` | Loss function to use ('hi', 'fi', etc.). |
+| `early_stopping` | `bool` | `True` | Whether to stop early if convergence is detected. |
+| `verbose` | `bool` | `False` | If True, prints progress and diagnostics during fitting. |
+| `data_form` | `str` | `'a'` | Internal data representation format. |
+| `gnostic_characteristics` | `bool` | `False` | If True, computes and records gnostic characteristics. |
+| `history` | `bool` | `True` | If True, records the optimization history for analysis. |
+
 ---
 
 ## Attributes
 
-- **coefficients**: `np.ndarray`  
-  Fitted polynomial regression coefficients.
-- **weights**: `np.ndarray`  
+- **coefficients**: `np.ndarray`
+  Fitted polynomial coefficients.
+- **weights**: `np.ndarray`
   Final sample weights after robust fitting.
-- **params**: `list of dict`  
+- **params**: `list of dict`
   Parameter snapshots (loss, weights, gnostic properties) at each iteration.
-- **_history**: `list`  
+- **_history**: `list` or `None`
   Internal optimization history (if enabled).
-- **degree, max_iter, tol, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics**:  
+- **degree, max_iter, tolerance, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics**
   Configuration parameters as set at initialization.
 
 ---
@@ -62,89 +66,132 @@ The `PolynomialRegressor` is a robust polynomial regression model built on the p
 ## Methods
 
 ### `fit(X, y)`
+
 Fits the polynomial regressor to input features `X` and targets `y` using robust, gnostic loss minimization. Iteratively optimizes coefficients and sample weights, optionally recording history.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`
   Input features.
-- **y**: `np.ndarray`, shape `(n_samples,)`  
+- **y**: `np.ndarray`, shape `(n_samples,)`
   Target values.
 
-**Returns:**  
+**Returns:**
 `self` (fitted model instance)
 
 ---
 
 ### `predict(X)`
-Predicts target values for new input features using the trained model.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
+Predicts target values for new input features using the fitted model.
+
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`
   Input features for prediction.
 
-**Returns:**  
-`y_pred`: `np.ndarray`, shape `(n_samples,)`  
+**Returns:**
+`y_pred`: `np.ndarray`, shape `(n_samples,)`
 Predicted target values.
 
 ---
 
 ### `score(X, y, case='i')`
+
 Computes the robust (gnostic) R² score for the polynomial regressor model.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`  
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`
   Input features for scoring.
-- **y**: `np.ndarray`, shape `(n_samples,)`  
+- **y**: `np.ndarray`, shape `(n_samples,)`
   True target values.
-- **case**: `str`, default `'i'`  
+- **case**: `str`, default `'i'`
   Specifies the case or variant of the R² score to compute.
 
-**Returns:**  
-`score`: `float`  
+**Returns:**
+`score`: `float`
 Robust R² score of the model on the provided data.
 
 ---
 
-### `save_model(path)`
+### `save(path)`
 
 Saves the trained model to disk using joblib.
 
-- **path**: str  
+- **path**: str
   Directory path to save the model.
 
 ---
 
-### `load_model(path)`
+### `load(path)`
 
 Loads a previously saved model from disk.
 
-- **path**: str  
+- **path**: str
   Directory path where the model is saved.
 
-**Returns:**  
+**Returns:**
 Instance of `PolynomialRegressor` with loaded parameters.
 
 ---
 
 ## Example Usage
 
-```python
-from machinegnostics.models.regression import PolynomialRegressor
+=== "Python"
 
-# Initialize the model
-model = PolynomialRegressor(degree=2, mg_loss='hi', verbose=True)
+    ```python
+    from machinegnostics.models import PolynomialRegressor
+    import numpy as np
 
-# Fit the model
-model.fit(X_train, y_train)
+    # Generate synthetic data with outliers
+    np.random.seed(42)
+    X_train = np.random.rand(50, 1) * 10
+    y_train = 0.5 * X_train.flatten()**2 - 2 * X_train.flatten() + 5 + np.random.normal(0, 1, 50)
+    
+    # Introduce outliers
+    y_train[::10] += 20 * np.random.choice([-1, 1], size=5)
 
-# Predict
-y_pred = model.predict(X_test)
+    # Initialize model
+    model = PolynomialRegressor(
+        degree=2, 
+        max_iter=200, 
+        verbose=True,
+        tolerance=1e-3
+    )
 
-# Score
-r2 = model.score(X_test, y_test)
-print(f'Robust R2 score: {r2}')
+    # Fit the model
+    model.fit(X_train, y_train)
 
-# Access coefficients and weights
-print("Coefficients:", model.coefficients)
-print("Weights:", model.weights)
-```
+    # Predict
+    X_test = np.linspace(0, 10, 10).reshape(-1, 1)
+    y_pred = model.predict(X_test)
+
+    # Score
+    r2 = model.score(X_train, y_train)
+    print(f'Robust R2 score: {r2:.4f}')
+    ```
+=== "Plot"
+
+    ```python
+    import matplotlib.pyplot as plt
+
+    # Generate smooth curve for visualization
+    X_test = np.linspace(0, 2, 100).reshape(-1, 1)
+    y_test = model.predict(X_test)
+
+    # Plot
+    plt.figure(figsize=(10, 6))
+    plt.scatter(X, y, color='blue', s=100, label='Data', zorder=3, alpha=0.6)
+    plt.scatter(X[8:], y[8:], color='red', s=150, label='Outliers', zorder=4, marker='X')
+    plt.plot(X_test, y_test, 'g-', linewidth=2, label='Fitted Model')
+
+    plt.xlabel('X')
+    plt.ylabel('y')
+    plt.title('Polynomial Regression Fit')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+    ```
+
+=== "Output"
+
+    ![Polynomial Regression](image/poly_reg/1770041646288.png)
 
 ---
 
@@ -163,24 +210,11 @@ This enables in-depth analysis and visualization of the training process.
 
 ---
 
-## Example Notebooks
-
-- [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_1_small_data_polyreg.ipynb)
-- [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_2_wine_data_polyreg.ipynb)
-
-![Polynomial Regression](../../plots/poly-reg1.png "Polynomial Regression")
-
----
-
 ## Notes
 
 - The model is robust to outliers and suitable for datasets with non-Gaussian noise.
-- Implements advanced machine learning techniques based on Mathematical Gnostics.
-<!-- - For more information, visit: [https://machinegnostics.info/](https://machinegnostics.info/) -->
+- Supports integration with mlflow for experiment tracking and deployment.
 
 ---
 
 **Author:** Nirmal Parmar  
-**Date:** 2025-05-01
-
----

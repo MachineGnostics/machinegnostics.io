@@ -20,40 +20,43 @@ The Machine Gnostics LinearRegressor is designed for robust regression tasks, es
 
 ## Key Features
 
-- **Fits a linear regression model**
-- **Robust to outliers and non-Gaussian noise**
-- **Iterative optimization with early stopping and convergence tolerance**
-- **Adaptive sample weighting using gnostic loss**
-- **Training history tracking for analysis and visualization**
-- **Customizable loss functions and scaling strategies**
-- **Compatible with numpy arrays for input/output**
+- Fits a linear regression model
+- Robust to outliers and non-Gaussian noise
+- Iterative optimization with early stopping and convergence tolerance
+- Adaptive sample weighting using gnostic loss
+- Training history tracking for analysis and visualization
+- Customizable loss functions and scaling strategies
+- Compatible with numpy arrays for input/output
 
 ---
 
 ## Parameters
 
-| Parameter                   | Type                 | Default | Description                                                      |
-| --------------------------- | -------------------- | ------- | ---------------------------------------------------------------- |
-| `scale`                   | {'auto', int, float} | 'auto'  | Scaling method or value for input features.                      |
-| `max_iter`                | int                  | 100     | Maximum number of optimization iterations.                       |
-| `tol`                     | float                | 1e-3    | Tolerance for convergence.                                       |
-| `mg_loss`                 | str                  | 'hi'    | Gnostic loss function to use (`'hi'`, `'fi'`, etc.).         |
-| `early_stopping`          | bool                 | True    | Whether to stop early if convergence is detected.                |
-| `verbose`                 | bool                 | False   | If True, prints progress and diagnostics during fitting.         |
-| `data_form`               | str                  | 'a'     | Internal data representation format.                             |
-| `gnostic_characteristics` | bool                 | True    | If True, computes and records gnostic properties (fi, hi, etc.). |
-| `history`                 | bool                 | True    | If True, records the optimization history for analysis.          |
-| `verbose`           | bool                  | True      | Print detailed progress, warnings, and results                   |
+| Parameter                 | Type                 | Default | Description                                                        |
+| ------------------------- | -------------------- | ------- | ------------------------------------------------------------------ |
+| `scale`                   | {'auto', int, float} | 'auto'  | Scaling method or value for input features.                        |
+| `max_iter`                | int                  | 100     | Maximum number of optimization iterations.                         |
+| `tolerance`               | float                | 1e-2    | Tolerance for convergence.                                         |
+| `mg_loss`                 | str                  | 'hi'    | Gnostic loss function to use (`'hi'`, `'fi'`, etc.).               |
+| `early_stopping`          | bool                 | True    | Whether to stop early if convergence is detected.                  |
+| `verbose`                 | bool                 | False   | If True, prints progress and diagnostics during fitting.           |
+| `data_form`               | str                  | 'a'     | Internal data representation format.                               |
+| `gnostic_characteristics` | bool                 | False   | If True, computes and records gnostic properties (fi, hi, etc.).   |
+| `history`                 | bool                 | True    | If True, records the optimization history for analysis.            |
 
 ---
 
 ## Attributes
 
-- **coefficients**: `np.ndarray`Fitted linear regression coefficients.
-- **weights**: `np.ndarray`Final sample weights after robust fitting.
-- **params**: `list of dict`Parameter snapshots (loss, weights, gnostic properties) at each iteration.
-- **_history**: `list`Internal optimization history (if enabled).
-- **degree, max_iter, tol, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics**:
+- **coefficients**: `np.ndarray`
+  Fitted linear regression coefficients.
+- **weights**: `np.ndarray`
+  Final sample weights after robust fitting.
+- **params**: `list of dict`
+  Parameter snapshots (loss, weights, gnostic properties) at each iteration.
+- **_history**: `list` or `None`
+  Internal optimization history (if enabled).
+- **degree, max_iter, tolerance, mg_loss, early_stopping, verbose, scale, data_form, gnostic_characteristics**:
   Configuration parameters as set at initialization.
 
 ---
@@ -64,7 +67,8 @@ The Machine Gnostics LinearRegressor is designed for robust regression tasks, es
 
 Fits the linear regressor to input features `X` and targets `y` using robust, gnostic loss minimization. Iteratively optimizes coefficients and sample weights, optionally recording history.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`Input features.
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`
+  Input features.
 - **y**: `np.ndarray`, shape `(n_samples,)`
   Target values.
 
@@ -75,7 +79,7 @@ Fits the linear regressor to input features `X` and targets `y` using robust, gn
 
 ### `predict(X)`
 
-Predicts target values for new input features using the trained model.
+Predicts target values for new input features using the fitted model.
 
 - **X**: `np.ndarray`, shape `(n_samples, n_features)`
   Input features for prediction.
@@ -90,8 +94,10 @@ Predicted target values.
 
 Computes the robust (gnostic) R² score for the linear regressor model.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`Input features for scoring.
-- **y**: `np.ndarray`, shape `(n_samples,)`True target values.
+- **X**: `np.ndarray`, shape `(n_samples, n_features)`
+  Input features for scoring.
+- **y**: `np.ndarray`, shape `(n_samples,)`
+  True target values.
 - **case**: `str`, default `'i'`
   Specifies the case or variant of the R² score to compute.
 
@@ -101,7 +107,7 @@ Robust R² score of the model on the provided data.
 
 ---
 
-### `save_model(path)`
+### `save(path)`
 
 Saves the trained model to disk using joblib.
 
@@ -110,7 +116,7 @@ Saves the trained model to disk using joblib.
 
 ---
 
-### `load_model(path)`
+### `load(path)`
 
 Loads a previously saved model from disk.
 
@@ -124,26 +130,67 @@ Instance of `LinearRegressor` with loaded parameters.
 
 ## Example Usage
 
-```python
-from machinegnostics.models.regression import LinearRegressor
+=== "Python"
 
-# Initialize the model
-model = LinearRegressor(max_iter=100, mg_loss='hi', verbose=True)
+    ```python
+    import numpy as np
+    from machinegnostics.models import LinearRegressor
+    import matplotlib.pyplot as plt
+    
+    # Generate linear data with noise and outliers
+    np.random.seed(42)
+    X = np.linspace(0, 2, 10).reshape(-1, 1)
+    y = 10 * X.ravel() + 1  # True: y = 10x + 1
+    
+    # Add noise and an outlier
+    y += np.random.normal(0, 2, 10)
+    y[2] += 28.0  # Outlier
+    
+    # Fit the model
+    model = LinearRegressor(max_iter=100, verbose=True)
+    model.fit(X, y)
+    
+    # Make predictions
+    y_pred = model.predict(X)
+    
+    print("Model fitted successfully!")
+    print(f"Coefficients (Intercept, Slope): {model.coefficients}")
+    print(f"MSE: {np.mean((y_pred - y)**2):.4f}")
+    
+    # Visualization code omitted for brevity; see output image
+    ```
 
-# Fit the model
-model.fit(X_train, y_train)
+=== "Plot"
 
-# Predict
-y_pred = model.predict(X_test)
+    ```python
+    import matplotlib.pyplot as plt
 
-# Score
-r2 = model.score(X_test, y_test)
-print(f"Robust R2 score: {r2}")
+    # Generate smooth line for visualization
+    X_test = np.linspace(0, 2, 100).reshape(-1, 1)
+    y_test = model.predict(X_test)
 
-# Access coefficients and weights
-print("Coefficients:", model.coefficients)
-print("Weights:", model.weights)
-```
+    # Plot
+    plt.figure(figsize=(10, 6))
+    plt.scatter(X, y, color='blue', s=100, label='Data', zorder=3, alpha=0.6)
+    plt.scatter(X[2], y[2], color='red', s=150, label='Outlier', zorder=4, marker='X')
+    plt.plot(X_test, y_test, 'g-', linewidth=2, label='Fitted Model')
+
+    # True relationship for reference
+    y_true = 10 * X_test + 1
+    plt.plot(X_test, y_true, 'k--', linewidth=1, alpha=0.5, label='True: y=10x+1')
+
+    plt.xlabel('X')
+    plt.ylabel('y')
+    plt.title('Linear Regression Fit')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    plt.tight_layout()
+    plt.show()
+    ```
+
+=== "Output"
+
+    ![Linear Regression Fit](image/lin_reg/1770040477695.png)
 
 ---
 
@@ -153,7 +200,7 @@ If `history=True`, the model records detailed training history at each iteration
 
 - `iteration`: Iteration number
 - `loss`: Gnostic loss value
-- `coefficients`: Regression coefficients at this iteration
+- `coefficients`: Regression coefficients at this iteration (normalized)
 - `rentropy`: Rentropy value (residual entropy)
 - `weights`: Sample weights at this iteration
 - `gnostic_characteristics`: (if enabled) fi, hi, etc.
@@ -162,24 +209,11 @@ This enables in-depth analysis and visualization of the training process.
 
 ---
 
-## Example Notebooks
-
-- [Example 1](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_wine_data_linreg.ipynb)
-- [Example 2](https://github.com/MachineGnostics/machinegnostics.io/blob/main/examples/example_1_1_small_data_linreg.ipynb)
-
-![Linear Regression](../../plots/lin_reg1.png "Linear Regression")
-
----
-
 ## Notes
 
 - The model is robust to outliers and suitable for datasets with non-Gaussian noise.
 - Supports integration with mlflow for experiment tracking and deployment.
-<!-- - For more information, check [Tutorials](../../tutorials/overview.md). -->
 
 ---
 
-**Author:** Nirmal Parmar   
-**Date:** 2025-05-01
-
----
+**Author:** Nirmal Parmar  

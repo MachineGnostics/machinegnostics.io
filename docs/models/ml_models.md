@@ -2,8 +2,7 @@
 
 ## Welcome to Machine Gnostics Machine Learning Models
 
-Machine Gnostics provides a growing suite of machine learning models for transparent, robust, and diagnostic predictive analytics. This section introduces the core supervised learning tools available today, and highlights our ongoing development of new models across supervised, unsupervised, and advanced categories.
-
+Machine Gnostics provides a growing suite of machine learning models for transparent, robust, and diagnostic predictive analytics.
 Our goal is to deliver interpretable, assumption-free machine learning solutions that combine classic algorithms with gnostic diagnostics. Whether you are working on classification, regression, clustering, or other tasks, Machine Gnostics models help you understand both predictions and underlying data structure.
 
 !!! tip "NOTE" 
@@ -15,19 +14,68 @@ Our goal is to deliver interpretable, assumption-free machine learning solutions
 
 ## Key Machine Learning Model Categories
 
-- **Classification Models**  
-  - Logistic Regression  
-  Reliable binary and multiclass classification with gnostic diagnostics.
+<div class="grid cards" markdown>
 
-- **Regression Models**  
-  - Linear Regression  
-  - Polynomial Regression  
-  Flexible regression tools for linear and nonlinear relationships.
+-   **Classification Models**
 
-- **Supervised Learning Utilities**  
-  - Cross-Validation  
-  - Train/Test Split  
-  Essential for model validation and reproducible experiments.
+    ---
+
+    - [Logistic Regression](cls/log_reg.md)
+    - [Multi Class Classification](cls/multi_class.md)
+
+-   **Regression Models**
+
+    ---
+
+    - [Linear Regression](reg/lin_reg.md)
+    - [Polynomial Regression](reg/poly_reg.md)
+
+-   **Clustering Models**
+
+    ---
+
+    - [KMeans Clustering](cluster/kmeans.md)
+    - [Estimating Local Clustering](cluster/glc.md)
+
+-   **Forecasting Models**
+
+    ---
+
+    - [Auto Regressor](forc/ar.md)
+    - [ARIMA](forc/arima.md)
+    - [SARIMA](forc/sarima.md)
+
+-   **Tree Models** Enhanced Scikit-learn
+
+    ---
+
+    - [Decision Tree Regressor](cart/dt_reg.md)
+    - [Decision Tree Classifier](cart/dt_cls.md)
+    - [Random Forest Regressor](cart/rf_reg.md)
+    - [Random Forest Classifier](cart/rf_cls.md)
+
+-   **Tree Models** Enhanced XGBoost
+
+    ---
+
+    - [Gnostic Boosting Regressor](cart/gb_reg.md)
+    - [Gnostic Boosting Classifier](cart/gb_cls.md)
+
+-   **Model Util**
+
+    ---
+
+    - [Cross Validation](./sup/cross_val.md)
+    - [Train Test Splits](./sup/train_test_split.md)
+    - [Gnostic Metrics](../metrics/accuracy.md)
+
+-   **Deployment**
+
+    ---
+
+    - [Mlflow Integration](sup/mlflow.md)
+</div>
+
 
 ---
 
@@ -44,11 +92,7 @@ Our goal is to deliver interpretable, assumption-free machine learning solutions
 ## Getting Started
 
 Explore the documentation for each model to learn about their features, usage patterns, and example workflows.  
-- Logistic Regression  
-- Linear Regression  
-- Polynomial Regression  
-- Cross-Validation  
-- Train/Test Split  
+
 
 Each page provides a detailed overview, key features, parameters, example usage, and references.
 

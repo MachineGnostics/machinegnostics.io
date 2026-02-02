@@ -3,7 +3,7 @@ site_url: https://machinegnostics.info
 site_description: A python library for machine learning and data science based on non-statistical methods.
 site_author: Nirmal Parmar
 copyright: 
-  Copyright © 2025 Machine Gnostics & Nirmal Parmar |  
+  Copyright © 2026 Nirmal Parmar (Machine Gnostics) |  
   <a href="https://github.com/MachineGnostics/machinegnostics/blob/main/LICENSE"> GNU v3.0 License  |</a>   
   <a href="#__consent">Change cookie settings   |</a>
   <a href="https://machinegnostics.info/contact/">Contact us</a>
@@ -111,13 +111,30 @@ nav:
   # machine learning vertical
   - Machine Learning:
     - Models: models/ml_models.md
-    - Supervised Learning:
+    - Regressors:
       - Linear Regressor: models/reg/lin_reg.md
       - Polynomial Regressor: models/reg/poly_reg.md
       - Logistic Regressor: models/cls/log_reg.md
+      - Decision Tree Regressor: models/cart/dt_reg.md
+      - Random Forest Regressor: models/cart/rf_reg.md
+      - Gnostic Boosting Regressor: models/cart/gb_reg.md
+    - Classifiers: 
+      - Multi Class Classifier: models/cls/multi_class.md
+      - Decision Tree Classifier: models/cart/dt_cls.md
+      - Random Forest Classifier: models/cart/rf_cls.md
+      - Gnostic Boosting Classifier: models/cart/gb_cls.md
+    - Clustering:
+      - KMeans Clustering: models/cluster/kmeans.md
+      - Estimating Local Clustering: models/cluster/glc.md
+    - Forecasting:
+      - Auto Regressor: models/forc/ar.md
+      - ARIMA: models/forc/arima.md
+      - SARIMA: models/forc/sarima.md
     - Utils:
       - Cross Validation: models/sup/cross_val.md
       - Train Test Split: models/sup/train_test_split.md
+    - Mlflow Integration: 
+      - Mlflow Tracking: models/sup/mlflow.md
   # deep learning vertical   
   - Deep Learning:
     - Magnet: magnet/magnet.md
@@ -183,7 +200,7 @@ extra:
     link: https://github.com/MachineGnostics/machinegnostics
     name: Machine Gnostics on GitHub
   - icon: fontawesome/brands/discord
-    link: https://discord.gg/BzXfaV56
+    link: https://discord.gg/WMMUaeJe2X
     name: Join us on Discord
   - icon: fontawesome/brands/linkedin
     link: https://www.linkedin.com/company/109036022/
@@ -194,6 +211,9 @@ extra:
   - icon: fontawesome/brands/instagram
     link: https://www.instagram.com/machinegnostics/
     name: Machine Gnostics on Instagram
+  - icon: fontawesome/brands/youtube
+    link: www.youtube.com/@MachineGnostics
+    name: Machine Gnostics on YouTube
   consent:
     title: Cookie consent
     description: >- 
