@@ -6,52 +6,53 @@ The `DataMembership` class provides a robust method to test whether a value can 
 
 ## Overview
 
-DataMembership answers the question: "Will the homogeneous sample remain homogeneous after extension by a new value?" The class uses EGDF and DataHomogeneity to check the effect of adding candidate values to the sample, and computes the Lower Sample Bound (LSB) and Upper Sample Bound (USB) for membership.
+**Membership Test:**
+"Is a value Zξ a potential member of the given sample Z?" In other words: "Will the homogeneous sample Z remain homogeneous after extension by Zξ?"
 
-- **EGDF-Based:** Only works with EGDF objects.
-- **Homogeneity-Driven:** Membership is defined by preservation of sample homogeneity.
-- **Adaptive Bound Search:** Finds minimum and maximum values that keep the sample homogeneous.
-- **Diagnostic:** Tracks errors, warnings, and search parameters.
-- **Visualization:** Plots EGDF, PDF, and membership bounds.
+**Logic Process:**
+
+1.  **Homogeneity Check**: First, check if the sample Z is homogeneous using `DataHomogeneity`.
+2.  **Extension Test**: If Z is homogeneous, extend the sample with a candidate value Zξ and check if the extended sample remains homogeneous.
+3.  **Bound Search**: Determine the Lower Sample Bound (LSB) and Upper Sample Bound (USB).
+    *   LSB search range: [LB, DLB]
+    *   USB search range: [DUB, UB]
+4.  **Result**: Find the minimum and maximum values of Zξ that preserve homogeneity.
 
 ---
 
 ## Key Features
 
-- **Tests membership of candidate values in homogeneous samples**
-- **Computes LSB and USB for membership range**
-- **Integrates with EGDF and DataHomogeneity**
-- **Adaptive, iterative bound search**
-- **Detailed logging and error tracking**
-- **Visualization of membership bounds and EGDF**
+- **Homogeneity Preservation**: Membership is defined by the preservation of sample homogeneity.
+- **Adaptive Bound Search**: Iteratively finds the exact boundaries where homogeneity is lost.
+- **Diagnostic Visualization**: Plots EGDF, PDF, and the determined membership bounds.
 
 ---
 
 ## Parameters
 
-| Parameter             | Type                  | Default   | Description                                                      |
-|-----------------------|-----------------------|-----------|------------------------------------------------------------------|
-| `egdf`                | EGDF                  | required  | Fitted EGDF object (must be fitted and contain data)             |
-| `verbose`             | bool                  | True      | Print detailed logs and diagnostics                              |
-| `catch`               | bool                  | True      | Store errors, warnings, and results                              |
-| `tolerance`           | float                 | 1e-3      | Tolerance for numerical calculations                             |
-| `max_iterations`      | int                   | 100       | Maximum iterations for bound search                              |
-| `initial_step_factor` | float                 | 0.001     | Initial step size factor for adaptive search                     |
+| Parameter             | Type    | Default | Description                                                  |
+| --------------------- | ------- | ------- | ------------------------------------------------------------ |
+| `gdf`                 | EGDF    | -       | Fitted EGDF object (must be fitted and contain data).        |
+| `verbose`             | bool    | False   | If True, detailed logs are printed during execution.         |
+| `catch`               | bool    | True    | If True, errors and warnings are stored in `params`.         |
+| `tolerance`           | float   | 1e-3    | Tolerance level for numerical calculations.                  |
+| `max_iterations`      | int     | 100     | Maximum number of iterations for bound search.               |
+| `initial_step_factor` | float   | 0.001   | Initial step size factor for adaptive bound search.          |
 
 ---
 
 ## Attributes
 
-- **LSB**: `float or None`  
-  Lower Sample Bound (minimum value that keeps sample homogeneous)
-- **USB**: `float or None`  
-  Upper Sample Bound (maximum value that keeps sample homogeneous)
-- **is_homogeneous**: `bool`  
-  Indicates whether the original sample is homogeneous
-- **params**: `dict`  
-  Stores results, errors, warnings, and search parameters
-- **fitted**: `bool`  
-  Indicates whether membership analysis has been completed
+- **LSB**: `float` or `None`
+  The calculated Lower Sample Bound.
+- **USB**: `float` or `None`
+  The calculated Upper Sample Bound.
+- **is_homogeneous**: `bool`
+  Indicates whether the original data sample is homogeneous.
+- **params**: `dict`
+  Stores results, errors, warnings, and search parameters.
+- **fitted**: `bool`
+  Indicates whether the membership analysis has been completed.
 
 ---
 
@@ -59,28 +60,26 @@ DataMembership answers the question: "Will the homogeneous sample remain homogen
 
 ### `fit()`
 
-Performs membership analysis to determine LSB and USB.
+Performs the membership analysis to determine the Lower Sample Bound (LSB) and Upper Sample Bound (USB).
 
-**Returns:**  
-`Tuple[float or None, float or None]` — The calculated LSB and USB values. Returns None for a bound if it cannot be determined.
+**Returns:**
+`Tuple[Optional[float], Optional[float]]` — The calculated LSB and USB values.
 
 ---
 
-### `plot(plot_smooth=True, plot='both', bounds=True, figsize=(12, 8))`
+### `plot()`
 
-Generates a plot of the EGDF and PDF with membership bounds and other relevant information.
+Generates a plot of the EGDF and PDF with membership bounds.
 
-- **plot_smooth**: `bool`  
-  Plot smoothed EGDF and PDF
-- **plot**: `str`  
-  'gdf', 'pdf', or 'both'
-- **bounds**: `bool`  
-  Include data bounds in the plot
-- **figsize**: `tuple`  
-  Figure size
+**Parameters:**
 
-**Returns:**  
-None (displays plot)
+- `plot_smooth` (bool, default=True): If True, plots smoothed curves.
+- `plot` (str, default='both'): 'gdf', 'pdf', or 'both'.
+- `bounds` (bool, default=True): If True, includes data bounds.
+- `figsize` (tuple, default=(12, 8)): Figure size.
+
+**Returns:**
+None
 
 ---
 
@@ -88,44 +87,54 @@ None (displays plot)
 
 Returns the analysis results stored in the `params` attribute.
 
-**Returns:**  
-`dict` — Contains LSB, USB, is_homogeneous, search parameters, errors, and warnings.
+**Returns:**
+`Dict[str, Any]` — Analysis results including LSB, USB, homogeneity status, and parameters.
 
 ---
 
 ## Example Usage
 
-```python
-import numpy as np
-from machinegnostics.magcal import EGDF, DataMembership
-data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
+=== "Python"
 
-egdf_instance = EGDF(data)
-egdf_instance.fit()
+    ```python
+    import numpy as np
+    from machinegnostics.magcal import EGDF, DataMembership
+    
+    # 1. Prepare homogeneous data
+    data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
+    
+    # 2. Fit EGDF
+    egdf = EGDF(data=data, catch=True)
+    egdf.fit()
+    
+    # 3. Perform Membership Analysis
+    membership = DataMembership(gdf=egdf, verbose=True)
+    lsb, usb = membership.fit()
+    
+    print(f"Lower Bound: {lsb}")
+    print(f"Upper Bound: {usb}")
+    
+    # 4. Visualize Results
+    membership.plot()
+    
+    # 5. Get detailed results
+    results = membership.results()
+    print(results)
+    ```
 
-membership = DataMembership(egdf_instance, verbose=True)
-lsb, usb = membership.fit()
+=== "Output"
 
-print(f"Lower Bound: {lsb}, Upper Bound: {usb}")
-
-membership.plot()
-
-results = membership.results()
-print(results)
-```
+    ![Data Membership](image/membership/1770038667188.png)
 
 ---
 
 ## Notes
 
-- Only works with EGDF objects; sample must be homogeneous for membership analysis.
-- LSB and USB define the range of values that can be added to the sample without losing homogeneity.
-- Errors and warnings are tracked in the results dictionary.
-- Visualization shows EGDF, PDF, and membership bounds for interpretability.
+- **Requirement**: This analysis only works with **EGDF** objects.
+- **Prerequisite**: The initial sample must be homogeneous. If `DataHomogeneity` finds it non-homogeneous, the analysis proceeds no further.
+- **Output**: LSB and USB represent the safe range for extending the dataset while maintaining its structural distribution properties.
 
 ---
 
-**Author:** Nirmal Parmar  
-**Date:** 2025-09-24
-
----
+**Author:** Nirmal Parmar   
+**Date:** 2025-10-10

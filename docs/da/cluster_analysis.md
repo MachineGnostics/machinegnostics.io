@@ -19,13 +19,13 @@ ClusterAnalysis orchestrates the entire process of fitting a GDF (ELDF/EGDF), as
 
 ## Key Features
 
-- **End-to-end cluster-based bound estimation**
-- **Integrates GDF fitting, homogeneity testing, and clustering**
-- **Supports local and global GDFs**
-- **Handles weighted, bounded, and unbounded data**
-- **Detailed error and warning logging**
-- **Memory-efficient operation via flushing**
-- **Visualization of GDF and cluster analysis results**
+- End-to-end cluster-based bound estimation
+- Integrates GDF fitting, homogeneity testing, and clustering
+- Supports local and global GDFs
+- Handles weighted, bounded, and unbounded data
+- Detailed error and warning logging
+- Memory-efficient operation via flushing
+- Visualization of GDF and cluster analysis results
 
 ---
 
@@ -36,7 +36,6 @@ ClusterAnalysis orchestrates the entire process of fitting a GDF (ELDF/EGDF), as
 | `verbose`              | bool                  | False     | Print detailed logs and progress information                      |
 | `catch`                | bool                  | True      | Store intermediate results and diagnostics                        |
 | `derivative_threshold` | float                 | 0.01      | Threshold for derivative-based cluster boundary detection         |
-| `slope_percentile`     | int                   | 70        | Percentile for slope-based boundary detection                     |
 | `DLB`                  | float or None         | None      | Data Lower Bound (absolute minimum, optional)                     |
 | `DUB`                  | float or None         | None      | Data Upper Bound (absolute maximum, optional)                     |
 | `LB`                   | float or None         | None      | Lower probable bound (optional)                                   |
@@ -105,27 +104,33 @@ None (displays plot)
 
 ## Example Usage
 
-```python
-import numpy as np
-from machinegnostics.magcal import ClusterAnalysis
+=== "Python"
 
-# Example data
-data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
+    ```python
+    import numpy as np
+    from machinegnostics.magcal import ClusterAnalysis
 
-# Initialize ClusterAnalysis
-ca = ClusterAnalysis(verbose=True)
+    # Example data
+    data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
 
-# Fit and get cluster bounds
-LCB, UCB = ca.fit(data)
-print(f"Main cluster bounds: LCB={LCB:.3f}, UCB={UCB:.3f}")
+    # Initialize ClusterAnalysis
+    ca = ClusterAnalysis(verbose=True)
 
-# Visualize results
-ca.plot()
+    # Fit and get cluster bounds
+    LCB, UCB = ca.fit(data)
+    print(f"Main cluster bounds: LCB={LCB:.3f}, UCB={UCB:.3f}")
 
-# Access results dictionary
-results = ca.results()
-print(results)
-```
+    # Visualize results
+    ca.plot()
+
+    # Access results dictionary
+    results = ca.results()
+    print(results)
+    ```
+
+=== "Output"
+
+    ![Cluster Analysis Plot](image/cluster_analysis/1770032920673.png)
 
 ---
 
@@ -139,12 +144,6 @@ print(results)
 
 ---
 
-## References
-
-- Gnostic Distribution Function theory and clustering methods (see mathematical gnostics literature)
-- For details on underlying algorithms, see documentation for ELDF, EGDF, and DataCluster classes
-
----
 
 **Author:** Nirmal Parmar  
 **Date:** 2025-09-24

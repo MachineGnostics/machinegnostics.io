@@ -1,108 +1,115 @@
 # DataScedasticity: Gnostic Homoscedasticity and Heteroscedasticity Test (Machine Gnostics)
 
-The `DataScedasticity` class provides a gnostic approach to testing for homoscedasticity and heteroscedasticity in data, using gnostic variance and gnostic linear regression. Unlike classical statistical tests, this method is based on the principles of the Machine Gnostics framework and is designed for robust, interpretable diagnostics.
+The `DataScedasticity` class provides a gnostic approach to testing for homoscedasticity and heteroscedasticity in data using local gnostic distribution functions (ELDF, QLDF). Unlike classical statistical tests that check residuals, this method analyzes the variability of the gnostic scale parameter.
 
 ---
 
 ## Overview
 
-DataScedasticity analyzes the spread of residuals from a gnostic linear regression model by splitting the data at the median of the independent variable and comparing the gnostic variances of squared residuals in each half. This approach is fundamentally different from classical tests (e.g., Breusch-Pagan, White's test), focusing on gnostic variance and regression rather than least squares and probabilistic assumptions.
+This class determines whether a dataset is homoscedastic (constant scale) or heteroscedastic (varying scale) using a fitted Gnostic (Local) Distribution Function (GDF).
 
-- **Gnostic Variance:** Measures uncertainty and spread according to gnostic principles.
-- **Gnostic Regression:** Uses a gnostic linear regression model, not standard least squares.
-- **Diagnostic Philosophy:** Not a formal statistical test, but a robust diagnostic for gnostic data analysis.
-- **Split Residuals:** Compares variance in residuals before and after the median of the independent variable.
+**The Gnostic Approach:**
+If the estimated Scale parameter (`S`) is variable across the domain (`varS=True`), the data is considered heteroscedastic. If the Scale parameter is constant, the data is homoscedastic.
+
+**Key differences vs. standard tests:**
+- Uses GDF's scale parameter (`S_var`) instead of residual-based heuristics.
+- Works with local/global gnostic scale (`S_local`, `S_opt`) for inference.
+- Integrates directly with Machine Gnostics models (`ELDF`, `QLDF`).
 
 ---
 
 ## Key Features
 
-- **Gnostic variance and regression for scedasticity analysis**
-- **No reliance on classical statistical assumptions**
-- **Robust to outliers and non-Gaussian data**
-- **Variance ratio calculation for split residuals**
-- **Clear homoscedastic/heteroscedastic decision**
-- **Detailed logging and parameter tracking**
+- **Direct GDF Integration**: Works seamlessly with `ELDF` and `QLDF`.
+- **Scale-Based Inference**: Uses the fundamental gnostic scale parameter.
+- **Robust Classification**: Simple decision boundary based on scale variability.
+- **Detailed Diagnostics**: Provides access to local and global scale parameters.
 
 ---
 
 ## Parameters
 
-| Parameter                | Type                  | Default   | Description                                                      |
-|--------------------------|-----------------------|-----------|------------------------------------------------------------------|
-| `scale`                  | str/int/float         | 'auto'    | Scale parameter for regression                                   |
-| `max_iter`               | int                   | 100       | Maximum iterations for regression optimization                   |
-| `tol`                    | float                 | 0.001     | Tolerance for regression convergence                             |
-| `mg_loss`                | str                   | 'hi'      | Loss function for gnostic regression                             |
-| `early_stopping`         | bool                  | True      | Enable early stopping in regression                              |
-| `verbose`                | bool                  | False     | Print detailed logs and diagnostics                              |
-| `data_form`              | str                   | 'a'       | Data form: 'a' (additive), 'm' (multiplicative)                  |
-| `gnostic_characteristics`| bool                  | True      | Use gnostic characteristics in regression                        |
-| `history`                | bool                  | True      | Track regression history                                         |
+| Parameter | Type                  | Default | Description                                                               |
+| --------- | --------------------- | ------- | ------------------------------------------------------------------------- |
+| `gdf`     | `Union[ELDF, QLDF]`   | `ELDF`  | Fitted GDF instance (must be `ELDF` or `QLDF`) configured with `varS=True`. |
+| `catch`   | `bool`                | `True`  | Whether to store analysis results in `params`.                            |
+| `verbose` | `bool`                | `False` | Enables debug-level logging when `True`.                                  |
 
 ---
 
 ## Attributes
 
-- **x**: `np.ndarray`  
-  Independent variable data.
-- **y**: `np.ndarray`  
-  Dependent variable data.
-- **model**: `LinearRegressor`  
-  Gnostic linear regression model.
-- **residuals**: `np.ndarray`  
-  Residuals from the fitted model.
-- **params**: `dict`  
-  Stores calculated variances and variance ratio.
-- **variance_ratio**: `float`  
-  Ratio of gnostic variances between data splits.
-- **is_homoscedastic**: `bool`  
-  True if data is homoscedastic under gnostic test, else False.
+- **gdf**: `Union[ELDF, QLDF]`
+  The underlying GDF instance.
+- **params**: `dict`
+  Results container populated after `fit()`.
+- **fitted**: `bool`
+  Boolean indicating whether scedasticity classification has been run.
 
 ---
 
 ## Methods
 
-### `fit(x, y)`
+### `fit()`
 
-Fits the gnostic linear regression model to the data and assesses scedasticity.
+Classify scedasticity based on the variability of the GDF's scale parameter.
 
-- **x**: `np.ndarray`  
-  Independent variable data.
-- **y**: `np.ndarray`  
-  Dependent variable data.
+**Returns:**
+`bool` — `True` if data is homoscedastic (constant scale), `False` if heteroscedastic.
 
-**Returns:**  
-`bool` — True if data is homoscedastic under the gnostic test, False if heteroscedastic.
+---
+
+### `results()`
+
+Return a dictionary summarizing the scedasticity analysis.
+
+**Returns:**
+`dict` — Contains keys:
+
+- `'scedasticity'`: `'homoscedastic'` or `'heteroscedastic'`
+- `'scale_parameter'`: The `S_var` array from the GDF
+- `'S_local'`: Local gnostic scale values
+- `'S_global'`: Global/optimal gnostic scale (`S_opt`)
 
 ---
 
 ## Example Usage
 
-```python
-import numpy as np
-from machinegnostics.magcal import DataScedasticity
+=== "Python"
 
-x = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-y = np.array([2.1, 4.2, 6.1, 8.3, 10.2, 12.1, 14.2, 16.1, 18.2, 20.1])
+    ```python
+    import numpy as np
+    from machinegnostics.magcal import ELDF, DataScedasticity
+    
+    # Example data (stack-loss data)
+    y = np.array([ 7,  8,  8,  8,  9, 11, 12, 13, 14, 14, 15, 15, 15, 18, 18, 19, 20, 28, 37, 37, 42])
+    
+    # Step 1: Fit ELDF with variable scale (essential for scedasticity check)
+    eldf = ELDF(varS=True, verbose=False)
+    eldf.fit(data=y, plot=True)
+    
+    # Step 2: Run scedasticity test
+    sc = DataScedasticity(gdf=eldf, verbose=True)
+    is_homo = sc.fit()
+    
+    # Step 3: Check results
+    print(f"Is data homoscedastic? {is_homo}")
+    info = sc.results()
+    ```
 
-sced = DataScedasticity()
-is_homo = sced.fit(x, y)
-print(f"Is data homoscedastic? {is_homo}")
-print(f"Variance ratio: {sced.variance_ratio}")
-```
+=== "Output"
+
+    ![Scedasticity Analysis](image/scedasticity/1770036418408.png)
 
 ---
 
 ## Notes
 
-- This is not a standard statistical test; results may differ from classical methods.
-- Gnostic variance and regression are designed for robust, interpretable diagnostics.
-- For more details on gnostic variance and regression, refer to the Machine Gnostics documentation.
+- The supplied `gdf` must be an instance of `ELDF` or `QLDF`, fitted with `varS=True`.
+- Validation is performed during initialization to ensure the GDF is compatible.
+- `fit()` sets the internal state; call `results()` afterwards to obtain a structured dictionary of outputs.
 
 ---
 
-**Author:** Nirmal Parmar  
-**Date:** 2025-09-24
-
----
+**Author:** Nirmal Parmar   
+**Date:** 2025-10-10

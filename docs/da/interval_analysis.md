@@ -21,13 +21,13 @@ IntervalAnalysis orchestrates the complete process of fitting GDFs, checking hom
 
 ## Key Features
 
-- **End-to-end interval estimation for GDFs**
-- **Automatic homogeneity testing and diagnostics**
-- **Adaptive tolerance and typical interval computation**
-- **Handles weighted, bounded, and unbounded data**
-- **Detailed error and warning logging**
-- **Visualization of fitted distributions and intervals**
-- **Deterministic and reproducible results**
+- End-to-end interval estimation for GDFs
+- Automatic homogeneity testing and diagnostics
+- Adaptive tolerance and typical interval computation
+- Handles weighted, bounded, and unbounded data
+- Detailed error and warning logging
+- Visualization of fitted distributions and intervals
+- Deterministic and reproducible results
 
 ---
 
@@ -43,12 +43,13 @@ IntervalAnalysis orchestrates the complete process of fitting GDFs, checking hom
 | `z0_optimize`              | bool               | True       | Optimize central parameter Z0 during fitting              |
 | `tolerance`                | float              | 1e-9       | Convergence tolerance for optimization                    |
 | `data_form`                | str                | 'a'        | Data form: 'a' (additive), 'm' (multiplicative)           |
-| `n_points`                 | int                | 100        | Number of points for distribution evaluation              |
+| `n_points`                 | int                | 10         | Number of points for distribution evaluation              |
+| `n_points_gdf`             | int                | 1000       | Number of points for smooth GDF generation                |
 | `homogeneous`              | bool               | True       | Assume data homogeneity (enables homogeneity testing)     |
 | `catch`                    | bool               | True       | Store warnings/errors and intermediate results            |
 | `weights`                  | np.ndarray or None | None       | Prior weights for data points                             |
 | `wedf`                     | bool               | False      | Use Weighted Empirical Distribution Function              |
-| `opt_method`               | str                | 'L-BFGS-B' | Optimization method (scipy.optimize)                      |
+| `opt_method`               | str                | 'Powell'   | Optimization method (scipy.optimize)                      |
 | `verbose`                  | bool               | False      | Print detailed progress and diagnostics                   |
 | `max_data_size`            | int                | 1000       | Max data size for smooth GDF generation                   |
 | `flush`                    | bool               | True       | Flush intermediate arrays after fitting                   |
@@ -59,7 +60,6 @@ IntervalAnalysis orchestrates the complete process of fitting GDFs, checking hom
 | `min_search_points`        | int                | 30         | Minimum search points before checking convergence         |
 | `boundary_margin_factor`   | float              | 0.001      | Margin factor to avoid searching at boundaries            |
 | `extrema_search_tolerance` | float              | 1e-6       | Tolerance for detecting extrema in Z0 variation           |
-| `gdf_recompute`            | bool               | False      | Recompute GDF for each candidate datum in interval search |
 | `gnostic_filter`           | bool               | False      | Apply gnostic clustering to filter outlier Z0 values      |
 | `cluster_bounds`           | bool               | True       | Estimate cluster bounds using DataCluster                 |
 | `membership_bounds`        | bool               | True       | Estimate membership bounds using DataMembership           |
@@ -157,23 +157,29 @@ None (displays plot)
 
 ## Example Usage
 
-```python
-import numpy as np
-from machinegnostics.magcal import IntervalAnalysis
+=== "Python"
 
-# Example data
-data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
+    ```python
+    import numpy as np
+    from machinegnostics.magcal import IntervalAnalysis
 
-# Initialize IntervalAnalysis
-ia = IntervalAnalysis(verbose=True)
+    # Example data
+    data = np.array([ -13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.])
 
-# Fit and get interval results
-ia.fit(data, plot=True)
-print(ia.results())
+    # Initialize IntervalAnalysis
+    ia = IntervalAnalysis(verbose=True)
 
-# Visualize results
-ia.plot(GDF=True, intervals=True)
-```
+    # Fit and get interval results
+    ia.fit(data, plot=True)
+    print(ia.results())
+
+    # Visualize results
+    ia.plot(GDF=True, intervals=True)
+    ```
+
+=== "Output"
+
+    ![Interval Analysis Plot](image/interval_analysis/1770033188023.png)
 
 ---
 
@@ -181,13 +187,12 @@ ia.plot(GDF=True, intervals=True)
 
 - Gnostic interval analysis is fundamentally different from statistical interval analysis: it does not rely on probability or sampling theory, but on algebraic and geometric properties of the data and distribution functions.
 - Homogeneity of the data is checked automatically; warnings are issued if violated.
-- For best results, use with ELDF/EGDF and set `wedf=False` for interval estimation.
 - Suitable for scientific, engineering, and reliability applications.
 - All warnings and errors are stored in the `params` attribute for later inspection.
 
 ---
 
-**Author:** Nirmal Parmar
+**Author:** Nirmal Parmar   
 **Date:** 2025-09-24
 
 ---

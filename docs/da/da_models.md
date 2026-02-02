@@ -25,7 +25,7 @@ Machine Gnostics models are specialized classes and algorithms designed to analy
 
 </div>
 
-  These models provide flexible, non-parametric representations of data distributions, supporting both empirical and quantile-based analysis.
+  These models provide flexible, non-parametric representations of data distributions, supporting both empirical and quantile-based analysis. For more information, see [GDF documentation](../mg/gdf.md).
 
 ### Data Analysis
 
