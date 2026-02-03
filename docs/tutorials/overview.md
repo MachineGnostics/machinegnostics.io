@@ -10,6 +10,7 @@ These tutorials are designed to help you master the Machine Gnostics framework f
 Before you begin, please ensure that Machine Gnostics is installed correctly in your environment.
 
 - See the [Installation Guide](../installation.md) for setup instructions.
+- Check out [Tutorials Library](../tutorials/tutorials.md) for step-by-step instructions.
 
 !!! note
     Machine Gnostics is based on Mathematical Gnostics theorems. The procedures and inference of results may differ from standard statistical methods, offering new perspectives and robust diagnostics.

@@ -162,6 +162,7 @@ nav:
   - Contact: contact.md
 
 markdown_extensions:
+  - def_list
   - toc:
       permalink: true
   - attr_list

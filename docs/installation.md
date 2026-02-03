@@ -131,7 +131,7 @@ Machine Gnostics is designed to be as simple to use as other machine learning li
     plt.grid(True, alpha=0.3)
     plt.show()
     ```
-Please find step by step tutorial [here](/tutorials/overview/).
+Please find step by step tutorial [here](./tutorials/tutorials.md).
 
 
 ## 5. Platform and Environment
