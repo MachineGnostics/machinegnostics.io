@@ -45,7 +45,7 @@ No question is too small. We're here to help and collaborate — please reach ou
     📧 [info.machinegnostics@gmail.com](mailto:info.machinegnostics@gmail.com)
     
     **Community & Social:**  
-    [Discord](https://discord.gg/BzXfaV56) &nbsp;|&nbsp; 
+    [Discord](https://discord.gg/WMMUaeJe2X) &nbsp;|&nbsp; 
     [LinkedIn](https://www.linkedin.com/company/109036022/) &nbsp;|&nbsp; 
     [GitHub](https://github.com/MachineGnostics/machinegnostics) &nbsp;|&nbsp; 
     [Instagram](https://www.instagram.com/machinegnostics)
@@ -146,7 +146,7 @@ document.getElementById("subscribe-form").addEventListener("submit", function (e
 
 ## Let’s Connect!
 
-- [Join our Discord](https://discord.gg/BzXfaV56) for real-time discussions.
+- [Join our Discord](https://discord.gg/WMMUaeJe2X) for real-time discussions.
 - [Follow us on LinkedIn](https://www.linkedin.com/company/109036022/) for professional updates.
 - [Star us on GitHub](https://github.com/MachineGnostics/machinegnostics) to support the project.
 - [Follow us on Instagram](https://www.instagram.com/machinegnostics) for quick updates.

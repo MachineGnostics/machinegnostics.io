@@ -1,4 +1,3 @@
-
 # Machine Gnostics – Example Gallery
 
 Explore practical examples and Jupyter notebooks demonstrating the use of Machine Gnostics for data analysis and machine learning. 
@@ -78,7 +77,6 @@ Each example includes:
         [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_08_gnostic_uncertainty_interval_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_08_gnostic_uncertainty_interval_analysis.ipynb)
 
     </div>
-
 
 === "Machine Learning Models"
 
@@ -221,7 +219,7 @@ Each example includes:
         
         *Coming soon!*
 
-        [:material-arrow-right: Read more about Magnet](../magnet/magnet.md)
+        [:material-arrow-right: Read more about MagE](../magnet/magnet.md)
 
     </div>
 

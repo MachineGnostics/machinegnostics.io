@@ -55,14 +55,6 @@ plugins:
 repo_url: https://github.com/MachineGnostics/machinegnostics
 repo_name: Machine Gnostics
 
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/MachineGnostics
-      name: GitHub
-  version:
-    provider: mike
-
 nav:
   - Home: 
     - Welcome: index.md
@@ -181,8 +173,11 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      # emoji_index: !!python/name:materialx.emoji.twemoji
+      # emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
   # - pymdownx:inlinehilite
   # - pymdownx:snippets
   - pymdownx.arithmatex:
@@ -196,6 +191,15 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format 
 
 extra:
+  announce: >-
+    <div style="display: flex; gap: 10px; justify-content: center; align-items: center; flex-wrap: wrap;">
+      <a href="https://badge.fury.io/py/machinegnostics"><img src="https://badge.fury.io/py/machinegnostics.svg" alt="PyPI version"></a>
+      <a href="https://pypi.org/project/machinegnostics/"><img src="https://img.shields.io/pypi/pyversions/machinegnostics.svg" alt="Python Versions"></a>
+      <a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a>
+      <a href="https://pepy.tech/project/machinegnostics"><img src="https://static.pepy.tech/badge/machinegnostics" alt="Downloads"></a>
+    </div>
+  version:
+    provider: mike
   analytics:
     provider: google
     property: G-CKN0D75GBF

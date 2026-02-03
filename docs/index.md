@@ -91,10 +91,10 @@ See the Concepts page for a deep dive into the science and philosophy behind MG.
 
 ## Real-World Impact
 
-- **Testimonials:**Hear from scientists and engineers who have solved unsolvable problems with MG.See [Testimonials](/stories/history/#testimonials) & [History](/stories/history/#historical-background).
+- **Testimonials:**Hear from scientists and engineers who have solved unsolvable problems with MG.See [Testimonials](./stories/history.md#testimonials) & [History](./stories/history.md#historical-background).
 - **Case Studies:**
   Explore real applications in thermodynamics, environmental science, and more.
-  See [Examples](tutorials/overview/#getting-started).
+  See [Tutorials](./tutorials/tutorials.md).
 
 ---
 
@@ -103,7 +103,7 @@ See the Concepts page for a deep dive into the science and philosophy behind MG.
 Machine Gnostics is open source and community-driven.
 
 - **Contribute:** Join us on [GitHub](https://github.com/MachineGnostics/machinegnostics).
-- **Contact:** Connect with the community—see [Contact](contact.md).
+- **Contact:** Connect with the community—see [Contact](contact.md#lets-connect).
 
 ---
 
@@ -112,7 +112,7 @@ Machine Gnostics is open source and community-driven.
 <div class="grid cards" markdown>
 
   -   :material-lightbulb: **Mathematical Gnostics**
-      [Core concepts](mg/concepts.md)
+      [Core concepts](./mg/concepts.md)
 
   -   :material-scale-balance: **Gnostic**
       [Fundamental principles](mg/principles.md)
@@ -130,7 +130,7 @@ Machine Gnostics is open source and community-driven.
       [Academic papers](ref/references.md)
 
   -   :material-school: **Tutorials**
-      [Get started](tutorials/overview.md)
+      [Get started](./tutorials/tutorials.md)
 
   -   :material-school: **OSS**
       [License: GNU v3.0](https://github.com/MachineGnostics/machinegnostics/blob/main/LICENSE)
