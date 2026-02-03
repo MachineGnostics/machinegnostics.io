@@ -18,7 +18,34 @@ Before you begin, please ensure that Machine Gnostics is installed correctly in 
 
 ## What You'll Learn
 
-### Data Analysis
+<div class="grid cards" markdown>
+
+-   :material-chart-bell-curve-cumulative: **Data Analysis**
+    - [Gnostic Distribution Function](../da/da_models.md/#gnostic-distribution-distributions-gdf)
+    - [Gnostic Data Tests](../da/da_models.md/#gnostic-data-tests)
+    - [Advanced Data Analysis](../da/da_models.md/#data-analysis)
+
+-   :material-brain: **Machine Learning**
+    - [Regression](../models/ml_models.md/#welcome-to-machine-gnostics-machine-learning-models)
+    - [Classification](../models/ml_models.md/#welcome-to-machine-gnostics-machine-learning-models)
+    - [Clustering](../models/ml_models.md/#welcome-to-machine-gnostics-machine-learning-models)
+    - [Forecasting](../models/ml_models.md/#welcome-to-machine-gnostics-machine-learning-models)
+    - [MLflow Integration](../models/sup/mlflow.md)
+
+-   :material-ruler: **Metrics**
+    - [Regular ML Metrics](../metrics/accuracy.md)
+    - [Gnostic Metrics](../metrics/mae.md)
+
+-   :material-creation: **Deep Learning**
+    - [Neural Networks](../magnet/magnet.md)
+    - _Coming soon!_
+
+</div>
+
+
+
+
+<!-- ### Data Analysis
 - [**Machine Gnostics Measures:**](1_da_basics.md) Understand the core measures and how they differ from traditional statistics.
 - [**Gnostics Distribution Functions:**](2_da_gdf.md) Learn to fit and interpret GDFs for your data.
 - [**Gnostics Tests**](5_da_test.md) Perform gnostic test on given data samples.
@@ -32,11 +59,11 @@ Before you begin, please ensure that Machine Gnostics is installed correctly in 
 - [**Logistic Regression:**](ml_log_reg_1.md) Perform robust binary classification with flexible probability outputs.
 - [**MLflow Integration:**](https://github.com/MachineGnostics/machinegnostics/blob/dev/examples/example_4_poly_reg_mf.ipynb) Track experiments and manage model deployment.
 
----
+--- -->
 
 ## Example Notebooks
 
-Explore hands-on Jupyter notebooks for each topic in the [Examples](examples.md) section.
+Explore hands-on Jupyter notebooks for each topic in the [Tutorials](tutorials.md) section.
 
 ---
 

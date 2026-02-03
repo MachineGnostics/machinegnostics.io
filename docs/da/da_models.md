@@ -27,29 +27,43 @@ Machine Gnostics models are specialized classes and algorithms designed to analy
 
   These models provide flexible, non-parametric representations of data distributions, supporting both empirical and quantile-based analysis. For more information, see [GDF documentation](../mg/gdf.md).
 
+### Gnostic Data Tests
+
+<div class="grid cards" markdown>
+
+-   **[Homogeneity Test](homogeneity.md)**
+
+    Functions for assessing data uniformity, analyzing distribution consistency and structural regularity.
+
+-   **[Scedasticity Test](scedasticity.md)**
+
+    Functions for assessing data variance, volatility, and dispersion characteristics across the dataset.
+
+-   **[Membership Test](membership.md)**
+
+    Algorithms for quantifying membership relevance and diagnostic scores for individual data points.
+
+
+</div>
+
 ### Data Analysis
 
 <div class="grid cards" markdown>
 
 -   **[Cluster Analysis](cluster_analysis.md)**
-    Tools for identifying natural groupings and structure in data, supporting unsupervised learning.
+
+    Tool for identifying natural groupings and structure in data.
 
 -   **[Interval Analysis](interval_analysis.md)**
-    Methods for estimating confidence intervals, bounds, and diagnostic regions with robust handling of outliers.
 
--   **[Homogeneity](homogeneity.md)**
-    Functions for assessing data uniformity, analyzing distribution consistency and structural regularity.
-
--   **[Scedasticity](scedasticity.md)**
-    Functions for assessing data variance, volatility, and dispersion characteristics across the dataset.
-
--   **[Membership](membership.md)**
-    Algorithms for quantifying membership relevance and diagnostic scores for individual data points.
+    Tool for estimating confidence intervals, bounds, and diagnostic regions with robust handling of outliers.
 
 -   **[Data Cluster](data_cluster.md)**
+
     Advanced boundary detection for identifying main clusters from probability density functions.
 
 -   **[Data Interval](data_interval.md)**
+
     Robust interval estimation engine for adaptive scanning and extracting meaningful data ranges.
 
 </div>
