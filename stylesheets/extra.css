@@ -1,0 +1,13 @@
+.md-banner {
+    background-color: #64ffda; /* Bright Mint */
+    color: #004d40; /* Dark Teal text */
+}
+
+.md-banner a {
+    color: #004d40; /* Dark Teal links */
+    text-decoration: underline; /* Optional: to make links obvious */
+}
+
+.md-banner a:hover {
+    color: #00695c; /* Darker teal on hover */
+}
