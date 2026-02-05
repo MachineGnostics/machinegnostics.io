@@ -22,20 +22,20 @@ Before you begin, please ensure that Machine Gnostics is installed correctly in 
 <div class="grid cards" markdown>
 
 -   :material-chart-bell-curve-cumulative: **Data Analysis**
-    - [Gnostic Distribution Function](../da/da_models.md/#gnostic-distribution-distributions-gdf)
-    - [Gnostic Data Tests](../da/da_models.md/#gnostic-data-tests)
-    - [Advanced Data Analysis](../da/da_models.md/#data-analysis)
+    - [Gnostic Distribution Function](./tutorials.md/#advanced-analysis)
+    - [Gnostic Data Tests](./tutorials.md/#data-tests)
+    - [Advanced Data Analysis](./tutorials.md/#advanced-analysis)
 
 -   :material-brain: **Machine Learning**
-    - [Regression](../models/ml_models.md/#welcome-to-machine-gnostics-machine-learning-models)
-    - [Classification](../models/ml_models.md/#welcome-to-machine-gnostics-machine-learning-models)
-    - [Clustering](../models/ml_models.md/#welcome-to-machine-gnostics-machine-learning-models)
-    - [Forecasting](../models/ml_models.md/#welcome-to-machine-gnostics-machine-learning-models)
-    - [MLflow Integration](../models/sup/mlflow.md)
+    - [Regression](./tutorials.md/#__tabbed_1_2)
+    - [Classification](./tutorials.md/#__tabbed_1_2)
+    - [Clustering](./tutorials.md/#__tabbed_1_2)
+    - [Forecasting](./tutorials.md/#__tabbed_1_2)
+    - [MLflow Integration](./tutorials.md/#__tabbed_1_3)
 
 -   :material-ruler: **Metrics**
-    - [Regular ML Metrics](../metrics/accuracy.md)
-    - [Gnostic Metrics](../metrics/mae.md)
+    - [Regular ML Metrics](./tutorials.md/#metrics)
+    - [Gnostic Metrics](./tutorials.md/#metrics)
 
 -   :material-creation: **Deep Learning**
     - [Neural Networks](../magnet/magnet.md)

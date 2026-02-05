@@ -1,13 +1,13 @@
-# Machine Gnostics – Example Gallery
+# Machine Gnostics – Tutorials Library
 
-Explore practical examples and Jupyter notebooks demonstrating the use of Machine Gnostics for data analysis and machine learning. 
+Explore tutorial and Jupyter notebooks demonstrating the use of Machine Gnostics for data analysis and machine learning.
 
-Each example includes:
+Each tutorial includes:
 
-*   Comprehensive code examples
-*   Theoretical background and explanations
-*   Immediate execution via Google Colab
-*   Source code access on GitHub
+* Comprehensive code examples
+* Theoretical background and explanations
+* Immediate execution via Google Colab
+* Source code access on GitHub
 
 ---
 
@@ -15,213 +15,213 @@ Each example includes:
 
 === "Data Analysis Models"
 
-    ### **Metrics**
-    <div class="grid cards" markdown>
+    ###**Metrics**
+    `<div class="grid cards" markdown>`
 
-    -   :material-ruler: **Machine Gnostics Basic Metrics**
+    -   :material-ruler:**Machine Gnostics Basic Metrics**
 
-        Learn how to calculate and interpret core Gnostics metrics.
+    Learn how to calculate and interpret core Gnostics metrics.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_01_gnostic_metrics.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_01_gnostic_metrics.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_01_gnostic_metrics.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_01_gnostic_metrics.ipynb)
 
-    </div>
+    `</div>`
 
-    ### **Data Tests**
-    <div class="grid cards" markdown>
+    ###**Data Tests**
+    `<div class="grid cards" markdown>`
 
-    -   :material-test-tube: **Data Homogeneity Test**
+    -   :material-test-tube:**Data Homogeneity Test**
 
-        Assess if your data comes from a single population or distribution.
+    Assess if your data comes from a single population or distribution.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_03_gnostic_data_homogeneity_test.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_03_gnostic_data_homogeneity_test.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_03_gnostic_data_homogeneity_test.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_03_gnostic_data_homogeneity_test.ipynb)
 
-    -   :material-chart-bell-curve: **Homoscedasticity Test**
+    -   :material-chart-bell-curve:**Homoscedasticity Test**
 
-        Test for constant variance across your dataset (homoscedasticity).
+    Test for constant variance across your dataset (homoscedasticity).
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_04_gnostic_homoscedasticity_test.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_04_gnostic_homoscedasticity_test.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_04_gnostic_homoscedasticity_test.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_04_gnostic_homoscedasticity_test.ipynb)
 
-    -   :material-account-group: **Data Membership Test**
+    -   :material-account-group:**Data Membership Test**
 
-        Evaluate whether new data points belong to the training distribution.
+    Evaluate whether new data points belong to the training distribution.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_05_gnostic_data_membership_test.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_05_gnostic_data_membership_test.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_05_gnostic_data_membership_test.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_05_gnostic_data_membership_test.ipynb)
 
-    </div>
+    `</div>`
 
-    ### **Advanced Analysis**
-    <div class="grid cards" markdown>
+    ###**Advanced Analysis**
+    `<div class="grid cards" markdown>`
 
-    -   :material-chart-bar: **Gnostic Distribution Functions**
+    -   :material-chart-bar:**Gnostic Distribution Functions**
 
-        Visualize and analyze data using Gnostics Distribution Functions.
+    Visualize and analyze data using Gnostics Distribution Functions.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb)
 
-    -   :material-chart-scatter-plot-hexbin: **Marginal Cluster Analysis**
+    -   :material-chart-scatter-plot-hexbin:**Marginal Cluster Analysis**
 
-        Perform clustering analysis using marginal distributions.
+    Perform clustering analysis using marginal distributions.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_06_gnostic_marginal_cluster_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_06_gnostic_marginal_cluster_analysis.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_06_gnostic_marginal_cluster_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_06_gnostic_marginal_cluster_analysis.ipynb)
 
-    -   :material-arrow-expand-horizontal: **Marginal Interval Analysis**
+    -   :material-arrow-expand-horizontal:**Marginal Interval Analysis**
 
-        Analyze data intervals and bounds with marginal analysis.
+    Analyze data intervals and bounds with marginal analysis.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_07_gnostic_marginal_interval_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_07_gnostic_marginal_interval_analysis.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_07_gnostic_marginal_interval_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_07_gnostic_marginal_interval_analysis.ipynb)
 
-    -   :material-alert-circle-outline: **Uncertainty Interval Analysis**
+    -   :material-alert-circle-outline:**Uncertainty Interval Analysis**
 
-        Quantify and analyze uncertainty within your data intervals.
+    Quantify and analyze uncertainty within your data intervals.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_08_gnostic_uncertainty_interval_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_08_gnostic_uncertainty_interval_analysis.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_08_gnostic_uncertainty_interval_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_08_gnostic_uncertainty_interval_analysis.ipynb)
 
-    </div>
+    `</div>`
 
 === "Machine Learning Models"
 
-    ### **Regression**
-    <div class="grid cards" markdown>
+    ###**Regression**
+    `<div class="grid cards" markdown>`
 
-    -   :material-chart-line: **Linear Regression**
+    -   :material-chart-line:**Linear Regression**
 
-        Standard linear regression implementation.
+    Standard linear regression implementation.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_01_linear_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_01_linear_regression.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_01_linear_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_01_linear_regression.ipynb)
 
-    -   :material-chart-bell-curve: **Polynomial Regression**
+    -   :material-chart-bell-curve:**Polynomial Regression**
 
-        Regression with polynomial features.
+    Regression with polynomial features.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_02_polynomial_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_02_polynomial_regression.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_02_polynomial_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_02_polynomial_regression.ipynb)
 
-    -   :material-glass-wine: **Wine Quality Regression**
+    -   :material-glass-wine:**Wine Quality Regression**
 
-        Real-world example: Predicting wine quality.
+    Real-world example: Predicting wine quality.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_03_wine_quality_linear_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_03_wine_quality_linear_regression.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_03_wine_quality_linear_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_03_wine_quality_linear_regression.ipynb)
 
-    -   :material-file-tree: **Decision Tree Regressor**
+    -   :material-file-tree:**Decision Tree Regressor**
 
-        Non-linear regression using Decision Trees.
+    Non-linear regression using Decision Trees.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_09_decision_tree_regressor.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_09_decision_tree_regressor.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_09_decision_tree_regressor.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_09_decision_tree_regressor.ipynb)
 
-    -   :material-forest: **Random Forest Regressor**
+    -   :material-forest:**Random Forest Regressor**
 
-        Ensemble regression using Random Forests.
+    Ensemble regression using Random Forests.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_11_random_forest_regressor.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_11_random_forest_regressor.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_11_random_forest_regressor.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_11_random_forest_regressor.ipynb)
 
-    -   :material-rocket-launch: **Boosting Regressor**
+    -   :material-rocket-launch:**Boosting Regressor**
 
-        Advanced regression using Boosting techniques.
+    Advanced regression using Boosting techniques.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_13_boosting_regressor.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_13_boosting_regressor.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_13_boosting_regressor.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_13_boosting_regressor.ipynb)
 
-    </div>
+    `</div>`
 
-    ### **Classification**
-    <div class="grid cards" markdown>
+    ###**Classification**
+    `<div class="grid cards" markdown>`
 
-    -   :material-toggle-switch: **Logistic Regression**
+    -   :material-toggle-switch:**Logistic Regression**
 
-        Binary classification fundamentals.
+    Binary classification fundamentals.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_04_logistic_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_04_logistic_regression.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_04_logistic_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_04_logistic_regression.ipynb)
 
-    -   :material-view-grid: **Multiclass Classification**
+    -   :material-view-grid:**Multiclass Classification**
 
-        Handling multiple classes in classification tasks.
+    Handling multiple classes in classification tasks.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_06_multiclass_classification.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_06_multiclass_classification.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_06_multiclass_classification.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_06_multiclass_classification.ipynb)
 
-    -   :material-file-tree: **Decision Tree Classifier**
+    -   :material-file-tree:**Decision Tree Classifier**
 
-        Classification using Decision Tree algorithms.
+    Classification using Decision Tree algorithms.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_08_decision_tree_classifier.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_08_decision_tree_classifier.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_08_decision_tree_classifier.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_08_decision_tree_classifier.ipynb)
 
-    -   :material-forest: **Random Forest Classifier**
+    -   :material-forest:**Random Forest Classifier**
 
-        Robust classification with Random Forests.
+    Robust classification with Random Forests.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_10_random_forest_classifier.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_10_random_forest_classifier.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_10_random_forest_classifier.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_10_random_forest_classifier.ipynb)
 
-    -   :material-rocket-launch: **Boosting Classifier**
+    -   :material-rocket-launch:**Boosting Classifier**
 
-        High-performance classification using Boosting.
+    High-performance classification using Boosting.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_12_boosting_classifier.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_12_boosting_classifier.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_12_boosting_classifier.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_12_boosting_classifier.ipynb)
 
-    </div>
+    `</div>`
 
-    ### **Clustering**
-    <div class="grid cards" markdown>
+    ###**Clustering**
+    `<div class="grid cards" markdown>`
 
-    -   :material-chart-bubble: **KMeans Clustering**
+    -   :material-chart-bubble:**KMeans Clustering**
 
-        Standard K-Means clustering implementation.
+    Standard K-Means clustering implementation.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_07_kmeans_clustering.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_07_kmeans_clustering.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_07_kmeans_clustering.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_07_kmeans_clustering.ipynb)
 
-    -   :material-chart-scatter-plot: **Gnostic Local Clustering**
+    -   :material-chart-scatter-plot:**Gnostic Local Clustering**
 
-        Clustering based on local Gnostic properties.
+    Clustering based on local Gnostic properties.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_17_gnostic_local_clustering.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_17_gnostic_local_clustering.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_17_gnostic_local_clustering.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_17_gnostic_local_clustering.ipynb)
 
-    </div>
+    `</div>`
 
-    ### **Forecasting**
-    <div class="grid cards" markdown>
+    ###**Forecasting**
+    `<div class="grid cards" markdown>`
 
-    -   :material-chart-timeline-variant: **AutoRegressor (AR)**
+    -   :material-chart-timeline-variant:**AutoRegressor (AR)**
 
-        Time series forecasting with AutoRegression.
+    Time series forecasting with AutoRegression.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_14_autoregressor_time_series.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_14_autoregressor_time_series.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_14_autoregressor_time_series.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_14_autoregressor_time_series.ipynb)
 
-    -   :material-chart-line-variant: **ARIMA**
+    -   :material-chart-line-variant:**ARIMA**
 
-        Forecasting with ARIMA models.
+    Forecasting with ARIMA models.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_15_arima_time_series.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_15_arima_time_series.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_15_arima_time_series.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_15_arima_time_series.ipynb)
 
-    -   :material-chart-timeline: **SARIMA**
+    -   :material-chart-timeline:**SARIMA**
 
-        Seasonal ARIMA for complex time series.
+    Seasonal ARIMA for complex time series.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_16_sarima_seasonal_time_series.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_16_sarima_seasonal_time_series.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_16_sarima_seasonal_time_series.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_16_sarima_seasonal_time_series.ipynb)
 
-    </div>
+    `</div>`
 
 === "Integrations & Tools"
 
-    ### **MLflow**
-    <div class="grid cards" markdown>
+    ###**MLflow**
+    `<div class="grid cards" markdown>`
 
-    -   :simple-mlflow: **MLflow Integration**
+    -   :simple-mlflow:**MLflow Integration**
 
-        Track experiments and manage models with MLflow.
+    Track experiments and manage models with MLflow.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_05_mlflow_integration.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_05_mlflow_integration.ipynb)
+    [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_05_mlflow_integration.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_05_mlflow_integration.ipynb)
 
-    </div>
+    `</div>`
 
 === "Deep Learning"
 
-    <div class="grid cards" markdown>
+    `<div class="grid cards" markdown>`
 
-    -   :material-brain: **Deep Learning Models**
+    -   :material-brain:**Deep Learning Models**
 
-        Advanced neural network architectures using Machine Gnostics.
-        
-        *Coming soon!*
+    Advanced neural network architectures using Machine Gnostics.
 
-        [:material-arrow-right: Read more about MagE](../magnet/magnet.md)
+    *Coming soon!*
 
-    </div>
+    [:material-arrow-right: Read more about Magnet](../magnet/magnet.md)
+
+    `</div>`
 
 ---
 

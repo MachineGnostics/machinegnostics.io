@@ -26,9 +26,11 @@ The origins of Mathematical Gnostics trace back to the early 1980s, when **Pavel
     | **2015** | **International Collaboration**<br>Collaboration with **Prof. M.B. Humber** (USA), resulting in a co-authored book and further dissemination of the theory. |
     | **2017** | **Scientific Analysis Tools**<br>**Z. Wagner** developed the Octave gnostic software, crucial for analyzing atmospheric aerosols at the Czech Academy of Sciences. |
     | **2018–2022** | **Research Expansion**<br>Application of gnostic methods expanded into environmental and medical research, including major EU projects. |
-    | **2023** | **Machine Gnostics**<br>**Nirmal Parmar** connected Mathematical Gnostics with machine learning, creating **Machine Gnostics**—opening a new dimension for assumption-free AI. |
+    | **Late 2022** | **The Machine Learning Connection**<br>**Nirmal Parmar** identified the link between Mathematical Gnostics and Machine Learning, initiating explorations into non-statistical AI (Machine Gnostics). |
+    | **2023** | **Machine Gnostics & Legacy**<br>**Pavel Kovanic** published his paperback book shortly before his passing. Concurrently, **Machine Gnostics** was born, bridging the theory with modern AI. |
 
     For more information on the history and development of mathematical gnostics, visit: [math-gnostics.eu](https://www.math-gnostics.eu/history/)
+
 
 ---
 
