@@ -28,20 +28,11 @@ This dataset is famous in robust statistics because it contains severe outliers 
 ## Example Usage
 
 ```python
-from machinegnostics.datasets import make_animals_check_data
+from machinegnostics.data import make_animals_check_data
 import numpy as np
 
 # Load the dataset
 X, y, names = make_animals_check_data()
-
-# inspect heaviest animal
-heaviest_idx = np.argmax(X)
-print(f"Heaviest: {names[heaviest_idx]} ({np.max(X)} kg)")
-# Output: Heaviest: Brachiosaurus (87000.0 kg)
-
-# Example: Inspecting first 5 entries
-for i in range(5):
-    print(f"{names[i]}: Body={X[i,0]}kg, Brain={y[i]}g")
 ```
 
 ---

@@ -36,7 +36,7 @@ The dataset is returned as a single matrix with the following columns:
 ## Example Usage
 
 ```python
-from machinegnostics.datasets import make_stackloss_check_data
+from machinegnostics.data import make_stackloss_check_data
 import numpy as np
 
 # Load the dataset

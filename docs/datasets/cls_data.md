@@ -38,7 +38,7 @@ This utility simplifies the creation of classification datasets by generating cl
 ## Example Usage
 
 ```python
-from machinegnostics.datasets import make_classification_check_data
+from machinegnostics.data import make_classification_check_data
 import numpy as np
 
 # Generate a 3-class dataset with 50 samples

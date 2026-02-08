@@ -36,7 +36,7 @@ The dataset forms two crescent shapes that are not linearly separable.
 ## Example Usage
 
 ```python
-from machinegnostics.datasets import make_moons_check_data
+from machinegnostics.data import make_moons_check_data
 import numpy as np
 
 # Generate noisy moon data

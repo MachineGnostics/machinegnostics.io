@@ -42,7 +42,7 @@ This utility creates regression datasets for testing:
 ## Example Usage
 
 ```python
-from machinegnostics.datasets import make_regression_check_data
+from machinegnostics.data import make_regression_check_data
 import numpy as np
 
 # Example 1: Standard Linear Regression

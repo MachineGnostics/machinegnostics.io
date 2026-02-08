@@ -51,7 +51,7 @@ All four datasets share nearly identical:
 ## Example Usage
 
 ```python
-from machinegnostics.datasets import make_anscombe_check_data
+from machinegnostics.data import make_anscombe_check_data
 import numpy as np
 
 # Load Dataset 3 (Linear with outlier)

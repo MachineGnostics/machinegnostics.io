@@ -27,7 +27,7 @@ Collected by James D. Forbes in the 19th century, this dataset contains 17 obser
 ## Example Usage
 
 ```python
-from machinegnostics.datasets import make_forbes_check_data
+from machinegnostics.data import make_forbes_check_data
 import numpy as np
 
 # Load the dataset
