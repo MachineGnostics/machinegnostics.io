@@ -219,7 +219,7 @@ Each example includes:
         
         *Coming soon!*
 
-        [:material-arrow-right: Read more about MagE](../magnet/magnet.md)
+        [:material-arrow-right: Read more about Magnet](../magnet/magnet.md)
 
     </div>
 
