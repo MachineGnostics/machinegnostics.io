@@ -77,7 +77,23 @@
          <lastmod>2026-02-08</lastmod>
     </url>
     <url>
+         <loc>https://machinegnostics.info/v0.0/datasets/linnerud_data/</loc>
+         <lastmod>2026-02-08</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/v0.0/datasets/longley_data/</loc>
+         <lastmod>2026-02-08</lastmod>
+    </url>
+    <url>
          <loc>https://machinegnostics.info/v0.0/datasets/moon_data/</loc>
+         <lastmod>2026-02-08</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/v0.0/datasets/mtcars_data/</loc>
+         <lastmod>2026-02-08</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/v0.0/datasets/puromycin_data/</loc>
          <lastmod>2026-02-08</lastmod>
     </url>
     <url>
@@ -86,6 +102,10 @@
     </url>
     <url>
          <loc>https://machinegnostics.info/v0.0/datasets/stackloss_data/</loc>
+         <lastmod>2026-02-08</lastmod>
+    </url>
+    <url>
+         <loc>https://machinegnostics.info/v0.0/datasets/starwars_data/</loc>
          <lastmod>2026-02-08</lastmod>
     </url>
     <url>

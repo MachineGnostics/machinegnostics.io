@@ -12,28 +12,28 @@
         <meta name="author" content="Nirmal Parmar">
       
       
-        <link rel="canonical" href="https://machinegnostics.info/v0.0/models/sup/cross_val/">
+        <link rel="canonical" href="https://machinegnostics.info/v0.0/datasets/longley_data/">
       
       
-        <link rel="prev" href="../../forc/sarima/">
+        <link rel="prev" href="../linnerud_data/">
       
       
-        <link rel="next" href="../train_test_split/">
+        <link rel="next" href="../mtcars_data/">
       
       
-      <link rel="icon" href="../../../images/logo.png">
+      <link rel="icon" href="../../images/logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
     
     
       
-        <title>Cross Validation - Machine Gnostics</title>
+        <title>Longley Data - Machine Gnostics</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -47,14 +47,14 @@
         
         
         
-        <link rel="stylesheet" href="../../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
+        <link rel="stylesheet" href="../../assets/external/fonts.googleapis.com/css.49ea35f2.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -90,7 +90,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#crossvalidator-custom-k-fold-cross-validation" class="md-skip">
+        <a href="#make_longley_check_data-longley-economic-dataset" class="md-skip">
           Skip to content
         </a>
       
@@ -144,9 +144,9 @@
 
 <header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
+    <a href="../.." title="Machine Gnostics" class="md-header__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
-  <img src="../../../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -163,7 +163,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Cross Validation
+              Longley Data
             
           </span>
         </div>
@@ -270,7 +270,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../.." class="md-tabs__link">
+        <a href="../.." class="md-tabs__link">
           
   
   
@@ -290,7 +290,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../installation/" class="md-tabs__link">
+        <a href="../../installation/" class="md-tabs__link">
           
   
   
@@ -310,31 +310,11 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../tutorials/overview/" class="md-tabs__link">
+        <a href="../../tutorials/overview/" class="md-tabs__link">
           
   
   
   Tutorials
-
-        </a>
-      </li>
-    
-  
-
-      
-        
-  
-  
-  
-  
-    
-    
-      <li class="md-tabs__item">
-        <a href="../../../da/da_models/" class="md-tabs__link">
-          
-  
-  
-  Data Analysis
 
         </a>
       </li>
@@ -352,7 +332,27 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../ml_models/" class="md-tabs__link">
+        <a href="../../da/da_models/" class="md-tabs__link">
+          
+  
+  
+  Data Analysis
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../models/ml_models/" class="md-tabs__link">
           
   
   
@@ -372,7 +372,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../magnet/magnet/" class="md-tabs__link">
+        <a href="../../magnet/magnet/" class="md-tabs__link">
           
   
   
@@ -399,7 +399,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../metrics/accuracy/" class="md-tabs__link">
+        <a href="../../metrics/accuracy/" class="md-tabs__link">
           
   
   
@@ -420,7 +420,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../ref/references/" class="md-tabs__link">
+      <a href="../../ref/references/" class="md-tabs__link">
         
   
   
@@ -439,7 +439,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../../contact/" class="md-tabs__link">
+      <a href="../../contact/" class="md-tabs__link">
         
   
   
@@ -480,9 +480,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Machine Gnostics" class="md-nav__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
+    <a href="../.." title="Machine Gnostics" class="md-nav__button md-logo" aria-label="Machine Gnostics" data-md-component="logo">
       
-  <img src="../../../images/logo.png" alt="logo">
+  <img src="../../images/logo.png" alt="logo">
 
     </a>
     Machine Gnostics
@@ -552,7 +552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -575,7 +575,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../stories/history/" class="md-nav__link">
+      <a href="../../stories/history/" class="md-nav__link">
         
   
   
@@ -641,7 +641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mg/concepts/" class="md-nav__link">
+      <a href="../../mg/concepts/" class="md-nav__link">
         
   
   
@@ -664,7 +664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mg/principles/" class="md-nav__link">
+      <a href="../../mg/principles/" class="md-nav__link">
         
   
   
@@ -687,7 +687,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mg/gdf/" class="md-nav__link">
+      <a href="../../mg/gdf/" class="md-nav__link">
         
   
   
@@ -710,7 +710,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mg/architecture/" class="md-nav__link">
+      <a href="../../mg/architecture/" class="md-nav__link">
         
   
   
@@ -733,7 +733,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../mg/mg_arguments/" class="md-nav__link">
+      <a href="../../mg/mg_arguments/" class="md-nav__link">
         
   
   
@@ -814,7 +814,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../installation/" class="md-nav__link">
+      <a href="../../installation/" class="md-nav__link">
         
   
   
@@ -837,7 +837,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tutorials/overview/" class="md-nav__link">
+      <a href="../../tutorials/overview/" class="md-nav__link">
         
   
   
@@ -860,7 +860,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tutorials/tutorials/" class="md-nav__link">
+      <a href="../../tutorials/tutorials/" class="md-nav__link">
         
   
   
@@ -933,7 +933,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tutorials/overview/" class="md-nav__link">
+      <a href="../../tutorials/overview/" class="md-nav__link">
         
   
   
@@ -956,7 +956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../tutorials/tutorials/" class="md-nav__link">
+      <a href="../../tutorials/tutorials/" class="md-nav__link">
         
   
   
@@ -983,26 +983,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
         
           
-          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
   
@@ -1015,7 +1020,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Data Analysis
@@ -1029,7 +1034,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/da_models/" class="md-nav__link">
+      <a href="../../da/da_models/" class="md-nav__link">
         
   
   
@@ -1058,17 +1063,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
         
           
-          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
             
   
   
@@ -1095,7 +1103,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/egdf/" class="md-nav__link">
+      <a href="../../da/egdf/" class="md-nav__link">
         
   
   
@@ -1118,7 +1126,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/eldf/" class="md-nav__link">
+      <a href="../../da/eldf/" class="md-nav__link">
         
   
   
@@ -1141,7 +1149,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/qgdf/" class="md-nav__link">
+      <a href="../../da/qgdf/" class="md-nav__link">
         
   
   
@@ -1164,7 +1172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/qldf/" class="md-nav__link">
+      <a href="../../da/qldf/" class="md-nav__link">
         
   
   
@@ -1201,17 +1209,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
         
           
-          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="">
             
   
   
@@ -1238,7 +1249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/cluster_analysis/" class="md-nav__link">
+      <a href="../../da/cluster_analysis/" class="md-nav__link">
         
   
   
@@ -1261,7 +1272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/interval_analysis/" class="md-nav__link">
+      <a href="../../da/interval_analysis/" class="md-nav__link">
         
   
   
@@ -1284,7 +1295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/homogeneity/" class="md-nav__link">
+      <a href="../../da/homogeneity/" class="md-nav__link">
         
   
   
@@ -1307,7 +1318,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/scedasticity/" class="md-nav__link">
+      <a href="../../da/scedasticity/" class="md-nav__link">
         
   
   
@@ -1330,7 +1341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/membership/" class="md-nav__link">
+      <a href="../../da/membership/" class="md-nav__link">
         
   
   
@@ -1353,7 +1364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/data_interval/" class="md-nav__link">
+      <a href="../../da/data_interval/" class="md-nav__link">
         
   
   
@@ -1376,7 +1387,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../da/data_cluster/" class="md-nav__link">
+      <a href="../../da/data_cluster/" class="md-nav__link">
         
   
   
@@ -1404,26 +1415,31 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" >
         
           
-          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="">
             
   
   
@@ -1436,7 +1452,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_4">
             <span class="md-nav__icon md-icon"></span>
             Datasets
@@ -1450,7 +1466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../datasets/animal_data/" class="md-nav__link">
+      <a href="../animal_data/" class="md-nav__link">
         
   
   
@@ -1473,7 +1489,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../datasets/anscombe_data/" class="md-nav__link">
+      <a href="../anscombe_data/" class="md-nav__link">
         
   
   
@@ -1496,7 +1512,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../datasets/cls_data/" class="md-nav__link">
+      <a href="../cls_data/" class="md-nav__link">
         
   
   
@@ -1519,7 +1535,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../datasets/forbes_data/" class="md-nav__link">
+      <a href="../forbes_data/" class="md-nav__link">
         
   
   
@@ -1542,7 +1558,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../datasets/linnerud_data/" class="md-nav__link">
+      <a href="../linnerud_data/" class="md-nav__link">
         
   
   
@@ -1557,862 +1573,6 @@
   
 
               
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../datasets/longley_data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Longley Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../datasets/mtcars_data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    MtCars Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../datasets/moon_data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Moon Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../datasets/puromycin_data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Puromycin Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../datasets/reg_data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Regression Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../datasets/stackloss_data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Stackloss Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../datasets/starwars_data/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Starwars Data
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-        
-        
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Machine Learning
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5">
-            <span class="md-nav__icon md-icon"></span>
-            Machine Learning
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../ml_models/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Models
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Regressors
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_2">
-            <span class="md-nav__icon md-icon"></span>
-            Regressors
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reg/lin_reg/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Linear Regressor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reg/poly_reg/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Polynomial Regressor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cls/log_reg/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Logistic Regressor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cart/dt_reg/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Decision Tree Regressor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cart/rf_reg/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Random Forest Regressor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cart/gb_reg/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Gnostic Boosting Regressor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Classifiers
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_3">
-            <span class="md-nav__icon md-icon"></span>
-            Classifiers
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cls/multi_class/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Multi Class Classifier
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cart/dt_cls/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Decision Tree Classifier
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cart/rf_cls/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Random Forest Classifier
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cart/gb_cls/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Gnostic Boosting Classifier
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Clustering
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_4">
-            <span class="md-nav__icon md-icon"></span>
-            Clustering
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cluster/kmeans/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    KMeans Clustering
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../cluster/glc/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Estimating Local Clustering
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Forecasting
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5_5">
-            <span class="md-nav__icon md-icon"></span>
-            Forecasting
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../forc/ar/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    Auto Regressor
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../forc/arima/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    ARIMA
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../forc/sarima/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    SARIMA
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" checked>
-        
-          
-          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    Utils
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5_6">
-            <span class="md-nav__icon md-icon"></span>
-            Utils
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
             
               
                 
@@ -2435,7 +1595,7 @@
   
   
   <span class="md-ellipsis">
-    Cross Validation
+    Longley Data
     
   </span>
   
@@ -2448,7 +1608,7 @@
   
   
   <span class="md-ellipsis">
-    Cross Validation
+    Longley Data
     
   </span>
   
@@ -2489,44 +1649,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
+  <a href="#returns" class="md-nav__link">
     <span class="md-ellipsis">
-      Attributes
+      Returns
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      Methods
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#split" class="md-nav__link">
-    <span class="md-ellipsis">
-      split()
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evaluatescoring_func" class="md-nav__link">
-    <span class="md-ellipsis">
-      evaluate(scoring_func)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2534,15 +1661,6 @@
   <a href="#example-usage" class="md-nav__link">
     <span class="md-ellipsis">
       Example Usage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Notes
     </span>
   </a>
   
@@ -2564,7 +1682,841 @@
   
   
     <li class="md-nav__item">
-      <a href="../train_test_split/" class="md-nav__link">
+      <a href="../mtcars_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MtCars Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../moon_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Moon Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../puromycin_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Puromycin Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reg_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Regression Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stackloss_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Stackloss Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../starwars_data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Starwars Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Machine Learning
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Machine Learning
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/ml_models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Regressors
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Regressors
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/reg/lin_reg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Linear Regressor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/reg/poly_reg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Polynomial Regressor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cls/log_reg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logistic Regressor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cart/dt_reg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decision Tree Regressor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cart/rf_reg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Random Forest Regressor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cart/gb_reg/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gnostic Boosting Regressor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Classifiers
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Classifiers
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cls/multi_class/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Multi Class Classifier
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cart/dt_cls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Decision Tree Classifier
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cart/rf_cls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Random Forest Classifier
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cart/gb_cls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gnostic Boosting Classifier
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Clustering
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Clustering
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cluster/kmeans/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    KMeans Clustering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/cluster/glc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Estimating Local Clustering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Forecasting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Forecasting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/forc/ar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Auto Regressor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/forc/arima/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ARIMA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/forc/sarima/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SARIMA
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_6" id="__nav_5_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Utils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_6">
+            <span class="md-nav__icon md-icon"></span>
+            Utils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/sup/cross_val/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cross Validation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../models/sup/train_test_split/" class="md-nav__link">
         
   
   
@@ -2601,20 +2553,17 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_7" >
         
           
-          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5_7" id="__nav_5_7_label" tabindex="0">
             
   
   
@@ -2641,7 +2590,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mlflow/" class="md-nav__link">
+      <a href="../../models/sup/mlflow/" class="md-nav__link">
         
   
   
@@ -2722,7 +2671,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../magnet/magnet/" class="md-nav__link">
+      <a href="../../magnet/magnet/" class="md-nav__link">
         
   
   
@@ -2838,7 +2787,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/accuracy/" class="md-nav__link">
+      <a href="../../metrics/accuracy/" class="md-nav__link">
         
   
   
@@ -2861,7 +2810,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/precision/" class="md-nav__link">
+      <a href="../../metrics/precision/" class="md-nav__link">
         
   
   
@@ -2884,7 +2833,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/recall/" class="md-nav__link">
+      <a href="../../metrics/recall/" class="md-nav__link">
         
   
   
@@ -2907,7 +2856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/confusion_matrix/" class="md-nav__link">
+      <a href="../../metrics/confusion_matrix/" class="md-nav__link">
         
   
   
@@ -2930,7 +2879,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/f1_score/" class="md-nav__link">
+      <a href="../../metrics/f1_score/" class="md-nav__link">
         
   
   
@@ -2953,7 +2902,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/r2/" class="md-nav__link">
+      <a href="../../metrics/r2/" class="md-nav__link">
         
   
   
@@ -2976,7 +2925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/classification_report/" class="md-nav__link">
+      <a href="../../metrics/classification_report/" class="md-nav__link">
         
   
   
@@ -2999,7 +2948,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/silhouette_score/" class="md-nav__link">
+      <a href="../../metrics/silhouette_score/" class="md-nav__link">
         
   
   
@@ -3073,7 +3022,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/mae/" class="md-nav__link">
+      <a href="../../metrics/mae/" class="md-nav__link">
         
   
   
@@ -3096,7 +3045,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/mse/" class="md-nav__link">
+      <a href="../../metrics/mse/" class="md-nav__link">
         
   
   
@@ -3119,7 +3068,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/rmse/" class="md-nav__link">
+      <a href="../../metrics/rmse/" class="md-nav__link">
         
   
   
@@ -3142,7 +3091,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/r2_score/" class="md-nav__link">
+      <a href="../../metrics/r2_score/" class="md-nav__link">
         
   
   
@@ -3165,7 +3114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_correlation/" class="md-nav__link">
+      <a href="../../metrics/g_correlation/" class="md-nav__link">
         
   
   
@@ -3188,7 +3137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_relevance/" class="md-nav__link">
+      <a href="../../metrics/g_relevance/" class="md-nav__link">
         
   
   
@@ -3211,7 +3160,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/divI/" class="md-nav__link">
+      <a href="../../metrics/divI/" class="md-nav__link">
         
   
   
@@ -3234,7 +3183,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/gmmfe/" class="md-nav__link">
+      <a href="../../metrics/gmmfe/" class="md-nav__link">
         
   
   
@@ -3257,7 +3206,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/entropy/" class="md-nav__link">
+      <a href="../../metrics/entropy/" class="md-nav__link">
         
   
   
@@ -3280,7 +3229,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/evalmet/" class="md-nav__link">
+      <a href="../../metrics/evalmet/" class="md-nav__link">
         
   
   
@@ -3303,7 +3252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/silhouette_score/" class="md-nav__link">
+      <a href="../../metrics/silhouette_score/" class="md-nav__link">
         
   
   
@@ -3326,7 +3275,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/stationarity_test/" class="md-nav__link">
+      <a href="../../metrics/stationarity_test/" class="md-nav__link">
         
   
   
@@ -3349,7 +3298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_auto_corelation/" class="md-nav__link">
+      <a href="../../metrics/g_auto_corelation/" class="md-nav__link">
         
   
   
@@ -3372,7 +3321,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_auto_covariance/" class="md-nav__link">
+      <a href="../../metrics/g_auto_covariance/" class="md-nav__link">
         
   
   
@@ -3395,7 +3344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_cross_variance/" class="md-nav__link">
+      <a href="../../metrics/g_cross_variance/" class="md-nav__link">
         
   
   
@@ -3418,7 +3367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_variance/" class="md-nav__link">
+      <a href="../../metrics/g_variance/" class="md-nav__link">
         
   
   
@@ -3441,7 +3390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_mean/" class="md-nav__link">
+      <a href="../../metrics/g_mean/" class="md-nav__link">
         
   
   
@@ -3464,7 +3413,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_median/" class="md-nav__link">
+      <a href="../../metrics/g_median/" class="md-nav__link">
         
   
   
@@ -3487,7 +3436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/g_std/" class="md-nav__link">
+      <a href="../../metrics/g_std/" class="md-nav__link">
         
   
   
@@ -3510,7 +3459,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../metrics/stationarity_test/" class="md-nav__link">
+      <a href="../../metrics/stationarity_test/" class="md-nav__link">
         
   
   
@@ -3548,7 +3497,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../ref/references/" class="md-nav__link">
+      <a href="../../ref/references/" class="md-nav__link">
         
   
   
@@ -3570,7 +3519,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../contact/" class="md-nav__link">
+      <a href="../../contact/" class="md-nav__link">
         
   
   
@@ -3630,44 +3579,11 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
+  <a href="#returns" class="md-nav__link">
     <span class="md-ellipsis">
-      Attributes
+      Returns
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#methods" class="md-nav__link">
-    <span class="md-ellipsis">
-      Methods
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Methods">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#split" class="md-nav__link">
-    <span class="md-ellipsis">
-      split()
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#evaluatescoring_func" class="md-nav__link">
-    <span class="md-ellipsis">
-      evaluate(scoring_func)
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -3675,15 +3591,6 @@
   <a href="#example-usage" class="md-nav__link">
     <span class="md-ellipsis">
       Example Usage
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#notes" class="md-nav__link">
-    <span class="md-ellipsis">
-      Notes
     </span>
   </a>
   
@@ -3708,115 +3615,73 @@
   
 
 
-<h1 id="crossvalidator-custom-k-fold-cross-validation">CrossValidator: Custom k-Fold Cross-Validation<a class="headerlink" href="#crossvalidator-custom-k-fold-cross-validation" title="Permanent link">&para;</a></h1>
-<p>The <code>CrossValidator</code> class provides a simple, flexible implementation of k-fold cross-validation for evaluating machine learning models. It is designed to work with any model that implements <code>fit(X, y)</code> and <code>predict(X)</code> methods, and supports custom scoring functions for regression or classification tasks.</p>
+<h1 id="make_longley_check_data-longley-economic-dataset">make_longley_check_data: Longley Economic Dataset<a class="headerlink" href="#make_longley_check_data-longley-economic-dataset" title="Permanent link">&para;</a></h1>
+<p>The <code>make_longley_check_data</code> function generates a Longley-like economic dataset. Ideally suited for testing numerical accuracy and stability in regression models, this dataset is famous for its high multicollinearity among predictors.</p>
 <hr />
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h2>
-<p>Cross-validation is a robust technique for assessing the generalization performance of machine learning models. The <code>CrossValidator</code> class splits your dataset into <code>k</code> folds, trains the model on <code>k-1</code> folds, and evaluates it on the remaining fold, repeating this process for each fold. The results are aggregated to provide a reliable estimate of model performance.</p>
+<p>This utility creates a synthetic version of the Longley economic dataset:</p>
+<ul>
+<li><strong>Structure</strong>: 16 observations with 7 economic variables.</li>
+<li><strong>Characteristics</strong>: High collinearity between predictors like <code>GNP</code>, <code>Population</code>, and <code>Year</code>.</li>
+<li><strong>Purpose</strong>: Validating the numerical stability of regression algorithms (e.g., least squares) under conditions of ill-conditioning.</li>
+<li><strong>Reproducibility</strong>: Uses a fixed seed (default 42).</li>
+</ul>
 <hr />
 <h2 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Default</th>
-<th>Description</th>
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+<th style="text-align: left;">Default</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>model</code></td>
-<td>object</td>
-<td>—</td>
-<td>A machine learning model with <code>fit(X, y)</code> and <code>predict(X)</code> methods.</td>
-</tr>
-<tr>
-<td><code>X</code></td>
-<td>array-like</td>
-<td>—</td>
-<td>Feature matrix of shape <code>(n_samples, n_features)</code>.</td>
-</tr>
-<tr>
-<td><code>y</code></td>
-<td>array-like</td>
-<td>—</td>
-<td>Target labels of shape <code>(n_samples,)</code>.</td>
-</tr>
-<tr>
-<td><code>k</code></td>
-<td>int</td>
-<td>5</td>
-<td>Number of folds for cross-validation.</td>
-</tr>
-<tr>
-<td><code>shuffle</code></td>
-<td>bool</td>
-<td>True</td>
-<td>Whether to shuffle the dataset before splitting into folds.</td>
-</tr>
-<tr>
-<td><code>random_seed</code></td>
-<td>int/None</td>
-<td>None</td>
-<td>Seed for reproducible shuffling (ignored if <code>shuffle=False</code>).</td>
+<td style="text-align: left;"><code>seed</code></td>
+<td style="text-align: left;">int</td>
+<td style="text-align: left;">Random seed for reproducibility.</td>
+<td style="text-align: left;"><code>42</code></td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
-<ul>
-<li><strong>folds</strong>: <code>list of tuple</code>
-  List of <code>(train_indices, test_indices)</code> for each fold.</li>
-</ul>
-<hr />
-<h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h2>
-<h3 id="split"><code>split()</code><a class="headerlink" href="#split" title="Permanent link">&para;</a></h3>
-<p>Splits the dataset into <code>k</code> folds.</p>
-<ul>
-<li><strong>Returns</strong>:
-  <code>folds</code>: list of tuple
-  Each tuple contains <code>(train_indices, test_indices)</code> for a fold.</li>
-</ul>
-<h3 id="evaluatescoring_func"><code>evaluate(scoring_func)</code><a class="headerlink" href="#evaluatescoring_func" title="Permanent link">&para;</a></h3>
-<p>Performs k-fold cross-validation and returns evaluation scores.</p>
-<ul>
-<li><strong>Parameters</strong>:<code>scoring_func</code>: callableA function that takes <code>y_true</code> and <code>y_pred</code> and returns a numeric score (e.g., <code>mean_squared_error</code>, <code>accuracy_score</code>).</li>
-<li><strong>Returns</strong>:
-  <code>scores</code>: list of float
-  Evaluation scores for each fold.</li>
-</ul>
+<h2 id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Return</th>
+<th style="text-align: left;">Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>data</code></td>
+<td style="text-align: left;">numpy.ndarray</td>
+<td style="text-align: left;">Array of shape <code>(16, 7)</code> containing economic indicators.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>column_names</code></td>
+<td style="text-align: left;">list[str]</td>
+<td style="text-align: left;">List of column names in order: <code>['GNP.deflator', 'GNP', 'Unemployed', 'Armed.Forces', 'Population', 'Year', 'Employed']</code>.</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">CrossValidator</span><span class="p">,</span> <span class="n">LinearRegressor</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.metircs</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Generate random data</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">machinegnostics.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_longley_check_data</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Generate Longley data</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">data</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">make_longley_check_data</span><span class="p">()</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Shape: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Output: (16, 7)</span>
 </span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Initialize model and cross-validator</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegressor</span><span class="p">()</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">cv</span> <span class="o">=</span> <span class="n">CrossValidator</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="c1"># Evaluate using mean squared error</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="n">scores</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">)</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cross-Validation Scores:&quot;</span><span class="p">,</span> <span class="n">scores</span><span class="p">)</span>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean Score:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">scores</span><span class="p">))</span>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Columns: </span><span class="si">{</span><span class="n">cols</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Output: [&#39;GNP.deflator&#39;, &#39;GNP&#39;, &#39;Unemployed&#39;, &#39;Armed.Forces&#39;, &#39;Population&#39;, &#39;Year&#39;, &#39;Employed&#39;]</span>
 </span></code></pre></div>
-<hr />
-<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
-<ul>
-<li>The model is re-initialized and trained from scratch for each fold.</li>
-<li>Supports any model with <code>fit</code> and <code>predict</code> methods.</li>
-<li>Works with any scoring function that accepts <code>y_true</code> and <code>y_pred</code>.</li>
-<li>Shuffling with a fixed <code>random_seed</code> ensures reproducible splits.</li>
-</ul>
-<hr />
-<p><strong>Author:</strong> Nirmal Parmar<br />
-<strong>Date:</strong> 2025-05-01</p>
-<hr />
 
 
 
@@ -3837,7 +3702,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="June 5, 2025 06:08:50 UTC">June 5, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 8, 2026 16:44:22 UTC">February 8, 2026</span>
   </span>
 
     
@@ -3875,7 +3740,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../../forc/sarima/" class="md-footer__link md-footer__link--prev" aria-label="Previous: SARIMA">
+          <a href="../linnerud_data/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Linnerud Data">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -3885,20 +3750,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                SARIMA
+                Linnerud Data
               </div>
             </div>
           </a>
         
         
           
-          <a href="../train_test_split/" class="md-footer__link md-footer__link--next" aria-label="Next: Train Test Split">
+          <a href="../mtcars_data/" class="md-footer__link md-footer__link--next" aria-label="Next: MtCars Data">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Train Test Split
+                MtCars Data
               </div>
             </div>
             <div class="md-footer__button md-icon">
@@ -4067,16 +3932,16 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer", "navigation.tabs", "navigation.sections", "navigation.top", "navigation.instant", "navigation.instant.progress", "navigation.instant.preview", "navigation.instant.prefetch", "navigation.tracking", "navigation.tabs.sticky", "content.code.annotate", "content.code.copy", "content.code.select"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
       
-        <script src="../../../assets/external/cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script src="../../assets/external/cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="../../../javascripts/cookie-consent.js"></script>
+        <script src="../../javascripts/cookie-consent.js"></script>
       
-        <script src="../../../javascripts/vertical-colors.js"></script>
+        <script src="../../javascripts/vertical-colors.js"></script>
       
     
   </body>
