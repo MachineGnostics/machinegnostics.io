@@ -168,9 +168,7 @@ with right:
     fig_e.update_yaxes(scaleanchor="x", scaleratio=1)
     st.plotly_chart(fig_e, width='stretch')
 
-st.subheader("Notes")
 st.markdown("""
-App Description for Streamlit
 # The Ideal Gnostic Cycle (IGC) Explorer
 
 > **"Nature creates uncertainty. The Analyst creates information."**
