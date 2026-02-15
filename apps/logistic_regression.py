@@ -20,6 +20,33 @@ def _parse_numbers(text: str) -> np.ndarray:
     return np.asarray(vals, dtype=float)
 
 
+def _parse_matrix(text: str) -> np.ndarray:
+    """Parse multi-line matrix input: each line is a sample, values comma/space-separated."""
+    if not text:
+        return np.array([])
+    rows = []
+    for raw_line in text.strip().splitlines():
+        line = raw_line.strip()
+        if line == "":
+            continue
+        # Remove enclosing brackets if present
+        line = line.replace("[", "").replace("]", "")
+        # Split by comma or whitespace
+        parts = [p for p in line.replace("\t", " ").replace(",", " ").split() if p]
+        try:
+            row = [float(p) for p in parts]
+            rows.append(row)
+        except ValueError:
+            # skip malformed lines
+            continue
+    if not rows:
+        return np.array([])
+    # Ensure consistent number of columns
+    ncols = len(rows[0])
+    rows = [r for r in rows if len(r) == ncols]
+    return np.asarray(rows, dtype=float)
+
+
 def _parse_labels(text: str) -> np.ndarray:
     arr = _parse_numbers(text)
     if arr.size == 0:
@@ -71,9 +98,41 @@ def main():
 
     # Data inputs
     st.subheader("Data")
-    default_X = "0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0"
-    # Labels encoded roughly by threshold; include one flipped label to simulate noise
-    default_y = "0, 0, 1, 1, 1, 1, 1, 0, 1"
+    default_X = (
+        "-0.14877078, 0.78315139\n"
+        "0.51076183, 0.17344784\n"
+        "0.64437712, -0.42849565\n"
+        "-0.53732321, 0.59258391\n"
+        "0.22222702, 0.29191072\n"
+        "0.23572707, 1.20037615\n"
+        "0.62012957, 0.6112227\n"
+        "0.80739956, 0.56024128\n"
+        "-0.07737646, 0.11472452\n"
+        "0.60976333, 1.05652725\n"
+        "1.06094342, -0.20799682\n"
+        "1.02333716, -0.45626228\n"
+        "-0.25819368, 0.89098369\n"
+        "1.56966645, -0.38745305\n"
+        "0.42832952, 0.418717\n"
+        "1.12501815, 0.41063388\n"
+        "1.39680669, -0.4302088\n"
+        "1.68131368, -0.15557384\n"
+        "0.7147671, -0.29233801\n"
+        "-0.98663443, 0.36345703\n"
+        "-0.91745348, 0.0861642\n"
+        "1.80689434, -0.06165931\n"
+        "-0.66046227, 0.64564557\n"
+        "1.82683378, 0.69365567\n"
+        "-0.86846608, 0.29560975\n"
+        "1.49040032, -0.18742405\n"
+        "0.09350187, 0.82814151\n"
+        "0.19537903, -0.2915211\n"
+        "0.21161396, -0.15171292\n"
+        "1.91989946, 0.57646733"
+    )
+    default_y = (
+        "0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1"
+    )
 
     if "logr_X_text" not in st.session_state:
         st.session_state["logr_X_text"] = default_X
@@ -83,7 +142,7 @@ def main():
     c_data = st.columns(2)
     with c_data[0]:
         X_text = st.text_area(
-            "X values (1D)",
+            "X values (lines; comma-separated features)",
             height=100,
             placeholder="e.g., 0, 0.5, 1.0, 1.5, 2.0",
             key="logr_X_text",
@@ -96,14 +155,16 @@ def main():
             key="logr_y_text",
         )
 
-    X = _parse_numbers(X_text)
+    # Parse X as matrix (supports 1D if single value per line)
+    X = _parse_matrix(X_text)
     # Accept 0/1 labels directly; if floats are provided, binarize with threshold 0.5
     y_raw = _parse_numbers(y_text)
     if y_raw.size > 0 and np.all(np.isin(y_raw, [0.0, 1.0])):
         y = y_raw.astype(int)
     else:
         y = _parse_labels(y_text)
-    st.caption(f"Parsed X: {X.size} points · y: {y.size} labels")
+    shape_txt = f"{X.shape[0]}x{X.shape[1]}" if X.ndim == 2 and X.size > 0 else f"{X.size}"
+    st.caption(f"Parsed X: {shape_txt} · y: {y.size} labels")
 
     # Options
     st.subheader("Options")
@@ -129,13 +190,15 @@ def main():
         gnostic_characteristics = st.checkbox("gnostic_characteristics", value=False)
 
     # Actions
-    a_cols = st.columns(3)
+    a_cols = st.columns(4)
     with a_cols[0]:
         do_fit = st.button("Fit Model", type="primary")
     with a_cols[1]:
         do_plot_prob = st.button("Plot Probabilities")
     with a_cols[2]:
         do_plot_w = st.button("Plot Weights")
+    with a_cols[3]:
+        do_plot_hist = st.button("Plot Loss & Entropy")
 
     # Session cache
     if "logr_state" not in st.session_state:
@@ -170,13 +233,13 @@ def main():
     if do_fit:
         if X.size == 0 or y.size == 0:
             st.error("Please provide both X and y labels.")
-        elif X.size != y.size:
+        elif (X.ndim == 1 and X.size != y.size) or (X.ndim == 2 and X.shape[0] != y.size):
             st.error("X and y must have the same number of points.")
         elif not np.all(np.isin(y, [0, 1])):
             st.error("Labels must be binary (0 or 1).")
         else:
             try:
-                X_ = X.reshape(-1, 1)
+                X_ = X.reshape(-1, 1) if X.ndim == 1 else X
                 model.fit(X_, y)
                 st.success("Model fitted successfully.")
                 st.session_state["logr_state"]["LOGR"] = model
@@ -202,12 +265,21 @@ def main():
                 st.error("Please provide both X and y labels.")
             else:
                 plt.close("all")
-                X_plot = np.linspace(np.min(X), np.max(X), 200).reshape(-1, 1)
+                if X.ndim == 1 or (X.ndim == 2 and X.shape[1] == 1):
+                    X_plot = np.linspace(np.min(X), np.max(X), 200).reshape(-1, 1)
+                else:
+                    # Vary first feature, fix others at their means
+                    mins = np.min(X, axis=0)
+                    maxs = np.max(X, axis=0)
+                    means = np.mean(X, axis=0)
+                    x1 = np.linspace(mins[0], maxs[0], 200)
+                    X_plot = np.column_stack([x1] + [np.full_like(x1, m) for m in means[1:]])
                 y_proba = model.predict_proba(X_plot)
                 fig, ax = plt.subplots(figsize=(10, 6))
-                # Scatter of original labels
-                ax.scatter(X, y, c=y, cmap="coolwarm", s=100, label="Labels (0/1)", alpha=0.7)
-                ax.plot(X_plot.ravel(), y_proba, "g-", linewidth=2, label="Predicted Probability")
+                # Scatter of original labels on first feature
+                x_plot_scatter = X if X.ndim == 1 else X[:, 0]
+                ax.scatter(x_plot_scatter, y, c=y, cmap="coolwarm", s=100, label="Labels (0/1)", alpha=0.7)
+                ax.plot(X_plot[:, 0], y_proba, "g-", linewidth=2, label="Predicted Probability")
                 ax.axhline(0.5, color="gray", linestyle="--", linewidth=1, label="Decision Threshold 0.5")
                 ax.set_xlabel("X")
                 ax.set_ylabel("Probability")
@@ -243,8 +315,44 @@ def main():
         except Exception as e:
             st.error(f"Plot weights failed: {e}")
 
+    # Footer
     st.markdown("---")
     st.markdown("**Author**: Nirmal Parmar, [Machine Gnostics](https://machinegnostics.info)")
-    
+
+    # Plot training history: gnostic loss and residual entropy
+    if do_plot_hist:
+        model = st.session_state["logr_state"].get("LOGR", model)
+        try:
+            hist = getattr(model, "_history", None)
+            if not hist:
+                st.error("No training history available. Fit the model with history=True.")
+            else:
+                history_valid = [h for h in hist if isinstance(h, dict) and ("h_loss" in h or "rentropy" in h)]
+                if len(history_valid) == 0:
+                    st.error("Training history does not contain loss/entropy fields.")
+                else:
+                    iterations = [h.get("iteration", i+1) for i, h in enumerate(history_valid)]
+                    h_loss = [h.get("h_loss", np.nan) for h in history_valid]
+                    rentropy = [h.get("rentropy", np.nan) for h in history_valid]
+
+                    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+                    axes[0].plot(iterations, h_loss, marker='o', color='tab:blue', linewidth=2)
+                    axes[0].set_title('Gnostic Loss (h_loss)')
+                    axes[0].set_xlabel('Iteration')
+                    axes[0].set_ylabel('Loss')
+                    axes[0].grid(True, alpha=0.3)
+
+                    axes[1].plot(iterations, rentropy, marker='s', color='tab:orange', linewidth=2)
+                    axes[1].set_title('Residual Entropy (rentropy)')
+                    axes[1].set_xlabel('Iteration')
+                    axes[1].set_ylabel('Entropy')
+                    axes[1].grid(True, alpha=0.3)
+
+                    plt.tight_layout()
+                    st.pyplot(fig)
+        except Exception as e:
+            st.error(f"Plot history failed: {e}")
+
+
 if __name__ == "__main__":
     main()

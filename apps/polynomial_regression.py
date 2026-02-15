@@ -62,8 +62,8 @@ def main():
 
     # Data inputs
     st.subheader("Data")
-    default_X = "0, 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0"
-    default_y = "1.0, 3.5, 34.0, 8.5, 11.0, 13.5, 16.0, 18.5, 21.0"  # includes an outlier at index 2
+    default_X = "0.0, 0.22222222, 0.44444444, 0.66666667, 0.88888889, 1.11111111, 1.33333333, 1.55555556, 1.77777778, 2.0"
+    default_y = "2.09934283, 2.95599654, 4.58061956, 6.94483982, 9.85923417, 14.73128481, 22.36219532, 33.04278049, 128.97116552, 65.3049809"
 
     if "pr_X_text" not in st.session_state:
         st.session_state["pr_X_text"] = default_X
@@ -119,13 +119,15 @@ def main():
     # remaining slots unused for symmetry
 
     # Actions
-    a_cols = st.columns(3)
+    a_cols = st.columns(4)
     with a_cols[0]:
         do_fit = st.button("Fit Model", type="primary")
     with a_cols[1]:
         do_plot_pred = st.button("Plot Predictions")
     with a_cols[2]:
         do_plot_w = st.button("Plot Weights")
+    with a_cols[3]:
+        do_plot_hist = st.button("Plot Loss & Entropy")
 
     # Session cache
     if "pr_state" not in st.session_state:
@@ -231,8 +233,44 @@ def main():
         except Exception as e:
             st.error(f"Plot weights failed: {e}")
 
+    # Footer
     st.markdown("---")
     st.markdown("**Author**: Nirmal Parmar, [Machine Gnostics](https://machinegnostics.info)")
-    
+
+    # Plot training history: gnostic loss and residual entropy
+    if do_plot_hist:
+        model = st.session_state["pr_state"].get("PR", model)
+        try:
+            hist = getattr(model, "_history", None)
+            if not hist:
+                st.error("No training history available. Fit the model with history=True.")
+            else:
+                history_valid = [h for h in hist if isinstance(h, dict) and ("h_loss" in h or "rentropy" in h)]
+                if len(history_valid) == 0:
+                    st.error("Training history does not contain loss/entropy fields.")
+                else:
+                    iterations = [h.get("iteration", i+1) for i, h in enumerate(history_valid)]
+                    h_loss = [h.get("h_loss", np.nan) for h in history_valid]
+                    rentropy = [h.get("rentropy", np.nan) for h in history_valid]
+
+                    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+                    axes[0].plot(iterations, h_loss, marker='o', color='tab:blue', linewidth=2)
+                    axes[0].set_title('Gnostic Loss (h_loss)')
+                    axes[0].set_xlabel('Iteration')
+                    axes[0].set_ylabel('Loss')
+                    axes[0].grid(True, alpha=0.3)
+
+                    axes[1].plot(iterations, rentropy, marker='s', color='tab:orange', linewidth=2)
+                    axes[1].set_title('Residual Entropy (rentropy)')
+                    axes[1].set_xlabel('Iteration')
+                    axes[1].set_ylabel('Entropy')
+                    axes[1].grid(True, alpha=0.3)
+
+                    plt.tight_layout()
+                    st.pyplot(fig)
+        except Exception as e:
+            st.error(f"Plot history failed: {e}")
+
+
 if __name__ == "__main__":
     main()
