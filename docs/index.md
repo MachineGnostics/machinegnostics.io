@@ -82,7 +82,7 @@ Machine Gnostics challenges the limitations of traditional, probabilistic models
 
 ---
 
-## How It Works
+## How It Works? [:simple-streamlit: Play](https://machinegnosticsio-igc.streamlit.app/)
 
 Machine Gnostics encodes the “gnostic cycle” of observation and feedback, letting you model uncertainty as a consequence of real, measurable conditions—not just randomness.
 See the Concepts page for a deep dive into the science and philosophy behind MG.

@@ -24,6 +24,12 @@ Each example includes:
 
         [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_01_gnostic_metrics.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_01_gnostic_metrics.ipynb)
 
+    -   :material-application: **Ideal Gnostic Cycle**
+       
+        Learn interactively how Ideal Gnostic Cycle works.
+
+        [:simple-streamlit: Play](https://machinegnosticsio-igc.streamlit.app/)
+
     </div>
 
     ### **Data Tests**
@@ -56,7 +62,7 @@ Each example includes:
 
         Visualize and analyze data using Gnostics Distribution Functions.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb)
+        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb) · [:simple-streamlit: Play](https://machinegnosticsio-gdf.streamlit.app/)
 
     -   :material-chart-scatter-plot-hexbin: **Marginal Cluster Analysis**
 
@@ -68,7 +74,7 @@ Each example includes:
 
         Analyze data intervals and bounds with marginal analysis.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_07_gnostic_marginal_interval_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_07_gnostic_marginal_interval_analysis.ipynb)
+        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_07_gnostic_marginal_interval_analysis.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_07_gnostic_marginal_interval_analysis.ipynb) · [:simple-streamlit: Play](https://machinegnosticsio-intv.streamlit.app/)
 
     -   :material-alert-circle-outline: **Uncertainty Interval Analysis**
 
@@ -87,13 +93,13 @@ Each example includes:
 
         Standard linear regression implementation.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_01_linear_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_01_linear_regression.ipynb)
+        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_01_linear_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_01_linear_regression.ipynb) · [:simple-streamlit: Play](https://machinegnosticsio-lin-reg.streamlit.app/)
 
     -   :material-chart-bell-curve: **Polynomial Regression**
 
         Regression with polynomial features.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_02_polynomial_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_02_polynomial_regression.ipynb)
+        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_02_polynomial_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_02_polynomial_regression.ipynb) · [:simple-streamlit: Play](https://machinegnosticsio-poly-reg.streamlit.app/)
 
     -   :material-glass-wine: **Wine Quality Regression**
 
@@ -128,7 +134,8 @@ Each example includes:
 
         Binary classification fundamentals.
 
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_04_logistic_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_04_logistic_regression.ipynb)
+        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_04_logistic_regression.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_04_logistic_regression.ipynb) · [:simple-streamlit: Play](https://machinegnosticsio-logi-reg.streamlit.app/)
+
 
     -   :material-view-grid: **Multiclass Classification**
 
