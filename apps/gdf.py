@@ -3,10 +3,10 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 # GDF classes
-from machinegnostics.magcal.gdf.eldf import ELDF
-from machinegnostics.magcal.gdf.egdf import EGDF
-from machinegnostics.magcal.gdf.qldf import QLDF
-from machinegnostics.magcal.gdf.qgdf import QGDF
+from machinegnostics.magcal import ELDF
+from machinegnostics.magcal import EGDF
+from machinegnostics.magcal import QLDF
+from machinegnostics.magcal import QGDF
 
 
 def _parse_numbers(text: str) -> np.ndarray:
@@ -166,7 +166,7 @@ def main():
     st.subheader("Data")
     data_text = st.text_area(
         "Enter data points (comma/space/newline separated)",
-        "11, 12, 13, 14, 15",
+        "-13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.",
         height=100,
         placeholder="e.g., 1.2, 3.4, 5.6\n7.8 9.0"
     )
