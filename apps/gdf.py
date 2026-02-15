@@ -365,6 +365,8 @@ def main():
             except Exception as e:
                 st.error(f"Plot failed: {e}")
 
-
+    st.markdown("---")
+    st.markdown("**Author**: Nirmal Parmar, [Machine Gnostics](https://machinegnostics.info)")
+    
 if __name__ == "__main__":
     main()
