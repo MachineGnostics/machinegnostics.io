@@ -1,2 +1,12 @@
 mkdocs
 mkdocs-material
+machinegnostics
+streamlit
+plotly
+pandas
+numpy
+protobuf
+matplotlib
+scipy
+watchdog
+machinegnostics
