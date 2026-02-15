@@ -1,6 +1,10 @@
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
+import io
+import sys
+import logging
+import contextlib
 
 # GDF classes
 from machinegnostics.magcal import ELDF, EGDF, QLDF, QGDF
@@ -161,11 +165,13 @@ def main():
 
     # Data input (no file upload; typed only)
     st.subheader("Data")
+    default_data_str = "-13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10."
     data_text = st.text_area(
         "Enter data points (comma/space/newline separated)",
-        "-13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.",
+        value=st.session_state.get("data_text", default_data_str),
         height=100,
-        placeholder="e.g., 1.2, 3.4, 5.6\n7.8 9.0"
+        placeholder="e.g., 1.2, 3.4, 5.6\n7.8 9.0",
+        key="data_text",
     )
     data = _parse_numbers(data_text)
     st.caption(f"Parsed {data.size} points")
@@ -226,7 +232,12 @@ def main():
 
     # Weights (optional)
     st.subheader("Weights (optional)")
-    weights_text = st.text_input("Weights list (matches data length)", value="")
+    default_weights_str = ""
+    weights_text = st.text_input(
+        "Weights list (matches data length)",
+        value=st.session_state.get("weights_text", default_weights_str),
+        key="weights_text",
+    )
     weights = _parse_weights(weights_text, data.size)
 
     # Plot options
@@ -248,6 +259,9 @@ def main():
     # Persist fitted objects across reruns
     if "gdf_state" not in st.session_state:
         st.session_state["gdf_state"] = {}
+    # Persist logs across reruns
+    if "gdf_logs" not in st.session_state:
+        st.session_state["gdf_logs"] = ""
 
     # Instantiate selected class
     gdf_obj = None
@@ -263,7 +277,7 @@ def main():
             n_points=n_points,
             homogeneous=homogeneous,
             catch=catch,
-            weights=None,
+            weights=weights,
             wedf=wedf,
             opt_method=opt_method,
             verbose=verbose,
@@ -280,7 +294,7 @@ def main():
             n_points=n_points,
             homogeneous=homogeneous,
             catch=catch,
-            weights=None,
+            weights=weights,
             wedf=wedf,
             opt_method=opt_method,
             verbose=verbose,
@@ -299,7 +313,7 @@ def main():
             n_points=n_points,
             homogeneous=homogeneous,
             catch=catch,
-            weights=None,
+            weights=weights,
             wedf=wedf,
             opt_method=opt_method,
             verbose=verbose,
@@ -316,7 +330,7 @@ def main():
             n_points=n_points,
             homogeneous=homogeneous,
             catch=catch,
-            weights=None,
+            weights=weights,
             wedf=wedf,
             opt_method=opt_method,
             verbose=verbose,
@@ -324,8 +338,19 @@ def main():
             flush=flush,
         )
 
-    # If we have a previously fitted object for this class, reuse it
+    # Auto-clear cached object if data length changed for this class
+    if "gdf_meta" not in st.session_state:
+        st.session_state["gdf_meta"] = {}
+    prev_meta = st.session_state["gdf_meta"].get(gdf_choice, {})
     prev_obj = st.session_state["gdf_state"].get(gdf_choice)
+    if prev_obj is not None and prev_meta.get("data_size") is not None and prev_meta["data_size"] != int(data.size):
+        # Data length changed; clear cached fitted object to avoid weight-size mismatches
+        st.session_state["gdf_state"].pop(gdf_choice, None)
+        prev_obj = None
+    # Update meta with current data size
+    st.session_state["gdf_meta"][gdf_choice] = {"data_size": int(data.size)}
+
+    # If we have a previously fitted object for this class, reuse it
     if prev_obj is not None:
         gdf_obj = prev_obj
 
@@ -335,10 +360,26 @@ def main():
             st.error("No data parsed. Please enter valid numeric values.")
         else:
             try:
-                gdf_obj.fit(data=data, plot=False)
+                # Capture stdout, stderr, and logging while fitting
+                buf = io.StringIO()
+                root_logger = logging.getLogger()
+                mg_logger = logging.getLogger("machinegnostics")
+                handler = logging.StreamHandler(buf)
+                handler.setLevel(logging.DEBUG if verbose else logging.INFO)
+                root_logger.addHandler(handler)
+                mg_logger.addHandler(handler)
+                with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
+                    gdf_obj.fit(data=data, plot=False)
                 st.success("Fitting completed.")
                 # Cache fitted object for reuse on Plot click
                 st.session_state["gdf_state"][gdf_choice] = gdf_obj
+                # Save logs
+                try:
+                    root_logger.removeHandler(handler)
+                    mg_logger.removeHandler(handler)
+                except Exception:
+                    pass
+                st.session_state["gdf_logs"] = buf.getvalue()
                 try:
                     results = gdf_obj.results()
                     st.subheader("Results")
@@ -349,6 +390,8 @@ def main():
             except Exception as e:
                 st.error(f"Fit failed: {e}")
 
+    # Reset button handling
+
     # Plot
     if do_plot:
         # Use cached fitted object if available
@@ -358,15 +401,37 @@ def main():
             st.error("Model not fitted yet. Please click 'Fit Model' first.")
         else:
             try:
-                plt.close("all")
-                gdf_obj.plot(plot_smooth=plot_smooth, plot=plot_kind, bounds=bounds, extra_df=extra_df, figsize=(10, 6))
+                # Capture logs while plotting
+                buf = io.StringIO()
+                root_logger = logging.getLogger()
+                mg_logger = logging.getLogger("machinegnostics")
+                handler = logging.StreamHandler(buf)
+                handler.setLevel(logging.DEBUG if verbose else logging.INFO)
+                root_logger.addHandler(handler)
+                mg_logger.addHandler(handler)
+                with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
+                    plt.close("all")
+                    gdf_obj.plot(plot_smooth=plot_smooth, plot=plot_kind, bounds=bounds, extra_df=extra_df, figsize=(10, 6))
                 fig = plt.gcf()
                 st.pyplot(fig)
+                # Save logs
+                try:
+                    root_logger.removeHandler(handler)
+                    mg_logger.removeHandler(handler)
+                except Exception:
+                    pass
+                st.session_state["gdf_logs"] = buf.getvalue()
             except Exception as e:
                 st.error(f"Plot failed: {e}")
 
-    st.markdown("---")
-    st.markdown("**Author**: Nirmal Parmar, [Machine Gnostics](https://machinegnostics.info)")
-    
+    # Logs panel
+    with st.expander("Training Logs", expanded=True):
+        logs = st.session_state.get("gdf_logs", "")
+        if logs.strip():
+            st.text(logs)
+        else:
+            st.caption("No logs captured yet. Enable 'verbose' for detailed output and fit/plot to populate logs.")
+
+
 if __name__ == "__main__":
     main()

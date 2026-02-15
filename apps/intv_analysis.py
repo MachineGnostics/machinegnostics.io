@@ -1,6 +1,10 @@
 import numpy as np
 import streamlit as st
 import matplotlib.pyplot as plt
+import io
+import sys
+import logging
+import contextlib
 
 from machinegnostics.magcal.gdf.marginal_intv_analysis import IntervalAnalysis
 
@@ -225,6 +229,8 @@ def main():
         st.session_state["ia_state"] = {}
     if "ia_meta" not in st.session_state:
         st.session_state["ia_meta"] = {}
+    if "ia_logs" not in st.session_state:
+        st.session_state["ia_logs"] = ""
 
     # Instantiate
     ia = IntervalAnalysis(
@@ -276,9 +282,25 @@ def main():
             st.error("Data contains NaN or Inf.")
         else:
             try:
-                ia.fit(data=data, plot=False)
+                # Capture stdout, stderr, and logging during fit
+                buf = io.StringIO()
+                root_logger = logging.getLogger()
+                mg_logger = logging.getLogger("machinegnostics")
+                handler = logging.StreamHandler(buf)
+                handler.setLevel(logging.DEBUG if verbose else logging.INFO)
+                root_logger.addHandler(handler)
+                mg_logger.addHandler(handler)
+                with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
+                    ia.fit(data=data, plot=False)
                 st.success("Interval analysis completed.")
                 st.session_state["ia_state"]["IA"] = ia
+                # Save logs
+                try:
+                    root_logger.removeHandler(handler)
+                    mg_logger.removeHandler(handler)
+                except Exception:
+                    pass
+                st.session_state["ia_logs"] = buf.getvalue()
                 # Show results
                 try:
                     res = ia.results()
@@ -299,15 +321,36 @@ def main():
             st.error("Analysis not fitted yet. Please click 'Fit Analysis'.")
         else:
             try:
-                plt.close("all")
-                ia.plot(GDF=plot_GDF, intervals=plot_intervals)
+                buf = io.StringIO()
+                root_logger = logging.getLogger()
+                mg_logger = logging.getLogger("machinegnostics")
+                handler = logging.StreamHandler(buf)
+                handler.setLevel(logging.DEBUG if verbose else logging.INFO)
+                root_logger.addHandler(handler)
+                mg_logger.addHandler(handler)
+                with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
+                    plt.close("all")
+                    ia.plot(GDF=plot_GDF, intervals=plot_intervals)
                 fig = plt.gcf()
                 st.pyplot(fig)
+                # Save logs
+                try:
+                    root_logger.removeHandler(handler)
+                    mg_logger.removeHandler(handler)
+                except Exception:
+                    pass
+                st.session_state["ia_logs"] = buf.getvalue()
             except Exception as e:
                 st.error(f"Plot failed: {e}")
 
-    st.markdown("---")
-    st.markdown("**Author**: Nirmal Parmar, [Machine Gnostics](https://machinegnostics.info)")
-    
+    # Logs panel
+    with st.expander("Analysis Logs", expanded=True):
+        logs = st.session_state.get("ia_logs", "")
+        if logs.strip():
+            st.text(logs)
+        else:
+            st.caption("No logs captured yet. Enable 'verbose' for detailed output and run fit/plot to populate logs.")
+
+
 if __name__ == "__main__":
     main()
