@@ -364,8 +364,13 @@ def main():
                 buf = io.StringIO()
                 root_logger = logging.getLogger()
                 mg_logger = logging.getLogger("machinegnostics")
+                prev_root_level = root_logger.level
+                prev_mg_level = mg_logger.level
                 handler = logging.StreamHandler(buf)
                 handler.setLevel(logging.DEBUG if verbose else logging.INFO)
+                # Ensure logger levels allow messages through
+                root_logger.setLevel(logging.DEBUG if verbose else logging.INFO)
+                mg_logger.setLevel(logging.DEBUG if verbose else logging.INFO)
                 root_logger.addHandler(handler)
                 mg_logger.addHandler(handler)
                 with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
@@ -377,6 +382,9 @@ def main():
                 try:
                     root_logger.removeHandler(handler)
                     mg_logger.removeHandler(handler)
+                    # Restore previous logger levels
+                    root_logger.setLevel(prev_root_level)
+                    mg_logger.setLevel(prev_mg_level)
                 except Exception:
                     pass
                 st.session_state["gdf_logs"] = buf.getvalue()
@@ -405,8 +413,12 @@ def main():
                 buf = io.StringIO()
                 root_logger = logging.getLogger()
                 mg_logger = logging.getLogger("machinegnostics")
+                prev_root_level = root_logger.level
+                prev_mg_level = mg_logger.level
                 handler = logging.StreamHandler(buf)
                 handler.setLevel(logging.DEBUG if verbose else logging.INFO)
+                root_logger.setLevel(logging.DEBUG if verbose else logging.INFO)
+                mg_logger.setLevel(logging.DEBUG if verbose else logging.INFO)
                 root_logger.addHandler(handler)
                 mg_logger.addHandler(handler)
                 with contextlib.redirect_stdout(buf), contextlib.redirect_stderr(buf):
@@ -418,6 +430,8 @@ def main():
                 try:
                     root_logger.removeHandler(handler)
                     mg_logger.removeHandler(handler)
+                    root_logger.setLevel(prev_root_level)
+                    mg_logger.setLevel(prev_mg_level)
                 except Exception:
                     pass
                 st.session_state["gdf_logs"] = buf.getvalue()
