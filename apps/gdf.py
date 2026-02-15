@@ -3,10 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 # GDF classes
-from machinegnostics.magcal import ELDF
-from machinegnostics.magcal import EGDF
-from machinegnostics.magcal import QLDF
-from machinegnostics.magcal import QGDF
+from machinegnostics.magcal import ELDF, EGDF, QLDF, QGDF
 
 
 def _parse_numbers(text: str) -> np.ndarray:
@@ -166,7 +163,7 @@ def main():
     st.subheader("Data")
     data_text = st.text_area(
         "Enter data points (comma/space/newline separated)",
-        "-13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.",
+        "11, 12, 13, 14, 15",
         height=100,
         placeholder="e.g., 1.2, 3.4, 5.6\n7.8 9.0"
     )
@@ -238,14 +235,8 @@ def main():
     bounds = st.checkbox("Show bounds", value=True)
     extra_df = st.checkbox("Compare extra DFs", value=True)
 
-    if gdf_choice == "ELDF":
-        plot_kind = st.selectbox("Plot kind", ["eldf", "pdf", "both"], index=2)
-    elif gdf_choice == "EGDF":
-        plot_kind = st.selectbox("Plot kind", ["gdf", "pdf", "both"], index=2)
-    elif gdf_choice == "QLDF":
-        plot_kind = st.selectbox("Plot kind", ["qldf", "pdf", "both"], index=2)
-    else:
-        plot_kind = st.selectbox("Plot kind", ["qgdf", "pdf", "both"], index=2)
+    # All base plot implementations expect 'gdf', 'pdf', or 'both'
+    plot_kind = st.selectbox("Plot kind", ["gdf", "pdf", "both"], index=2)
 
     # Actions
     run_cols = st.columns(2)
@@ -253,6 +244,10 @@ def main():
         do_fit = st.button("Fit Model", type="primary")
     with run_cols[1]:
         do_plot = st.button("Plot Results")
+
+    # Persist fitted objects across reruns
+    if "gdf_state" not in st.session_state:
+        st.session_state["gdf_state"] = {}
 
     # Instantiate selected class
     gdf_obj = None
@@ -329,6 +324,11 @@ def main():
             flush=flush,
         )
 
+    # If we have a previously fitted object for this class, reuse it
+    prev_obj = st.session_state["gdf_state"].get(gdf_choice)
+    if prev_obj is not None:
+        gdf_obj = prev_obj
+
     # Fit and show results
     if do_fit:
         if data.size == 0:
@@ -337,6 +337,8 @@ def main():
             try:
                 gdf_obj.fit(data=data, plot=False)
                 st.success("Fitting completed.")
+                # Cache fitted object for reuse on Plot click
+                st.session_state["gdf_state"][gdf_choice] = gdf_obj
                 try:
                     results = gdf_obj.results()
                     st.subheader("Results")
@@ -349,13 +351,19 @@ def main():
 
     # Plot
     if do_plot:
-        try:
-            plt.close("all")
-            gdf_obj.plot(plot_smooth=plot_smooth, plot=plot_kind, bounds=bounds, extra_df=extra_df, figsize=(10, 6))
-            fig = plt.gcf()
-            st.pyplot(fig)
-        except Exception as e:
-            st.error(f"Plot failed: {e}")
+        # Use cached fitted object if available
+        gdf_obj = st.session_state["gdf_state"].get(gdf_choice, gdf_obj)
+        # Guard: must be fitted before plotting
+        if not hasattr(gdf_obj, "_fitted") or not getattr(gdf_obj, "_fitted"):
+            st.error("Model not fitted yet. Please click 'Fit Model' first.")
+        else:
+            try:
+                plt.close("all")
+                gdf_obj.plot(plot_smooth=plot_smooth, plot=plot_kind, bounds=bounds, extra_df=extra_df, figsize=(10, 6))
+                fig = plt.gcf()
+                st.pyplot(fig)
+            except Exception as e:
+                st.error(f"Plot failed: {e}")
 
 
 if __name__ == "__main__":
