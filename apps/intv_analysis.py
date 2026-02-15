@@ -350,7 +350,9 @@ def main():
             st.text(logs)
         else:
             st.caption("No logs captured yet. Enable 'verbose' for detailed output and run fit/plot to populate logs.")
-
+    # Footer
+    st.markdown("---")
+    st.markdown("**Author**: Nirmal Parmar, [Machine Gnostics](https://machinegnostics.info)")
 
 if __name__ == "__main__":
     main()
