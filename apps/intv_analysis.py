@@ -114,9 +114,11 @@ def main():
     # Data
     st.subheader("Data")
     default_data_str = "-13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10."
+    # Initialize session-state backed widget values once
+    if "ia_data_text" not in st.session_state:
+        st.session_state["ia_data_text"] = default_data_str
     data_text = st.text_area(
         "Enter data points (comma/space/newline separated)",
-        value=st.session_state.get("ia_data_text", default_data_str),
         height=100,
         placeholder="e.g., 1.2, 3.4, 5.6\n7.8 9.0",
         key="ia_data_text",
@@ -198,9 +200,10 @@ def main():
     # Weights
     st.subheader("Weights (optional)")
     default_weights_str = ""
+    if "ia_weights_text" not in st.session_state:
+        st.session_state["ia_weights_text"] = default_weights_str
     weights_text = st.text_input(
         "Weights list (matches data length)",
-        value=st.session_state.get("ia_weights_text", default_weights_str),
         key="ia_weights_text",
     )
     weights = _parse_weights(weights_text, data.size)
@@ -291,11 +294,14 @@ def main():
 
     # Reset
     if do_reset:
+        # Update session state-backed widget values and clear cached analysis
         st.session_state["ia_data_text"] = default_data_str
         st.session_state["ia_weights_text"] = default_weights_str
-        st.session_state["ia_state"].pop("IA", None)
-        st.session_state["ia_meta"].pop("IA", None)
+        st.session_state.get("ia_state", {}).pop("IA", None)
+        st.session_state.get("ia_meta", {}).pop("IA", None)
         st.success("Reset completed. Defaults restored and state cleared.")
+        # Rerun to reflect reset values in widgets
+        st.rerun()
 
     # Plot
     if do_plot:
@@ -313,6 +319,6 @@ def main():
 
     st.markdown("---")
     st.markdown("**Author**: Nirmal Parmar, [Machine Gnostics](https://machinegnostics.info)")
-
+    
 if __name__ == "__main__":
     main()
