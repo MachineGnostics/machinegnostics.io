@@ -214,13 +214,11 @@ def main():
     plot_intervals = st.checkbox("Plot intervals", value=True)
 
     # Actions
-    buttons = st.columns(3)
+    buttons = st.columns(2)
     with buttons[0]:
         do_fit = st.button("Fit Analysis", type="primary")
     with buttons[1]:
         do_plot = st.button("Plot")
-    with buttons[2]:
-        do_reset = st.button("Reset Data & State")
 
     # Session state for caching
     if "ia_state" not in st.session_state:
@@ -292,16 +290,7 @@ def main():
             except Exception as e:
                 st.error(f"Fit failed: {e}")
 
-    # Reset
-    if do_reset:
-        # Update session state-backed widget values and clear cached analysis
-        st.session_state["ia_data_text"] = default_data_str
-        st.session_state["ia_weights_text"] = default_weights_str
-        st.session_state.get("ia_state", {}).pop("IA", None)
-        st.session_state.get("ia_meta", {}).pop("IA", None)
-        st.success("Reset completed. Defaults restored and state cleared.")
-        # Rerun to reflect reset values in widgets
-        st.rerun()
+    # Reset option removed
 
     # Plot
     if do_plot:
