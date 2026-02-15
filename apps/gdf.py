@@ -161,13 +161,11 @@ def main():
 
     # Data input (no file upload; typed only)
     st.subheader("Data")
-    default_data_str = "-13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10."
     data_text = st.text_area(
         "Enter data points (comma/space/newline separated)",
-        value=st.session_state.get("data_text", default_data_str),
+        "-13.5, 0, 1., 2., 3., 4., 5., 6., 7., 8., 9., 10.",
         height=100,
-        placeholder="e.g., 1.2, 3.4, 5.6\n7.8 9.0",
-        key="data_text",
+        placeholder="e.g., 1.2, 3.4, 5.6\n7.8 9.0"
     )
     data = _parse_numbers(data_text)
     st.caption(f"Parsed {data.size} points")
@@ -228,12 +226,7 @@ def main():
 
     # Weights (optional)
     st.subheader("Weights (optional)")
-    default_weights_str = ""
-    weights_text = st.text_input(
-        "Weights list (matches data length)",
-        value=st.session_state.get("weights_text", default_weights_str),
-        key="weights_text",
-    )
+    weights_text = st.text_input("Weights list (matches data length)", value="")
     weights = _parse_weights(weights_text, data.size)
 
     # Plot options
@@ -246,13 +239,11 @@ def main():
     plot_kind = st.selectbox("Plot kind", ["gdf", "pdf", "both"], index=2)
 
     # Actions
-    run_cols = st.columns(3)
+    run_cols = st.columns(2)
     with run_cols[0]:
         do_fit = st.button("Fit Model", type="primary")
     with run_cols[1]:
         do_plot = st.button("Plot Results")
-    with run_cols[2]:
-        do_reset = st.button("Reset Data & State")
 
     # Persist fitted objects across reruns
     if "gdf_state" not in st.session_state:
@@ -272,7 +263,7 @@ def main():
             n_points=n_points,
             homogeneous=homogeneous,
             catch=catch,
-            weights=weights,
+            weights=None,
             wedf=wedf,
             opt_method=opt_method,
             verbose=verbose,
@@ -289,7 +280,7 @@ def main():
             n_points=n_points,
             homogeneous=homogeneous,
             catch=catch,
-            weights=weights,
+            weights=None,
             wedf=wedf,
             opt_method=opt_method,
             verbose=verbose,
@@ -308,7 +299,7 @@ def main():
             n_points=n_points,
             homogeneous=homogeneous,
             catch=catch,
-            weights=weights,
+            weights=None,
             wedf=wedf,
             opt_method=opt_method,
             verbose=verbose,
@@ -325,7 +316,7 @@ def main():
             n_points=n_points,
             homogeneous=homogeneous,
             catch=catch,
-            weights=weights,
+            weights=None,
             wedf=wedf,
             opt_method=opt_method,
             verbose=verbose,
@@ -333,19 +324,8 @@ def main():
             flush=flush,
         )
 
-    # Auto-clear cached object if data length changed for this class
-    if "gdf_meta" not in st.session_state:
-        st.session_state["gdf_meta"] = {}
-    prev_meta = st.session_state["gdf_meta"].get(gdf_choice, {})
-    prev_obj = st.session_state["gdf_state"].get(gdf_choice)
-    if prev_obj is not None and prev_meta.get("data_size") is not None and prev_meta["data_size"] != int(data.size):
-        # Data length changed; clear cached fitted object to avoid weight-size mismatches
-        st.session_state["gdf_state"].pop(gdf_choice, None)
-        prev_obj = None
-    # Update meta with current data size
-    st.session_state["gdf_meta"][gdf_choice] = {"data_size": int(data.size)}
-
     # If we have a previously fitted object for this class, reuse it
+    prev_obj = st.session_state["gdf_state"].get(gdf_choice)
     if prev_obj is not None:
         gdf_obj = prev_obj
 
@@ -368,16 +348,6 @@ def main():
                     st.write(vars(gdf_obj))
             except Exception as e:
                 st.error(f"Fit failed: {e}")
-
-    # Reset button handling
-    if do_reset:
-        # Reset widget values
-        st.session_state["data_text"] = default_data_str
-        st.session_state["weights_text"] = default_weights_str
-        # Clear cached fitted object and meta for current class
-        st.session_state["gdf_state"].pop(gdf_choice, None)
-        st.session_state["gdf_meta"].pop(gdf_choice, None)
-        st.success("Reset completed. Defaults restored and state cleared.")
 
     # Plot
     if do_plot:
