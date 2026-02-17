@@ -1,5 +1,8 @@
 # Machine Gnostics 
-[![PyPI - Version](https://img.shields.io/pypi/v/machinegnostics)](https://pypi.org/project/machinegnostics/) [![Python Versions](https://img.shields.io/pypi/pyversions/machinegnostics.svg)](https://pypi.org/project/machinegnostics/) [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![PyPI version](https://badge.fury.io/py/machinegnostics.svg)](https://badge.fury.io/py/machinegnostics)
+[![Python Versions](https://img.shields.io/pypi/pyversions/machinegnostics.svg)](https://pypi.org/project/machinegnostics/)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![PyPI Downloads](https://static.pepy.tech/personalized-badge/machinegnostics?period=total&units=INTERNATIONAL_SYSTEM&left_color=GREY&right_color=BLUE&left_text=downloads)](https://pepy.tech/projects/machinegnostics)
 
   Welcome to `Machine Gnostics`, an innovative Python library designed to implement the principles of Mathematical Gnostics for robust data analysis, modeling, and inference. Unlike traditional statistical approaches that depend heavily on probabilistic assumptions, Machine Gnostics harnesses deterministic algebraic and geometric structures. This unique foundation enables the library to deliver exceptional resilience against outliers, noise, and corrupted data, making it a powerful tool for challenging real-world scenarios.
 
