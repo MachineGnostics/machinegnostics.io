@@ -14,17 +14,19 @@ Gnostic cross-covariance generalizes classical covariance by leveraging irreleva
 
 Both approaches converge to linear error in cases of weak uncertainty, but provide robust diagnostics in challenging data scenarios. The metric is computed as the mean product of irrelevances between two data samples.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `X` and `y`; for `X`, a Pandas DataFrame column is supported.
+
 ---
 
 
 ## Parameters
 
-| Parameter | Type       | Description                                                                                 |
-|-----------|------------|---------------------------------------------------------------------------------------------|
-| `X`       | np.ndarray | Feature data sample (1D numpy array, no NaN/Inf). For multi-column X, pass each column separately. |
-| `y`       | np.ndarray | Target data sample (1D numpy array, no NaN/Inf).                                            |
-| `case`    | str        | Geometry type: `'i'` for estimation (EGDF), `'j'` for quantifying (QGDF). Default: `'i'`.   |
-| `verbose` | bool       | If True, enables detailed logging for debugging. Default: `False`.                          |
+| Parameter | Type                                   | Description                                                                                 |
+|-----------|----------------------------------------|---------------------------------------------------------------------------------------------|
+| `X`       | array-like or Pandas Series/DataFrame  | Feature data sample (1D Series or single DataFrame column, no NaN/Inf).                     |
+| `y`       | array-like or Pandas Series            | Target data sample (1D, no NaN/Inf).                                                        |
+| `case`    | str                                    | Geometry type: `'i'` for estimation (EGDF), `'j'` for quantifying (QGDF). Default: `'i'`.   |
+| `verbose` | bool                                   | If True, enables detailed logging for debugging. Default: `False`.                          |
 
 ---
 
@@ -74,8 +76,8 @@ except ValueError as e:
 
 ## Notes
 
-- `X` must be a 1D numpy array (single column). For multi-column X, pass each column separately (e.g., `X[:, i]`).
-- `y` must be a 1D numpy array.
+- `X` must be a 1D array/Series (single column). For multi-column X, pass each column separately (e.g., `X[:, i]` or a single DataFrame column).
+- `y` must be a 1D array/Series.
 - Both arrays must be of the same length, with no NaN or Inf values.
 - The metric is robust to data uncertainty and provides meaningful estimates even in the presence of noise or outliers.
 - Ensure that the input data is preprocessed and cleaned for optimal results.

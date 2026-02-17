@@ -74,8 +74,8 @@ ClusterAnalysis orchestrates the entire process of fitting a GDF (ELDF/EGDF), as
 
 Runs the full cluster analysis pipeline on the input data.
 
-- **data**: `np.ndarray`, shape `(n_samples,)`  
-  Input data array for interval analysis
+- **data**: array-like or Series, shape `(n_samples,)`  
+  Input data for interval analysis. Accepts NumPy arrays or Pandas Series/DataFrame column.
 - **plot**: `bool` (optional)  
   If True, generates plots for the fitted GDF and cluster analysis
 

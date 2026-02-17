@@ -8,6 +8,8 @@ The `accuracy_score` function computes the accuracy of classification models by 
 
 Accuracy is defined as the proportion of correct predictions among the total number of cases examined. It is a simple yet powerful metric for assessing how well a model is performing, especially when the classes are balanced.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `y_true` and `y_pred`.
+
 ---
 
 ## Parameters
@@ -58,7 +60,7 @@ print(accuracy_score(df['true'], df['pred']))
 
 ## Notes
 
-- The function supports input as numpy arrays, lists, or pandas Series.
+- Compatibility: Accepts NumPy arrays, lists, or Pandas Series.
 - If you pass a pandas DataFrame, you must select a column (e.g., `df['col']`), not the whole DataFrame.
 - The accuracy metric is most informative when the dataset is balanced. For imbalanced datasets, consider additional metrics such as precision, recall, or F1 score.
 

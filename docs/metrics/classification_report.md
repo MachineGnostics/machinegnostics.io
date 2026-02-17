@@ -15,6 +15,8 @@ This function provides a detailed breakdown of classifier performance for each c
 
 It also computes weighted averages across all classes.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `y_true` and `y_pred`.
+
 ---
 
 ## Parameters

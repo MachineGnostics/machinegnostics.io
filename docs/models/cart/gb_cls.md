@@ -23,8 +23,8 @@ Machine Gnostics `GnosticBoostingClassifier` combines state-of-the-art gradient 
 - Integration with XGBoost for high-performance gradient boosting
 - Customizable gnostic loss functions (`'hi'`, etc.)
 - Convergence-based early stopping
-- Training history tracking for detailed analysis
-- Compatible with numpy arrays for input/output
+ - Training history tracking for detailed analysis
+ - Compatible with NumPy arrays and Pandas DataFrame/Series for input/output
 
 ---
 
@@ -73,10 +73,10 @@ This method trains the model using an iterative process. In each iteration, an X
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - Target labels.
+ - **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+     - Input features. Accepts NumPy arrays or Pandas DataFrame.
+ - **y**: array-like or Series of shape `(n_samples,)`
+     - Target labels. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 
@@ -91,8 +91,8 @@ Predict class labels for input samples.
 
 **Parameters**
 
-- **model_input**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input data for prediction.
+ - **model_input**: array-like or DataFrame of shape `(n_samples, n_features)`
+     - Input data for prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -107,8 +107,8 @@ Predict class probabilities for input samples.
 
 **Parameters**
 
-- **model_input**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input data for prediction.
+ - **model_input**: array-like or DataFrame of shape `(n_samples, n_features)`
+     - Input data for prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -123,10 +123,10 @@ Return the mean accuracy on the given test data and labels.
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features for evaluation.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - True class labels.
+ - **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+     - Input features for evaluation. Accepts NumPy arrays or Pandas DataFrame.
+ - **y**: array-like or Series of shape `(n_samples,)`
+     - True class labels. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 

@@ -12,7 +12,7 @@ The Machine Gnostics LinearRegressor is designed for robust regression tasks, es
 - **Event-Level Modeling:** Handles uncertainty and error at the level of individual data events.
 - **Algebraic Inference:** Utilizes gnostic algebra and error geometry for robust learning.
 - **Resilient:** Designed to be robust against outliers, corrupted data, and distributional shifts.
-- **Flexible:** Supports numpy arrays, pandas DataFrames, and pyspark DataFrames.
+- **Flexible:** Supports NumPy arrays and Pandas DataFrame/Series.
 - **mlflow Integration:** For experiment tracking and deployment.
 - **Easy Model Persistence:** Save and load models with joblib.
 
@@ -26,7 +26,7 @@ The Machine Gnostics LinearRegressor is designed for robust regression tasks, es
 - Adaptive sample weighting using gnostic loss
 - Training history tracking for analysis and visualization
 - Customizable loss functions and scaling strategies
-- Compatible with numpy arrays for input/output
+- Compatible with NumPy arrays and Pandas DataFrame/Series for input/output
 
 ---
 
@@ -67,10 +67,10 @@ The Machine Gnostics LinearRegressor is designed for robust regression tasks, es
 
 Fits the linear regressor to input features `X` and targets `y` using robust, gnostic loss minimization. Iteratively optimizes coefficients and sample weights, optionally recording history.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`
-  Input features.
-- **y**: `np.ndarray`, shape `(n_samples,)`
-  Target values.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+  Input features. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+  Target values. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns:**
 `self` (fitted model instance)
@@ -81,8 +81,8 @@ Fits the linear regressor to input features `X` and targets `y` using robust, gn
 
 Predicts target values for new input features using the fitted model.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`
-  Input features for prediction.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+  Input features for prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns:**
 `y_pred`: `np.ndarray`, shape `(n_samples,)`
@@ -94,10 +94,10 @@ Predicted target values.
 
 Computes the robust (gnostic) R² score for the linear regressor model.
 
-- **X**: `np.ndarray`, shape `(n_samples, n_features)`
-  Input features for scoring.
-- **y**: `np.ndarray`, shape `(n_samples,)`
-  True target values.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+  Input features for scoring. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+  True target values. Accepts NumPy arrays or Pandas Series/DataFrame column.
 - **case**: `str`, default `'i'`
   Specifies the case or variant of the R² score to compute.
 

@@ -9,16 +9,18 @@ The `auto_correlation` function computes the Gnostic auto-correlation coefficien
 Auto-correlation quantifies how much a data sample resembles itself when shifted by a specified lag.
 Unlike classical auto-correlation, the Gnostic version uses irrelevance measures from gnostic theory, providing robust, assumption-free estimates that reflect the true structure of your data.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `data`.
+
 ---
 
 ## Parameters
 
-| Parameter   | Type       | Description                                                                                    |
-| ----------- | ---------- | ---------------------------------------------------------------------------------------------- |
-| `data`    | np.ndarray | Data sample (1D numpy array, no NaN/Inf).                                                      |
-| `lag`     | int        | Lag value (non-negative, less than length of data). Default:`0`.                             |
-| `case`    | str        | Geometry type:`'i'` for estimation (EGDF), `'j'` for quantifying (QGDF). Default: `'i'`. |
-| `verbose` | bool       | If True, enables detailed logging for debugging. Default:`False`.                            |
+| Parameter   | Type                           | Description                                                                                    |
+| ----------- | ------------------------------ | ---------------------------------------------------------------------------------------------- |
+| `data`    | array-like or Pandas Series     | Data sample (1D, no NaN/Inf).                                                                  |
+| `lag`     | int                            | Lag value (non-negative, less than length of data). Default:`0`.                               |
+| `case`    | str                            | Geometry type:`'i'` for estimation (EGDF), `'j'` for quantifying (QGDF). Default: `'i'`.       |
+| `verbose` | bool                           | If True, enables detailed logging for debugging. Default:`False`.                              |
 
 ---
 
@@ -32,7 +34,7 @@ Unlike classical auto-correlation, the Gnostic version uses irrelevance measures
 ## Raises
 
 - **ValueError**
-  If input is not a 1D numpy array, is empty, contains NaN/Inf, or if lag/case is invalid.
+  If input is not 1D array-like, is empty, contains NaN/Inf, or if lag/case is invalid.
 
 ---
 

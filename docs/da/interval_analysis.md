@@ -47,7 +47,7 @@ IntervalAnalysis orchestrates the complete process of fitting GDFs, checking hom
 | `n_points_gdf`             | int                | 1000       | Number of points for smooth GDF generation                |
 | `homogeneous`              | bool               | True       | Assume data homogeneity (enables homogeneity testing)     |
 | `catch`                    | bool               | True       | Store warnings/errors and intermediate results            |
-| `weights`                  | np.ndarray or None | None       | Prior weights for data points                             |
+| `weights`                  | array-like or Series or None | None       | Prior weights for data points (accepts NumPy arrays or Pandas Series).                             |
 | `wedf`                     | bool               | False      | Use Weighted Empirical Distribution Function              |
 | `opt_method`               | str                | 'Powell'   | Optimization method (scipy.optimize)                      |
 | `verbose`                  | bool               | False      | Print detailed progress and diagnostics                   |
@@ -79,7 +79,8 @@ IntervalAnalysis orchestrates the complete process of fitting GDFs, checking hom
 
 Runs the complete interval analysis workflow on the input data.
 
-- **data**: `np.ndarray`, shape `(n_samples,)`1D numpy array of input data for interval analysis
+- **data**: array-like or Series, shape `(n_samples,)`  
+  Input data for interval analysis. Accepts NumPy arrays or Pandas Series/DataFrame column.
 - **plot**: `bool` (optional)
   If True, automatically generates diagnostic plots after fitting
 

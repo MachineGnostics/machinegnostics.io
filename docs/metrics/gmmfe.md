@@ -22,6 +22,8 @@ where:
 
 A lower GMMFE indicates a better fit, as it means the geometric mean of the relative errors is smaller.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `y` and `y_fit`.
+
 ---
 
 ## Interpretation
@@ -35,11 +37,11 @@ GMMFE is particularly valuable when comparing models across datasets with differ
 
 ## Parameters
 
-| Parameter   | Type       | Description                                                     |
-| ----------- | ---------- | --------------------------------------------------------------- |
-| `y`       | np.ndarray | Observed data (ground truth). 1D array of numerical values.     |
-| `y_fit`   | np.ndarray | Fitted data (model predictions). 1D array, same shape as `y`. |
-| `verbose` | bool       | Print detailed progress, warnings, and results                  |
+| Parameter   | Type                           | Description                                                     |
+| ----------- | ------------------------------ | --------------------------------------------------------------- |
+| `y`       | array-like or Pandas Series     | Observed data (ground truth). 1D values.                        |
+| `y_fit`   | array-like or Pandas Series     | Fitted data (model predictions). 1D values, same shape as `y`.  |
+| `verbose` | bool                            | Print detailed progress, warnings, and results                  |
 
 ---
 

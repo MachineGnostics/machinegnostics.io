@@ -64,8 +64,8 @@ Fit the SARIMA model to the time series `y`.
 
 **Parameters**
 
-- **y**: `array-like`
-    - Target time series.
+- **y**: array-like or Series
+    - Target time series. Accepts NumPy arrays or Pandas Series.
 - **X**: `Ignored`
     - Not used.
 
@@ -100,8 +100,8 @@ Returns the **Robust R²** calculated on the stationary (fully differenced) seri
 
 **Parameters**
 
-- **y**: `array-like`
-    - Time series to evaluate.
+- **y**: array-like or Series
+    - Time series to evaluate. Accepts NumPy arrays or Pandas Series.
 
 **Returns**
 

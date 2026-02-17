@@ -20,10 +20,10 @@ The calculation depends on the selected geometry:
 
 ## Parameters
 
-| Parameter      | Type                     | Description                                                                 |
-|----------------|--------------------------|-----------------------------------------------------------------------------|
-| `data`         | array-like               | Reference data values (e.g., Ground Truth) or single dataset. Must be 1D.   |
-| `data_compare` | array-like, optional     | Data to compare (e.g., Predicted). Comparison is `data_compare - data`.     |
+| Parameter      | Type                                   | Description                                                                 |
+|----------------|----------------------------------------|-----------------------------------------------------------------------------|
+| `data`         | array-like or Pandas Series            | Reference data values (e.g., Ground Truth) or single dataset. Must be 1D.   |
+| `data_compare` | array-like or Pandas Series, optional  | Data to compare (e.g., Predicted). Comparison is `data_compare - data`.     |
 | `S`            | float or 'auto'          | Scale parameter. If float, suggested [0.01, 2]. Default: `'auto'`.          |
 | `case`         | str                      | `'i'` for estimating (EGDF), `'j'` for quantifying (QGDF). Default: `'i'`.  |
 | `z0_optimize`  | bool                     | Whether to optimize the location parameter z0. Default: `False`.            |
@@ -79,6 +79,7 @@ print(f"Entropy (quantifying): {ent_out}")
 - For standard uncertainty estimation, use **case 'i'**. The values are typically normalized between 0 (certainty) and 1 (max uncertainty).
 - For analyzing tails and outliers, use **case 'j'**.
 - If `S='auto'`, the scale parameter is estimated automatically based on data homogeneity.
+- Compatibility: Accepts NumPy arrays and Pandas Series.
 
 ---
 

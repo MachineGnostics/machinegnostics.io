@@ -13,17 +13,19 @@ The Gnostic correlation metric measures the association between two arrays using
 
 Unlike classical correlation coefficients, the Gnostic approach is resilient to data uncertainty and is meaningful for both small and large datasets.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series; for `X`, a Pandas DataFrame column is supported.
+
 ---
 
 ## Parameters
 
-| Parameter | Type       | Description                                                                 |
-| --------- | ---------- | --------------------------------------------------------------------------- |
-| `X`       | array-like | Feature data sample (1D array or single column from 2D array, no NaN/Inf).  |
-| `y`       | array-like | Target data sample (1D array, no NaN/Inf).                                  |
-| `case`    | str        | `'i'` for estimation geometry, `'j'` for quantifying geometry. Default: `'i'`. |
-| `S`       | str        | Gnostic scale parameter. If `'auto'`, determines best scale based on homogeneity. Default: `'auto'`. |
-| `verbose` | bool       | If True, enables detailed logging for debugging. Default: `False`.           |
+| Parameter | Type                                   | Description                                                                 |
+| --------- | -------------------------------------- | --------------------------------------------------------------------------- |
+| `X`       | array-like or Pandas Series/DataFrame  | Feature data sample (1D Series or single column from DataFrame, no NaN/Inf).|
+| `y`       | array-like or Pandas Series            | Target data sample (1D, no NaN/Inf).                                        |
+| `case`    | str                                    | `'i'` for estimation geometry, `'j'` for quantifying geometry. Default: `'i'`. |
+| `S`       | str                                    | Gnostic scale parameter. If `'auto'`, determines best scale based on homogeneity. Default: `'auto'`. |
+| `verbose` | bool                                   | If True, enables detailed logging for debugging. Default: `False`.           |
 
 ---
 
@@ -67,8 +69,8 @@ for i in range(X.shape[1]):
 
 ## Notes
 
-- Both `X` and `y` must be 1D arrays of the same length, with no missing or infinite values.
-- For multi-column `X`, pass each column separately (e.g., `X[:, i]`).
+- Both `X` and `y` must be 1D arrays/Series of the same length, with no missing or infinite values.
+- For multi-column `X`, pass each column separately (e.g., `X[:, i]` or a single DataFrame column).
 - The metric is robust to outliers and provides meaningful estimates even for small or noisy datasets.
 - If data homogeneity is not met, the function will adjust parameters and issue a warning for best results.
 - For optimal results, ensure your data is preprocessed and cleaned.

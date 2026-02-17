@@ -24,11 +24,11 @@ Expected values range from -1 to 1:
 
 ## Parameters
 
-| Parameter | Type       | Description                                              |
-| --------- | ---------- | -------------------------------------------------------- |
-| `X`       | array-like | Feature array of shape (n_samples, n_features).          |
-| `labels`  | array-like | Cluster labels for each sample. Shape (n_samples,).      |
-| `verbose` | bool       | If True, enables detailed logging for debugging. Default: `False`. |
+| Parameter | Type                               | Description                                              |
+| --------- | ---------------------------------- | -------------------------------------------------------- |
+| `X`       | array-like or Pandas DataFrame     | Feature data of shape (n_samples, n_features).           |
+| `labels`  | array-like or Pandas Series        | Cluster labels for each sample. Shape (n_samples,).      |
+| `verbose` | bool                               | If True, enables detailed logging for debugging. Default: `False`. |
 
 ---
 
@@ -67,6 +67,7 @@ print(f"Silhouette Score: {score}")
 
 ## Notes
 
+- Compatibility: Accepts NumPy arrays and Pandas DataFrame/Series.
 - Requires at least 2 distinct clusters to be calculated.
 - If the number of unique labels is 1 or equal to the number of samples, the score is 0.0.
 - Uses Euclidean distance for calculations.

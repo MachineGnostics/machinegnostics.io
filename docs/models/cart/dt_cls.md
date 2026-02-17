@@ -25,7 +25,7 @@ Machine Gnostics `GnosticDecisionTreeClassifier` combines the interpretability o
 - Identifies and handles outliers automatically
 - Convergence-based early stopping
 - Training history tracking for analysis
-- Compatible with numpy arrays for input/output
+- Compatible with NumPy arrays and Pandas DataFrame/Series for input/output
 
 ---
 
@@ -72,10 +72,10 @@ This method trains the decision tree classifier using the provided input feature
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - Target labels.
+ - **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+    - Target labels. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 
@@ -90,8 +90,8 @@ Predict outcomes for new data.
 
 **Parameters**
 
-- **model_input**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input data for prediction.
+- **model_input**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input data for prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -106,10 +106,10 @@ Compute the accuracy score of the model on given data.
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features for evaluation.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - True class labels.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features for evaluation. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+    - True class labels. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 

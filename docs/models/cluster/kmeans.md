@@ -20,7 +20,7 @@ Machine Gnostics `KMeansClustering` extends the traditional K-Means algorithm by
 - Robust clustering using gnostic loss functions ('hi' or 'hj')
 - Adaptive sample weights for outlier suppression
 - Detailed history tracking of optimization process
-- Compatible with numpy arrays
+- Compatible with NumPy arrays and Pandas DataFrame/Series
 - Easy model persistence (save/load)
 - Standard Scikit-learn style API (fit, predict, score)
 
@@ -69,8 +69,8 @@ This method iteratively optimizes cluster centroids and sample weights to minimi
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features. Accepts NumPy arrays or Pandas DataFrame.
 - **y**: `Ignored`
     - Not used, present for API consistency.
 
@@ -87,8 +87,8 @@ Predict the closest cluster each sample in `model_input` belongs to.
 
 **Parameters**
 
-- **model_input**: `np.ndarray` of shape `(n_samples, n_features)`
-    - New data to predict.
+- **model_input**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - New data to predict. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -103,8 +103,8 @@ Compute the negative inertia score (sum of squared distances to closest centroid
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features. Accepts NumPy arrays or Pandas DataFrame.
 - **y**: `Ignored`
     - Not used.
 

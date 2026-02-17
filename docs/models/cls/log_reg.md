@@ -26,7 +26,7 @@ Machine Gnostics `LogisticRegressor` brings deterministic, event-level modeling 
 - Iterative optimization with early stopping and convergence tolerance
 - Adaptive sample weighting
 - Training history tracking for analysis and visualization
-- Compatible with numpy arrays for input/output
+- Compatible with NumPy arrays and Pandas DataFrame/Series for input/output
 
 ---
 
@@ -72,9 +72,9 @@ This method trains the logistic regression model using the provided input featur
 **Parameters**
 
 - **X**: `array-like` or `DataFrame` of shape `(n_samples, n_features)`
-    - Input features for training.
+    - Input features for training. Accepts NumPy arrays or Pandas DataFrame.
 - **y**: `array-like` of shape `(n_samples,)`
-    - Target labels for training (binary 0 or 1).
+    - Target labels for training (binary 0 or 1). Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 
@@ -90,7 +90,7 @@ Predict class labels for new data.
 **Parameters**
 
 - **model_input**: `array-like` or `DataFrame` of shape `(n_samples, n_features)`
-    - Input data for prediction.
+    - Input data for prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -106,7 +106,7 @@ Predict class probabilities for new data.
 **Parameters**
 
 - **model_input**: `array-like` or `DataFrame` of shape `(n_samples, n_features)`
-    - Input data for probability prediction.
+    - Input data for probability prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -122,9 +122,9 @@ Compute the F1 score of the model on given data.
 **Parameters**
 
 - **X**: `array-like` or `DataFrame` of shape `(n_samples, n_features)`
-    - Input features for evaluation.
+    - Input features for evaluation. Accepts NumPy arrays or Pandas DataFrame.
 - **y**: `array-like` of shape `(n_samples,)`
-    - True binary labels.
+    - True binary labels. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 

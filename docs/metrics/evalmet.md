@@ -20,16 +20,18 @@ $$
 
 A higher EvalMet value indicates a better model fit, balancing explained variance, error magnitude, and information divergence.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `y`, `y_fit`, and `w`.
+
 ---
 
 ## Parameters
 
-| Parameter   | Type       | Default                                        | Description                                                                                               |
-| ----------- | ---------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
-| `y`       | np.ndarray | —                                             | Observed data (ground truth). 1D array of numerical values.                                               |
-| `y_fit`   | np.ndarray | —                                             | Fitted data (model predictions). 1D array, same shape as `y`.                                           |
-| `w`       | np.ndarray | None                                           | Optional weights for data points. 1D array, same shape as `y`. If not provided, equal weights are used. |
-| `verbose` | bool       | Print detailed progress, warnings, and results |                                                                                                           |
+| Parameter   | Type                           | Default                                        | Description                                                                                               |
+| ----------- | ------------------------------ | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `y`       | array-like or Pandas Series     | —                                             | Observed data (ground truth). 1D values.                                                                  |
+| `y_fit`   | array-like or Pandas Series     | —                                             | Fitted data (model predictions). 1D values, same shape as `y`.                                            |
+| `w`       | array-like or Pandas Series     | None                                           | Optional weights for data points. 1D values, same shape as `y`. If not provided, equal weights are used. |
+| `verbose` | bool                            | Print detailed progress, warnings, and results |                                                                                                           |
 
 ---
 

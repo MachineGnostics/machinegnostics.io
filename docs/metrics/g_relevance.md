@@ -13,17 +13,19 @@ The Hc metric measures the gnostic relevance or irrelevance between true and pre
 
 Unlike classical metrics, Hc uses gnostic algebra to provide deeper insight into the relationship between predictions and actual outcomes, especially in the presence of outliers or non-normal data.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `y_true` and `y_pred`.
+
 ---
 
 ## Parameters
 
-| Parameter   | Type       | Description                                                         |
-| ----------- | ---------- | ------------------------------------------------------------------- |
-| `y_true`    | array-like | True values (list, tuple, or numpy array).                          |
-| `y_pred`    | array-like | Predicted values (list, tuple, or numpy array).                     |
-| `case`      | str        | `'i'` for relevance, `'j'` for irrelevance. Default: `'i'`.         |
-| `S`         | float/str  | Gnostic scale parameter. Default: `'auto'`.                         |
-| `verbose`   | bool       | If True, enables detailed logging for debugging. Default: `False`.  |
+| Parameter   | Type                           | Description                                                         |
+| ----------- | ------------------------------ | ------------------------------------------------------------------- |
+| `y_true`    | array-like or Pandas Series    | True values (1D).                                                   |
+| `y_pred`    | array-like or Pandas Series    | Predicted values (1D).                                              |
+| `case`      | str                            | `'i'` for relevance, `'j'` for irrelevance. Default: `'i'`.         |
+| `S`         | float/str                      | Gnostic scale parameter. Default: `'auto'`.                         |
+| `verbose`   | bool                           | If True, enables detailed logging for debugging. Default: `False`.  |
 
 ---
 
@@ -36,7 +38,7 @@ Unlike classical metrics, Hc uses gnostic algebra to provide deeper insight into
 
 ## Raises
 
-- **TypeError**If `y_true` or `y_pred` are not array-like.
+- **TypeError** If `y_true` or `y_pred` are not array-like (NumPy arrays, lists) or Pandas Series.
 - **ValueError**
   If inputs are empty, contain NaN/Inf, are not 1D, have mismatched shapes, or if `case` is not `'i'` or `'j'`.
 

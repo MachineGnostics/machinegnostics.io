@@ -10,6 +10,8 @@ The F1 score combines precision and recall into a single metric by taking their 
 
 This metric is particularly important when you want to balance the trade-off between precision and recall, such as in information retrieval, medical diagnosis, and fraud detection.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `y_true` and `y_pred`.
+
 ---
 
 ## Parameters
@@ -69,7 +71,7 @@ print(f1_score(df['true'], df['pred'], average='binary'))
 
 ## Notes
 
-- The function supports input as numpy arrays, lists, or pandas Series.
+- Compatibility: Accepts NumPy arrays, lists, or Pandas Series.
 - If you pass a pandas DataFrame, you must select a column (e.g., `df['col']`), not the whole DataFrame.
 - For binary classification, by convention, the second label is treated as the positive class.
 - For imbalanced datasets, consider using `average='weighted'` to account for class support.

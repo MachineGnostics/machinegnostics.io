@@ -13,13 +13,15 @@ Gnostic median generalizes classical median by using irrelevance and fidelity me
 
 Both approaches are robust to outliers and non-normal data, providing reliable diagnostics in challenging scenarios.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `data`.
+
 ---
 
 ## Parameters
 
-| Parameter       | Type       | Description                                                                  | Default   |
-| --------------- | ---------- | ---------------------------------------------------------------------------- | --------- |
-| `data`          | np.ndarray | Input data array (1D, no NaN/Inf).                                           | Required  |
+| Parameter       | Type                           | Description                                                                  | Default   |
+| --------------- | ------------------------------ | ---------------------------------------------------------------------------- | --------- |
+| `data`          | array-like or Pandas Series    | Input data (1D, no NaN/Inf).                                                 | Required  |
 | `case`          | str        | `'i'` for estimating median (EGDF), `'j'` for quantifying median (QGDF).     | `'i'`     |
 | `S`             | float/str  | Scaling parameter for EGDF/QGDF. Can be `float` or `'auto'`.                 | `'auto'`  |
 | `z0_optimize`   | bool       | Whether to optimize z0 in EGDF/QGDF.                                         | `True`    |
@@ -38,7 +40,7 @@ Both approaches are robust to outliers and non-normal data, providing reliable d
 
 ## Raises
 
-- **TypeError**If input is not a numpy array, or if `S` is not a float or `'auto'`.
+- **TypeError** If input is not array-like (NumPy arrays, lists) or Pandas Series, or if `S` is not a float or `'auto'`.
 - **ValueError**
   If input is not 1D, is empty, contains NaN/Inf, or if `case`/`data_form` is invalid.
 

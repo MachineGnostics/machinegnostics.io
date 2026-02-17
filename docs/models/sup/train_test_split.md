@@ -1,6 +1,6 @@
 # train_test_split: Random Train/Test Data Splitter
 
-The `train_test_split` function provides a simple and flexible way to split your dataset into random training and testing subsets. It is compatible with numpy arrays and can also handle lists or tuples as input. This function is essential for evaluating machine learning models on unseen data and is a core utility in most ML workflows.
+The `train_test_split` function provides a simple and flexible way to split your dataset into random training and testing subsets. It accepts NumPy arrays, Pandas DataFrame/Series, and can also handle lists or tuples as input. This function is essential for evaluating machine learning models on unseen data and is a core utility in most ML workflows.
 
 ---
 
@@ -20,8 +20,8 @@ Splitting your data into training and testing sets is a fundamental step in mach
 
 | Parameter     | Type                | Default | Description                                                                 |
 |---------------|---------------------|---------|-----------------------------------------------------------------------------|
-| `X`           | array-like          | —       | Feature data to be split. Must be indexable and of consistent length.       |
-| `y`           | array-like or None  | None    | Target data to be split alongside X. Must be same length as X.              |
+| `X`           | array-like          | —       | Feature data to be split. Accepts NumPy arrays or Pandas DataFrame. Must be indexable and of consistent length.       |
+| `y`           | array-like or None  | None    | Target data to be split alongside X. Accepts NumPy arrays or Pandas Series/DataFrame column. Must be same length as X.              |
 | `test_size`   | float or int        | 0.25    | If float, fraction of data for test set (0.0 < test_size < 1.0). If int, absolute number of test samples. |
 | `shuffle`     | bool                | True    | Whether to shuffle the data before splitting.                               |
 | `random_seed` | int or None         | None    | Controls the shuffling for reproducibility.                                 |

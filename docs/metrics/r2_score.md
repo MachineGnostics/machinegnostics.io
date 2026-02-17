@@ -8,6 +8,8 @@ The `robr2` function computes the Robust R-squared (RobR2) value for evaluating 
 
 Robust R-squared (RobR2) measures the proportion of variance in the observed data explained by the fitted data, while reducing sensitivity to outliers. This is achieved by using a weighted formulation, which allows for more reliable model evaluation in real-world scenarios where data may not be perfectly clean.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for inputs.
+
 ---
 
 ## Formula
@@ -31,9 +33,9 @@ If weights are not provided, equal weights are assumed.
 
 | Parameter   | Type               | Description                                                                                       |
 | ----------- | ------------------ | ------------------------------------------------------------------------------------------------- |
-| `y`       | np.ndarray         | Observed data (ground truth). 1D array of numerical values.                                       |
-| `y_fit`   | np.ndarray         | Fitted data (model predictions). 1D array, same shape as `y`.                                   |
-| `w`       | np.ndarray or None | Optional weights for data points. 1D array, same shape as `y`. If None, equal weights are used. |
+| `y`       | array-like or Pandas Series | Observed data (ground truth). 1D values.                                          |
+| `y_fit`   | array-like or Pandas Series | Fitted data (model predictions). 1D values, same shape as `y`.                   |
+| `w`       | array-like or None | Optional weights for data points. 1D values, same shape as `y`. If None, equal weights are used. |
 | `verbose` | bool               | Print detailed progress, warnings, and results                                                    |
 
 ---

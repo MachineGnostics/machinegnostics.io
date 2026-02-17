@@ -71,8 +71,8 @@ If `optimize=True`, this runs a grid search over $(p, d, q)$ combinations to min
 
 **Parameters**
 
-- **y**: `array-like`
-  - Target time series.
+- **y**: array-like or Series
+  - Target time series. Accepts NumPy arrays or Pandas Series.
 - **X**: `Ignored`
   - Not used.
 
@@ -110,8 +110,8 @@ Currently, scoring is primarily supported for in-sample evaluation (on the train
 
 **Parameters**
 
-- **y**: `array-like`
-  - Time series to evaluate.
+- **y**: array-like or Series
+  - Time series to evaluate. Accepts NumPy arrays or Pandas Series.
 
 **Returns**
 

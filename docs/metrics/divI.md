@@ -22,6 +22,8 @@ where:
 
 DivI compares the information content of the dependent variable and its fit. The better the fit, the closer DivI is to 1. If the fit is highly uncertain or poor, DivI decreases.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for inputs.
+
 ---
 
 ## Interpretation
@@ -35,11 +37,11 @@ DivI is particularly useful in robust model evaluation, as it is less sensitive 
 
 ## Parameters
 
-| Parameter   | Type       | Description                                                     |
-| ----------- | ---------- | --------------------------------------------------------------- |
-| `y`       | np.ndarray | Observed data (ground truth). 1D array of numerical values.     |
-| `y_fit`   | np.ndarray | Fitted data (model predictions). 1D array, same shape as `y`. |
-| `verbose` | bool       | Print detailed progress, warnings, and results                  |
+| Parameter   | Type                           | Description                                                     |
+| ----------- | ------------------------------ | --------------------------------------------------------------- |
+| `y`       | array-like or Pandas Series     | Observed data (ground truth). 1D values.                        |
+| `y_fit`   | array-like or Pandas Series     | Fitted data (model predictions). 1D values, same shape as `y`. |
+| `verbose` | bool                            | Print detailed progress, warnings, and results                  |
 
 ---
 

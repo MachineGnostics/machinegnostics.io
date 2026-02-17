@@ -13,6 +13,8 @@ A confusion matrix is a table that is often used to describe the performance of 
 
 This metric helps you understand the types of errors your classifier is making and is essential for evaluating classification accuracy, precision, recall, and other related metrics.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `y_true` and `y_pred`.
+
 ---
 
 ## Parameters
@@ -65,7 +67,7 @@ print(cm_custom)
 
 ## Notes
 
-- The function supports input as lists, numpy arrays, or pandas Series.
+- Compatibility: Accepts NumPy arrays, lists, or Pandas Series.
 - Both `y_true` and `y_pred` must be 1D, have the same shape, and must not be empty or contain NaN/Inf.
 - If `labels` is not provided, all unique labels in `y_true` and `y_pred` are used in sorted order.
 - The confusion matrix is essential for computing other metrics such as accuracy, precision, recall, and F1-score.

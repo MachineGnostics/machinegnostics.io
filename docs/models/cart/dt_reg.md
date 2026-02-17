@@ -25,21 +25,12 @@ Machine Gnostics `GnosticDecisionTreeRegressor` combines the interpretability of
 - Identifies and handles outliers automatically
 - Convergence-based early stopping
 - Training history tracking for analysis
-- Compatible with numpy arrays for input/output
+ - Compatible with NumPy arrays and Pandas DataFrame/Series for input/output
 
 ---
 
 ## Parameters
-
-| Parameter | Type | Default | Description |
-| :--- | :--- | :--- | :--- |
-| `max_depth` | `int` | `None` | Maximum depth of the tree. |
-| `min_samples_split` | `int` | `2` | Minimum samples to split a node. |
-| `gnostic_weights` | `bool` | `True` | Whether to use iterative gnostic weights. |
-| `max_iter` | `int` | `10` | Maximum gnostic iterations. |
-| `tolerance` | `float` | `1e-4` | Convergence tolerance. |
 | `data_form` | `str` | `'a'` | Data form: 'a' (additive) or 'm' (multiplicative). |
-| `verbose` | `bool` | `False` | Verbosity. |
 | `random_state` | `int` | `None` | Random seed. |
 | `history` | `bool` | `True` | Whether to record training history. |
 | `scale` | `str` | `'auto'` | Scaling method for input features. |
@@ -57,7 +48,6 @@ Machine Gnostics `GnosticDecisionTreeRegressor` combines the interpretability of
     - Maximum number of iterations used.
 - **_history**: `list`
     - List of dictionaries containing training history (if enabled).
-- **tolerance, data_form, verbose, random_state, scale, early_stopping**
     - Configuration parameters as set at initialization.
 
 ---
@@ -72,10 +62,10 @@ This method trains the decision tree regressor using the provided input features
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - Target values.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+    - Target values. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 
@@ -90,8 +80,8 @@ Predict outcomes for new data.
 
 **Parameters**
 
-- **model_input**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input data for prediction.
+- **model_input**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input data for prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -106,10 +96,10 @@ Compute the robust (gnostic) R² score for the model.
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features for evaluation.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - True target values.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features for evaluation. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+    - True target values. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 

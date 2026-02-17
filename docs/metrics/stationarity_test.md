@@ -21,13 +21,13 @@ If the Residual Entropy sequence is homogeneous, the time series is considered s
 
 ## Parameters
 
-| Parameter     | Type       | Description                                                                 | Default  |
-| ------------- | ---------- | --------------------------------------------------------------------------- | -------- |
-| `data`        | array-like | Time series data to analyze (1D).                                           | Required |
-| `window_size` | int        | Size of the sliding window for entropy calculation.                         | `10`     |
-| `S`           | str        | Scale parameter for EGDF fitting (`'auto'` or float).                       | `'auto'` |
-| `data_form`   | str        | Form of input data: `'a'` (additive) or `'m'` (multiplicative).             | `'a'`    |
-| `verbose`     | bool       | If True, enables detailed logging for debugging.                            | `False`  |
+| Parameter     | Type                           | Description                                                                 | Default  |
+| ------------- | ------------------------------ | --------------------------------------------------------------------------- | -------- |
+| `data`        | array-like or Pandas Series    | Time series data to analyze (1D).                                           | Required |
+| `window_size` | int                            | Size of the sliding window for entropy calculation.                         | `10`     |
+| `S`           | str                            | Scale parameter for EGDF fitting (`'auto'` or float).                       | `'auto'` |
+| `data_form`   | str                            | Form of input data: `'a'` (additive) or `'m'` (multiplicative).             | `'a'`    |
+| `verbose`     | bool                           | If True, enables detailed logging for debugging.                            | `False`  |
 
 ---
 
@@ -72,6 +72,7 @@ print(f"Is stationary: {is_stat_trend}")
 - **Window Size**: The `window_size` determines the locality of the entropy calculation. It must be smaller than the total length of the data but large enough to fit an EGDF (typically > 3).
 - **Residual Entropy**: This metric captures the uncertainty within the local window. If this uncertainty remains consistent (homogeneous) throughout the series, the process is deemed stationary.
 - **Robustness**: Like other Gnostic metrics, this test is robust to outliers and does not rely on Gaussian assumptions.
+- **Compatibility**: Accepts NumPy arrays and Pandas Series as input.
 
 ---
 

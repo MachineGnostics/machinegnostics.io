@@ -13,13 +13,15 @@ Gnostic variance generalizes classical variance by using irrelevance measures:
 
 Both approaches are robust to outliers and non-normal data, providing reliable diagnostics in challenging scenarios.
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `data`.
+
 ---
 
 ## Parameters
 
-| Parameter       | Type       | Description                                                                      | Default   |
-| --------------- | ---------- | -------------------------------------------------------------------------------- | --------- |
-| `data`          | np.ndarray | Input data array (1D, no NaN/Inf).                                               | Required  |
+| Parameter       | Type                           | Description                                                                      | Default   |
+| --------------- | ------------------------------ | -------------------------------------------------------------------------------- | --------- |
+| `data`          | array-like or Pandas Series    | Input data (1D, no NaN/Inf).                                                     | Required  |
 | `case`          | str        | `'i'` for estimating variance (ELDF), `'j'` for quantifying variance (QLDF).      | `'i'`     |
 | `S`             | float/str  | Scaling parameter for ELDF. can be `float` or `'auto'`.  Suggested range: [0.01, 2].         | `'auto'`  |
 | `z0_optimize`   | bool       | Whether to optimize z0 in ELDF/QLDF.                                             | `True`    |
@@ -38,7 +40,7 @@ Both approaches are robust to outliers and non-normal data, providing reliable d
 
 ## Raises
 
-- **TypeError**If input is not a numpy array.
+- **TypeError** If input is not array-like (NumPy arrays, lists) or Pandas Series.
 - **ValueError**
   If input is not 1D, is empty, contains NaN/Inf, or if `case` is not `'i'` or `'j'`.
 

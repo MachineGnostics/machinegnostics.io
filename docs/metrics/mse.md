@@ -17,11 +17,11 @@ MSE is widely used in regression analysis to quantify the accuracy of prediction
 
 ## Parameters
 
-| Parameter   | Type       | Description                                    |
-| ----------- | ---------- | ---------------------------------------------- |
-| `y_true`  | array-like | True values (targets).                         |
-| `y_pred`  | array-like | Predicted values.                              |
-| `verbose` | bool       | Print detailed progress, warnings, and results |
+| Parameter   | Type                           | Description                                    |
+| ----------- | ------------------------------ | ---------------------------------------------- |
+| `y_true`  | array-like or Pandas Series     | True values (targets).                         |
+| `y_pred`  | array-like or Pandas Series     | Predicted values.                              |
+| `verbose` | bool                            | Print detailed progress, warnings, and results |
 
 ---
 
@@ -34,9 +34,8 @@ MSE is widely used in regression analysis to quantify the accuracy of prediction
 
 ## Raises
 
-- **TypeError**If `y_true` or `y_pred` are not array-like (list, tuple, or numpy array).
-- **ValueError**
-  If inputs have mismatched shapes or are empty.
+- **TypeError** If `y_true` or `y_pred` are not array-like (NumPy arrays, lists) or Pandas Series.
+- **ValueError** If inputs have mismatched shapes or are empty.
 
 ---
 
@@ -61,7 +60,7 @@ print(mean_squared_error(y_true, y_pred))
 
 ## Notes
 
-- The function supports input as lists, tuples, or numpy arrays.
+- Compatibility: Accepts NumPy arrays and Pandas Series.
 - Both `y_true` and `y_pred` must have the same shape and must not be empty.
 - MSE penalizes larger errors more than MAE (mean absolute error), making it sensitive to outliers.
 

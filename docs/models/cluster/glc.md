@@ -30,7 +30,7 @@ It includes mechanisms to automatically determine the optimal scale parameter ($
 - Identifies cluster boundaries (valleys) and centroids (peaks)
 - Visualization method `plot()` included
 - Robust to outliers
-- Compatible with numpy arrays
+- Compatible with NumPy arrays and Pandas DataFrame/Series
 
 ---
 
@@ -80,8 +80,8 @@ This process involves:
 
 **Parameters**
 
-- **X**: `np.ndarray`
-    - Input data. (Flattened if > 1D).
+- **X**: array-like or DataFrame
+    - Input data. Accepts NumPy arrays or Pandas DataFrame. (Flattened if > 1D).
 - **y**: `Ignored`
     - Not used.
 
@@ -97,8 +97,8 @@ Predict cluster labels for new data. Labels are assigned based on which "valley-
 
 **Parameters**
 
-- **model_input**: `np.ndarray`
-    - New data to predict.
+- **model_input**: array-like or DataFrame
+    - New data to predict. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -115,8 +115,8 @@ Unlike K-Means inertia, this metric measures the "unexplained" information in th
 
 **Parameters**
 
-- **X**: `np.ndarray`
-    - Input features.
+- **X**: array-like or DataFrame
+    - Input features. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 

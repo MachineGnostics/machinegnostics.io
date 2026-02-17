@@ -24,7 +24,7 @@ Machine Gnostics `GnosticRandomForestRegressor` combines the ensemble power of R
 - Identifies and handles outliers automatically
 - Convergence-based early stopping
 - Training history tracking for analysis
-- Compatible with numpy arrays for input/output
+- Compatible with NumPy arrays and Pandas DataFrame/Series for input/output
 
 ---
 
@@ -70,10 +70,10 @@ This method trains the random forest classifier. If `gnostic_weights` is True, i
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - Target values.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+    - Target values. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 
@@ -88,8 +88,8 @@ Predict target values for input samples.
 
 **Parameters**
 
-- **model_input**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input data for prediction.
+- **model_input**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input data for prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -104,10 +104,10 @@ Return the robust (gnostic) coefficient of determination R² of the prediction.
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features for evaluation.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - True target values.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features for evaluation. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+    - True target values. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 

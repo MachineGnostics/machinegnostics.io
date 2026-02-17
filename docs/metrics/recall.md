@@ -10,6 +10,8 @@ Recall is defined as the ratio of true positives (TP) to the sum of true positiv
 
 This metric is especially important in scenarios where false negatives are more costly than false positives (e.g., disease screening, fraud detection).
 
+- Compatibility: Accepts NumPy arrays and Pandas Series for `y_true` and `y_pred`.
+
 ---
 
 ## Parameters
@@ -69,7 +71,7 @@ print(recall_score(df['true'], df['pred'], average='binary'))
 
 ## Notes
 
-- The function supports input as numpy arrays, lists, or pandas Series.
+- Compatibility: Accepts NumPy arrays, lists, or Pandas Series.
 - If you pass a pandas DataFrame, you must select a column (e.g., `df['col']`), not the whole DataFrame.
 - For binary classification, by convention, the second label is treated as the positive class.
 - For imbalanced datasets, consider using `average='weighted'` to account for class support.

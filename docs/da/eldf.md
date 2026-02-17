@@ -52,7 +52,7 @@ ELDF is optimized for local probability and density estimation, especially when 
 | `n_points`        | int                   | 1000      | Number of points for distribution curve                          |
 | `homogeneous`     | bool                  | True      | Assume data homogeneity                                          |
 | `catch`           | bool                  | True      | Store intermediate results (memory usage)                        |
-| `weights`         | np.ndarray or None    | None      | Prior weights for data points                                    |
+| `weights`         | array-like or Series or None    | None      | Prior weights for data points (accepts NumPy arrays or Pandas Series). |
 | `wedf`            | bool                  | False     | Use Weighted Empirical Distribution Function                     |
 | `opt_method`      | str                   | 'Powell'  | Optimization method (scipy.optimize)                             |
 | `verbose`         | bool                  | False     | Print progress and diagnostics                                   |
@@ -76,8 +76,8 @@ ELDF is optimized for local probability and density estimation, especially when 
 
 Fits the ELDF to your data, estimating all relevant parameters and generating the local distribution function.
 
-- **data**: `np.ndarray`, shape `(n_samples,)`  
-  Input data array.
+- **data**: array-like or Series, shape `(n_samples,)`  
+  Input data. Accepts NumPy arrays or Pandas Series/DataFrame column.
 - **plot**: `bool` (optional)  
   If True, automatically plots the fitted distribution.
 

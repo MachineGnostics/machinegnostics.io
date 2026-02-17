@@ -15,8 +15,8 @@ Cross-validation is a robust technique for assessing the generalization performa
 | Parameter       | Type       | Default | Description                                                             |
 | --------------- | ---------- | ------- | ----------------------------------------------------------------------- |
 | `model`       | object     | —      | A machine learning model with `fit(X, y)` and `predict(X)` methods. |
-| `X`           | array-like | —      | Feature matrix of shape `(n_samples, n_features)`.                    |
-| `y`           | array-like | —      | Target labels of shape `(n_samples,)`.                                |
+| `X`           | array-like | —      | Feature matrix of shape `(n_samples, n_features)`. Accepts NumPy arrays or Pandas DataFrame.                    |
+| `y`           | array-like | —      | Target labels of shape `(n_samples,)`. Accepts NumPy arrays or Pandas Series/DataFrame column.                                |
 | `k`           | int        | 5       | Number of folds for cross-validation.                                   |
 | `shuffle`     | bool       | True    | Whether to shuffle the dataset before splitting into folds.             |
 | `random_seed` | int/None   | None    | Seed for reproducible shuffling (ignored if `shuffle=False`).         |

@@ -24,7 +24,7 @@ Machine Gnostics `GnosticRandomForestClassifier` is designed for robust classifi
 - Identifies and handles outliers/mislabeled data automatically
 - Convergence-based early stopping
 - Training history tracking for analysis
-- Compatible with numpy arrays for input/output
+- Compatible with NumPy arrays and Pandas DataFrame/Series for input/output
 
 ---
 
@@ -72,10 +72,10 @@ This method trains the random forest classifier. If `gnostic_weights` is True, i
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - Target labels.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+    - Target labels. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 
@@ -90,8 +90,8 @@ Predict class labels for input samples.
 
 **Parameters**
 
-- **model_input**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input data for prediction.
+- **model_input**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input data for prediction. Accepts NumPy arrays or Pandas DataFrame.
 
 **Returns**
 
@@ -106,10 +106,10 @@ Return the mean accuracy on the given test data and labels.
 
 **Parameters**
 
-- **X**: `np.ndarray` of shape `(n_samples, n_features)`
-    - Input features for evaluation.
-- **y**: `np.ndarray` of shape `(n_samples,)`
-    - True class labels.
+- **X**: array-like or DataFrame of shape `(n_samples, n_features)`
+    - Input features for evaluation. Accepts NumPy arrays or Pandas DataFrame.
+- **y**: array-like or Series of shape `(n_samples,)`
+    - True class labels. Accepts NumPy arrays or Pandas Series/DataFrame column.
 
 **Returns**
 
