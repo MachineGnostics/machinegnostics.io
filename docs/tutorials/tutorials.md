@@ -203,20 +203,7 @@ Each example includes:
 
     </div>
 
-=== "Integrations & Tools"
-
-    ### **MLflow**
-    <div class="grid cards" markdown>
-
-    -   :simple-mlflow: **MLflow Integration**
-
-        Track experiments and manage models with MLflow.
-
-        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_05_mlflow_integration.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_05_mlflow_integration.ipynb)
-
-    </div>
-
-=== "Deep Learning"
+=== "Deep Learning Models"
 
     <div class="grid cards" markdown>
 
@@ -227,6 +214,19 @@ Each example includes:
         *Coming soon!*
 
         [:material-arrow-right: Read more about Magnet](../magnet/magnet.md)
+
+    </div>
+
+=== "Integrations & Tools"
+
+    ### **MLflow**
+    <div class="grid cards" markdown>
+
+    -   :simple-mlflow: **MLflow Integration**
+
+        Track experiments and manage models with MLflow.
+
+        [:simple-googlecolab: Open in Colab](https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_05_mlflow_integration.ipynb) · [:simple-github: GitHub](https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_models_05_mlflow_integration.ipynb)
 
     </div>
 
