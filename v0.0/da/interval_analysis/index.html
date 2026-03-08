@@ -103,7 +103,7 @@
             
 <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
     <span>
-        <strong>Welcome to Machine Gnostics!</strong> <em>New version 0.0.3 out now!</em> Follow us for more updates:
+        <strong>Welcome to Machine Gnostics!</strong> <em>Released a new version! 🎈 Follow us for more updates.</em>
     </span>
     <div style="display: flex; gap: 12px; align-items: center;">
         <a href="https://github.com/MachineGnostics/machinegnostics" title="Machine Gnostics on GitHub" style="color: inherit; display: flex;">
@@ -3846,9 +3846,9 @@
 </tr>
 <tr>
 <td><code>weights</code></td>
-<td>np.ndarray or None</td>
+<td>array-like or Series or None</td>
 <td>None</td>
-<td>Prior weights for data points</td>
+<td>Prior weights for data points (accepts NumPy arrays or Pandas Series).</td>
 </tr>
 <tr>
 <td><code>wedf</code></td>
@@ -3953,7 +3953,8 @@
 <h3 id="fitdata-plotfalse"><code>fit(data, plot=False)</code><a class="headerlink" href="#fitdata-plotfalse" title="Permanent link">&para;</a></h3>
 <p>Runs the complete interval analysis workflow on the input data.</p>
 <ul>
-<li><strong>data</strong>: <code>np.ndarray</code>, shape <code>(n_samples,)</code>1D numpy array of input data for interval analysis</li>
+<li><strong>data</strong>: array-like or Series, shape <code>(n_samples,)</code><br />
+  Input data for interval analysis. Accepts NumPy arrays or Pandas Series/DataFrame column.</li>
 <li><strong>plot</strong>: <code>bool</code> (optional)
   If True, automatically generates diagnostic plots after fitting</li>
 </ul>
@@ -4078,7 +4079,7 @@ None (displays plot)</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 2, 2026 13:29:04 UTC">February 2, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 17, 2026 14:07:10 UTC">February 17, 2026</span>
   </span>
 
     

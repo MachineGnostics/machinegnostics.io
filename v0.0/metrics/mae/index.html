@@ -103,7 +103,7 @@
             
 <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
     <span>
-        <strong>Welcome to Machine Gnostics!</strong> <em>New version 0.0.3 out now!</em> Follow us for more updates:
+        <strong>Welcome to Machine Gnostics!</strong> <em>Released a new version! 🎈 Follow us for more updates.</em>
     </span>
     <div style="display: flex; gap: 12px; align-items: center;">
         <a href="https://github.com/MachineGnostics/machinegnostics" title="Machine Gnostics on GitHub" style="color: inherit; display: flex;">
@@ -3673,12 +3673,12 @@ This approach ensures that error metrics reflect the true structure and diagnost
 <tbody>
 <tr>
 <td><code>y_true</code></td>
-<td>array-like</td>
+<td>array-like or Pandas Series</td>
 <td>True values (targets).</td>
 </tr>
 <tr>
 <td><code>y_pred</code></td>
-<td>array-like</td>
+<td>array-like or Pandas Series</td>
 <td>Predicted values.</td>
 </tr>
 <tr>
@@ -3697,9 +3697,8 @@ This approach ensures that error metrics reflect the true structure and diagnost
 <hr />
 <h2 id="raises">Raises<a class="headerlink" href="#raises" title="Permanent link">&para;</a></h2>
 <ul>
-<li><strong>TypeError</strong>If <code>y_true</code> or <code>y_pred</code> are not array-like (list, tuple, or numpy array).</li>
-<li><strong>ValueError</strong>
-  If inputs have mismatched shapes or are empty.</li>
+<li><strong>TypeError</strong> If <code>y_true</code> or <code>y_pred</code> are not array-like (NumPy arrays, lists) or Pandas Series.</li>
+<li><strong>ValueError</strong> If inputs have mismatched shapes or are empty.</li>
 </ul>
 <hr />
 <h2 id="example-usage">Example Usage<a class="headerlink" href="#example-usage" title="Permanent link">&para;</a></h2>
@@ -3719,7 +3718,7 @@ This approach ensures that error metrics reflect the true structure and diagnost
 <hr />
 <h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The function supports input as lists, tuples, or numpy arrays.</li>
+<li>Compatibility: Accepts NumPy arrays and Pandas Series.</li>
 <li>Both <code>y_true</code> and <code>y_pred</code> must have the same shape and must not be empty.</li>
 <li>MAE is robust to outliers but does not penalize large errors as strongly as mean squared error (MSE).</li>
 </ul>
@@ -3747,7 +3746,7 @@ This approach ensures that error metrics reflect the true structure and diagnost
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 24, 2025 15:50:40 UTC">September 24, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 17, 2026 14:07:10 UTC">February 17, 2026</span>
   </span>
 
     
