@@ -11,3 +11,328 @@
 .md-banner a:hover {
     color: #00695c; /* Darker teal on hover */
 }
+
+@import url('../assets/external/fonts.googleapis.com/css2.aed57817.css');
+
+.md-content .md-typeset {
+    max-width: 100%;
+}
+
+.gn-home {
+    position: relative;
+    isolation: isolate;
+    font-family: 'Space Grotesk', var(--md-text-font, sans-serif);
+    color: var(--md-default-fg-color);
+}
+
+.gn-home .gn-web-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+[data-md-color-scheme="default"] .gn-home .gn-web-canvas {
+    opacity: 0.95;
+    mix-blend-mode: normal;
+}
+
+[data-md-color-scheme="slate"] .gn-home .gn-web-canvas {
+    opacity: 0.8;
+    mix-blend-mode: normal;
+}
+
+.gn-home > section {
+    position: relative;
+    z-index: 1;
+}
+
+.gn-home .gn-hero {
+    position: relative;
+    overflow: hidden;
+    padding: 4.5rem 2rem;
+    border-radius: 1rem;
+    border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 70%);
+    background: radial-gradient(circle at 10% 20%, color-mix(in srgb, var(--md-primary-fg-color), transparent 78%), transparent 45%),
+                radial-gradient(circle at 85% 15%, color-mix(in srgb, #ffd166, transparent 85%), transparent 38%),
+                linear-gradient(180deg, color-mix(in srgb, var(--md-default-bg-color), #000 15%) 0%, color-mix(in srgb, var(--md-default-bg-color), #000 28%) 100%);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--md-primary-fg-color), transparent 85%),
+                0 20px 40px rgba(0, 0, 0, 0.26);
+}
+
+.gn-home .gn-hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(transparent 96%, color-mix(in srgb, var(--md-primary-fg-color), transparent 75%) 100%),
+        linear-gradient(90deg, transparent 96%, color-mix(in srgb, var(--md-primary-fg-color), transparent 75%) 100%);
+    background-size: 36px 36px;
+    opacity: 0.3;
+}
+
+.gn-home h1,
+.gn-home h2,
+.gn-home h3 {
+    font-family: 'Space Grotesk', var(--md-text-font, sans-serif);
+    letter-spacing: -0.01em;
+}
+
+.gn-home .gn-overline {
+    margin: 0 0 .75rem;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    color: color-mix(in srgb, var(--md-primary-fg-color), white 35%);
+    font-weight: 700;
+}
+
+.gn-home .gn-subtitle {
+    max-width: 56rem;
+    color: color-mix(in srgb, var(--md-default-fg-color), white 12%);
+    font-size: 1.08rem;
+}
+
+.gn-home .gn-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 1.25rem;
+}
+
+.gn-home .gn-section {
+    margin-top: 2rem;
+    padding: 1.75rem;
+    border-radius: .9rem;
+    background: color-mix(in srgb, var(--md-default-bg-color), #111 9%);
+    border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 82%);
+}
+
+.gn-home blockquote {
+    border-left-color: var(--md-primary-fg-color);
+    color: color-mix(in srgb, var(--md-default-fg-color), white 15%);
+}
+
+.gn-home .gn-compare,
+.gn-home .gn-features {
+    display: grid;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.gn-home .gn-compare {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.gn-home .gn-card,
+.gn-home .gn-feature {
+    border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 78%);
+    border-radius: .9rem;
+    padding: 1rem;
+    background: color-mix(in srgb, var(--md-default-bg-color), #111 16%);
+    transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.gn-home .gn-card:hover,
+.gn-home .gn-feature:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--md-primary-fg-color), transparent 40%);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.22);
+}
+
+.gn-home .gn-card--accent {
+    background: linear-gradient(180deg,
+                color-mix(in srgb, var(--md-primary-fg-color), transparent 92%) 0%,
+                color-mix(in srgb, var(--md-default-bg-color), #111 14%) 100%);
+}
+
+.gn-home .gn-card ul,
+.gn-home .gn-feature ul {
+    margin-top: .8rem;
+}
+
+.gn-home .gn-tags,
+.gn-home .gn-pill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin-top: .9rem;
+}
+
+.gn-home .gn-tags span,
+.gn-home .gn-pill-grid span {
+    display: inline-flex;
+    align-items: center;
+    font-size: .78rem;
+    padding: .35rem .62rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 62%);
+    background: color-mix(in srgb, var(--md-primary-fg-color), transparent 92%);
+}
+
+.gn-home .gn-feature a,
+.gn-home .gn-section > p > a {
+    font-weight: 600;
+    text-align: center;
+    display: block;
+}
+
+.gn-home .gn-cta {
+    text-align: center;
+    background: linear-gradient(180deg,
+                color-mix(in srgb, var(--md-primary-fg-color), transparent 94%) 0%,
+                color-mix(in srgb, var(--md-default-bg-color), #111 8%) 100%);
+}
+
+.gn-home .gn-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.gn-contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.gn-form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.gn-form-row .gn-form-group {
+    flex: 1;
+}
+
+.gn-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.gn-form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--md-default-fg-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gn-form-group input,
+.gn-form-group textarea {
+    padding: 0.75rem 0;
+    border: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--md-default-fg-color), transparent 50%);
+    background-color: transparent;
+    color: var(--md-default-fg-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.gn-form-group input:focus,
+.gn-form-group textarea:focus {
+    outline: none;
+    border-bottom-color: var(--md-primary-fg-color);
+}
+
+.gn-contact-form button {
+    align-self: center;
+    padding: 0.75rem 2rem;
+    background-color: transparent;
+    color: var(--md-primary-fg-color);
+    border: none;
+    border-radius: 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+}
+
+.gn-contact-form button:hover {
+    text-decoration-color: var(--md-primary-fg-color);
+}
+
+.gn-social {
+    text-align: center;
+    background-color: var(--md-default-bg-color);
+    border-top: 1px solid color-mix(in srgb, var(--md-default-fg-color), transparent 20%);
+    padding-top: 2rem;
+}
+
+.gn-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.gn-social-links a {
+    color: var(--md-primary-fg-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border: 1px solid var(--md-primary-fg-color);
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gn-social-links a:hover {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+}
+
+.gn-home .gn-reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity .5s ease, transform .5s ease;
+}
+
+.gn-home .gn-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@media screen and (max-width: 76.1875em) {
+    .gn-home .gn-hero {
+        padding: 3.2rem 1.25rem;
+    }
+
+    .gn-home .gn-section {
+        padding: 1.1rem;
+    }
+
+    .gn-home .gn-compare {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gn-home .gn-features {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gn-home .gn-card,
+    .gn-home .gn-feature {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .gn-form-row {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+}
