@@ -112,7 +112,7 @@
 			</div>
 			<div class="gn-form-group">
 				<label for="message">Message</label>
-				<textarea id="message" name="entry.262910174" rows="4" required></textarea>
+				<textarea id="message" name="entry.262910174" rows="3" required></textarea>
 			</div>
 			<!-- Honeypot field to catch bots -->
 			<div style="display:none;">
