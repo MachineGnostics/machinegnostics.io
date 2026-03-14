@@ -40,7 +40,7 @@ plugins:
 
 nav:
   - Welcome: index.md
-  - Quickstart: https://docs.machinegnostics.com/latest/installation/#4-quick-usage-example
+  - Quickstart: https://docs.machinegnostics.com/latest/installation/
   - Documentation: https://docs.machinegnostics.com/latest/
   - History: https://docs.machinegnostics.com/latest/stories/history/
   - Concept: https://docs.machinegnostics.com/latest/mg/concepts/
