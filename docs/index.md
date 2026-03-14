@@ -10,7 +10,7 @@
 		</p>
 		<div class="gn-actions">
 			<a href="#contact-form" class="md-button md-button--primary">Request a Gnostic Audit</a>
-			<a href="#methodological-foundation" class="md-button">Explore the Science</a>
+			<a href="https://docs.machinegnostics.com/latest/" class="md-button">Explore the Science</a>
 		</div>
 	</section>
 
