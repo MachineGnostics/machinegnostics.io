@@ -45,7 +45,7 @@ nav:
   - History: https://docs.machinegnostics.com/latest/stories/history/
   - Concept: https://docs.machinegnostics.com/latest/mg/concepts/
   - Contact: https://docs.machinegnostics.com/latest/contact/
-  
+
 markdown_extensions:
   - def_list
   - toc:

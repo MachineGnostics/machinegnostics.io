@@ -41,7 +41,7 @@
 					<span>Riemannian Geometry</span>
 					<span>Small-Sample Theory</span>
 				</div>
-				<a href="https://docs.machinegnostics.com/latest/da/da_models/">Explore Data Analysis Modules →</a>
+				<a href="https://docs.machinegnostics.com/latest/da/da_models/" target="_blank">Explore Data Analysis Modules →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -55,7 +55,7 @@
 					<span>Thermodynamic Models</span>
 					<span>Explainability</span>
 				</div>
-				<a href="https://docs.machinegnostics.com/latest/models/ml_models/">See ML Models →</a>
+				<a href="https://docs.machinegnostics.com/latest/models/ml_models/" target="_blank">See ML Models →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -68,7 +68,7 @@
 					<span>Thermodynamic Models</span>
 					<span>Noise Immunity</span>
 				</div>
-				<a href="https://docs.machinegnostics.com/latest/magnet/magnet/">Learn about MAGNET →</a>
+				<a href="https://docs.machinegnostics.com/latest/magnet/magnet/" target="_blank">Learn about MAGNET →</a>
 			</article>
 		</div>
 	</section>
@@ -87,7 +87,7 @@
 			<span>Data as Mass Less Particles</span>
 			<span>Gnostic Uncertainty</span>
 		</div>
-		<p><a href="https://docs.machinegnostics.com/latest/mg/concepts/">Read the Principles →</a></p>
+		<p><a href="https://docs.machinegnostics.com/latest/mg/concepts/" target="_blank">Read the Principles →</a></p>
 	</section>
 
 	<section class="gn-section gn-cta gn-reveal" id="contact-form">
@@ -95,27 +95,42 @@
 		<p>
 			Have an "unsolvable" data challenge? Fill out the form below and our team will evaluate whether Mathematical Gnostics can unlock certainty where probability has failed.
 		</p>
-		<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="gn-contact-form">
+		<form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScy294rN0eSLNJaYIrYOTmg_RMRqrRFf2IG1AdKdfiVE1Jqug/formResponse" method="POST" target="_blank" class="gn-contact-form">
 			<div class="gn-form-row">
 				<div class="gn-form-group">
 					<label for="name">Name</label>
-					<input type="text" id="name" name="name" required>
+					<input type="text" id="name" name="entry.1778644361" required>
 				</div>
 				<div class="gn-form-group">
 					<label for="surname">Surname</label>
-					<input type="text" id="surname" name="surname" required>
+					<input type="text" id="surname" name="entry.1242623021" required>
 				</div>
 			</div>
 			<div class="gn-form-group">
 				<label for="email">Email</label>
-				<input type="email" id="email" name="email" required>
+				<input type="email" id="email" name="entry.1414927051" required>
 			</div>
 			<div class="gn-form-group">
 				<label for="message">Message</label>
-				<textarea id="message" name="message" rows="4" required></textarea>
+				<textarea id="message" name="entry.262910174" rows="4" required></textarea>
+			</div>
+			<!-- Honeypot field to catch bots -->
+			<div style="display:none;">
+				<label for="website">Website (leave blank)</label>
+				<input type="text" id="website" name="website" autocomplete="off">
 			</div>
 			<button type="submit" class="md-button md-button--primary">Submit Query</button>
 		</form>
+		<script>
+			document.querySelector('.gn-contact-form').addEventListener('submit', function(e) {
+				var honeypot = document.getElementById('website');
+				if (honeypot.value !== '') {
+					e.preventDefault();
+					alert('Spam detected. Please try again.');
+					return false;
+				}
+			});
+		</script>
 		<small>All submissions are reviewed by our principal consultants. Response within 48 hours.</small>
 	</section>
 

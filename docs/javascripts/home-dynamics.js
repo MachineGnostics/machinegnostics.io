@@ -199,4 +199,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateParallax();
   window.addEventListener('scroll', updateParallax, { passive: true });
+
+  // Make docs.machinegnostics.com links open in new tab
+  document.querySelectorAll('a[href^="https://docs.machinegnostics.com"]').forEach(link => {
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+  });
 });
