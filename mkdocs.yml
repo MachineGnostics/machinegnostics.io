@@ -26,18 +26,6 @@ theme:
         name: Switch to dark mode
   features:
     - navigation.footer
-    - navigation.tabs
-    - navigation.sections
-    - navigation.top
-    - navigation.instant
-    - navigation.instant.progress
-    - navigation.instant.preview
-    - navigation.instant.prefetch
-    - navigation.tracking
-    - navigation.tabs.sticky
-    - content.code.annotate
-    - content.code.copy
-    - content.code.select
   custom_dir: overrides
   language: en
 
@@ -47,11 +35,16 @@ plugins:
   - git-revision-date-localized
   - awesome-pages
 
-repo_url: https://github.com/MachineGnostics/machinegnostics
-repo_name: Machine Gnostics
+# repo_url: https://github.com/MachineGnostics/machinegnostics
+# repo_name: Machine Gnostics
 
 nav:
   - Welcome: index.md
+  - Quickstart: https://docs.machinegnostics.com/latest/installation/#4-quick-usage-example
+  - Documentation: https://docs.machinegnostics.com/latest/
+  - History: https://docs.machinegnostics.com/latest/stories/history/
+  - Concept: https://docs.machinegnostics.com/latest/mg/concepts/
+  - Contact: https://machinegnostics.com/contact/
 
 markdown_extensions:
   - def_list

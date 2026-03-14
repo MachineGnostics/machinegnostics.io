@@ -10,8 +10,8 @@
 			An innovative Python ecosystem implementing Mathematical Gnostics for 'non-statistical' robust data analysis, machine learning, and neural networks.
 		</p>
 		<div class="gn-actions">
-			<a href="contact/" class="md-button md-button--primary">Request a Gnostic Audit</a>
-			<a href="mg/concepts/" class="md-button">Explore the Science</a>
+			<a href="mailto:info@machinegnostics.com" class="md-button md-button--primary">Request a Gnostic Audit</a>
+			<a href="#methodological-foundation" class="md-button">Explore the Science</a>
 		</div>
 	</section>
 
@@ -48,7 +48,7 @@
 		</div>
 	</section>
 
-	<section class="gn-section gn-reveal">
+	<section class="gn-section gn-reveal" id="core-features">
 		<h2>Core Features</h2>
 		<div class="gn-features">
 			<article class="gn-feature">
@@ -62,7 +62,7 @@
 					<span>Riemannian Geometry</span>
 					<span>Small-Sample Theory</span>
 				</div>
-				<a href="da/da_models/">Explore Data Analysis Modules →</a>
+				<a href="#core-features">Explore Data Analysis Modules →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -76,7 +76,7 @@
 					<span>Thermodynamic Models</span>
 					<span>Explainability</span>
 				</div>
-				<a href="models/ml_models/">See ML Models →</a>
+				<a href="#core-features">See ML Models →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -90,12 +90,12 @@
 					<span>Non-Linear Systems</span>
 					<span>Noise Immunity</span>
 				</div>
-				<a href="magnet/magnet/">Learn about MAGNET →</a>
+				<a href="#core-features">Learn about MAGNET →</a>
 			</article>
 		</div>
 	</section>
 
-	<section class="gn-section gn-reveal">
+	<section class="gn-section gn-reveal" id="methodological-foundation">
 		<h2>Our Methodological Foundation</h2>
 		<div class="gn-pill-grid">
 			<span>Riemannian Geometry</span>
@@ -107,7 +107,7 @@
 			<span>Space Curvature</span>
 			<span>Gnostic Cycle</span>
 		</div>
-		<p><a href="mg/principles/">Read the Principles →</a></p>
+		<p><a href="#methodological-foundation">Read the Principles →</a></p>
 	</section>
 
 	<section class="gn-section gn-cta gn-reveal">
@@ -117,7 +117,7 @@
 			certainty where probability has failed.
 		</p>
 		<div class="gn-actions">
-			<a href="contact/" class="md-button md-button--primary">Submit a Gnostic Audit Request</a>
+			<a href="mailto:info@machinegnostics.com" class="md-button md-button--primary">Submit a Gnostic Audit Request</a>
 		</div>
 		<small>All submissions are reviewed by our principal consultants. Response within 48 hours.</small>
 	</section>
