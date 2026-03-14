@@ -176,6 +176,8 @@
 .gn-home .gn-feature a,
 .gn-home .gn-section > p > a {
     font-weight: 600;
+    text-align: center;
+    display: block;
 }
 
 .gn-home .gn-cta {
@@ -183,6 +185,113 @@
     background: linear-gradient(180deg,
                 color-mix(in srgb, var(--md-primary-fg-color), transparent 94%) 0%,
                 color-mix(in srgb, var(--md-default-bg-color), #111 8%) 100%);
+}
+
+.gn-home .gn-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.gn-contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.gn-form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.gn-form-row .gn-form-group {
+    flex: 1;
+}
+
+.gn-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.gn-form-group label {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--md-default-fg-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.gn-form-group input,
+.gn-form-group textarea {
+    padding: 0.75rem 0;
+    border: none;
+    border-bottom: 1px solid color-mix(in srgb, var(--md-default-fg-color), transparent 50%);
+    background-color: transparent;
+    color: var(--md-default-fg-color);
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.gn-form-group input:focus,
+.gn-form-group textarea:focus {
+    outline: none;
+    border-bottom-color: var(--md-primary-fg-color);
+}
+
+.gn-contact-form button {
+    align-self: center;
+    padding: 0.75rem 2rem;
+    background-color: transparent;
+    color: var(--md-primary-fg-color);
+    border: none;
+    border-radius: 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+}
+
+.gn-contact-form button:hover {
+    text-decoration-color: var(--md-primary-fg-color);
+}
+
+.gn-social {
+    text-align: center;
+    background-color: var(--md-default-bg-color);
+    border-top: 1px solid color-mix(in srgb, var(--md-default-fg-color), transparent 20%);
+    padding-top: 2rem;
+}
+
+.gn-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.gn-social-links a {
+    color: var(--md-primary-fg-color);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border: 1px solid var(--md-primary-fg-color);
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gn-social-links a:hover {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
 }
 
 .gn-home .gn-reveal {
@@ -203,5 +312,26 @@
 
     .gn-home .gn-section {
         padding: 1.1rem;
+    }
+
+    .gn-home .gn-compare {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gn-home .gn-features {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gn-home .gn-card,
+    .gn-home .gn-feature {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .gn-form-row {
+        flex-direction: column;
+        gap: 1.5rem;
     }
 }
