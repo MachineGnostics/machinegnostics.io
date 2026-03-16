@@ -32,40 +32,42 @@
 		<p>
 			Prefer to fill out a form? Use this to tell us more about your inquiry, and we'll get back to you promptly.
 		</p>
-		<form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScy294rN0eSLNJaYIrYOTmg_RMRqrRFf2IG1AdKdfiVE1Jqug/formResponse" method="POST" target="_blank" class="gn-contact-form">
+		<form action="https://formsubmit.co/info.machinegnostics@gmail.com" method="POST" class="gn-contact-form">
 			<div class="gn-form-row">
 				<div class="gn-form-group">
 					<label for="name">Name</label>
-					<input type="text" id="name" name="entry.1778644361" required>
+					<input type="text" id="name" name="name" required>
 				</div>
 				<div class="gn-form-group">
 					<label for="surname">Surname</label>
-					<input type="text" id="surname" name="entry.1242623021" required>
+					<input type="text" id="surname" name="surname" required>
 				</div>
 			</div>
 			<div class="gn-form-group">
 				<label for="email">Email</label>
-				<input type="email" id="email" name="entry.1414927051" required>
+				<input type="email" id="email" name="email" required>
 			</div>
 			<div class="gn-form-group">
 				<label for="message">Message</label>
-				<textarea id="message" name="entry.262910174" rows="5" required placeholder="Tell us everything..."></textarea>
+				<textarea id="message" name="message" rows="5" required placeholder="Tell us everything..."></textarea>
 			</div>
 			<!-- Honeypot field to catch bots -->
 			<div style="display:none;">
-				<label for="website">Website (leave blank)</label>
-				<input type="text" id="website" name="website" autocomplete="off">
+				<input type="text" name="_honey" autocomplete="off">
 			</div>
+			<!-- FormSubmit settings -->
+			<input type="hidden" name="_captcha" value="false">
 			<button type="submit" class="md-button md-button--primary">Send Message</button>
 		</form>
 		<script>
+			// Show thank you message after form submission
 			document.querySelector('.gn-contact-form').addEventListener('submit', function(e) {
-				var honeypot = document.getElementById('website');
-				if (honeypot.value !== '') {
-					e.preventDefault();
-					alert('Spam detected. Please try again.');
-					return false;
-				}
+				setTimeout(function() {
+					const formElement = document.getElementById('contact-form');
+					if (formElement) {
+						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Your message has been sent successfully. We\'ll get back to you within 24-48 hours.</p><a href="/" class="md-button md-button--primary" style="margin-top: 1rem;">Back to Home</a></div>';
+					}
+				}, 1000);
 			});
 		</script>
 		<small style="display: block; text-align: center; margin-top: 1rem;">Your message is important to us. We'll respond as soon as possible.</small>
