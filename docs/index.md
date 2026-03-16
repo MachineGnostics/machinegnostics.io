@@ -9,8 +9,8 @@
 			An innovative Python ecosystem implementing Mathematical Gnostics for 'non-statistical' robust data analysis, machine learning, and neural networks.
 		</p>
 		<div class="gn-actions">
-			<a href="#contact-form" class="md-button md-button--primary">Request a Gnostic Audit</a>
-			<a href="https://docs.machinegnostics.com/latest/" class="md-button">Explore the Science</a>
+			<a href="/consultancy/" class="md-button md-button--primary">Request a Gnostic Audit</a>
+			<a href="/developers/" class="md-button">For Developers</a>
 		</div>
 	</section>
 
@@ -90,48 +90,14 @@
 		<p><a href="https://docs.machinegnostics.com/latest/mg/concepts/" target="_blank">Read the Principles →</a></p>
 	</section>
 
-	<section class="gn-section gn-cta gn-reveal" id="contact-form">
+	<section class="gn-section gn-cta gn-reveal">
 		<h2>Take the First Step</h2>
 		<p>
-			Have an "unsolvable" data challenge? Fill out the form below and our team will evaluate whether Mathematical Gnostics can unlock certainty where probability has failed.
+			Have an "unsolvable" data challenge? Our team will evaluate whether Mathematical Gnostics can unlock certainty where probability has failed.
 		</p>
-		<form action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScy294rN0eSLNJaYIrYOTmg_RMRqrRFf2IG1AdKdfiVE1Jqug/formResponse" method="POST" target="_blank" class="gn-contact-form">
-			<div class="gn-form-row">
-				<div class="gn-form-group">
-					<label for="name">Name</label>
-					<input type="text" id="name" name="entry.1778644361" required>
-				</div>
-				<div class="gn-form-group">
-					<label for="surname">Surname</label>
-					<input type="text" id="surname" name="entry.1242623021" required>
-				</div>
-			</div>
-			<div class="gn-form-group">
-				<label for="email">Email</label>
-				<input type="email" id="email" name="entry.1414927051" required>
-			</div>
-			<div class="gn-form-group">
-				<label for="message">Message</label>
-				<textarea id="message" name="entry.262910174" rows="3" required></textarea>
-			</div>
-			<!-- Honeypot field to catch bots -->
-			<div style="display:none;">
-				<label for="website">Website (leave blank)</label>
-				<input type="text" id="website" name="website" autocomplete="off">
-			</div>
-			<button type="submit" class="md-button md-button--primary">Submit Query</button>
-		</form>
-		<script>
-			document.querySelector('.gn-contact-form').addEventListener('submit', function(e) {
-				var honeypot = document.getElementById('website');
-				if (honeypot.value !== '') {
-					e.preventDefault();
-					alert('Spam detected. Please try again.');
-					return false;
-				}
-			});
-		</script>
-		<small>All submissions are reviewed by our principal consultants. Response within 48 hours.</small>
+		<div class="gn-actions">
+			<a href="/contact/" class="md-button md-button--primary">Submit Your Challenge</a>
+		</div>
 	</section>
 
 	<section class="gn-section gn-social gn-reveal">

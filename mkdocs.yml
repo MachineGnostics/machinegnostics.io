@@ -39,12 +39,11 @@ plugins:
 # repo_name: Machine Gnostics
 
 nav:
-  - Welcome: index.md
-  - Quickstart: https://docs.machinegnostics.com/latest/installation/
-  - Documentation: https://docs.machinegnostics.com/latest/
-  - History: https://docs.machinegnostics.com/latest/stories/history/
-  - Concept: https://docs.machinegnostics.com/latest/mg/concepts/
-  - Contact: https://docs.machinegnostics.com/latest/contact/
+  - Home: index.md
+  - Consultancy: consultancy.md
+  - Developers: developers.md
+  - FAQ: faq.md
+  - Contact: contact.md
 
 markdown_extensions:
   - def_list
