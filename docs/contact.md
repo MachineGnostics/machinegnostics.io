@@ -55,8 +55,9 @@
 			<div style="display:none;">
 				<input type="text" name="_honey" autocomplete="off">
 			</div>
-			<!-- FormSubmit settings -->
+			<!-- FormSubmit settings - unique subject for each email -->
 			<input type="hidden" name="_captcha" value="false">
+			<input type="hidden" id="subject-field" name="_subject" value="">
 			<button type="submit" class="md-button md-button--primary">Send Message</button>
 		</form>
 		<script>
@@ -66,6 +67,14 @@
 				
 				const form = this;
 				const formData = new FormData(form);
+				
+				// Create unique subject with sender's name
+				const name = document.getElementById('name').value;
+				const surname = document.getElementById('surname').value;
+				const timestamp = new Date().toLocaleString();
+				const subject = `New Contact Form: ${name} ${surname} - ${timestamp}`;
+				
+				formData.set('_subject', subject);
 				
 				// Submit to FormSubmit via fetch (no redirect)
 				fetch('https://formsubmit.co/info.machinegnostics@gmail.com', {
