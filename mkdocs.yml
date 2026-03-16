@@ -35,15 +35,17 @@ plugins:
   - git-revision-date-localized
   - awesome-pages
 
-# repo_url: https://github.com/MachineGnostics/machinegnostics
-# repo_name: Machine Gnostics
+repo_url: https://github.com/MachineGnostics/machinegnostics
+repo_name: Machine Gnostics
 
 nav:
   - Home: index.md
   - Consultancy: consultancy.md
   - Developers: developers.md
+  - Documentation: https://docs.machinegnostics.com
   - FAQ: faq.md
   - Contact: contact.md
+
 
 markdown_extensions:
   - def_list
