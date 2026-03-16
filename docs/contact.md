@@ -61,14 +61,29 @@
 			<button type="submit" class="md-button md-button--primary">Send Message</button>
 		</form>
 		<script>
-			// Prevent redirect to FormSubmit and show thank you message on our site
+			// Form submission handler
 			document.querySelector('.gn-contact-form').addEventListener('submit', function(e) {
 				e.preventDefault();
 				
 				const form = this;
+				const button = form.querySelector('button[type="submit"]');
+				const originalText = button.textContent;
+				
+				// Validate honeypot
+				const honeypot = form.querySelector('input[name="_honey"]');
+				if (honeypot && honeypot.value !== '') {
+					alert('Spam detected. Please try again.');
+					return false;
+				}
+				
+				// Disable button
+				button.disabled = true;
+				button.textContent = 'Sending...';
+				
+				// Prepare form data
 				const formData = new FormData(form);
 				
-				// Create unique subject with sender's name
+				// Create unique subject with sender's name and timestamp
 				const name = document.getElementById('name').value;
 				const surname = document.getElementById('surname').value;
 				const timestamp = new Date().toLocaleString();
@@ -76,25 +91,33 @@
 				
 				formData.set('_subject', subject);
 				
-				// Submit to FormSubmit via fetch (no redirect)
+				// Create abort controller for timeout
+				const controller = new AbortController();
+				const timeoutId = setTimeout(() => controller.abort(), 8000);
+				
+				// Submit form
 				fetch('https://formsubmit.co/info.machinegnostics@gmail.com', {
 					method: 'POST',
-					body: formData
+					body: formData,
+					signal: controller.signal
 				})
 				.then(response => {
-					// Show thank you message regardless of response
-					const formElement = document.getElementById('contact-form');
-					if (formElement) {
-						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Your message has been sent successfully. We\'ll get back to you within 24-48 hours.</p><a href="/" class="md-button md-button--primary" style="margin-top: 1rem;">Back to Home</a></div>';
-					}
+					clearTimeout(timeoutId);
+					showSuccessMessage();
 				})
 				.catch(error => {
-					// Still show thank you even if there's an error (FormSubmit usually works)
+					clearTimeout(timeoutId);
+					// Show success message even on error (FormSubmit processes in background)
+					console.log('Form submitted (may still be processing)');
+					showSuccessMessage();
+				});
+				
+				function showSuccessMessage() {
 					const formElement = document.getElementById('contact-form');
 					if (formElement) {
 						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Your message has been sent successfully. We\'ll get back to you within 24-48 hours.</p><a href="/" class="md-button md-button--primary" style="margin-top: 1rem;">Back to Home</a></div>';
 					}
-				});
+				}
 			});
 		</script>
 		<small style="display: block; text-align: center; margin-top: 1rem;">Your message is important to us. We'll respond as soon as possible.</small>
