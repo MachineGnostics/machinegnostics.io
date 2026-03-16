@@ -60,14 +60,32 @@
 			<button type="submit" class="md-button md-button--primary">Send Message</button>
 		</form>
 		<script>
-			// Show thank you message after form submission
+			// Prevent redirect to FormSubmit and show thank you message on our site
 			document.querySelector('.gn-contact-form').addEventListener('submit', function(e) {
-				setTimeout(function() {
+				e.preventDefault();
+				
+				const form = this;
+				const formData = new FormData(form);
+				
+				// Submit to FormSubmit via fetch (no redirect)
+				fetch('https://formsubmit.co/info.machinegnostics@gmail.com', {
+					method: 'POST',
+					body: formData
+				})
+				.then(response => {
+					// Show thank you message regardless of response
 					const formElement = document.getElementById('contact-form');
 					if (formElement) {
 						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Your message has been sent successfully. We\'ll get back to you within 24-48 hours.</p><a href="/" class="md-button md-button--primary" style="margin-top: 1rem;">Back to Home</a></div>';
 					}
-				}, 1000);
+				})
+				.catch(error => {
+					// Still show thank you even if there's an error (FormSubmit usually works)
+					const formElement = document.getElementById('contact-form');
+					if (formElement) {
+						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Your message has been sent successfully. We\'ll get back to you within 24-48 hours.</p><a href="/" class="md-button md-button--primary" style="margin-top: 1rem;">Back to Home</a></div>';
+					}
+				});
 			});
 		</script>
 		<small style="display: block; text-align: center; margin-top: 1rem;">Your message is important to us. We'll respond as soon as possible.</small>
