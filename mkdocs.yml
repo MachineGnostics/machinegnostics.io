@@ -31,7 +31,8 @@ theme:
 
 plugins:
   - privacy
-  - search
+  - search:
+      lang: en
   - git-revision-date-localized
   - awesome-pages
 
