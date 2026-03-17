@@ -24,16 +24,20 @@ document.addEventListener('DOMContentLoaded', () => {
         nodeRgb: '110, 245, 211',
         nodeBaseAlpha: 0.45,
         nodePulse: 0.08,
+        goldenRgb: '255, 200, 80',
+        goldenAlphaMax: 0.32,
       },
       light: {
         gradientA: 'rgba(21, 125, 148, 0.08)',
         gradientB: 'rgba(44, 96, 121, 0.06)',
         gradientC: 'rgba(7, 42, 61, 0.10)',
-        lineRgb: '20, 108, 136',
-        lineAlphaMax: 0.26,
-        nodeRgb: '16, 120, 156',
-        nodeBaseAlpha: 0.50,
-        nodePulse: 0.10,
+        lineRgb: '16, 92, 116',
+        lineAlphaMax: 0.42,
+        nodeRgb: '12, 100, 130',
+        nodeBaseAlpha: 0.55,
+        nodePulse: 0.12,
+        goldenRgb: '218, 165, 32',
+        goldenAlphaMax: 0.48,
       },
     };
 
@@ -69,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
       canvas.height = Math.floor(height * ratio);
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
 
-      const density = Math.max(45, Math.floor((width * height) / 28000));
+      const density = Math.max(54, Math.floor((width * height) / 23400));
       points.length = 0;
       for (let i = 0; i < density; i += 1) {
         points.push(createPoint());
@@ -95,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       context.fillStyle = gradient;
       context.fillRect(0, 0, width, height);
 
-      const maxDistance = Math.min(165, Math.max(120, width * 0.12));
+      const maxDistance = Math.min(200, Math.max(145, width * 0.14));
 
       for (let i = 0; i < points.length; i += 1) {
         const pointA = points[i];
@@ -113,8 +117,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
           if (distance < maxDistance) {
             const alpha = (1 - distance / maxDistance) * activePalette.lineAlphaMax;
-            context.strokeStyle = `rgba(${activePalette.lineRgb}, ${alpha})`;
-            context.lineWidth = 0.6;
+            const isGolden = Math.random() < 0.18;
+            
+            if (isGolden) {
+              const goldenAlpha = (1 - distance / maxDistance) * activePalette.goldenAlphaMax;
+              context.strokeStyle = `rgba(${activePalette.goldenRgb}, ${goldenAlpha})`;
+              context.lineWidth = 0.9;
+            } else {
+              context.strokeStyle = `rgba(${activePalette.lineRgb}, ${alpha})`;
+              context.lineWidth = 0.75;
+            }
+            
             context.beginPath();
             context.moveTo(pointA.x, pointA.y);
             context.lineTo(pointB.x, pointB.y);
