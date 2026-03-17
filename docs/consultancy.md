@@ -9,7 +9,7 @@
 			Transform your most challenging data problems with mathematical rigor. From audit to collaboration, we guide you through the gnostic revolution.
 		</p>
 		<div class="gn-actions">
-			<a href="#contact-form" class="md-button md-button--primary">Request Free Assessment</a>
+			<a href="/contact/" class="md-button md-button--primary">Request Free Assessment</a>
 			<a href="https://docs.machinegnostics.com/latest/" class="md-button">Learn More</a>
 		</div>
 	</section>
