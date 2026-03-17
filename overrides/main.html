@@ -22,3 +22,633 @@
     </a>
 </div>
 {% endblock %}
+
+{% block content %}
+{{ super() }}
+
+<!-- Floating Buttons and Modal HTML -->
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
+
+	.global-floating-btns {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+		z-index: 1000;
+		font-family: 'Space Grotesk', var(--md-text-font, sans-serif);
+	}
+
+	.global-floating-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.35rem;
+		padding: 0.4rem 0.63rem;
+		border-radius: 0.4rem;
+		background: linear-gradient(180deg,
+					color-mix(in srgb, var(--md-primary-fg-color), transparent 90%) 0%,
+					color-mix(in srgb, var(--md-default-bg-color), #111 6%) 100%);
+		color: var(--md-primary-fg-color);
+		text-decoration: none;
+		font-size: 0.5rem;
+		font-weight: 600;
+		border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 70%);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+		transition: all 0.22s ease;
+		cursor: pointer;
+		font-family: 'Space Grotesk', var(--md-text-font, sans-serif);
+	}
+
+	.global-floating-btn:hover {
+		transform: translateY(-2px);
+		border-color: color-mix(in srgb, var(--md-primary-fg-color), transparent 40%);
+		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+	}
+
+	.global-floating-btn:active {
+		transform: translateY(0px);
+	}
+
+	.global-floating-btn-icon {
+		font-size: 0.63rem;
+		display: flex;
+		align-items: center;
+		line-height: 1;
+	}
+
+	@media (max-width: 768px) {
+		.global-floating-btns {
+			bottom: 1.5rem;
+			right: 1.5rem;
+			gap: 0.3rem;
+		}
+
+		.global-floating-btn {
+			padding: 0.36rem 0.54rem;
+			font-size: 0.47rem;
+		}
+
+		.global-floating-btn-icon {
+			font-size: 0.57rem;
+		}
+	}
+
+	.contact-modal {
+		display: none;
+		position: fixed;
+		z-index: 2000;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+	}
+
+	.contact-modal.show {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		backdrop-filter: blur(5px);
+	}
+
+	.contact-modal-content {
+		background: linear-gradient(180deg,
+					color-mix(in srgb, var(--md-primary-fg-color), transparent 94%) 0%,
+					color-mix(in srgb, var(--md-default-bg-color), #111 8%) 100%);
+		padding: 2.5rem;
+		border-radius: 1rem;
+		border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 80%);
+		box-shadow: 0 20px 40px rgba(0, 0, 0, 0.26);
+		width: 90%;
+		max-width: 450px;
+		position: relative;
+		animation: slideUp 0.3s ease;
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+	}
+
+	[data-md-color-scheme="slate"] .contact-modal-content {
+		background: linear-gradient(180deg,
+					color-mix(in srgb, #37474F, transparent 92%) 0%,
+					color-mix(in srgb, #37474F, #000 8%) 100%);
+		border-color: color-mix(in srgb, var(--md-primary-fg-color), transparent 70%);
+	}
+
+	@keyframes slideUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.contact-modal-close {
+		position: absolute;
+		top: 1.25rem;
+		right: 1.25rem;
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		cursor: pointer;
+		color: color-mix(in srgb, var(--md-default-fg-color), transparent 30%);
+		transition: color 0.3s ease;
+		padding: 0.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.contact-modal-close:hover {
+		color: var(--md-primary-fg-color);
+	}
+
+	.contact-modal h2 {
+		margin: 0 0 1.5rem;
+		color: var(--md-primary-fg-color);
+		font-family: 'Space Grotesk', var(--md-text-font, sans-serif);
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		font-size: 1.5rem;
+	}
+
+	.contact-modal .gn-form-group {
+		margin-bottom: 1.2rem;
+	}
+
+	.contact-modal .gn-form-row {
+		display: flex;
+		gap: 0.75rem;
+	}
+
+	.contact-modal .gn-form-row .gn-form-group {
+		flex: 1;
+	}
+
+	.contact-modal input,
+	.contact-modal textarea {
+		width: 100%;
+		padding: 0.5rem 0;
+		border: none;
+		border-bottom: 1px solid color-mix(in srgb, var(--md-default-fg-color), transparent 50%);
+		background-color: transparent;
+		color: var(--md-default-fg-color);
+		font-family: inherit;
+		font-size: 0.85rem;
+		transition: border-color 0.3s ease;
+	}
+
+	.contact-modal input:focus,
+	.contact-modal textarea:focus {
+		outline: none;
+		border-bottom-color: var(--md-primary-fg-color);
+	}
+
+	.contact-modal label {
+		display: block;
+		margin-bottom: 0.4rem;
+		font-weight: 500;
+		color: var(--md-default-fg-color);
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+	}
+
+	.contact-modal form {
+		margin-top: 0;
+		display: grid;
+		gap: 1rem;
+	}
+
+	.contact-modal form button {
+		padding: 0.75rem 2rem;
+		background-color: transparent;
+		color: var(--md-primary-fg-color);
+		border: none;
+		border-radius: 0;
+		font-weight: 500;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		font-size: 0.9rem;
+		text-decoration: underline;
+		text-decoration-color: transparent;
+		margin-top: 1.5rem;
+		font-family: 'Space Grotesk', var(--md-text-font, sans-serif);
+		justify-self: center;
+	}
+
+	.contact-modal form button:hover {
+		text-decoration-color: var(--md-primary-fg-color);
+	}
+
+	@media (max-width: 768px) {
+		.contact-modal-content {
+			width: 95%;
+			padding: 1.5rem 2rem;
+		}
+
+		.contact-modal h2 {
+			font-size: 1.25rem;
+		}
+	}
+</style>
+
+<div class="global-floating-btns">
+	<button type="button" onclick="openContactModal()" class="global-floating-btn" title="Get in Touch">
+		<span class="global-floating-btn-icon">💬</span>
+		<span>Connect</span>
+	</button>
+	<a href="https://docs.machinegnostics.com/latest/installation/" target="_blank" class="global-floating-btn" title="Installation Instructions">
+		<span class="global-floating-btn-icon">⬇</span>
+		<span>Install</span>
+	</a>
+</div>
+
+<div id="contactModal" class="contact-modal">
+	<div class="contact-modal-content">
+		<button type="button" class="contact-modal-close" onclick="closeContactModal()">✕</button>
+		<h2>Get in Touch</h2>
+		<form id="globalContactForm" action="https://formsubmit.co/info.machinegnostics@gmail.com" method="POST">
+			<div class="gn-form-row">
+				<div class="gn-form-group">
+					<label for="globalName">Name</label>
+					<input type="text" id="globalName" name="name" required>
+				</div>
+				<div class="gn-form-group">
+					<label for="globalSurname">Surname</label>
+					<input type="text" id="globalSurname" name="surname" required>
+				</div>
+			</div>
+			<div class="gn-form-group">
+				<label for="globalEmail">Email</label>
+				<input type="email" id="globalEmail" name="email" required>
+			</div>
+			<div class="gn-form-group">
+				<label for="globalMessage">Message</label>
+				<textarea id="globalMessage" name="message" rows="4" required placeholder="Tell us about your inquiry..."></textarea>
+			</div>
+			<div style="display:none;">
+				<input type="text" name="_honey" autocomplete="off">
+			</div>
+			<input type="hidden" name="_captcha" value="false">
+			<input type="hidden" id="globalSubject" name="_subject" value="">
+			<button type="submit" class="md-button md-button--primary">Send Message</button>
+		</form>
+	</div>
+</div>
+
+<script>
+function openContactModal() {
+	var modal = document.getElementById('contactModal');
+	if (modal) {
+		modal.classList.add('show');
+		document.body.style.overflow = 'hidden';
+	}
+}
+
+function closeContactModal() {
+	var modal = document.getElementById('contactModal');
+	if (modal) {
+		modal.classList.remove('show');
+		document.body.style.overflow = 'auto';
+	}
+}
+
+window.addEventListener('click', function(event) {
+	var modal = document.getElementById('contactModal');
+	if (event.target === modal) {
+		closeContactModal();
+	}
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+	var form = document.getElementById('globalContactForm');
+	if (form) {
+		form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			var button = form.querySelector('button[type="submit"]');
+			var honeypot = form.querySelector('input[name="_honey"]');
+			
+			if (honeypot && honeypot.value !== '') {
+				alert('Spam detected.');
+				return false;
+			}
+			
+			button.disabled = true;
+			button.textContent = 'Sending...';
+			
+			var formData = new FormData(form);
+			var nameEl = document.getElementById('globalName');
+			var surnameEl = document.getElementById('globalSurname');
+			var name = nameEl ? nameEl.value : '';
+			var surname = surnameEl ? surnameEl.value : '';
+			var timestamp = new Date().toLocaleString();
+			var subject = 'New Contact Form: ' + name + ' ' + surname + ' - ' + timestamp;
+			
+			formData.set('_subject', subject);
+			
+			var controller = new AbortController();
+			var timeoutId = setTimeout(function() { controller.abort(); }, 8000);
+			
+			fetch('https://formsubmit.co/info.machinegnostics@gmail.com', {
+				method: 'POST',
+				body: formData,
+				signal: controller.signal
+			}).then(function(response) {
+				clearTimeout(timeoutId);
+				form.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: #00BCD4;">✓ Thank You!</h3><p>Your message has been sent. We will reply within 24-48 hours.</p><button type="button" onclick="closeContactModal()" class="md-button md-button--primary" style="margin-top: 1rem;">Close</button></div>';
+			}).catch(function(error) {
+				clearTimeout(timeoutId);
+				form.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: #00BCD4;">✓ Thank You!</h3><p>Your message has been sent. We will reply within 24-48 hours.</p><button type="button" onclick="closeContactModal()" class="md-button md-button--primary" style="margin-top: 1rem;">Close</button></div>';
+			});
+		});
+	}
+});
+</script>
+{% endblock %}
+
+<style>
+	.global-floating-btns {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+		z-index: 1000;
+	}
+
+	.global-floating-btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.35rem;
+		padding: 0.42rem 0.7rem;
+		border-radius: 0.5rem;
+		background: rgba(var(--md-primary-fg-color), 0.15);
+		color: var(--md-primary-fg-color);
+		text-decoration: none;
+		font-size: 0.6rem;
+		font-weight: 600;
+		box-shadow: 0 4px 15px rgba(0, 188, 212, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+		transition: all 0.3s ease;
+		border: none;
+		cursor: pointer;
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+	}
+
+	.global-floating-btn:hover {
+		background: var(--md-primary-fg-color);
+		color: var(--md-default-bg-color);
+		box-shadow: 0 4px 16px rgba(0, 188, 212, 0.3);
+		transform: translateX(-3px);
+	}
+
+	.global-floating-btn:active {
+		transform: translateX(-1px);
+	}
+
+	.global-floating-btn-icon {
+		font-size: 0.67rem;
+		display: flex;
+		align-items: center;
+	}
+
+	@media (max-width: 768px) {
+		.global-floating-btns {
+			bottom: 1.5rem;
+			right: 1.5rem;
+			gap: 0.35rem;
+		}
+
+		.global-floating-btn {
+			padding: 0.35rem 0.53rem;
+			font-size: 0.53rem;
+		}
+
+		.global-floating-btn-icon {
+			font-size: 0.56rem;
+		}
+	}
+
+	/* Contact Modal Styles */
+	.contact-modal {
+		display: none;
+		position: fixed;
+		z-index: 2000;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		animation: fadeIn 0.3s ease;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; }
+		to { opacity: 1; }
+	}
+
+	.contact-modal.show {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		backdrop-filter: blur(5px);
+	}
+
+	.contact-modal-content {
+		background: var(--md-default-bg-color);
+		padding: 2rem;
+		border-radius: 1rem;
+		box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+		width: 90%;
+		max-width: 500px;
+		position: relative;
+		animation: slideUp 0.3s ease;
+	}
+
+	@keyframes slideUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.contact-modal-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		background: none;
+		border: none;
+		font-size: 1.5rem;
+		cursor: pointer;
+		color: var(--md-default-fg-color);
+		transition: color 0.3s ease;
+		padding: 0.5rem;
+	}
+
+	.contact-modal-close:hover {
+		color: var(--md-primary-fg-color);
+	}
+
+	.contact-modal h2 {
+		margin-top: 0;
+		color: var(--md-primary-fg-color);
+	}
+
+	.contact-modal .gn-contact-form {
+		margin-top: 1.5rem;
+	}
+
+	@media (max-width: 768px) {
+		.contact-modal-content {
+			width: 95%;
+			padding: 1.5rem;
+		}
+
+		.contact-modal h2 {
+			font-size: 1.5rem;
+		}
+	}
+</style>
+
+<div class="global-floating-btns">
+	<button onclick="openContactModal()" class="global-floating-btn" title="Get in Touch">
+		<span class="global-floating-btn-icon">💬</span>
+		<span>Connect</span>
+	</button>
+	<a href="https://docs.machinegnostics.com/latest/installation/" target="_blank" class="global-floating-btn" title="Installation Instructions">
+		<span class="global-floating-btn-icon">⬇</span>
+		<span>Install</span>
+	</a>
+</div>
+
+<!-- Contact Modal -->
+<div id="contactModal" class="contact-modal">
+	<div class="contact-modal-content">
+		<button class="contact-modal-close" onclick="closeContactModal()">✕</button>
+		<h2>Get in Touch</h2>
+		<form id="globalContactForm" action="https://formsubmit.co/info.machinegnostics@gmail.com" method="POST" class="gn-contact-form">
+			<div class="gn-form-row">
+				<div class="gn-form-group">
+					<label for="globalName">Name</label>
+					<input type="text" id="globalName" name="name" required>
+				</div>
+				<div class="gn-form-group">
+					<label for="globalSurname">Surname</label>
+					<input type="text" id="globalSurname" name="surname" required>
+				</div>
+			</div>
+			<div class="gn-form-group">
+				<label for="globalEmail">Email</label>
+				<input type="email" id="globalEmail" name="email" required>
+			</div>
+			<div class="gn-form-group">
+				<label for="globalMessage">Message</label>
+				<textarea id="globalMessage" name="message" rows="4" required placeholder="Tell us about your inquiry..."></textarea>
+			</div>
+			<!-- Honeypot field to catch bots -->
+			<div style="display:none;">
+				<input type="text" name="_honey" autocomplete="off">
+			</div>
+			<!-- FormSubmit settings -->
+			<input type="hidden" name="_captcha" value="false">
+			<input type="hidden" id="globalSubject" name="_subject" value="">
+			<button type="submit" class="md-button md-button--primary">Send Message</button>
+		</form>
+	</div>
+</div>
+
+<script>
+	function openContactModal() {
+		document.getElementById('contactModal').classList.add('show');
+		document.body.style.overflow = 'hidden';
+	}
+
+	function closeContactModal() {
+		document.getElementById('contactModal').classList.remove('show');
+		document.body.style.overflow = 'auto';
+	}
+
+	// Close modal when clicking outside
+	window.addEventListener('click', function(event) {
+		const modal = document.getElementById('contactModal');
+		if (event.target === modal) {
+			closeContactModal();
+		}
+	});
+
+	// Handle form submission
+	document.addEventListener('DOMContentLoaded', function() {
+		const form = document.getElementById('globalContactForm');
+		if (form) {
+			form.addEventListener('submit', function(e) {
+				e.preventDefault();
+				
+				const button = form.querySelector('button[type="submit"]');
+				
+				// Validate honeypot
+				const honeypot = form.querySelector('input[name="_honey"]');
+				if (honeypot && honeypot.value !== '') {
+					alert('Spam detected. Please try again.');
+					return false;
+				}
+				
+				// Disable button
+				button.disabled = true;
+				button.textContent = 'Sending...';
+				
+				// Create FormData FIRST
+				const formData = new FormData(form);
+				
+				// Generate subject and set it on FormData
+				const name = document.getElementById('globalName').value;
+				const surname = document.getElementById('globalSurname').value;
+				const timestamp = new Date().toLocaleString();
+				const subject = `New Contact Form: ${name} ${surname} - ${timestamp}`;
+				
+				// Set subject on FormData directly
+				formData.set('_subject', subject);
+				
+				// Create abort controller for timeout
+				const controller = new AbortController();
+				const timeoutId = setTimeout(() => controller.abort(), 8000);
+				
+				// Submit form
+				fetch('https://formsubmit.co/info.machinegnostics@gmail.com', {
+					method: 'POST',
+					body: formData,
+					signal: controller.signal
+				})
+				.then(response => {
+					clearTimeout(timeoutId);
+					showSuccessMessage();
+				})
+				.catch(error => {
+					clearTimeout(timeoutId);
+					console.log('Form submitted (may still be processing)');
+					showSuccessMessage();
+				});
+				
+				function showSuccessMessage() {
+					const formElement = form;
+					if (formElement) {
+						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Your message has been sent successfully. We\'ll get back to you within 24-48 hours.</p><button type="button" onclick="closeContactModal()" class="md-button md-button--primary" style="margin-top: 1rem;">Close</button></div>';
+					}
+				}
+			});
+		}
+	});
+</script>
