@@ -17,7 +17,7 @@
 	<section class="gn-section gn-reveal">
 		<h2>Our Consulting Services</h2>
 		<p>
-			We work with organizations to identify where <span style="color: #FF8C00; font-weight: bold;">non-statistical machine learning</span> can solve the unsolvable.
+			We work with organizations to identify where <span style="color: #FF8C00; font-weight: bold;"> Machine Gnostics (Machine Learning Powered by Mathematical Gnostics)</span> can solve the unsolvable.
 		</p>
 	</section>
 
@@ -95,23 +95,10 @@
 	<section class="gn-section gn-cta gn-reveal">
 		<h2>Begin Your Free Assessment</h2>
 		<p>
-			Tell us about your data challenge. Our team will evaluate your situation and show you how Machine Gnostics can unlock certainty where traditional approaches have failed.
+			Tell us about your data challenge. Our team will evaluate your situation and show you how Machine Gnostics can unlock certainty where traditional approaches are falling short.
 		</p>
 		<div class="gn-actions">
 			<a href="/contact/" class="md-button md-button--primary">Request Free Assessment</a>
-		</div>
-	</section>
-
-	<section class="gn-section gn-social gn-reveal">
-		<h2>Stay Connected</h2>
-		<p>Follow our latest consultancy insights and research developments.</p>
-		<div class="gn-social-links">
-			<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank" title="GitHub">GitHub</a>
-			<a href="https://discord.gg/WMMUaeJe2X" target="_blank" title="Discord">Discord</a>
-			<a href="https://www.linkedin.com/company/109036022/" target="_blank" title="LinkedIn">LinkedIn</a>
-			<a href="https://pypi.org/project/machinegnostics/" target="_blank" title="PyPI">PyPI</a>
-			<a href="https://www.instagram.com/machinegnostics/" target="_blank" title="Instagram">Instagram</a>
-			<a href="https://www.youtube.com/@MachineGnostics" target="_blank" title="YouTube">YouTube</a>
 		</div>
 	</section>
 </div>

@@ -17,12 +17,12 @@
 	<section class="gn-section gn-reveal">
 		<h2>Why Choose Machine Gnostics?</h2>
 		<p>
-			<span style="color: #FF8C00; font-weight: bold;">Deterministic, explainable, and mathematically rigorous.</span>
+			<span style="color: #FF8C00; font-weight: bold;">Deterministic, Explainable, and Mathematically Rigorous.</span>
 		</p>
 		<p>
 			Machine Gnostics offers a fundamentally different approach to data analysis and machine learning. No more black boxes. No more statistical assumptions that fail with small datasets. Just pure mathematical certainty encoded in clean, Pythonic APIs.
 		</p>
-		<blockquote>"Code with Machine Gnostics. Let the data speak."</blockquote>
+		<blockquote>"Code with Machine Gnostics, and let the data speak."</blockquote>
 	</section>
 
 	<section class="gn-section gn-reveal" id="how-different">
@@ -201,18 +201,6 @@ egdf.plot()
 
 # Access fitted parameters
 results = egdf.results()</code></pre>
-	</section>
-
-	<section class="gn-section gn-social gn-reveal">
-		<h2>Connect with Our Developer Community</h2>
-		<p>Stay updated with releases, contribute your ideas, and shape the future of Machine Gnostics AI.</p>
-		<div class="gn-social-links">
-			<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank" title="GitHub">GitHub</a>
-			<a href="https://discord.gg/WMMUaeJe2X" target="_blank" title="Discord">Discord</a>
-			<a href="https://www.linkedin.com/company/109036022/" target="_blank" title="LinkedIn">LinkedIn</a>
-			<a href="https://pypi.org/project/machinegnostics/" target="_blank" title="PyPI">PyPI</a>
-			<a href="https://www.youtube.com/@MachineGnostics" target="_blank" title="YouTube">YouTube</a>
-		</div>
 	</section>
 </div>
 ---

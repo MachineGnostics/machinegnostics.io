@@ -118,19 +118,6 @@
 			<a href="/contact/" class="md-button md-button--primary">Send Your Question</a>
 		</div>
 	</section>
-
-	<section class="gn-section gn-social gn-reveal">
-		<h2>Connect & Learn More</h2>
-		<p>Join our community of mathematicians, engineers, research scientist, and data scientists transforming AI.</p>
-		<div class="gn-social-links">
-			<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank" title="GitHub">GitHub</a>
-			<a href="https://discord.gg/WMMUaeJe2X" target="_blank" title="Discord">Discord</a>
-			<a href="https://www.linkedin.com/company/109036022/" target="_blank" title="LinkedIn">LinkedIn</a>
-			<a href="https://pypi.org/project/machinegnostics/" target="_blank" title="PyPI">PyPI</a>
-			<a href="https://www.instagram.com/machinegnostics/" target="_blank" title="Instagram">Instagram</a>
-			<a href="https://www.youtube.com/@MachineGnostics" target="_blank" title="YouTube">YouTube</a>
-		</div>
-	</section>
 </div>
 
 <style>
