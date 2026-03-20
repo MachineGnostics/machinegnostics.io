@@ -17,7 +17,7 @@
 	<section class="gn-section gn-reveal">
 		<h2>Why Machine Gnostics?</h2>
 		<p>
-			<span style="color: #FF8C00; font-weight: bold;">A Step toward, non-statistical Machine Learning!</span>
+			<span style="color: #FF8C00; font-weight: bold;">A Step Toward, Non-Statistical Machine Learning!</span>
 		</p>
 		<p>
 			Move past fragile, assumption-heavy models. Machine Gnostics encodes the laws of nature—geometry,

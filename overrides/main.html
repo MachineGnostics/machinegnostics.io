@@ -302,11 +302,11 @@
 		<form id="globalContactForm" action="https://formsubmit.co/info.machinegnostics@gmail.com" method="POST">
 			<div class="gn-form-row">
 				<div class="gn-form-group">
-					<label for="globalName">Name</label>
+					<label for="globalName">First Name</label>
 					<input type="text" id="globalName" name="name" required>
 				</div>
 				<div class="gn-form-group">
-					<label for="globalSurname">Surname</label>
+					<label for="globalSurname">Last Name</label>
 					<input type="text" id="globalSurname" name="surname" required>
 				</div>
 			</div>
@@ -387,10 +387,10 @@ document.addEventListener('DOMContentLoaded', function() {
 				signal: controller.signal
 			}).then(function(response) {
 				clearTimeout(timeoutId);
-				form.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: #00BCD4;">✓ Thank You!</h3><p>Your message has been sent. We will reply within 24-48 hours.</p><button type="button" onclick="closeContactModal()" class="md-button md-button--primary" style="margin-top: 1rem;">Close</button></div>';
+				form.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: #00BCD4;">✓ Thank You!</h3><p>Thank you for connecting with us. Your enquiry has been successfully submitted and is being carefully reviewed by our team. We will be in touch shortly to explore how we can best support your objectives. We value your time and your ambition.</p><button type="button" onclick="closeContactModal()" class="md-button md-button--primary" style="margin-top: 1rem;">Close</button></div>';
 			}).catch(function(error) {
 				clearTimeout(timeoutId);
-				form.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: #00BCD4;">✓ Thank You!</h3><p>Your message has been sent. We will reply within 24-48 hours.</p><button type="button" onclick="closeContactModal()" class="md-button md-button--primary" style="margin-top: 1rem;">Close</button></div>';
+				form.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: #00BCD4;">✓ Thank You!</h3><p>Thank you for connecting with us. Your enquiry has been successfully submitted and is being carefully reviewed by our team. We will be in touch shortly to explore how we can best support your objectives. We value your time and your ambition.</p><button type="button" onclick="closeContactModal()" class="md-button md-button--primary" style="margin-top: 1rem;">Close</button></div>';
 			});
 		});
 	}

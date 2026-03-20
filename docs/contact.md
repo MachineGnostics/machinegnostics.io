@@ -35,11 +35,11 @@
 		<form action="https://formsubmit.co/info.machinegnostics@gmail.com" method="POST" class="gn-contact-form">
 			<div class="gn-form-row">
 				<div class="gn-form-group">
-					<label for="name">Name</label>
+					<label for="name">First Name</label>
 					<input type="text" id="name" name="name" required>
 				</div>
 				<div class="gn-form-group">
-					<label for="surname">Surname</label>
+					<label for="surname">Last Name</label>
 					<input type="text" id="surname" name="surname" required>
 				</div>
 			</div>
@@ -115,7 +115,7 @@
 				function showSuccessMessage() {
 					const formElement = document.getElementById('contact-form');
 					if (formElement) {
-						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Your message has been sent successfully. We\'ll get back to you within 24-48 hours.</p><a href="/" class="md-button md-button--primary" style="margin-top: 1rem;">Back to Home</a></div>';
+						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Thank you for connecting with us. Your enquiry has been successfully submitted and is being carefully reviewed by our team. We will be in touch shortly to explore how we can best support your objectives. We value your time and your ambition.</p><a href="/" class="md-button md-button--primary" style="margin-top: 1rem;">Back to Home</a></div>';
 					}
 				}
 			});
