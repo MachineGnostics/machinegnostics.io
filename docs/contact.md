@@ -133,32 +133,6 @@
 		</div>
 	</section>
 
-	<section class="gn-section gn-reveal">
-		<h2>Other Ways to Reach Us</h2>
-		<div class="gn-contact-channels">
-			<div class="gn-contact-channel">
-				<h3>GitHub Issues</h3>
-				<p>Report bugs or suggest features directly on our repository.</p>
-				<a href="https://github.com/MachineGnostics/machinegnostics/issues" target="_blank">Open an Issue →</a>
-			</div>
-			<div class="gn-contact-channel">
-				<h3>GitHub Discussions</h3>
-				<p>Ask questions and discuss with the community in our discussions forum.</p>
-				<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank">Join Discussions →</a>
-			</div>
-			<div class="gn-contact-channel">
-				<h3>LinkedIn</h3>
-				<p>Connect with us on LinkedIn for company updates and insights.</p>
-				<a href="https://www.linkedin.com/company/109036022/" target="_blank">Follow Us →</a>
-			</div>
-			<div class="gn-contact-channel">
-				<h3>YouTube</h3>
-				<p>Watch tutorials, webinars, and deep dives into Mathematical Gnostics concepts.</p>
-				<a href="https://www.youtube.com/@MachineGnostics" target="_blank">Subscribe →</a>
-			</div>
-		</div>
-	</section>
-
 	<section class="gn-section gn-social gn-reveal">
 		<h2>Follow Us Everywhere</h2>
 		<p>Stay updated with the latest in Mathematical Gnostics and join our growing community.</p>
@@ -187,7 +161,7 @@
 
 .gn-email-link {
 	display: inline-block;
-	font-size: 1.3rem;
+	font-size: 0.9rem;
 	font-weight: 600;
 	color: var(--md-primary-fg-color);
 	text-decoration: none;
