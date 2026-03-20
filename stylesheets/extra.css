@@ -90,6 +90,12 @@
     font-weight: 700;
 }
 
+[data-md-color-scheme="default"] .gn-home .gn-overline {
+    color: var(--md-primary-fg-color);
+    font-weight: 800;
+    letter-spacing: .2em;
+}
+
 .gn-home .gn-subtitle {
     max-width: 56rem;
     color: color-mix(in srgb, var(--md-default-fg-color), white 12%);
