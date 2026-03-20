@@ -39,6 +39,7 @@
 		gap: 0.3rem;
 		z-index: 1000;
 		font-family: 'Space Grotesk', var(--md-text-font, sans-serif);
+		transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	}
 
 	.global-floating-btn {
@@ -49,27 +50,52 @@
 		padding: 0.4rem 0.63rem;
 		border-radius: 0.4rem;
 		background: linear-gradient(180deg,
-					color-mix(in srgb, var(--md-primary-fg-color), transparent 90%) 0%,
-					color-mix(in srgb, var(--md-default-bg-color), #111 6%) 100%);
+					color-mix(in srgb, var(--md-primary-fg-color), transparent 75%) 0%,
+					color-mix(in srgb, var(--md-default-bg-color), #111 12%) 100%);
 		color: var(--md-primary-fg-color);
 		text-decoration: none;
-		font-size: 0.5rem;
+		font-size: 0.6rem;
 		font-weight: 600;
-		border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 70%);
+		border: 1.2px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 45%);
 		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 		transition: all 0.22s ease;
 		cursor: pointer;
 		font-family: 'Space Grotesk', var(--md-text-font, sans-serif);
+		min-height: 2.2rem;
+		min-width: auto;
+		line-height: 1;
+		white-space: nowrap;
+	}
+
+	[data-md-color-scheme="default"] .global-floating-btn {
+		background: linear-gradient(180deg,
+					color-mix(in srgb, var(--md-primary-fg-color), transparent 50%) 0%,
+					color-mix(in srgb, var(--md-primary-fg-color), transparent 70%) 100%);
+		border: 1.2px solid var(--md-primary-fg-color);
+		box-shadow: 0 4px 16px rgba(0, 188, 212, 0.25);
 	}
 
 	.global-floating-btn:hover {
 		transform: translateY(-2px);
-		border-color: color-mix(in srgb, var(--md-primary-fg-color), transparent 40%);
+		border-color: var(--md-primary-fg-color);
 		box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+	}
+
+	[data-md-color-scheme="default"] .global-floating-btn:hover {
+		background: linear-gradient(180deg,
+					color-mix(in srgb, var(--md-primary-fg-color), transparent 35%) 0%,
+					color-mix(in srgb, var(--md-primary-fg-color), transparent 55%) 100%);
+		box-shadow: 0 8px 24px rgba(0, 188, 212, 0.35);
 	}
 
 	.global-floating-btn:active {
 		transform: translateY(0px);
+	}
+
+	.global-floating-btns button.global-floating-btn,
+	.global-floating-btns a.global-floating-btn {
+		height: auto;
+		width: auto;
 	}
 
 	.global-floating-btn-icon {
@@ -262,11 +288,9 @@
 
 <div class="global-floating-btns">
 	<button type="button" onclick="openContactModal()" class="global-floating-btn" title="Get in Touch">
-		<span class="global-floating-btn-icon">💬</span>
 		<span>Connect</span>
 	</button>
 	<a href="https://docs.machinegnostics.com/latest/installation/" target="_blank" class="global-floating-btn" title="Installation Instructions">
-		<span class="global-floating-btn-icon">⬇</span>
 		<span>Install</span>
 	</a>
 </div>
@@ -403,6 +427,34 @@ style.textContent = `
 	}
 `;
 document.head.appendChild(style);
+
+/* Adjust floating buttons to avoid footer overlap */
+function adjustButtonsForFooter() {
+	const floatingBtns = document.querySelector('.global-floating-btns');
+	const footer = document.querySelector('.md-footer');
+	
+	if (!floatingBtns || !footer) return;
+	
+	window.addEventListener('scroll', function() {
+		const footerRect = footer.getBoundingClientRect();
+		const viewportHeight = window.innerHeight;
+		
+		// If footer is visible in viewport (top of footer is above bottom of viewport)
+		if (footerRect.top < viewportHeight) {
+			// Move buttons to 70% from top (50% + 20% further down)
+			floatingBtns.style.bottom = 'auto';
+			floatingBtns.style.top = '70vh';
+			floatingBtns.style.right = '2rem';
+		} else {
+			// Reset to bottom right
+			floatingBtns.style.bottom = '2rem';
+			floatingBtns.style.top = 'auto';
+			floatingBtns.style.right = '2rem';
+		}
+	});
+}
+
+document.addEventListener('DOMContentLoaded', adjustButtonsForFooter);
 </script>
 {% endblock %}
 
