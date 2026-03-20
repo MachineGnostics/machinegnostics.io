@@ -55,7 +55,7 @@
 					<span>Thermodynamic Models</span>
 					<span>Explainability</span>
 				</div>
-				<a href="https://docs.machinegnostics.com/latest/models/ml_models/" target="_blank">See ML Models →</a>
+				<a href="https://docs.machinegnostics.com/latest/models/ml_models/" target="_blank">Explore ML Models →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -68,7 +68,7 @@
 					<span>Thermodynamic Models</span>
 					<span>Noise Immunity</span>
 				</div>
-				<a href="https://docs.machinegnostics.com/latest/magnet/magnet/" target="_blank">Learn about MAGNET →</a>
+				<a href="https://docs.machinegnostics.com/latest/magnet/magnet/" target="_blank">Explore about MAGNET →</a>
 			</article>
 		</div>
 	</section>
@@ -93,23 +93,10 @@
 	<section class="gn-section gn-cta gn-reveal">
 		<h2>Take the First Step</h2>
 		<p>
-			Have an "unsolvable" data challenge? Our team will evaluate whether Mathematical Gnostics can unlock certainty where probability has failed.
+			Have an "unsolvable" data challenge? Let our team determine how <span style="color: #FF8C00; font-weight: bold;">the laws of nature</span> into your analysis can solve your most impossible data problems.
 		</p>
 		<div class="gn-actions">
-			<a href="/contact/" class="md-button md-button--primary">Submit Your Challenge</a>
-		</div>
-	</section>
-
-	<section class="gn-section gn-social gn-reveal">
-		<h2>Follow Us</h2>
-		<p>Stay updated with the latest in Mathematical Gnostics and join our community.</p>
-		<div class="gn-social-links">
-			<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank" title="GitHub">GitHub</a>
-			<a href="https://discord.gg/WMMUaeJe2X" target="_blank" title="Discord">Discord</a>
-			<a href="https://www.linkedin.com/company/109036022/" target="_blank" title="LinkedIn">LinkedIn</a>
-			<a href="https://pypi.org/project/machinegnostics/" target="_blank" title="PyPI">PyPI</a>
-			<a href="https://www.instagram.com/machinegnostics/" target="_blank" title="Instagram">Instagram</a>
-			<a href="https://www.youtube.com/@MachineGnostics" target="_blank" title="YouTube">YouTube</a>
+			<a href="/contact/" class="md-button md-button--primary">Submit Your Query</a>
 		</div>
 	</section>
 </div>
