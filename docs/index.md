@@ -27,6 +27,16 @@
 		<blockquote>“Let data speak for themselves.”</blockquote>
 	</section>
 
+	<section class="gn-section gn-reveal" id="introduction-video">
+		<h2>Discover Machine Gnostics</h2>
+		<p>
+			Watch this introductory video to understand how Machine Gnostics revolutionizes machine learning with non-statistical methods.
+		</p>
+		<div style="text-align: center; margin-top: 1rem;">
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/ZweSmDETOKk?start=1" title="Introduction to Machine Gnostics" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width: 100%; border-radius: 0.5rem;"></iframe>
+		</div>
+	</section>
+
 	<section class="gn-section gn-reveal" id="core-features">
 		<h2>Core Features</h2>
 		<div class="gn-features">
