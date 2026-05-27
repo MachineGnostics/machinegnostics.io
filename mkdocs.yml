@@ -41,8 +41,8 @@ repo_name: Machine Gnostics
 
 nav:
   - Home: index.md
-  - Consultancy: consultancy.md
-  - Developers: developers.md
+  - Consult: consultancy.md
+  - Develop: developers.md
   - FAQ: faq.md
   - Contact: contact.md
 
@@ -113,9 +113,11 @@ extra:
 
 extra_css:
   - stylesheets/extra.css
+  - stylesheets/scifi-immersive.css
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
   - javascripts/cookie-consent.js
   - javascripts/vertical-colors.js
   - javascripts/home-dynamics.js
+  - javascripts/scifi-holographic.js

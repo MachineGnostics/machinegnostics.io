@@ -20,7 +20,7 @@
 			<span style="color: #FF8C00; font-weight: bold;">Deterministic, Explainable, and Mathematically Rigorous.</span>
 		</p>
 		<p>
-			Machine Gnostics offers a fundamentally different approach to data analysis and machine learning. No more black boxes. No more statistical assumptions that fail with small datasets. Just pure mathematical certainty encoded in clean, Pythonic APIs.
+			Machine Gnostics offers a fundamentally different approach to data analysis and machine learning. No more statistical assumptions that fail with small datasets. Just pure mathematical certainty encoded in clean, Pythonic APIs.
 		</p>
 		<blockquote>"Code with Machine Gnostics, and let the data speak."</blockquote>
 	</section>
