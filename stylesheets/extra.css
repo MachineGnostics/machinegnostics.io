@@ -32,16 +32,16 @@
     height: 100vh;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 [data-md-color-scheme="default"] .gn-home .gn-web-canvas {
-    opacity: 0.95;
+    opacity: 0.92;
     mix-blend-mode: normal;
 }
 
 [data-md-color-scheme="slate"] .gn-home .gn-web-canvas {
-    opacity: 0.8;
+    opacity: 1;
     mix-blend-mode: normal;
 }
 
@@ -324,25 +324,107 @@
         padding: 1.1rem;
     }
 
+    /* Fix: these are CSS grid containers, flex rules have no effect */
     .gn-home .gn-compare {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
     }
 
     .gn-home .gn-features {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        grid-template-columns: 1fr;
     }
 
     .gn-home .gn-card,
     .gn-home .gn-feature {
         width: 100%;
-        max-width: 400px;
+        max-width: 100%;
     }
 
     .gn-form-row {
         flex-direction: column;
         gap: 1.5rem;
+    }
+}
+
+/* ── Responsive: Tablet / iPad (portrait + landscape, ≤768px) ─────── */
+@media screen and (max-width: 48em) {
+    .gn-home .gn-hero {
+        padding: 2.25rem 1rem;
+        border-radius: 0.75rem;
+    }
+
+    .gn-home h1 {
+        font-size: 1.75rem;
+        line-height: 1.22;
+    }
+
+    .gn-home .gn-subtitle {
+        font-size: 0.97rem;
+    }
+
+    /* Stack CTA buttons full-width */
+    .gn-home .gn-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .gn-home .gn-actions a {
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Responsive video: maintain 16:9 regardless of fixed HTML attributes */
+    .gn-home iframe {
+        width: 100% !important;
+        height: auto !important;
+        aspect-ratio: 16 / 9;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .gn-contact-form {
+        max-width: 100%;
+    }
+}
+
+/* ── Responsive: Mobile portrait (≤480px) ─────────────────────────── */
+@media screen and (max-width: 30em) {
+    .gn-home .gn-hero {
+        padding: 1.75rem 0.9rem;
+        border-radius: 0.5rem;
+    }
+
+    .gn-home h1 {
+        font-size: 1.45rem;
+    }
+
+    .gn-home .gn-subtitle {
+        font-size: 0.92rem;
+    }
+
+    .gn-home .gn-section {
+        padding: 0.9rem;
+        border-radius: 0.6rem;
+    }
+
+    .gn-home .gn-tags span,
+    .gn-home .gn-pill-grid span {
+        font-size: 0.71rem;
+        padding: 0.25rem 0.5rem;
+    }
+
+    .gn-home .gn-feature a {
+        text-align: left;
+    }
+
+    /* Footer bottom bar: stack and centre */
+    .gn-footer-bottom-inner {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+    }
+
+    .gn-footer-bottom-links {
+        justify-content: center !important;
     }
 }
