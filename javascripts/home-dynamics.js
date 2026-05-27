@@ -80,17 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let time = 0;
   let raf  = null;
 
-  /* hyperspace surge state: fast photons + stronger warp distortion */
-  const AUTO_HYPERSPACE_MS   = 100000;
-  const HYPERSPACE_MS        = 12000;
-  const HYPER_CLICK_COUNT    = 6;
-  const HYPER_CLICK_WINDOWMS = 1700;
-  const HYPER_COOLDOWN_MS    = 3500;
-  let hyperspaceUntil = 0;
-  let nextAutoHyperspaceAt = performance.now() + AUTO_HYPERSPACE_MS;
-  let lastHyperspaceAt = -Infinity;
-  let clickBurstTs = [];
-
   /* gravity wells  ── positions are set proportionally on resize */
   const wells = [
     { fx: 0.72, fy: 0.26, mass: 1.0 },
@@ -237,71 +226,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
-  const isHyperspace = () => performance.now() < hyperspaceUntil;
-
-  const triggerHyperspace = () => {
-    const now = performance.now();
-    if (now - lastHyperspaceAt < HYPER_COOLDOWN_MS) return;
-
-    lastHyperspaceAt = now;
-    hyperspaceUntil = now + HYPERSPACE_MS;
-    nextAutoHyperspaceAt = now + AUTO_HYPERSPACE_MS;
-
-    /* burst-inject fast comets to make surge visually obvious */
-    const burst = clamp(Math.floor(Math.min(W, H) / 14), 40, 90);
-    for (let i = 0; i < burst; i++) {
-      const c = newComet();
-      const edge = Math.floor(rand(0, 4));
-      if      (edge === 0) { c.x = rand(0, W); c.y = -10; }
-      else if (edge === 1) { c.x = rand(0, W); c.y = H + 10; }
-      else if (edge === 2) { c.x = -10; c.y = rand(0, H); }
-      else                 { c.x = W + 10; c.y = rand(0, H); }
-
-      /* generally fly inward across the frame, with variance */
-      const toCx = W * 0.5 - c.x;
-      const toCy = H * 0.5 - c.y;
-      const base = Math.atan2(toCy, toCx);
-      const ang = base + rand(-0.55, 0.55);
-      const spd = rand(5.6, 11.8);
-      c.vx = Math.cos(ang) * spd;
-      c.vy = Math.sin(ang) * spd;
-      c.trailLen = Math.floor(rand(24, 54));
-      c.alpha = rand(0.62, 0.98);
-      c.trail = [];
-      comets.push(c);
-    }
-
-    const maxC = Math.max(190, Math.floor((W * H) / 7200));
-    if (comets.length > maxC) comets.splice(0, comets.length - maxC);
-  };
-
   /* ── gravity warp offset ─────────────────────────────────────────── */
   const warpAt = (gx, gy) => {
     let dx = 0, dy = 0;
     const scale = Math.min(W, H);
-    const warpBoost = isHyperspace() ? 3.4 : 1;
     for (const w of [...wArr, ...mobHoles]) {
       const ex = gx - w.x;
       const ey = gy - w.y;
       const d2 = ex * ex + ey * ey;
       const maxR = scale * 0.45;
       const falloff = 1 / (1 + d2 / (maxR * maxR * 0.07));
-      const strength = w.mass * 32 * falloff * warpBoost;
+      const strength = w.mass * 32 * falloff;
       const d = Math.sqrt(d2) + 0.001;
       dx -= (ex / d) * strength;
       dy -= (ey / d) * strength;
-
-      /* explosion ripple: thin water-wave style refractive distortion */
-      if (w.state === 'exploding' && w.explodeRing > 0) {
-        const ringR = w.explodeRing;
-        const bandW = Math.max(18, ringR * 0.11);
-        const distToRing = d - ringR;
-        const band = Math.exp(-((distToRing * distToRing) / (bandW * bandW)));
-        const wave = Math.sin(distToRing * 0.075 - time * 9.2);
-        const ripple = wave * band * w.mass * 8.6;
-        dx += (ex / d) * ripple;
-        dy += (ey / d) * ripple;
-      }
     }
     return { dx, dy };
   };
@@ -313,8 +251,8 @@ document.addEventListener('DOMContentLoaded', () => {
       /* ── EXPLODING: animate shockwave, then respawn ── */
       if (bh.state === 'exploding') {
         bh.explodeTimer--;
-        bh.explodeRing += Math.min(W, H) * 0.010;
-        bh.flashAlpha   = clamp(bh.explodeTimer / 92, 0, 1);
+        bh.explodeRing += Math.min(W, H) * 0.013;
+        bh.flashAlpha   = clamp(bh.explodeTimer / 32, 0, 1);
         if (bh.explodeTimer <= 0) {
           /* respawn at fresh random position */
           const a2 = rand(0, Math.PI * 2), s2 = rand(0.12, 0.38);
@@ -343,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       bh.lifeTimer--;
       if (bh.lifeTimer <= 0 || bh.consumed >= 10) {
         /* ── TRIGGER EXPLOSION ── */
-        bh.state = 'exploding';  bh.explodeTimer = 132;  bh.flashAlpha = 1.0;
+        bh.state = 'exploding';  bh.explodeTimer = 85;  bh.flashAlpha = 1.0;
 
         /* release all orbiting comets outward */
         for (const p of comets) {
@@ -627,27 +565,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fa > 0.04) {
           const fr = r * 10 * fa;
           const fl = ctx.createRadialGradient(x, y, 0, x, y, fr);
-          fl.addColorStop(0,    rgba(WHITE, fa * 0.62));
-          fl.addColorStop(0.22, rgba(CYAN,  fa * 0.48));
-          fl.addColorStop(0.55, rgba(TEAL,  fa * 0.24));
+          fl.addColorStop(0,    rgba(WHITE, fa * 0.92));
+          fl.addColorStop(0.22, rgba(CYAN,  fa * 0.72));
+          fl.addColorStop(0.55, rgba(TEAL,  fa * 0.38));
           fl.addColorStop(1,   'transparent');
           ctx.beginPath(); ctx.arc(x, y, fr, 0, Math.PI * 2);
           ctx.fillStyle = fl; ctx.fill();
         }
         /* expanding shockwave rings */
         if (bh.explodeRing > 0) {
-          for (let i = 0; i < 3; i++) {
-            const rr = bh.explodeRing * (1 - i * 0.18);
-            const ra = clamp(fa * (0.54 - i * 0.14), 0, 1);
-            const rw = Math.max(0.45, (1.15 - i * 0.25) * fa);
-            ctx.lineWidth   = rw;
-            ctx.strokeStyle = i === 0
-              ? rgba(WHITE, ra)
-              : rgba(TEAL, ra * 0.92);
-            ctx.beginPath();
-            ctx.arc(x, y, rr, 0, Math.PI * 2);
-            ctx.stroke();
-          }
+          ctx.lineWidth   = 2.8 * fa;
+          ctx.strokeStyle = rgba(WHITE, clamp(fa * 0.92, 0, 1));
+          ctx.beginPath(); ctx.arc(x, y, bh.explodeRing, 0, Math.PI * 2); ctx.stroke();
+          ctx.lineWidth   = 5.5 * fa;
+          ctx.strokeStyle = rgba(TEAL, clamp(fa * 0.60, 0, 1));
+          ctx.beginPath(); ctx.arc(x, y, bh.explodeRing * 0.70, 0, Math.PI * 2); ctx.stroke();
         }
         continue; /* skip normal visuals */
       }
@@ -698,11 +630,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── draw: comet particles with colour trails ──────────────────── */
   const drawComets = () => {
     const light     = isLight();
-    const hyper     = isHyperspace();
     const REPULSE_R = 220;
-    const REPULSE_F = hyper ? 3.6 : 2.0;
-    const MAX_SPD   = hyper ? 11.8 : 2.5;
-    const DAMP      = hyper ? 0.997 : 0.991;
+    const REPULSE_F = 2.0;
+    const MAX_SPD   = 2.5;
+    const DAMP      = 0.991;
 
     for (const p of comets) {
       let orbiting = false;
@@ -814,8 +745,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.lineCap = 'round';
         for (let t = 0; t < tLen - 1; t++) {
           const progress = (t + 1) / tLen;
-          const ta = progress * p.alpha * (light ? 0.65 : 0.55) * (hyper ? 1.55 : 1);
-          const tw = p.r * (hyper ? 3.9 : 1.8) * progress;
+          const ta = progress * p.alpha * (light ? 0.65 : 0.55);
+          const tw = p.r * 1.8 * progress;
           ctx.strokeStyle = rgba(p.color, ta);
           ctx.lineWidth   = Math.max(0.4, tw);
           ctx.beginPath();
@@ -826,18 +757,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       /* ── draw head: glow halo + solid core ── */
-      const pulse = 0.55 + 0.45 * Math.sin(p.pulse * (hyper ? 2.5 : 1));
+      const pulse = 0.55 + 0.45 * Math.sin(p.pulse);
       const headA = p.alpha * pulse;
 
-      const glowR = p.r * (hyper ? 6.8 : 3.2);
-      const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, glowR);
+      const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 3.2);
       grd.addColorStop(0,   rgba(p.color, headA * (light ? 0.85 : 1.0)));
       grd.addColorStop(0.4, rgba(p.color, headA * 0.35));
       grd.addColorStop(1,  'transparent');
       ctx.globalAlpha = 1;
       ctx.fillStyle   = grd;
       ctx.beginPath();
-      ctx.arc(p.x, p.y, glowR, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, p.r * 3.2, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.globalAlpha = headA;
@@ -853,9 +783,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let lastVisible = true;
 
   const draw = () => {
-    const now = performance.now();
-    if (now >= nextAutoHyperspaceAt) triggerHyperspace();
-
     time += 0.016;
     updateMobHoles();          /* advance black-hole positions before grid uses them */
     ctx.clearRect(0, 0, W, H);
@@ -881,19 +808,6 @@ document.addEventListener('DOMContentLoaded', () => {
     mouse.active = true;
   }, { passive: true });
   document.addEventListener('mouseleave', () => { mouse.active = false; });
-
-  /* rapid multi-click trigger for hyperspace surge */
-  document.addEventListener('click', () => {
-    const now = performance.now();
-    clickBurstTs.push(now);
-    while (clickBurstTs.length && (now - clickBurstTs[0]) > HYPER_CLICK_WINDOWMS) {
-      clickBurstTs.shift();
-    }
-    if (clickBurstTs.length >= HYPER_CLICK_COUNT) {
-      clickBurstTs = [];
-      triggerHyperspace();
-    }
-  }, { passive: true });
   /* touch support */
   document.addEventListener('touchmove', e => {
     if (e.touches.length > 0) {

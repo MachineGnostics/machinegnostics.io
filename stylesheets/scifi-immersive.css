@@ -142,7 +142,6 @@
 [data-md-color-scheme="slate"] .md-footer-meta,
 [data-md-color-scheme="slate"] .md-footer__inner,
 [data-md-color-scheme="slate"] .md-footer-meta__inner {
-  background: transparent !important;
   color: rgba(155, 215, 208, 0.80) !important;
 }
 [data-md-color-scheme="slate"] .md-footer__title,
@@ -667,6 +666,7 @@
 }
 [data-md-color-scheme="slate"] .md-sidebar {
   background: transparent !important;
+  z-index: 4 !important;
 }
 
 /* ── 16. Search ──────────────────────────────────────────────────────── */
