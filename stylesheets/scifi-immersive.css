@@ -111,6 +111,20 @@
   color: #ffffff !important;
   opacity: 1 !important;
 }
+[data-md-color-scheme="slate"] .md-source,
+[data-md-color-scheme="slate"] .md-source__icon,
+[data-md-color-scheme="slate"] .md-source__repository,
+[data-md-color-scheme="slate"] .md-header__source .md-icon {
+  color: rgba(255,255,255,0.88) !important;
+  fill: rgba(255,255,255,0.88) !important;
+}
+[data-md-color-scheme="slate"] .md-source:hover,
+[data-md-color-scheme="slate"] .md-source:hover .md-source__icon,
+[data-md-color-scheme="slate"] .md-source:hover .md-source__repository {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+  opacity: 1 !important;
+}
 
 /* ── 4. Footer ────────────────────────────────────────────────────────── */
 [data-md-color-scheme="slate"] .md-footer {
@@ -647,16 +661,22 @@
 }
 [data-md-color-scheme="slate"] .md-sidebar {
   background: transparent !important;
-  position: sticky !important;
-  z-index: 4 !important;  /* must be above the fixed canvas (z-index: 0) */
+  z-index: 4 !important;  /* above canvas; position managed by Material per breakpoint */
 }
 
 /* ── 16. Search ──────────────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .md-search__icon,
+[data-md-color-scheme="slate"] .md-search__icon.md-icon {
+  color: var(--teal) !important;
+}
 [data-md-color-scheme="slate"] .md-search__input {
   background: rgba(3, 18, 26, 0.82) !important;
   border: 1px solid rgba(0,212,170,0.2) !important;
   color: rgba(175,240,235,0.9) !important;
   font-family: var(--font-mono) !important;
+}
+[data-md-color-scheme="slate"] .md-search__input::placeholder {
+  color: rgba(175,240,235,0.38) !important;
 }
 [data-md-color-scheme="slate"] .md-search__input:focus {
   border-color: var(--teal) !important;
