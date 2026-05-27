@@ -96,6 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
   /* freely-drifting black holes */
   let mobHoles = [];
 
+  /* periodic system events */
+  let burstTimerSec = 60;
+  let burstClickCount = 0;
+  let burstActiveSec = 0;
+  let superPhotonTimerSec = 10;
+  let superPhotons = [];
+
   /* galaxy background — stardust band + core + distant galaxies */
   let galaxyDust    = [];
   let galaxySmudges = [];
@@ -139,12 +146,18 @@ document.addEventListener('DOMContentLoaded', () => {
     comets = Array.from({ length: pn }, () => newComet());
 
     /* mobile black holes — 4 small freely-drifting holes */
-    /* stagger initial timers so the 4 holes don't explode at the same time */
+    /* stagger initial age so the 4 holes don't explode at the same time */
     mobHoles = Array.from({ length: 4 }, (_, i) => {
       const bh = newMobHole();
-      bh.lifeTimer += i * 480; /* ~8 s apart: holes detonate one at a time */
+      bh.ageSec += i * 8;
       return bh;
     });
+
+    superPhotons = [];
+    burstTimerSec = 60;
+    burstClickCount = 0;
+    burstActiveSec = 0;
+    superPhotonTimerSec = 10;
 
     /* ── galaxy background data ─────────────────────────────────────── */
     const gCX = W * 0.52, gCY = H * 0.46;   /* galactic centre on screen */
@@ -188,20 +201,23 @@ document.addEventListener('DOMContentLoaded', () => {
   const newMobHole = () => {
     const angle = rand(0, Math.PI * 2);
     const spd   = rand(0.12, 0.38);
+    const baseR = rand(7, 17);
     return {
       x:             rand(W * 0.05, W * 0.95),
       y:             rand(H * 0.05, H * 0.95),
       vx:            Math.cos(angle) * spd,
       vy:            Math.sin(angle) * spd,
       mass:          rand(0.30, 0.65),
-      r:             rand(7, 17),
+      baseR,
+      r:             baseR,
       phase:         rand(0, Math.PI * 2),
       turn:          rand(-0.005, 0.005),
       consumed:      0,
       capturedCount: 0,
-      lifeTimer:     rand(900, 1800), /* frames before explosion ~15-30 s */
+      lifeSpanSec:   60,
+      ageSec:        rand(0, 14),
       state:         'active',        /* 'active' | 'exploding' */
-      explodeTimer:  0,
+      explodeTimerSec: 0,
       explodeRing:   0,
       flashAlpha:    0,
     };
@@ -226,6 +242,108 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   };
 
+  const spawnSuperPhoton = () => {
+    const side = Math.floor(rand(0, 4));
+    const margin = 28;
+    let x = 0, y = 0, tx = 0, ty = 0;
+    if (side === 0) {
+      x = rand(0, W); y = -margin;
+      tx = rand(0, W); ty = H + margin;
+    } else if (side === 1) {
+      x = W + margin; y = rand(0, H);
+      tx = -margin; ty = rand(0, H);
+    } else if (side === 2) {
+      x = rand(0, W); y = H + margin;
+      tx = rand(0, W); ty = -margin;
+    } else {
+      x = -margin; y = rand(0, H);
+      tx = W + margin; ty = rand(0, H);
+    }
+
+    /* slight cross-axis jitter so paths feel less uniform */
+    tx = clamp(tx + rand(-W * 0.18, W * 0.18), -margin, W + margin);
+    ty = clamp(ty + rand(-H * 0.18, H * 0.18), -margin, H + margin);
+
+    const dx = tx - x;
+    const dy = ty - y;
+    const d = Math.sqrt(dx * dx + dy * dy) + 0.001;
+    const lifeSec = 3;
+    /* cross entire path within lifespan (units: px/frame at 60fps) */
+    const speed = (d / (lifeSec * 60)) * rand(1.03, 1.12);
+
+    superPhotons.push({
+      x,
+      y,
+      vx: (dx / d) * speed,
+      vy: (dy / d) * speed,
+      r: rand(1.0, 2.4), /* same size range as regular photons */
+      lifeSec,
+      z: rand(-0.9, 0.9),
+      vz: rand(-1.2, 1.2),
+      trail: [],
+      trailLen: Math.floor(rand(18, 30)),
+      phase: rand(0, Math.PI * 2),
+    });
+  };
+
+  const emitPhotonBurst = (origin = null) => {
+    const cx = origin ? origin.x : rand(W * 0.20, W * 0.80);
+    const cy = origin ? origin.y : rand(H * 0.20, H * 0.80);
+    const burst = 28;
+    for (let i = 0; i < burst; i++) {
+      const ba = (i / burst) * Math.PI * 2 + rand(-0.20, 0.20);
+      const bs = rand(0.9, 2.2);
+      const c  = newComet();
+      c.x = cx;
+      c.y = cy;
+      c.vx = Math.cos(ba) * bs;
+      c.vy = Math.sin(ba) * bs;
+      c.trail = [];
+      c.r = rand(0.9, 2.0);
+      comets.push(c);
+    }
+    burstActiveSec = 2.0;
+
+    const maxC = Math.max(90, Math.floor((W * H) / 11000));
+    if (comets.length > maxC) comets.splice(0, comets.length - maxC);
+  };
+
+  const triggerHoleExplosion = (bh) => {
+    if (!bh || bh.state !== 'active') return;
+
+    bh.state = 'exploding';
+    bh.explodeTimerSec = 1.8;
+    bh.flashAlpha = 1.0;
+
+    /* release all orbiting comets outward (slower repulsion) */
+    for (const p of comets) {
+      if (p.capturedBy === bh) {
+        const oa = (p.orbitAngle || 0) + rand(-0.9, 0.9);
+        p.vx = Math.cos(oa) * rand(0.8, 1.9);
+        p.vy = Math.sin(oa) * rand(0.8, 1.9);
+        p.capturedBy = null;
+        p.trail = [];
+      }
+    }
+
+    /* emit burst photons in all directions */
+    const burst = clamp(12 + Math.floor(bh.consumed * 1.3), 12, 24);
+    for (let i = 0; i < burst; i++) {
+      const ba = (i / burst) * Math.PI * 2 + rand(-0.35, 0.35);
+      const bs = rand(1.0, 2.4);
+      const c  = newComet();
+      c.x = bh.x;
+      c.y = bh.y;
+      c.vx = Math.cos(ba) * bs;
+      c.vy = Math.sin(ba) * bs;
+      c.trail = [];
+      comets.push(c);
+    }
+
+    const maxC = Math.max(90, Math.floor((W * H) / 11000));
+    if (comets.length > maxC) comets.splice(0, comets.length - maxC);
+  };
+
   /* ── gravity warp offset ─────────────────────────────────────────── */
   const warpAt = (gx, gy) => {
     let dx = 0, dy = 0;
@@ -241,71 +359,106 @@ document.addEventListener('DOMContentLoaded', () => {
       dx -= (ex / d) * strength;
       dy -= (ey / d) * strength;
     }
+
+    /* super photons distort local space-time like tiny fast black holes */
+    for (const sp of superPhotons) {
+      const ex = gx - sp.x;
+      const ey = gy - sp.y;
+      const d2 = ex * ex + ey * ey;
+      const maxR = scale * 0.22;
+      const falloff = 1 / (1 + d2 / (maxR * maxR * 0.06));
+      const life = clamp(sp.lifeSec / 3, 0, 1);
+      const strength = (5.0 + life * 2.0) * falloff;
+      const d = Math.sqrt(d2) + 0.001;
+      dx -= (ex / d) * strength;
+      dy -= (ey / d) * strength;
+    }
+
     return { dx, dy };
   };
 
   /* ── update: mobile black holes (positions + lifecycle state machine) ── */
-  const updateMobHoles = () => {
+  const updateMobHoles = (dtSec) => {
+    const frameScale = clamp(dtSec * 60, 0.45, 2.2);
     for (const bh of mobHoles) {
 
       /* ── EXPLODING: animate shockwave, then respawn ── */
       if (bh.state === 'exploding') {
-        bh.explodeTimer--;
-        bh.explodeRing += Math.min(W, H) * 0.013;
-        bh.flashAlpha   = clamp(bh.explodeTimer / 32, 0, 1);
-        if (bh.explodeTimer <= 0) {
+        bh.explodeTimerSec -= dtSec;
+        bh.explodeRing += Math.min(W, H) * 0.16 * dtSec; /* 2x slower repel wave */
+        bh.flashAlpha = clamp(bh.explodeTimerSec / 0.95, 0, 1);
+        if (bh.explodeTimerSec <= 0) {
           /* respawn at fresh random position */
           const a2 = rand(0, Math.PI * 2), s2 = rand(0.12, 0.38);
           bh.x = rand(W * 0.08, W * 0.92);  bh.y = rand(H * 0.08, H * 0.92);
           bh.vx = Math.cos(a2) * s2;        bh.vy = Math.sin(a2) * s2;
           bh.turn = rand(-0.005, 0.005);
-          bh.consumed = 0;  bh.capturedCount = 0;
-          bh.lifeTimer = rand(900, 1800);
-          bh.state = 'active';  bh.explodeRing = 0;  bh.flashAlpha = 0;
+          bh.consumed = 0;
+          bh.capturedCount = 0;
+          bh.ageSec = 0;
+          bh.r = bh.baseR;
+          bh.state = 'active';
+          bh.explodeRing = 0;
+          bh.flashAlpha = 0;
         }
         continue;
       }
 
       /* ── ACTIVE: drift + lifecycle countdown ── */
-      const angle = Math.atan2(bh.vy, bh.vx) + bh.turn;
+      const angle = Math.atan2(bh.vy, bh.vx) + bh.turn * frameScale;
       const spd   = Math.sqrt(bh.vx * bh.vx + bh.vy * bh.vy);
       bh.vx = Math.cos(angle) * spd;
       bh.vy = Math.sin(angle) * spd;
-      bh.x += bh.vx;  bh.y += bh.vy;
-      bh.phase += 0.014;
+      bh.x += bh.vx * frameScale;
+      bh.y += bh.vy * frameScale;
+      bh.phase += 0.014 * frameScale;
       if (bh.x < -90)    bh.x = W + 90;
       if (bh.x > W + 90) bh.x = -90;
       if (bh.y < -90)    bh.y = H + 90;
       if (bh.y > H + 90) bh.y = -90;
 
-      bh.lifeTimer--;
-      if (bh.lifeTimer <= 0 || bh.consumed >= 10) {
-        /* ── TRIGGER EXPLOSION ── */
-        bh.state = 'exploding';  bh.explodeTimer = 85;  bh.flashAlpha = 1.0;
+      if (burstActiveSec <= 0) bh.ageSec += dtSec;
 
-        /* release all orbiting comets outward */
-        for (const p of comets) {
-          if (p.capturedBy === bh) {
-            const oa = (p.orbitAngle || 0) + rand(-0.9, 0.9);
-            p.vx = Math.cos(oa) * rand(2.0, 4.5);
-            p.vy = Math.sin(oa) * rand(2.0, 4.5);
-            p.capturedBy = null;  p.trail = [];
-          }
-        }
+      const lifeRatio = clamp(bh.ageSec / bh.lifeSpanSec, 0, 1);
+      const growthByLife = 1 + lifeRatio * 0.75;
+      const growthByMass = 1 + Math.min(0.55, bh.consumed * 0.05);
+      bh.r = bh.baseR * growthByLife * growthByMass;
 
-        /* emit burst comets in all directions */
-        const burst = clamp(12 + Math.floor(bh.consumed * 1.5), 12, 22);
-        for (let i = 0; i < burst; i++) {
-          const ba = (i / burst) * Math.PI * 2 + rand(-0.4, 0.4);
-          const bs = rand(2.5, 5.5);
-          const c  = newComet();
-          c.x = bh.x;  c.y = bh.y;
-          c.vx = Math.cos(ba) * bs;  c.vy = Math.sin(ba) * bs;
-          c.trail = [];
-          comets.push(c);
-        }
-        const maxC = Math.max(75, Math.floor((W * H) / 12000));
-        if (comets.length > maxC) comets.splice(0, comets.length - maxC);
+      if (bh.ageSec >= bh.lifeSpanSec || bh.consumed >= 14) {
+        triggerHoleExplosion(bh);
+      }
+    }
+  };
+
+  const updateSuperPhotons = (dtSec) => {
+    const frameScale = clamp(dtSec * 60, 0.45, 2.2);
+
+    superPhotonTimerSec -= dtSec;
+    if (superPhotonTimerSec <= 0) {
+      spawnSuperPhoton();
+      superPhotonTimerSec = 10;
+    }
+
+    for (let i = superPhotons.length - 1; i >= 0; i--) {
+      const sp = superPhotons[i];
+      sp.lifeSec -= dtSec;
+      if (sp.lifeSec <= 0) {
+        superPhotons.splice(i, 1);
+        continue;
+      }
+
+      sp.trail.push({ x: sp.x, y: sp.y, z: sp.z });
+      if (sp.trail.length > sp.trailLen) sp.trail.shift();
+
+      sp.x += sp.vx * frameScale;
+      sp.y += sp.vy * frameScale;
+      sp.z += sp.vz * dtSec;
+      sp.phase += 0.08 * frameScale;
+
+      if (sp.z < -1.25 || sp.z > 1.25) sp.vz *= -1;
+
+      if (sp.x < -40 || sp.x > W + 40 || sp.y < -40 || sp.y > H + 40) {
+        superPhotons.splice(i, 1);
       }
     }
   };
@@ -574,12 +727,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         /* expanding shockwave rings */
         if (bh.explodeRing > 0) {
-          ctx.lineWidth   = 2.8 * fa;
-          ctx.strokeStyle = rgba(WHITE, clamp(fa * 0.92, 0, 1));
-          ctx.beginPath(); ctx.arc(x, y, bh.explodeRing, 0, Math.PI * 2); ctx.stroke();
-          ctx.lineWidth   = 5.5 * fa;
-          ctx.strokeStyle = rgba(TEAL, clamp(fa * 0.60, 0, 1));
-          ctx.beginPath(); ctx.arc(x, y, bh.explodeRing * 0.70, 0, Math.PI * 2); ctx.stroke();
+          const t = clamp(1 - fa, 0, 1);
+          for (let i = 0; i < 4; i++) {
+            const wavePhase = t * 6.5 + i * 1.25;
+            const ripple = Math.sin(wavePhase) * (2.2 - i * 0.35);
+            const rr = bh.explodeRing * (1 - i * 0.16) + ripple;
+            if (rr <= 1) continue;
+
+            const wa = clamp(fa * (0.55 - i * 0.10), 0, 1);
+            ctx.lineWidth = Math.max(0.22, 0.56 - i * 0.08); /* thin water-wave lines */
+            ctx.strokeStyle = i % 2 === 0
+              ? rgba(WHITE, wa)
+              : rgba(TEAL, wa * 0.95);
+            ctx.beginPath();
+            ctx.arc(x, y, rr, 0, Math.PI * 2);
+            ctx.stroke();
+          }
         }
         continue; /* skip normal visuals */
       }
@@ -587,6 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
       /* ── ACTIVE ── */
       const pulse        = 0.82 + 0.18 * Math.sin(time * 0.9 + phase);
       const accreteBoost = 1 + (bh.capturedCount || 0) * 0.28; /* glow brightens as comets spiral in */
+      const halfLife = bh.ageSec >= (bh.lifeSpanSec * 0.5);
 
       /* outer lensing glow */
       const glow = ctx.createRadialGradient(x, y, r * 0.5, x, y, r * 7);
@@ -611,6 +775,17 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.strokeStyle = rgba(TEAL, (light ? 0.55 : 0.70) * mass * pulse * accreteBoost);
       ctx.lineWidth   = 1.4 * pulse;
       ctx.beginPath(); ctx.arc(x, y, r * 1.55 * pulse, 0, Math.PI * 2); ctx.stroke();
+
+      /* half-life golden ring */
+      if (halfLife) {
+        const goldAlpha = (light ? 0.30 : 0.46) * (0.8 + 0.2 * Math.sin(time * 3.4 + phase));
+        ctx.strokeStyle = `rgba(255, 212, 96, ${goldAlpha.toFixed(3)})`;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.arc(x, y, r * 1.95 + Math.sin(time * 1.8 + phase) * 0.9, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
       /* secondary cyan ring */
       ctx.strokeStyle = rgba(CYAN, (light ? 0.28 : 0.38) * mass);
       ctx.lineWidth   = 0.65;
@@ -634,6 +809,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const REPULSE_F = 2.0;
     const MAX_SPD   = 2.5;
     const DAMP      = 0.991;
+    const freezePulse = burstActiveSec > 0;
 
     for (const p of comets) {
       let orbiting = false;
@@ -724,13 +900,24 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
+        /* super-photon local distortion */
+        for (const sp of superPhotons) {
+          const ex = sp.x - p.x, ey = sp.y - p.y;
+          const d = Math.sqrt(ex * ex + ey * ey) + 0.1;
+          if (d < 110) {
+            const f = (0.030 * clamp(sp.lifeSec / 3, 0, 1)) / (d * 0.012 + 1);
+            p.vx += (ex / d) * f;
+            p.vy += (ey / d) * f;
+          }
+        }
+
         /* damping + speed cap */
         p.vx *= DAMP;  p.vy *= DAMP;
         const spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
         if (spd > MAX_SPD) { p.vx = (p.vx / spd) * MAX_SPD; p.vy = (p.vy / spd) * MAX_SPD; }
 
         p.x += p.vx;  p.y += p.vy;
-        p.pulse += 0.022;
+        if (!freezePulse) p.pulse += 0.022;
 
         /* wrap */
         if (p.x < -25)    { p.x = W + 25; p.trail = []; }
@@ -779,12 +966,64 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.globalAlpha = 1;
   };
 
+  const drawSuperPhotons = () => {
+    for (const sp of superPhotons) {
+      const perspective = 1 + sp.z * 0.24;
+      const life = clamp(sp.lifeSec / 3, 0, 1);
+      const headR = Math.max(0.28, sp.r * perspective);
+
+      const tLen = sp.trail.length;
+      if (tLen > 1) {
+        ctx.lineCap = 'round';
+        for (let t = 0; t < tLen - 1; t++) {
+          const progress = (t + 1) / tLen;
+          const tw = Math.max(0.25, headR * 1.7 * progress);
+          const ta = progress * 0.55 * life;
+          ctx.strokeStyle = `rgba(180, 242, 255, ${ta.toFixed(3)})`;
+          ctx.lineWidth = tw;
+          ctx.beginPath();
+          ctx.moveTo(sp.trail[t].x, sp.trail[t].y);
+          ctx.lineTo(sp.trail[t + 1].x, sp.trail[t + 1].y);
+          ctx.stroke();
+        }
+      }
+
+      const halo = ctx.createRadialGradient(sp.x, sp.y, 0, sp.x, sp.y, headR * 7);
+      halo.addColorStop(0, `rgba(220, 250, 255, ${(0.95 * life).toFixed(3)})`);
+      halo.addColorStop(0.25, `rgba(0, 229, 255, ${(0.60 * life).toFixed(3)})`);
+      halo.addColorStop(0.58, `rgba(0, 212, 170, ${(0.24 * life).toFixed(3)})`);
+      halo.addColorStop(1, 'transparent');
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(sp.x, sp.y, headR * 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = `rgba(255,255,255, ${(0.95 * life).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(sp.x, sp.y, headR, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  };
+
   /* ── main render loop ────────────────────────────────────────────── */
   let lastVisible = true;
+  let lastTs = performance.now();
 
   const draw = () => {
-    time += 0.016;
-    updateMobHoles();          /* advance black-hole positions before grid uses them */
+    const now = performance.now();
+    const dtSec = clamp((now - lastTs) / 1000, 1 / 120, 0.05);
+    lastTs = now;
+
+    time += dtSec;
+    burstTimerSec -= dtSec;
+    if (burstTimerSec <= 0) {
+      emitPhotonBurst();
+      burstTimerSec = 60;
+    }
+    if (burstActiveSec > 0) burstActiveSec -= dtSec;
+
+    updateSuperPhotons(dtSec);
+    updateMobHoles(dtSec);     /* advance black-hole positions before grid uses them */
     ctx.clearRect(0, 0, W, H);
 
     drawGalaxy();
@@ -794,6 +1033,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawGravityWells();
     drawMobileBlackHoles();
     drawComets();
+    drawSuperPhotons();
 
     raf = requestAnimationFrame(draw);
   };
@@ -818,12 +1058,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }, { passive: true });
   document.addEventListener('touchend', () => { mouse.active = false; }, { passive: true });
 
+  document.addEventListener('click', e => {
+    const x = e.clientX;
+    const y = e.clientY;
+
+    /* click black hole -> immediate explosion */
+    let target = null;
+    let nearest = Infinity;
+    for (const bh of mobHoles) {
+      if (bh.state !== 'active') continue;
+      const d = Math.hypot(x - bh.x, y - bh.y);
+      const hitR = bh.r * 2.2;
+      if (d <= hitR && d < nearest) {
+        nearest = d;
+        target = bh;
+      }
+    }
+    if (target) triggerHoleExplosion(target);
+
+    /* each 3 clicks -> photon burst + reset 60s timer */
+    burstClickCount++;
+    if (burstClickCount >= 3) {
+      emitPhotonBurst({ x, y });
+      burstClickCount = 0;
+      burstTimerSec = 60;
+    }
+  }, { passive: true });
+
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       cancelAnimationFrame(raf);
       lastVisible = false;
     } else if (!lastVisible) {
       lastVisible = true;
+      lastTs = performance.now();
       draw();
     }
   });
