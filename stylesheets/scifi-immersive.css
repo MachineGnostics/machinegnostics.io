@@ -53,6 +53,11 @@
   --md-code-fg-color:             #84ffff;
 }
 
+/* ── 1b. Canvas visibility ────────────────────────────────────────────── */
+[data-md-color-scheme="slate"] .gn-home .gn-web-canvas {
+  opacity: 1;
+}
+
 /* ── 2. Animated Nebula Background (CSS layers) ───────────────────────── */
 [data-md-color-scheme="slate"] body::before {
   content: '';
@@ -132,7 +137,7 @@
   border-top: 1px solid rgba(0,212,170,0.14) !important;
   color: rgba(175, 230, 222, 0.85) !important;
   position: relative !important;
-  z-index: 4 !important;  /* must be above the fixed canvas (z-index: 0) */
+  z-index: 4 !important;
 }
 [data-md-color-scheme="slate"] .md-footer-meta,
 [data-md-color-scheme="slate"] .md-footer__inner,
@@ -661,7 +666,6 @@
 }
 [data-md-color-scheme="slate"] .md-sidebar {
   background: transparent !important;
-  z-index: 4 !important;  /* above canvas; position managed by Material per breakpoint */
 }
 
 /* ── 16. Search ──────────────────────────────────────────────────────── */
@@ -676,7 +680,7 @@
   font-family: var(--font-mono) !important;
 }
 [data-md-color-scheme="slate"] .md-search__input::placeholder {
-  color: rgba(175,240,235,0.38) !important;
+  color: rgba(175, 240, 235, 0.38) !important;
 }
 [data-md-color-scheme="slate"] .md-search__input:focus {
   border-color: var(--teal) !important;
