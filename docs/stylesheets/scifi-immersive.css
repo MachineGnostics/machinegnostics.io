@@ -137,7 +137,7 @@
   border-top: 1px solid rgba(0,212,170,0.14) !important;
   color: rgba(175, 230, 222, 0.85) !important;
   position: relative !important;
-  z-index: 4 !important;
+  z-index: 1 !important;
 }
 [data-md-color-scheme="slate"] .md-footer-meta,
 [data-md-color-scheme="slate"] .md-footer__inner,
@@ -943,8 +943,10 @@
 
 /* ── L4. Footer ───────────────────────────────────────────────────────── */
 [data-md-color-scheme="default"] .md-footer {
-  background: rgba(232, 248, 244, 0.96) !important;
+  background: transparent !important;
   border-top: 1px solid rgba(0,110,88,0.14) !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 /* ── L4b. Custom Footer Grid (light) ─────────────────────────────────── */
