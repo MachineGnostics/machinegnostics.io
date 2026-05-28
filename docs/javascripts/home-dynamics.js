@@ -144,23 +144,116 @@ document.addEventListener('DOMContentLoaded', () => {
     'Your future self says thanks.',
     'I see genius in this orbit.',
     'Entropy says hi, order says wow.',
+    'Your thinking has excellent gravity.',
+    'Nice work, star pilot.',
+    'The universe likes your style.',
+    'Keep steering by curiosity.',
+    'Your focus is shining.',
+    'That was a sharp move.',
+    'I am cheering quietly in zero-g.',
+    'You are building something cool.',
+    'Mission control approves your pace.',
+    'Small steps, huge orbit.',
+    'Your curiosity is doing the heavy lifting.',
+    'Nice pattern recognition.',
+    'The stars are impressed.',
+    'Your orbit is looking healthy.',
+    'That idea just sparkled.',
+    'Excellent trajectory.',
+    'You are doing real science now.',
+    'Tiny badge of cosmic honor.',
+    'That felt like a win.',
+    'I am proud of this data voyage.',
+    'You bring the nice kind of chaos.',
+    'Smooth operator in a noisy universe.',
+    'You made that look easy.',
+    'Keep the signal, lose the noise.',
+    'Orbit stabilized nicely.',
+    'Fresh ideas detected.',
+    'Your brain is on a good wavelength.',
+    'Very solid cosmic thinking.',
+    'We are in a good timeline.',
+    'You are charting new constellations.',
+    'Nice one, commander.',
+    'I trust your next move.',
+    'The nebula noticed that.',
+    'You just improved the universe.',
   ];
   const ASTRONAUT_CLICK_PHRASES = [
-    'Can I help you?',
-    'What up?',
-    'Write me email, I am busy now!',
-    'Mission support online. Need anything?',
-    'Beep boop. Emotional support astronaut here.',
-    'I wave, therefore I am.',
-    'Status report: you are doing great.',
-    'Coffee? I only have stardust.',
-    'You clicked me. I feel important.',
-    'Need ideas? I have a whole nebula.',
-    'I can totally keep a secret. Probably.',
-    'We got this, commander!',
-    'Tell me your next bold move.',
-    'Plot twist: you are awesome.',
-    'My schedule is chaos, but for you I have 8 seconds.',
+    'Hey, Aestro is awake and available.',
+    'Aestro says hello with extra visor energy.',
+    'Need a guide? Aestro is already orbiting.',
+    'Aestro is listening with the good ear of space.',
+    'Tap again if you want another Aestro line.',
+    'Aestro is in a chatty mood right now.',
+    'That click reached Aestro HQ.',
+    'Aestro can do a tiny wave and a big opinion.',
+    'You found Aestro in interactive mode.',
+    'Aestro is here for questions, vibes, and stardust.',
+    'Aestro heard you. Nice timing.',
+    'Aestro says: keep the questions coming.',
+    'This is Aestro, professional helper of the orbit.',
+    'Aestro is flattered by the click.',
+    'Aestro can be helpful and dramatic at the same time.',
+    'Aestro is practicing friendly zero-g replies.',
+    'Aestro is ready for another move.',
+    'Aestro approves this interaction.',
+    'Aestro is doing the little astronaut thing again.',
+    'Click success. Aestro noticed.',
+    'Aestro has opinions, and they are mostly positive.',
+    'Aestro is a good companion for curious clicks.',
+    'Aestro can keep orbiting while you explore.',
+    'Aestro says the current mission looks promising.',
+    'Aestro is here with quiet confidence.',
+    'Aestro can help you think out loud.',
+    'Aestro likes this conversation already.',
+    'Aestro is tiny, but the enthusiasm is large.',
+    'Aestro is giving this click a thumbs-up.',
+    'Aestro sees you. That counts as a meeting.',
+    'Aestro is in interactive mode and feeling good.',
+    'Aestro can do curiosity on demand.',
+    'Aestro says your timing is excellent.',
+    'Aestro is ready for another round.',
+    'Aestro is busy making the orbit friendlier.',
+    'Aestro welcomes your next bright idea.',
+    'Aestro is happy to be the tiny mascot of this page.',
+    'Aestro can answer with style.',
+    'Aestro is keeping the mood light.',
+    'Aestro likes a good click with purpose.',
+    'Aestro is now officially engaged.',
+    'Aestro can do this all day, sort of.',
+    'Aestro thinks this is a decent use of time.',
+    'Aestro is looking at the stars and at you.',
+    'Aestro says good things happen after a click.',
+    'Aestro is here, bright and ready.',
+    'Aestro can be your tiny mission buddy.',
+    'Aestro is grateful for the attention.',
+    'Aestro is the sort of helper that waves back.',
+    'Aestro says welcome to the friendly orbit.',
+  ].map(message => message.replace(/Aestro/g, 'Astro'));
+  const ASTRONAUT_SCROLL_PHRASES = [
+    'Nice scroll. I am reading the orbit.',
+    'That is a smooth page glide.',
+    'Scroll speed: delightfully cosmic.',
+    'You are moving the universe along.',
+    'Astro likes this little gravity drift.',
+    'Your scroll has excellent momentum.',
+    'We are surfing the page together.',
+    'That scroll felt scientifically tidy.',
+    'I saw that page move. Very elegant.',
+    'Orbit status: gently accelerating.',
+    'You are making the page do a moonwalk.',
+    'Nice, clean scroll energy.',
+  ];
+  const ASTRONAUT_RETURN_PHRASES = [
+    'Welcome back, commander. I saved your orbit.',
+    'Good to see you again. Astro remembers the vibe.',
+    'You came back. That is my favorite signal.',
+    'Re-entry complete. Glad you are here.',
+    'Astro noticed the repeat visit and waved first.',
+    'Same page, fresh orbit, new ideas.',
+    'You are back. I am still on duty.',
+    'Welcome home to the friendly side of space.',
   ];
   const ASTRONAUT_EXPLOSION_PHRASES = [
     'Whoa! That black hole had drama.',
@@ -179,16 +272,86 @@ document.addEventListener('DOMContentLoaded', () => {
     'You found a lucky star sticker.',
   ];
   const ASTRONAUT_BRAND_PHRASES = [
-    'Machine Gnostics signal stamped in local space.',
-    'Brand beacon online: Machine Gnostics.',
-    'Orbit tag: MACHINE GNOSTICS locked and glowing.',
-    'Friendly mark deployed. Machine Gnostics says hi.',
-    'MG signature dropped into this star lane.',
+    'OSS signal stamped in local space.',
+    'OSS beacon online.',
+    'Orbit tag: OSS locked and glowing.',
+    'Friendly mark deployed. OSS says hi.',
+    'OSS signature dropped into this star lane.',
+  ];
+  const ASTRONAUT_MARKETING_PHRASES = [
+    'OSS turns data into delightful signals.',
+    'OSS makes insight feel like a launch sequence.',
+    'Smart models, fun orbit, less noise.',
+    'OSS: where structure meets starlight.',
+    'Better questions, brighter answers.',
+    'OSS keeps the signal and loses the drama.',
+    'Fun science for serious thinkers.',
+    'OSS makes pattern finding feel playful.',
+    'Cosmic clarity for your next decision.',
+    'OSS: elegant learning for curious teams.',
+    'Less guesswork, more gravity.',
+    'The OSS way: calm data, bold insight.',
+    'OSS helps ideas find orbit.',
+    'Turn messy signals into a guided mission.',
+    'OSS is data, but with a smile.',
+    'Insight should be this smooth.',
+    'OSS: practical intelligence with cosmic polish.',
+    'Build models that behave like good satellites.',
+    'OSS keeps your analytics in formation.',
+    'Learn faster, steer cleaner.',
+    'OSS makes complexity feel friendly.',
+    'Tiny data, big clarity.',
+    'OSS: the fun side of rigorous thinking.',
+    'Let the signal wear the crown.',
+    'OSS gives your data a cockpit.',
+    'Beautiful structure for busy minds.',
+    'OSS: engineered for curious orbiters.',
+    'Make your next metric actually mean something.',
+    'OSS turns friction into forward motion.',
+    'Analytics with a little spark in the visor.',
+    'OSS helps teams see what matters.',
+    'Calm dashboards, sharper decisions.',
+    'OSS: where neat math meets neat vibes.',
+    'Put your data on a better trajectory.',
+    'OSS is science with style.',
+    'OSS keeps the mission readable.',
+    'Make your model less noisy and more noble.',
+    'OSS turns raw signals into runway.',
+    'Crisp insight for cosmic-scale questions.',
+    'OSS: friendly rigor for modern teams.',
+    'Data should feel this clear.',
+    'OSS makes the unknown less spooky.',
+    'Better logic, better launch.',
+    'OSS gives your pipeline a pulse.',
+    'Curious minds choose OSS.',
+    'OSS makes meaning pop.',
+    'A better orbit for your numbers.',
+    'OSS: playful, precise, and practical.',
+    'Let OSS help the signal sing.',
+    'OSS is your friendly gravity well for insight.',
   ];
   const ASTRONAUT_FRIDAY_SPECIAL = 'WEEKEND ORBIT: Friday detected. Keep the vibes in stable orbit.';
   const ASTRONAUT_TAGS = ['COMMS', 'EVA LOG', 'MISSION TIP', 'ORBIT NOTE'];
   const ASTRONAUT_MOODS = ['chill', 'excited', 'curious', 'sleepy'];
   const ASTRONAUT_GESTURES = ['wave', 'thumbs', 'salute', 'visor', 'spin'];
+  const ASTRONAUT_OUTFITS = [
+    { name: 'mint', body: [238, 250, 248], band: [0, 212, 170], trim: [0, 126, 152], visor: [54, 92, 118] },
+    { name: 'amber', body: [251, 246, 235], band: [255, 156, 64], trim: [176, 110, 24], visor: [112, 78, 50] },
+    { name: 'ice', body: [242, 248, 255], band: [0, 145, 186], trim: [0, 110, 132], visor: [52, 98, 132] },
+    { name: 'sunset', body: [250, 244, 240], band: [255, 136, 38], trim: [166, 96, 18], visor: [120, 88, 54] },
+    { name: 'orbit', body: [244, 249, 246], band: [0, 230, 214], trim: [0, 126, 148], visor: [44, 92, 118] },
+    { name: 'stellar', body: [249, 247, 252], band: [110, 236, 224], trim: [96, 118, 172], visor: [60, 72, 124] },
+    { name: 'weekday', body: [245, 249, 250], band: [0, 212, 170], trim: [0, 118, 132], visor: [58, 94, 120] },
+  ];
+  const ASTRO_BUBBLE_TIMER_MIN = 4.8;
+  const ASTRO_BUBBLE_TIMER_MAX = 6.4;
+  const ASTRONAUT_PERSONALITIES = [
+    { key: 'guide', label: 'Guide', defaultMood: 'chill', motion: { bob: 0.92, tilt: 0.74, wave: 0.94, leg: 0.92, surprise: 0.13 } },
+    { key: 'spark', label: 'Spark', defaultMood: 'excited', motion: { bob: 1.16, tilt: 1.02, wave: 1.22, leg: 1.08, surprise: 0.22 } },
+    { key: 'zen', label: 'Zen', defaultMood: 'sleepy', motion: { bob: 0.76, tilt: 0.50, wave: 0.82, leg: 0.84, surprise: 0.08 } },
+    { key: 'trickster', label: 'Trickster', defaultMood: 'curious', motion: { bob: 1.08, tilt: 1.16, wave: 1.10, leg: 1.06, surprise: 0.28 } },
+  ];
+  const ASTRO_VISIT_KEY = 'machinegnostics.astro.visits';
 
   /* galaxy background — stardust band + core + distant galaxies */
   let galaxyDust    = [];
@@ -465,6 +628,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!astronaut) {
       const px = rand(0, 1) < 0.5 ? rand(W * 0.05, W * 0.22) : rand(W * 0.78, W * 0.95);
+      let visitCount = 1;
+      try {
+        visitCount = Math.max(1, parseInt(localStorage.getItem(ASTRO_VISIT_KEY) || '0', 10) + 1);
+        localStorage.setItem(ASTRO_VISIT_KEY, String(visitCount));
+      } catch (_err) {
+        visitCount = 1;
+      }
+      const personality = ASTRONAUT_PERSONALITIES[(visitCount - 1) % ASTRONAUT_PERSONALITIES.length];
       astronaut = {
         x: px,
         y: rand(H * 0.16, H * 0.86),
@@ -479,11 +650,19 @@ document.addEventListener('DOMContentLoaded', () => {
         wavePhase: rand(0, Math.PI * 2),
         spinPhase: 0,
         moodBoostSec: 0,
-        mood: 'chill',
+        mood: personality.defaultMood,
         moodTimerSec: rand(6.0, 12.0),
         gesture: 'wave',
         gestureTimerSec: rand(3.0, 6.5),
         brandTimerSec: rand(14.0, 30.0),
+        marketingTimerSec: rand(12.0, 24.0),
+        surpriseTimerSec: rand(9.0, 18.0),
+        outfitKey: '',
+        outfitTheme: null,
+        outfitSpinSec: 0,
+        personalityKey: personality.key,
+        personalityLabel: personality.label,
+        visitCount,
         hover: false,
         dragging: false,
         dragOffsetX: 0,
@@ -496,6 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
         suitDrift: rand(0, Math.PI * 2),
         bubble: {
           text: '',
+          meta: '',
           timerSec: 0,
           cooldownSec: rand(3.5, 7.5),
           alpha: 0,
@@ -528,8 +708,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const setAstronautMood = (mood, durationSec = rand(5.0, 10.0)) => {
     if (!astronaut) return;
+    const previousMood = astronaut.mood;
     astronaut.mood = mood;
     astronaut.moodTimerSec = durationSec;
+
+    if (previousMood !== mood) {
+      astronaut.outfitSpinSec = 1.15;
+      astronaut.gesture = 'spin';
+      astronaut.gestureTimerSec = Math.max(astronaut.gestureTimerSec, 1.4);
+    }
+  };
+
+  const getAstronautOutfitTheme = () => {
+    const day = new Date().getDay();
+    const isFriday = day === 5;
+    const mood = astronaut ? astronaut.mood : 'chill';
+    const base = ASTRONAUT_OUTFITS[day % ASTRONAUT_OUTFITS.length];
+    const moodMap = {
+      chill: base,
+      excited: ASTRONAUT_OUTFITS[1],
+      curious: ASTRONAUT_OUTFITS[2],
+      sleepy: ASTRONAUT_OUTFITS[0],
+    };
+    const selected = moodMap[mood] || base;
+    if (isFriday) {
+      return {
+        name: 'friday-orbit',
+        body: ASTRONAUT_OUTFITS[4].body,
+        band: ASTRONAUT_OUTFITS[4].band,
+        trim: ASTRONAUT_OUTFITS[4].trim,
+        visor: ASTRONAUT_OUTFITS[5].visor,
+      };
+    }
+    return selected;
+  };
+
+  const maybeUpdateAstronautOutfit = () => {
+    if (!astronaut) return;
+    const theme = getAstronautOutfitTheme();
+    const key = `${new Date().getDay()}-${astronaut.mood}-${theme.name}`;
+    if (astronaut.outfitKey !== key) {
+      astronaut.outfitKey = key;
+      astronaut.outfitTheme = theme;
+      astronaut.outfitSpinSec = Math.max(astronaut.outfitSpinSec, 1.1);
+      astronaut.gesture = 'spin';
+      astronaut.gestureTimerSec = Math.max(astronaut.gestureTimerSec, 1.2);
+    }
   };
 
   const pickAstronautGesture = () => {
@@ -539,15 +763,43 @@ document.addEventListener('DOMContentLoaded', () => {
     astronaut.gestureTimerSec = g === 'spin' ? rand(1.6, 2.2) : rand(2.6, 5.8);
   };
 
+  const getAstronautPersonality = () => {
+    if (!astronaut) return ASTRONAUT_PERSONALITIES[0];
+    return ASTRONAUT_PERSONALITIES.find((item) => item.key === astronaut.personalityKey) || ASTRONAUT_PERSONALITIES[0];
+  };
+
+  const maybeTriggerAstroSurprise = () => {
+    if (!astronaut || astronaut.dragging) return;
+    const personality = getAstronautPersonality();
+    if (Math.random() > personality.motion.surprise) return;
+    const surprises = ['spin', 'wave', 'salute', 'thumbs'];
+    astronaut.gesture = surprises[Math.floor(Math.random() * surprises.length)];
+    astronaut.gestureTimerSec = rand(1.8, 3.0);
+    if (Math.random() < 0.38) {
+      setAstronautMood(ASTRONAUT_MOODS[Math.floor(Math.random() * ASTRONAUT_MOODS.length)], rand(2.8, 4.6));
+    }
+    if (Math.random() < 0.24) {
+      triggerAstronautBubble('Tiny surprise maneuver complete.', 'event');
+    }
+  };
+
   const formatCommsLine = (message, category = 'auto') => {
+    const mood = astronaut ? astronaut.mood : 'chill';
+    const moodTag = mood === 'excited' ? 'BUZZING' : mood === 'curious' ? 'CURIOUS' : mood === 'sleepy' ? 'LO-FI' : 'CALM';
     let tag;
     if (category === 'click') tag = 'COMMS';
     else if (category === 'event') tag = 'ORBIT NOTE';
     else if (category === 'explosion') tag = 'EVA LOG';
     else if (category === 'sticker') tag = 'MISSION TIP';
-    else if (category === 'brand') tag = 'BRAND SIGNAL';
+    else if (category === 'brand') tag = 'OSS SIGNAL';
+    else if (category === 'marketing') tag = 'NOTE';
     else tag = ASTRONAUT_TAGS[Math.floor(Math.random() * ASTRONAUT_TAGS.length)];
-    return `${tag}: ${message}`;
+    const personality = astronaut ? astronaut.personalityLabel : 'Guide';
+    const timeStamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return {
+      meta: `ASTRO  ${moodTag}  ${personality}  ${tag}  ${timeStamp}`,
+      text: message,
+    };
   };
 
   const beginAstronautDrag = (px, py) => {
@@ -601,9 +853,11 @@ document.addEventListener('DOMContentLoaded', () => {
         text = ASTRONAUT_IDLE_PHRASES[Math.floor(Math.random() * ASTRONAUT_IDLE_PHRASES.length)];
       }
     }
-    text = formatCommsLine(text, category);
-    astronaut.bubble.text = text;
-    astronaut.bubble.timerSec = rand(2.2, 3.4);
+    const formatted = formatCommsLine(text, category);
+    astronaut.bubble.text = formatted.text;
+    astronaut.bubble.meta = formatted.meta;
+    astronaut.bubble.category = category;
+    astronaut.bubble.timerSec = rand(ASTRO_BUBBLE_TIMER_MIN, ASTRO_BUBBLE_TIMER_MAX);
     astronaut.bubble.cooldownSec = rand(5.0, 11.5);
   };
 
@@ -721,14 +975,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!astronaut) return;
 
     const frameScale = clamp(dtSec * 60, 0.45, 2.2);
+    const personality = getAstronautPersonality();
     astronaut.moodTimerSec -= dtSec;
     astronaut.gestureTimerSec -= dtSec;
+    astronaut.surpriseTimerSec -= dtSec;
 
     if (astronaut.moodTimerSec <= 0) {
       setAstronautMood(ASTRONAUT_MOODS[Math.floor(Math.random() * ASTRONAUT_MOODS.length)]);
     }
     if (astronaut.gestureTimerSec <= 0) {
       pickAstronautGesture();
+    }
+
+    const moodMotion = astronaut.mood === 'excited' ? 1.35 : astronaut.mood === 'curious' ? 1.12 : astronaut.mood === 'sleepy' ? 0.72 : 1.0;
+
+    maybeUpdateAstronautOutfit();
+    if (astronaut.outfitSpinSec > 0) astronaut.outfitSpinSec -= dtSec;
+
+    if (astronaut.surpriseTimerSec <= 0) {
+      maybeTriggerAstroSurprise();
+      astronaut.surpriseTimerSec = rand(10.0, 22.0);
     }
 
     if (astronaut.hover || astronaut.dragging) {
@@ -752,6 +1018,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (astronaut.mood === 'sleepy') speedMood = 0.72;
       else if (astronaut.mood === 'curious') speedMood = 1.10;
       else if (astronaut.mood === 'excited') speedMood = 1.22;
+
       const desiredVx = (dx / d) * clamp(d / 180, 0.09, 0.42) * speedMood;
       const desiredVy = (dy / d) * clamp(d / 180, 0.07, 0.34) * speedMood;
 
@@ -760,7 +1027,6 @@ document.addEventListener('DOMContentLoaded', () => {
       astronaut.vx = lerp(astronaut.vx, astronaut.targetVx, 0.032 * frameScale);
       astronaut.vy = lerp(astronaut.vy, astronaut.targetVy, 0.032 * frameScale);
 
-      /* center-avoidance push keeps idle motion near page periphery */
       if (astronautInCenterZone(astronaut.x, astronaut.y)) {
         const cx = W * 0.5;
         const cy = H * 0.5;
@@ -778,13 +1044,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const margin = Math.max(20, astronaut.size * 1.6);
     astronaut.x = clamp(astronaut.x, margin, W - margin);
     astronaut.y = clamp(astronaut.y, margin, H - margin);
-    astronaut.bobPhase += 0.014 * frameScale;
+    astronaut.bobPhase += 0.014 * frameScale * (0.82 + moodMotion * 0.28) * personality.motion.bob;
     let waveSpd = astronaut.hover || astronaut.dragging ? 0.20 : 0.11;
     if (astronaut.mood === 'excited') waveSpd *= 1.22;
     else if (astronaut.mood === 'sleepy') waveSpd *= 0.74;
-    astronaut.wavePhase += waveSpd * frameScale;
-    astronaut.spinPhase += (astronaut.gesture === 'spin' ? 0.18 : 0.03) * frameScale;
-    astronaut.suitDrift += 0.012 * frameScale;
+    astronaut.wavePhase += waveSpd * frameScale * (0.88 + moodMotion * 0.18) * personality.motion.wave;
+    astronaut.spinPhase += (astronaut.gesture === 'spin' ? 0.18 : 0.03) * frameScale * moodMotion * personality.motion.tilt;
+    astronaut.suitDrift += 0.012 * frameScale * (0.90 + moodMotion * 0.10);
 
     astronaut.bubble.cooldownSec -= dtSec;
     if (astronaut.bubble.timerSec > 0) {
@@ -794,13 +1060,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const bubbleT = astronaut.bubble.timerSec;
-    if (bubbleT > 0) {
-      const inA = clamp((3.4 - bubbleT) / 0.25, 0, 1);
-      const outA = clamp(bubbleT / 0.45, 0, 1);
-      astronaut.bubble.alpha = Math.min(inA, outA);
-    } else {
-      astronaut.bubble.alpha = 0;
-    }
+    astronaut.bubble.alpha = bubbleT > 0
+      ? Math.min(clamp((ASTRO_BUBBLE_TIMER_MAX - bubbleT) / 0.25, 0, 1), clamp(bubbleT / 0.55, 0, 1))
+      : 0;
 
     if (astronaut.moodBoostSec > 0) astronaut.moodBoostSec -= dtSec;
 
@@ -810,6 +1072,15 @@ document.addEventListener('DOMContentLoaded', () => {
       triggerAstronautBubble(msg, 'brand');
       spawnBrandMark();
       astronaut.brandTimerSec = rand(18.0, 34.0);
+    }
+
+    astronaut.marketingTimerSec -= dtSec;
+    if (astronaut.marketingTimerSec <= 0 && !astronaut.dragging) {
+      const msg = ASTRONAUT_MARKETING_PHRASES[Math.floor(Math.random() * ASTRONAUT_MARKETING_PHRASES.length)];
+      triggerAstronautBubble(msg, 'marketing');
+      astronaut.gesture = 'thumbs';
+      astronaut.gestureTimerSec = rand(2.2, 3.5);
+      astronaut.marketingTimerSec = rand(16.0, 30.0);
     }
 
     maybeSpawnStarSticker(dtSec);
@@ -851,12 +1122,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const x = astronaut.x;
     const y = astronaut.y + Math.sin(astronaut.bobPhase) * astronaut.size * 0.32;
-    const s = astronaut.size;
+    const s = astronaut.size * 1.12;
     const light = isLight();
     const hour = new Date().getHours();
     const isNight = hour < 6 || hour >= 19;
     const mood = astronaut.moodBoostSec > 0 ? clamp(astronaut.moodBoostSec / 4, 0, 1) : 0;
     const gesture = astronaut.gesture || 'wave';
+    const personality = getAstronautPersonality();
+    const theme = astronaut.outfitTheme || getAstronautOutfitTheme();
+    const bodyColor = light
+      ? [Math.max(0, (theme.body || [245, 250, 252])[0] - 40), Math.max(0, (theme.body || [245, 250, 252])[1] - 48), Math.max(0, (theme.body || [245, 250, 252])[2] - 30)]
+      : (theme.body || [245, 250, 252]);
+    const bandColor = light
+      ? [Math.min(255, (theme.band || [0, 212, 170])[0] + 18), Math.min(255, (theme.band || [0, 212, 170])[1] + 14), Math.min(255, (theme.band || [0, 212, 170])[2] + 24)]
+      : (theme.band || [0, 212, 170]);
+    const trimColor = light
+      ? [Math.max(0, (theme.trim || [0, 126, 152])[0] - 16), Math.max(0, (theme.trim || [0, 126, 152])[1] - 24), Math.max(0, (theme.trim || [0, 126, 152])[2] - 18)]
+      : (theme.trim || [0, 126, 152]);
+    const visorBase = light
+      ? [Math.max(0, (theme.visor || [52, 98, 132])[0] - 8), Math.max(0, (theme.visor || [52, 98, 132])[1] - 12), Math.max(0, (theme.visor || [52, 98, 132])[2] - 16)]
+      : (theme.visor || [52, 98, 132]);
 
     const glowA = (light ? 0.06 : 0.13) + (astronaut.hover ? 0.06 : 0) + mood * 0.08;
     const glow = ctx.createRadialGradient(x, y, 0, x, y, s * 4.6);
@@ -870,9 +1155,69 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ctx.save();
     ctx.translate(x, y);
-    const baseRot = Math.sin(astronaut.bobPhase * 0.8) * 0.06;
+    const baseRot = Math.sin(astronaut.bobPhase * 0.8) * 0.06 * personality.motion.tilt;
     const spinRot = gesture === 'spin' ? Math.sin(astronaut.spinPhase) * 0.22 : 0;
-    ctx.rotate(baseRot + spinRot);
+    const outfitSpin = astronaut.outfitSpinSec > 0 ? Math.sin(astronaut.outfitSpinSec * 7.5) * 0.55 : 0;
+    const headTilt = astronaut.mood === 'curious' ? Math.sin(astronaut.wavePhase * 0.7) * 0.08 : astronaut.mood === 'sleepy' ? -0.04 : 0;
+    ctx.rotate(baseRot + spinRot + outfitSpin + headTilt);
+
+    const cueAlpha = light ? 0.92 : 0.98;
+    const cueColor = `rgba(${bandColor[0]},${bandColor[1]},${bandColor[2]},${cueAlpha})`;
+    const cueMuted = `rgba(${trimColor[0]},${trimColor[1]},${trimColor[2]},${light ? 0.62 : 0.78})`;
+    ctx.save();
+    ctx.translate(0, -s * 1.18);
+    ctx.strokeStyle = cueColor;
+    ctx.fillStyle = cueColor;
+    ctx.lineWidth = 1.2;
+
+    if (astronaut.mood === 'excited') {
+      for (const [dx, dy, r] of [[-10, -2, 1.8], [0, -10, 2.4], [10, -2, 1.8]]) {
+        ctx.beginPath();
+        ctx.arc(dx, dy, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.beginPath();
+      ctx.arc(0, -16, 7, 0.18 * Math.PI, 0.82 * Math.PI);
+      ctx.stroke();
+    } else if (astronaut.mood === 'curious') {
+      ctx.beginPath();
+      ctx.arc(0, -7, 5.4, 0.2 * Math.PI, 1.75 * Math.PI);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(5, 6, 1.9, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-7, 8);
+      ctx.lineTo(-3, 0);
+      ctx.stroke();
+    } else if (astronaut.mood === 'sleepy') {
+      ctx.strokeStyle = cueMuted;
+      ctx.beginPath();
+      ctx.moveTo(-8, -2);
+      ctx.lineTo(-2, -8);
+      ctx.lineTo(4, -2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(2, 8);
+      ctx.lineTo(8, 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(-10, 10, 1.8, 0, Math.PI * 2);
+      ctx.fill();
+    } else {
+      ctx.strokeStyle = cueColor;
+      ctx.beginPath();
+      ctx.arc(-8, -4, 2.0, 0, Math.PI * 2);
+      ctx.arc(0, -10, 2.6, 0, Math.PI * 2);
+      ctx.arc(8, -4, 2.0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.moveTo(-8, 4);
+      ctx.lineTo(8, 4);
+      ctx.stroke();
+    }
+
+    ctx.restore();
 
     /* detached suit piece drifting in space */
     const sx = s * (1.95 + Math.sin(astronaut.suitDrift) * 0.28);
@@ -881,12 +1226,12 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.translate(sx, sy);
     ctx.rotate(Math.sin(astronaut.suitDrift) * 0.38);
     const pieceGrad = ctx.createLinearGradient(-s * 0.22, -s * 0.18, s * 0.22, s * 0.18);
-    pieceGrad.addColorStop(0, light ? 'rgba(170,190,202,0.88)' : 'rgba(176,210,224,0.88)');
-    pieceGrad.addColorStop(1, light ? 'rgba(108,132,146,0.88)' : 'rgba(118,150,170,0.88)');
+    pieceGrad.addColorStop(0, `rgba(${bodyColor[0]},${bodyColor[1]},${bodyColor[2]},0.88)`);
+    pieceGrad.addColorStop(1, `rgba(${Math.max(0, bodyColor[0] - 70)},${Math.max(0, bodyColor[1] - 40)},${Math.max(0, bodyColor[2] - 30)},0.88)`);
     ctx.fillStyle = pieceGrad;
     roundedRectPath(ctx, -s * 0.24, -s * 0.18, s * 0.50, s * 0.36, 2.2);
     ctx.fill();
-    ctx.strokeStyle = light ? 'rgba(0,110,132,0.34)' : 'rgba(120,220,245,0.48)';
+    ctx.strokeStyle = `rgba(${trimColor[0]},${trimColor[1]},${trimColor[2]},${light ? 0.36 : 0.56})`;
     ctx.lineWidth = 0.8;
     ctx.stroke();
     ctx.restore();
@@ -901,56 +1246,57 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.stroke();
     ctx.setLineDash([]);
 
-    /* backpack */
-    const bagGrad = ctx.createLinearGradient(-s * 0.50, -s * 0.15, -s * 0.05, s * 0.75);
-    bagGrad.addColorStop(0, light ? 'rgba(168,186,198,0.96)' : 'rgba(170,196,214,0.96)');
-    bagGrad.addColorStop(1, light ? 'rgba(118,140,154,0.96)' : 'rgba(120,148,166,0.96)');
-    ctx.fillStyle = bagGrad;
-    roundedRectPath(ctx, -s * 0.54, -s * 0.12, s * 0.38, s * 0.86, 2.8);
-    ctx.fill();
-
     /* torso */
     const torsoGrad = ctx.createLinearGradient(-s * 0.44, -s * 0.06, s * 0.36, s * 1.20);
-    torsoGrad.addColorStop(0, light ? 'rgba(245,250,252,0.97)' : 'rgba(240,248,252,0.96)');
-    torsoGrad.addColorStop(0.52, light ? 'rgba(218,230,236,0.97)' : 'rgba(210,224,232,0.96)');
-    torsoGrad.addColorStop(1, light ? 'rgba(188,205,214,0.97)' : 'rgba(182,198,210,0.96)');
+    torsoGrad.addColorStop(0, `rgba(${bodyColor[0]},${bodyColor[1]},${bodyColor[2]},0.97)`);
+    torsoGrad.addColorStop(0.52, `rgba(${Math.max(0, bodyColor[0] - 22)},${Math.max(0, bodyColor[1] - 16)},${Math.max(0, bodyColor[2] - 12)},0.97)`);
+    torsoGrad.addColorStop(1, `rgba(${Math.max(0, bodyColor[0] - 46)},${Math.max(0, bodyColor[1] - 32)},${Math.max(0, bodyColor[2] - 24)},0.97)`);
     ctx.fillStyle = torsoGrad;
     ctx.beginPath();
     ctx.ellipse(-s * 0.02, s * 0.36, s * 0.52, s * 0.88, 0, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = light ? 'rgba(0,136,156,0.72)' : 'rgba(0,230,214,0.80)';
-    ctx.lineWidth = 1.0;
+    ctx.strokeStyle = `rgba(${trimColor[0]},${trimColor[1]},${trimColor[2]},${light ? 0.72 : 0.88})`;
+    ctx.lineWidth = 1.2;
     ctx.stroke();
 
     /* high-visibility suit bands */
-    ctx.fillStyle = light ? 'rgba(255,136,38,0.88)' : 'rgba(255,156,64,0.90)';
+    ctx.fillStyle = `rgba(${bandColor[0]},${bandColor[1]},${bandColor[2]},${light ? 0.88 : 0.92})`;
     roundedRectPath(ctx, -s * 0.34, s * 0.08, s * 0.62, s * 0.08, 1.6);
     ctx.fill();
     roundedRectPath(ctx, -s * 0.20, s * 0.78, s * 0.36, s * 0.07, 1.4);
     ctx.fill();
 
+    ctx.strokeStyle = `rgba(${bandColor[0]},${bandColor[1]},${bandColor[2]},${light ? 0.82 : 0.92})`;
+    ctx.lineWidth = 1.3;
+    ctx.beginPath();
+    ctx.arc(-s * 0.30, s * 0.06, s * 0.10, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(s * 0.30, s * 0.06, s * 0.10, 0, Math.PI * 2);
+    ctx.stroke();
+
     /* chest details */
-    ctx.fillStyle = light ? 'rgba(136,156,170,0.72)' : 'rgba(144,166,182,0.78)';
+    ctx.fillStyle = `rgba(${Math.max(0, bodyColor[0] - 96)},${Math.max(0, bodyColor[1] - 82)},${Math.max(0, bodyColor[2] - 72)},0.72)`;
     roundedRectPath(ctx, -s * 0.20, s * 0.26, s * 0.26, s * 0.18, 2.2);
     ctx.fill();
-    ctx.fillStyle = light ? 'rgba(0,128,92,0.75)' : 'rgba(0,210,140,0.82)';
+    ctx.fillStyle = `rgba(${trimColor[0]},${trimColor[1]},${trimColor[2]},${light ? 0.75 : 0.86})`;
     ctx.beginPath();
     ctx.arc(-s * 0.10, s * 0.35, s * 0.03, 0, Math.PI * 2);
     ctx.fill();
 
     /* helmet shell */
     const helmetShell = ctx.createRadialGradient(-s * 0.06, -s * 0.50, s * 0.05, 0, -s * 0.36, s * 0.64);
-    helmetShell.addColorStop(0, light ? 'rgba(245,252,255,0.98)' : 'rgba(236,248,255,0.96)');
-    helmetShell.addColorStop(1, light ? 'rgba(188,206,220,0.96)' : 'rgba(176,198,214,0.96)');
+    helmetShell.addColorStop(0, `rgba(${Math.min(255, bodyColor[0] + 8)},${Math.min(255, bodyColor[1] + 10)},${Math.min(255, bodyColor[2] + 10)},0.98)`);
+    helmetShell.addColorStop(1, `rgba(${Math.max(0, bodyColor[0] - 52)},${Math.max(0, bodyColor[1] - 44)},${Math.max(0, bodyColor[2] - 36)},0.96)`);
     ctx.fillStyle = helmetShell;
     ctx.beginPath();
     ctx.arc(0, -s * 0.38, s * 0.60, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = light ? 'rgba(0,128,150,0.64)' : 'rgba(0,226,214,0.72)';
-    ctx.lineWidth = 0.9;
+    ctx.strokeStyle = `rgba(${trimColor[0]},${trimColor[1]},${trimColor[2]},${light ? 0.64 : 0.76})`;
+    ctx.lineWidth = 1.0;
     ctx.stroke();
 
-    ctx.strokeStyle = light ? 'rgba(255,146,46,0.72)' : 'rgba(255,170,84,0.76)';
+    ctx.strokeStyle = `rgba(${bandColor[0]},${bandColor[1]},${bandColor[2]},${light ? 0.72 : 0.82})`;
     ctx.lineWidth = 1.0;
     ctx.beginPath();
     ctx.arc(0, -s * 0.38, s * 0.60, 0.12 * Math.PI, 0.88 * Math.PI);
@@ -959,9 +1305,9 @@ document.addEventListener('DOMContentLoaded', () => {
     /* visor */
     const visorGrad = ctx.createRadialGradient(-s * 0.12, -s * 0.52, s * 0.02, 0, -s * 0.40, s * 0.38);
     if (isNight) {
-      visorGrad.addColorStop(0, light ? 'rgba(132,190,222,0.84)' : 'rgba(136,206,238,0.84)');
-      visorGrad.addColorStop(0.58, light ? 'rgba(52,98,132,0.88)' : 'rgba(32,84,118,0.88)');
-      visorGrad.addColorStop(1, light ? 'rgba(20,60,92,0.90)' : 'rgba(14,52,84,0.92)');
+      visorGrad.addColorStop(0, light ? `rgba(${visorBase[0] + 70},${visorBase[1] + 70},${visorBase[2] + 70},0.84)` : `rgba(${visorBase[0] + 84},${visorBase[1] + 84},${visorBase[2] + 84},0.84)`);
+      visorGrad.addColorStop(0.58, light ? `rgba(${visorBase[0]},${visorBase[1]},${visorBase[2]},0.88)` : `rgba(${Math.max(0, visorBase[0] - 22)},${Math.max(0, visorBase[1] - 20)},${Math.max(0, visorBase[2] - 20)},0.88)`);
+      visorGrad.addColorStop(1, light ? `rgba(${Math.max(0, visorBase[0] - 32)},${Math.max(0, visorBase[1] - 36)},${Math.max(0, visorBase[2] - 42)},0.90)` : `rgba(${Math.max(0, visorBase[0] - 44)},${Math.max(0, visorBase[1] - 46)},${Math.max(0, visorBase[2] - 52)},0.92)`);
     } else {
       visorGrad.addColorStop(0, light ? 'rgba(198,156,104,0.84)' : 'rgba(220,170,118,0.82)');
       visorGrad.addColorStop(0.58, light ? 'rgba(120,88,54,0.88)' : 'rgba(112,78,50,0.88)');
@@ -990,59 +1336,61 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.stroke();
 
     /* gesture-driven arms */
-    ctx.strokeStyle = light ? 'rgba(220,234,242,0.92)' : 'rgba(216,232,242,0.94)';
-    ctx.lineWidth = 1.7;
+    ctx.strokeStyle = `rgba(${Math.min(255, bodyColor[0] + 8)},${Math.min(255, bodyColor[1] + 8)},${Math.min(255, bodyColor[2] + 8)},${light ? 0.92 : 0.94})`;
+    ctx.lineWidth = 2.6;
     ctx.lineCap = 'round';
+    const armLift = astronaut.mood === 'excited' ? -s * 0.05 : astronaut.mood === 'sleepy' ? s * 0.06 : astronaut.mood === 'curious' ? -s * 0.02 : 0;
+    const legBend = astronaut.mood === 'excited' ? s * 0.10 : astronaut.mood === 'sleepy' ? -s * 0.04 : astronaut.mood === 'curious' ? s * 0.04 : 0;
 
     /* left arm baseline */
     ctx.beginPath();
-    ctx.moveTo(-s * 0.22, s * 0.04);
-    ctx.lineTo(-s * 0.52, gesture === 'salute' ? s * 0.08 : -s * 0.02);
-    ctx.lineTo(-s * 0.72, gesture === 'salute' ? s * 0.20 : s * 0.06);
+    ctx.moveTo(-s * 0.22, s * 0.04 + armLift * 0.4);
+    ctx.lineTo(-s * 0.60, (gesture === 'salute' ? s * 0.10 : -s * 0.02) + armLift);
+    ctx.lineTo(-s * 1.02, (gesture === 'salute' ? s * 0.28 : s * 0.10) + armLift * 1.1);
     ctx.stroke();
 
     if (gesture === 'thumbs') {
       ctx.save();
-      ctx.translate(s * 0.24, s * 0.03);
+      ctx.translate(s * 0.24, s * 0.03 + armLift * 0.45);
       ctx.rotate(-1.42 + Math.sin(astronaut.wavePhase) * 0.14);
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.lineTo(s * 0.34, -s * 0.01);
-      ctx.lineTo(s * 0.54, s * 0.06);
+      ctx.lineTo(s * 0.42, -s * 0.01);
+      ctx.lineTo(s * 0.70, s * 0.08);
       ctx.stroke();
-      ctx.fillStyle = light ? 'rgba(228,240,246,0.96)' : 'rgba(222,236,246,0.96)';
-      ctx.beginPath(); ctx.arc(s * 0.56, s * 0.05, s * 0.07, 0, Math.PI * 2); ctx.fill();
-      ctx.beginPath(); ctx.arc(s * 0.60, -s * 0.04, s * 0.04, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = light ? 'rgba(228,240,246,0.98)' : 'rgba(222,236,246,0.98)';
+      ctx.beginPath(); ctx.arc(s * 0.72, s * 0.06, s * 0.09, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(s * 0.78, -s * 0.03, s * 0.05, 0, Math.PI * 2); ctx.fill();
       ctx.restore();
     } else if (gesture === 'salute') {
       ctx.beginPath();
-      ctx.moveTo(s * 0.23, s * 0.03);
-      ctx.lineTo(s * 0.44, -s * 0.16);
-      ctx.lineTo(s * 0.26, -s * 0.34);
+      ctx.moveTo(s * 0.23, s * 0.03 + armLift * 0.35);
+      ctx.lineTo(s * 0.52, -s * 0.20);
+      ctx.lineTo(s * 0.30, -s * 0.42);
       ctx.stroke();
-      ctx.fillStyle = light ? 'rgba(228,240,246,0.96)' : 'rgba(222,236,246,0.96)';
-      ctx.beginPath(); ctx.arc(s * 0.24, -s * 0.35, s * 0.07, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = light ? 'rgba(228,240,246,0.98)' : 'rgba(222,236,246,0.98)';
+      ctx.beginPath(); ctx.arc(s * 0.30, -s * 0.44, s * 0.09, 0, Math.PI * 2); ctx.fill();
     } else if (gesture === 'visor') {
       ctx.beginPath();
-      ctx.moveTo(s * 0.24, s * 0.04);
-      ctx.lineTo(s * 0.34, -s * 0.24);
-      ctx.lineTo(s * 0.02, -s * 0.42);
+      ctx.moveTo(s * 0.24, s * 0.04 + armLift * 0.35);
+      ctx.lineTo(s * 0.42, -s * 0.28);
+      ctx.lineTo(s * 0.02, -s * 0.50);
       ctx.stroke();
-      ctx.fillStyle = light ? 'rgba(228,240,246,0.96)' : 'rgba(222,236,246,0.96)';
-      ctx.beginPath(); ctx.arc(-s * 0.03, -s * 0.42, s * 0.07, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = light ? 'rgba(228,240,246,0.98)' : 'rgba(222,236,246,0.98)';
+      ctx.beginPath(); ctx.arc(-s * 0.02, -s * 0.50, s * 0.09, 0, Math.PI * 2); ctx.fill();
     } else {
       const waveA = -0.95 + Math.sin(astronaut.wavePhase) * (gesture === 'spin' ? 0.30 : 0.50);
       ctx.save();
-      ctx.translate(s * 0.25, s * 0.04);
+      ctx.translate(s * 0.25, s * 0.04 + armLift * 0.35);
       ctx.rotate(waveA);
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.lineTo(s * 0.34, -s * 0.01);
-      ctx.lineTo(s * 0.58, s * 0.08);
+      ctx.lineTo(s * 0.42, -s * 0.02);
+      ctx.lineTo(s * 0.84, s * 0.16);
       ctx.stroke();
       ctx.beginPath();
-      ctx.arc(s * 0.60, s * 0.09, s * 0.07, 0, Math.PI * 2);
-      ctx.fillStyle = light ? 'rgba(228,240,246,0.95)' : 'rgba(222,236,246,0.95)';
+      ctx.arc(s * 0.88, s * 0.16, s * 0.10, 0, Math.PI * 2);
+      ctx.fillStyle = light ? 'rgba(228,240,246,0.98)' : 'rgba(222,236,246,0.98)';
       ctx.fill();
       ctx.restore();
     }
@@ -1050,15 +1398,15 @@ document.addEventListener('DOMContentLoaded', () => {
     /* legs and boots */
     ctx.beginPath();
     ctx.moveTo(-s * 0.16, s * 1.02);
-    ctx.lineTo(-s * 0.22, s * 1.42);
+    ctx.lineTo(-s * 0.30, s * 1.58 - legBend * personality.motion.leg);
     ctx.moveTo(s * 0.16, s * 1.02);
-    ctx.lineTo(s * 0.22, s * 1.42);
+    ctx.lineTo(s * 0.30, s * 1.58 + legBend * personality.motion.leg * 0.6);
     ctx.stroke();
 
-    ctx.fillStyle = light ? 'rgba(170,188,200,0.96)' : 'rgba(164,186,202,0.96)';
-    roundedRectPath(ctx, -s * 0.30, s * 1.38, s * 0.16, s * 0.09, 1.6);
+    ctx.fillStyle = `rgba(${Math.max(0, bodyColor[0] - 60)},${Math.max(0, bodyColor[1] - 60)},${Math.max(0, bodyColor[2] - 52)},0.96)`;
+    roundedRectPath(ctx, -s * 0.36, s * (1.50 - legBend * 0.08), s * 0.28, s * 0.14, 2.2);
     ctx.fill();
-    roundedRectPath(ctx, s * 0.14, s * 1.38, s * 0.16, s * 0.09, 1.6);
+    roundedRectPath(ctx, s * 0.08, s * (1.50 + legBend * 0.05), s * 0.28, s * 0.14, 2.2);
     ctx.fill();
 
     /* tiny RCS thruster blink */
@@ -1076,13 +1424,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const ba = astronaut.bubble.alpha;
     if (ba > 0.01 && astronaut.bubble.text) {
       const text = astronaut.bubble.text;
+      const meta = astronaut.bubble.meta || '';
+      const category = astronaut.bubble.category || 'auto';
       ctx.save();
-      ctx.font = '700 11px Space Mono, monospace';
+      ctx.font = '700 9px Space Mono, monospace';
       const padX = 10;
       const padY = 8;
-      const lineH = 14;
+      const metaLineH = 11;
+      const lineH = 12;
       const maxBubbleW = clamp(W * 0.34, 180, 280);
-      const maxTextW = Math.max(120, maxBubbleW - padX * 2);
+      const metaInset = category === 'brand' || category === 'marketing' ? 14 : 0;
+      const maxTextW = Math.max(120, maxBubbleW - padX * 2 - metaInset);
 
       const words = text.trim().split(/\s+/).filter(Boolean);
       const lines = [];
@@ -1128,10 +1480,10 @@ document.addEventListener('DOMContentLoaded', () => {
         bubbleLines[maxLines - 1] = `${trimmed}...`;
       }
 
-      let textW = 0;
+      let textW = ctx.measureText(meta).width;
       for (const ln of bubbleLines) textW = Math.max(textW, ctx.measureText(ln).width);
       const tw = Math.min(maxBubbleW, textW + padX * 2);
-      const th = Math.max(28, padY * 2 + lineH * bubbleLines.length);
+      const th = Math.max(34, padY * 2 + metaLineH + 4 + lineH * bubbleLines.length);
       const bx = clamp(x + s * 1.2, 8, W - tw - 8);
       const by = clamp(y - s * 2.9, 8, H - th - 8);
 
@@ -1146,6 +1498,25 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.fill();
       ctx.stroke();
 
+      if (category === 'brand' || category === 'marketing') {
+        const iconCx = bx + 13;
+        const iconCy = by + 13;
+        const pulse = 0.55 + 0.45 * Math.sin(time * 6.0);
+        ctx.strokeStyle = category === 'brand'
+          ? `rgba(0,212,170, ${(0.65 * ba * pulse).toFixed(3)})`
+          : `rgba(255,156,64, ${(0.65 * ba * pulse).toFixed(3)})`;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(iconCx, iconCy, 5.2, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(iconCx - 3.5, iconCy);
+        ctx.lineTo(iconCx + 3.5, iconCy);
+        ctx.moveTo(iconCx, iconCy - 3.5);
+        ctx.lineTo(iconCx, iconCy + 3.5);
+        ctx.stroke();
+      }
+
       ctx.beginPath();
       ctx.moveTo(bx + 14, by + th);
       ctx.lineTo(bx + 22, by + th);
@@ -1153,13 +1524,35 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.closePath();
       ctx.fill();
 
+      if (category === 'marketing') {
+        ctx.fillStyle = light
+          ? `rgba(0,126,152, ${(0.84 * ba).toFixed(3)})`
+          : `rgba(255,178,96, ${(0.86 * ba).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(bx + tw - 14, by + 14, 2.2, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      const textX = category === 'brand' || category === 'marketing' ? bx + padX + 14 : bx + padX;
+      const metaColor = astronaut.mood === 'excited'
+        ? `rgba(255,156,64, ${(0.96 * ba).toFixed(3)})`
+        : astronaut.mood === 'curious'
+          ? `rgba(0,145,186, ${(0.96 * ba).toFixed(3)})`
+          : astronaut.mood === 'sleepy'
+            ? `rgba(126,148,196, ${(0.96 * ba).toFixed(3)})`
+            : `rgba(0,212,170, ${(0.96 * ba).toFixed(3)})`;
+      ctx.fillStyle = metaColor;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'top';
+      ctx.font = '700 8px Space Mono, monospace';
+      ctx.fillText(meta, textX, by + padY);
+
       ctx.fillStyle = light
         ? `rgba(0,98,116, ${(0.92 * ba).toFixed(3)})`
         : `rgba(205,250,245, ${(0.95 * ba).toFixed(3)})`;
-      ctx.textAlign = 'left';
-      ctx.textBaseline = 'top';
+      ctx.font = '700 9.35px Space Mono, monospace';
       for (let i = 0; i < bubbleLines.length; i++) {
-        ctx.fillText(bubbleLines[i], bx + padX, by + padY + i * lineH);
+        ctx.fillText(bubbleLines[i], textX, by + padY + metaLineH + 4 + i * lineH);
       }
       ctx.restore();
     }
@@ -2305,6 +2698,8 @@ document.addEventListener('DOMContentLoaded', () => {
         astronaut.hover = true;
         astronaut.dragMoved = false;
         setAstronautMood('excited', 3.6);
+        astronaut.gesture = Math.random() < 0.5 ? 'wave' : 'thumbs';
+        astronaut.gestureTimerSec = rand(2.0, 3.4);
       }
       const text = ASTRONAUT_CLICK_PHRASES[Math.floor(Math.random() * ASTRONAUT_CLICK_PHRASES.length)];
       triggerAstronautBubble(text, 'click');
@@ -2342,8 +2737,11 @@ document.addEventListener('DOMContentLoaded', () => {
       lastVisible = true;
       lastTs = performance.now();
       if (astronaut) {
-        triggerAstronautBubble('Welcome back, commander.', 'event');
+        const msg = ASTRONAUT_RETURN_PHRASES[Math.floor(Math.random() * ASTRONAUT_RETURN_PHRASES.length)];
+        triggerAstronautBubble(msg, 'event');
         setAstronautMood('curious', 3.0);
+        astronaut.gesture = 'salute';
+        astronaut.gestureTimerSec = rand(2.1, 3.4);
       }
       draw();
     }
@@ -2387,8 +2785,11 @@ document.addEventListener('DOMContentLoaded', () => {
       heroBg.style.transform = `translateY(${y}px)`;
 
       if (vy > 900 && scrollReact.cooldownSec <= 0 && astronaut && !document.hidden) {
-        triggerAstronautBubble('Hyperspace scroll detected. Wheee!', 'event');
+        const msg = ASTRONAUT_SCROLL_PHRASES[Math.floor(Math.random() * ASTRONAUT_SCROLL_PHRASES.length)];
+        triggerAstronautBubble(msg, 'event');
         setAstronautMood('excited', 2.4);
+        astronaut.gesture = Math.random() < 0.5 ? 'spin' : 'wave';
+        astronaut.gestureTimerSec = rand(1.6, 2.8);
         scrollReact.cooldownSec = 7.0;
       }
 
