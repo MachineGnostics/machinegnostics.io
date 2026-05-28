@@ -117,6 +117,13 @@ document.addEventListener('DOMContentLoaded', () => {
   let superPhotonTimerSec = 10;
   let superPhotons = [];
   let astronautSuppressClick = false;
+  let starStickers = [];
+  let brandMarks = [];
+  const scrollReact = {
+    lastY: window.scrollY || 0,
+    lastTs: performance.now(),
+    cooldownSec: 0,
+  };
 
   /* tiny fun astronaut */
   let astronaut = null;
@@ -165,6 +172,23 @@ document.addEventListener('DOMContentLoaded', () => {
     'Black hole said goodbye very loudly.',
     'I call that a gravity mic drop.',
   ];
+  const ASTRONAUT_STICKER_PHRASES = [
+    'Stellar catch! +1 cosmic point.',
+    'Nice grab. You are pure stardust energy.',
+    'Keep collecting tiny wonders.',
+    'You found a lucky star sticker.',
+  ];
+  const ASTRONAUT_BRAND_PHRASES = [
+    'Machine Gnostics signal stamped in local space.',
+    'Brand beacon online: Machine Gnostics.',
+    'Orbit tag: MACHINE GNOSTICS locked and glowing.',
+    'Friendly mark deployed. Machine Gnostics says hi.',
+    'MG signature dropped into this star lane.',
+  ];
+  const ASTRONAUT_FRIDAY_SPECIAL = 'WEEKEND ORBIT: Friday detected. Keep the vibes in stable orbit.';
+  const ASTRONAUT_TAGS = ['COMMS', 'EVA LOG', 'MISSION TIP', 'ORBIT NOTE'];
+  const ASTRONAUT_MOODS = ['chill', 'excited', 'curious', 'sleepy'];
+  const ASTRONAUT_GESTURES = ['wave', 'thumbs', 'salute', 'visor', 'spin'];
 
   /* galaxy background — stardust band + core + distant galaxies */
   let galaxyDust    = [];
@@ -453,7 +477,13 @@ document.addEventListener('DOMContentLoaded', () => {
         driftTimerSec: rand(2.2, 5.5),
         bobPhase: rand(0, Math.PI * 2),
         wavePhase: rand(0, Math.PI * 2),
+        spinPhase: 0,
         moodBoostSec: 0,
+        mood: 'chill',
+        moodTimerSec: rand(6.0, 12.0),
+        gesture: 'wave',
+        gestureTimerSec: rand(3.0, 6.5),
+        brandTimerSec: rand(14.0, 30.0),
         hover: false,
         dragging: false,
         dragOffsetX: 0,
@@ -494,6 +524,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const astronautInCenterZone = (ax, ay) => {
     return ax > W * 0.25 && ax < W * 0.75 && ay > H * 0.22 && ay < H * 0.80;
+  };
+
+  const setAstronautMood = (mood, durationSec = rand(5.0, 10.0)) => {
+    if (!astronaut) return;
+    astronaut.mood = mood;
+    astronaut.moodTimerSec = durationSec;
+  };
+
+  const pickAstronautGesture = () => {
+    if (!astronaut) return;
+    const g = ASTRONAUT_GESTURES[Math.floor(Math.random() * ASTRONAUT_GESTURES.length)];
+    astronaut.gesture = g;
+    astronaut.gestureTimerSec = g === 'spin' ? rand(1.6, 2.2) : rand(2.6, 5.8);
+  };
+
+  const formatCommsLine = (message, category = 'auto') => {
+    let tag;
+    if (category === 'click') tag = 'COMMS';
+    else if (category === 'event') tag = 'ORBIT NOTE';
+    else if (category === 'explosion') tag = 'EVA LOG';
+    else if (category === 'sticker') tag = 'MISSION TIP';
+    else if (category === 'brand') tag = 'BRAND SIGNAL';
+    else tag = ASTRONAUT_TAGS[Math.floor(Math.random() * ASTRONAUT_TAGS.length)];
+    return `${tag}: ${message}`;
   };
 
   const beginAstronautDrag = (px, py) => {
@@ -537,12 +591,124 @@ document.addEventListener('DOMContentLoaded', () => {
     if (astronaut.dragMoved) astronautSuppressClick = true;
   };
 
-  const triggerAstronautBubble = (forcedText = null) => {
+  const triggerAstronautBubble = (forcedText = null, category = 'auto') => {
     if (!astronaut) return;
-    const text = forcedText || ASTRONAUT_IDLE_PHRASES[Math.floor(Math.random() * ASTRONAUT_IDLE_PHRASES.length)];
+    let text = forcedText;
+    if (!text) {
+      if (new Date().getDay() === 5 && Math.random() < 0.28) {
+        text = ASTRONAUT_FRIDAY_SPECIAL;
+      } else {
+        text = ASTRONAUT_IDLE_PHRASES[Math.floor(Math.random() * ASTRONAUT_IDLE_PHRASES.length)];
+      }
+    }
+    text = formatCommsLine(text, category);
     astronaut.bubble.text = text;
     astronaut.bubble.timerSec = rand(2.2, 3.4);
     astronaut.bubble.cooldownSec = rand(5.0, 11.5);
+  };
+
+  const maybeSpawnStarSticker = (dtSec) => {
+    if (!astronaut || astronaut.dragging) return;
+    if (starStickers.length >= 2) return;
+    const chance = dtSec * 0.018; /* very rare */
+    if (Math.random() >= chance) return;
+
+    starStickers.push({
+      x: astronaut.x + rand(-astronaut.size * 1.4, astronaut.size * 1.4),
+      y: astronaut.y + rand(-astronaut.size * 1.2, astronaut.size * 1.2),
+      vx: rand(-0.12, 0.12),
+      vy: rand(-0.08, 0.06),
+      r: rand(3.6, 5.2),
+      lifeSec: rand(8.0, 13.0),
+      maxLife: 13.0,
+      phase: rand(0, Math.PI * 2),
+    });
+  };
+
+  const spawnBrandMark = () => {
+    if (!astronaut) return;
+    if (brandMarks.length >= 2) return;
+    brandMarks.push({
+      x: astronaut.x + rand(-astronaut.size * 2.1, astronaut.size * 2.1),
+      y: astronaut.y + rand(-astronaut.size * 1.9, astronaut.size * 0.8),
+      r: rand(16, 26),
+      lifeSec: rand(3.2, 5.2),
+      maxLife: 5.2,
+      phase: rand(0, Math.PI * 2),
+      spin: rand(-0.6, 0.6),
+    });
+  };
+
+  const updateBrandMarks = (dtSec) => {
+    for (let i = brandMarks.length - 1; i >= 0; i--) {
+      const bm = brandMarks[i];
+      bm.lifeSec -= dtSec;
+      bm.phase += dtSec * (1.8 + bm.spin);
+      bm.y -= dtSec * 3.8;
+      if (bm.lifeSec <= 0) brandMarks.splice(i, 1);
+    }
+  };
+
+  const drawBrandMarks = () => {
+    const light = isLight();
+    for (const bm of brandMarks) {
+      const life = clamp(bm.lifeSec / bm.maxLife, 0, 1);
+      const pulse = 0.55 + 0.45 * Math.sin(time * 5 + bm.phase);
+      const a = life * pulse;
+
+      ctx.save();
+      ctx.translate(bm.x, bm.y);
+      ctx.rotate(Math.sin(bm.phase) * 0.14);
+
+      ctx.strokeStyle = light
+        ? `rgba(0,126,152, ${(0.52 * a).toFixed(3)})`
+        : `rgba(110,236,224, ${(0.62 * a).toFixed(3)})`;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(0, 0, bm.r, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = light
+        ? `rgba(255,154,56, ${(0.48 * a).toFixed(3)})`
+        : `rgba(255,184,96, ${(0.54 * a).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(0, 0, bm.r * 0.68, 0.12 * Math.PI, 1.52 * Math.PI);
+      ctx.stroke();
+
+      ctx.fillStyle = light
+        ? `rgba(0,98,122, ${(0.92 * a).toFixed(3)})`
+        : `rgba(205,250,245, ${(0.95 * a).toFixed(3)})`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '700 9px Space Mono, monospace';
+      ctx.fillText('MG', 0, -1);
+
+      ctx.font = '700 6px Space Mono, monospace';
+      ctx.fillText('MACHINE GNOSTICS', 0, bm.r + 8);
+      ctx.restore();
+    }
+  };
+
+  const updateStarStickers = (dtSec) => {
+    for (let i = starStickers.length - 1; i >= 0; i--) {
+      const st = starStickers[i];
+      st.lifeSec -= dtSec;
+      st.phase += dtSec * 2.2;
+      st.x += st.vx;
+      st.y += st.vy;
+      st.vy -= 0.002;
+      if (st.lifeSec <= 0 || st.x < -18 || st.x > W + 18 || st.y < -18 || st.y > H + 18) {
+        starStickers.splice(i, 1);
+      }
+    }
+  };
+
+  const hitStarSticker = (x, y) => {
+    for (let i = starStickers.length - 1; i >= 0; i--) {
+      const st = starStickers[i];
+      if (Math.hypot(x - st.x, y - st.y) <= st.r * 1.8) return i;
+    }
+    return -1;
   };
 
   const astronautHit = (x, y) => {
@@ -555,6 +721,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!astronaut) return;
 
     const frameScale = clamp(dtSec * 60, 0.45, 2.2);
+    astronaut.moodTimerSec -= dtSec;
+    astronaut.gestureTimerSec -= dtSec;
+
+    if (astronaut.moodTimerSec <= 0) {
+      setAstronautMood(ASTRONAUT_MOODS[Math.floor(Math.random() * ASTRONAUT_MOODS.length)]);
+    }
+    if (astronaut.gestureTimerSec <= 0) {
+      pickAstronautGesture();
+    }
+
+    if (astronaut.hover || astronaut.dragging) {
+      setAstronautMood('excited', 2.2);
+    }
+
     if (!astronaut.dragging) {
       astronaut.driftTimerSec -= dtSec;
       const reachTarget = Math.hypot(astronaut.x - astronaut.targetX, astronaut.y - astronaut.targetY) < Math.max(18, astronaut.size * 2.2);
@@ -568,8 +748,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const dx = astronaut.targetX - astronaut.x;
       const dy = astronaut.targetY - astronaut.y;
       const d = Math.hypot(dx, dy) + 0.001;
-      const desiredVx = (dx / d) * clamp(d / 180, 0.09, 0.42);
-      const desiredVy = (dy / d) * clamp(d / 180, 0.07, 0.34);
+      let speedMood = 1.0;
+      if (astronaut.mood === 'sleepy') speedMood = 0.72;
+      else if (astronaut.mood === 'curious') speedMood = 1.10;
+      else if (astronaut.mood === 'excited') speedMood = 1.22;
+      const desiredVx = (dx / d) * clamp(d / 180, 0.09, 0.42) * speedMood;
+      const desiredVy = (dy / d) * clamp(d / 180, 0.07, 0.34) * speedMood;
 
       astronaut.targetVx = desiredVx;
       astronaut.targetVy = desiredVy;
@@ -595,7 +779,11 @@ document.addEventListener('DOMContentLoaded', () => {
     astronaut.x = clamp(astronaut.x, margin, W - margin);
     astronaut.y = clamp(astronaut.y, margin, H - margin);
     astronaut.bobPhase += 0.014 * frameScale;
-    astronaut.wavePhase += (astronaut.hover || astronaut.dragging ? 0.20 : 0.11) * frameScale;
+    let waveSpd = astronaut.hover || astronaut.dragging ? 0.20 : 0.11;
+    if (astronaut.mood === 'excited') waveSpd *= 1.22;
+    else if (astronaut.mood === 'sleepy') waveSpd *= 0.74;
+    astronaut.wavePhase += waveSpd * frameScale;
+    astronaut.spinPhase += (astronaut.gesture === 'spin' ? 0.18 : 0.03) * frameScale;
     astronaut.suitDrift += 0.012 * frameScale;
 
     astronaut.bubble.cooldownSec -= dtSec;
@@ -615,6 +803,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (astronaut.moodBoostSec > 0) astronaut.moodBoostSec -= dtSec;
+
+    astronaut.brandTimerSec -= dtSec;
+    if (astronaut.brandTimerSec <= 0 && !astronaut.dragging) {
+      const msg = ASTRONAUT_BRAND_PHRASES[Math.floor(Math.random() * ASTRONAUT_BRAND_PHRASES.length)];
+      triggerAstronautBubble(msg, 'brand');
+      spawnBrandMark();
+      astronaut.brandTimerSec = rand(18.0, 34.0);
+    }
+
+    maybeSpawnStarSticker(dtSec);
+    updateStarStickers(dtSec);
+    updateBrandMarks(dtSec);
+  };
+
+  const drawStarStickers = () => {
+    const light = isLight();
+    for (const st of starStickers) {
+      const life = clamp(st.lifeSec / st.maxLife, 0, 1);
+      const tw = 0.45 + 0.55 * Math.sin(time * 8 + st.phase);
+      const a = life * tw;
+      const col = light
+        ? `rgba(0,128,150, ${(0.72 * a).toFixed(3)})`
+        : `rgba(154,238,255, ${(0.88 * a).toFixed(3)})`;
+      const core = light
+        ? `rgba(255,194,92, ${(0.85 * a).toFixed(3)})`
+        : `rgba(255,218,126, ${(0.92 * a).toFixed(3)})`;
+
+      ctx.strokeStyle = col;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(st.x - st.r, st.y);
+      ctx.lineTo(st.x + st.r, st.y);
+      ctx.moveTo(st.x, st.y - st.r);
+      ctx.lineTo(st.x, st.y + st.r);
+      ctx.stroke();
+
+      ctx.fillStyle = core;
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.r * 0.42, 0, Math.PI * 2);
+      ctx.fill();
+    }
   };
 
   const drawAstronaut = () => {
@@ -624,7 +853,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const y = astronaut.y + Math.sin(astronaut.bobPhase) * astronaut.size * 0.32;
     const s = astronaut.size;
     const light = isLight();
+    const hour = new Date().getHours();
+    const isNight = hour < 6 || hour >= 19;
     const mood = astronaut.moodBoostSec > 0 ? clamp(astronaut.moodBoostSec / 4, 0, 1) : 0;
+    const gesture = astronaut.gesture || 'wave';
 
     const glowA = (light ? 0.06 : 0.13) + (astronaut.hover ? 0.06 : 0) + mood * 0.08;
     const glow = ctx.createRadialGradient(x, y, 0, x, y, s * 4.6);
@@ -638,7 +870,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ctx.save();
     ctx.translate(x, y);
-    ctx.rotate(Math.sin(astronaut.bobPhase * 0.8) * 0.06);
+    const baseRot = Math.sin(astronaut.bobPhase * 0.8) * 0.06;
+    const spinRot = gesture === 'spin' ? Math.sin(astronaut.spinPhase) * 0.22 : 0;
+    ctx.rotate(baseRot + spinRot);
 
     /* detached suit piece drifting in space */
     const sx = s * (1.95 + Math.sin(astronaut.suitDrift) * 0.28);
@@ -724,9 +958,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /* visor */
     const visorGrad = ctx.createRadialGradient(-s * 0.12, -s * 0.52, s * 0.02, 0, -s * 0.40, s * 0.38);
-    visorGrad.addColorStop(0, light ? 'rgba(120,164,188,0.82)' : 'rgba(120,178,210,0.80)');
-    visorGrad.addColorStop(0.58, light ? 'rgba(44,92,118,0.86)' : 'rgba(26,76,104,0.86)');
-    visorGrad.addColorStop(1, light ? 'rgba(20,58,80,0.86)' : 'rgba(10,42,64,0.88)');
+    if (isNight) {
+      visorGrad.addColorStop(0, light ? 'rgba(132,190,222,0.84)' : 'rgba(136,206,238,0.84)');
+      visorGrad.addColorStop(0.58, light ? 'rgba(52,98,132,0.88)' : 'rgba(32,84,118,0.88)');
+      visorGrad.addColorStop(1, light ? 'rgba(20,60,92,0.90)' : 'rgba(14,52,84,0.92)');
+    } else {
+      visorGrad.addColorStop(0, light ? 'rgba(198,156,104,0.84)' : 'rgba(220,170,118,0.82)');
+      visorGrad.addColorStop(0.58, light ? 'rgba(120,88,54,0.88)' : 'rgba(112,78,50,0.88)');
+      visorGrad.addColorStop(1, light ? 'rgba(72,48,32,0.90)' : 'rgba(62,42,28,0.92)');
+    }
     ctx.fillStyle = visorGrad;
     ctx.beginPath();
     ctx.arc(0, -s * 0.40, s * 0.40, 0, Math.PI * 2);
@@ -749,31 +989,63 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.arc(0, -s * 0.30, s * 0.09, 0.25, Math.PI - 0.25);
     ctx.stroke();
 
-    /* left arm */
+    /* gesture-driven arms */
     ctx.strokeStyle = light ? 'rgba(220,234,242,0.92)' : 'rgba(216,232,242,0.94)';
     ctx.lineWidth = 1.7;
     ctx.lineCap = 'round';
+
+    /* left arm baseline */
     ctx.beginPath();
     ctx.moveTo(-s * 0.22, s * 0.04);
-    ctx.lineTo(-s * 0.52, -s * 0.02);
-    ctx.lineTo(-s * 0.72, s * 0.06);
+    ctx.lineTo(-s * 0.52, gesture === 'salute' ? s * 0.08 : -s * 0.02);
+    ctx.lineTo(-s * 0.72, gesture === 'salute' ? s * 0.20 : s * 0.06);
     ctx.stroke();
 
-    /* right arm waving with forearm articulation */
-    const waveA = -0.95 + Math.sin(astronaut.wavePhase) * 0.50;
-    ctx.save();
-    ctx.translate(s * 0.25, s * 0.04);
-    ctx.rotate(waveA);
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(s * 0.34, -s * 0.01);
-    ctx.lineTo(s * 0.58, s * 0.08);
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(s * 0.60, s * 0.09, s * 0.07, 0, Math.PI * 2);
-    ctx.fillStyle = light ? 'rgba(228,240,246,0.95)' : 'rgba(222,236,246,0.95)';
-    ctx.fill();
-    ctx.restore();
+    if (gesture === 'thumbs') {
+      ctx.save();
+      ctx.translate(s * 0.24, s * 0.03);
+      ctx.rotate(-1.42 + Math.sin(astronaut.wavePhase) * 0.14);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(s * 0.34, -s * 0.01);
+      ctx.lineTo(s * 0.54, s * 0.06);
+      ctx.stroke();
+      ctx.fillStyle = light ? 'rgba(228,240,246,0.96)' : 'rgba(222,236,246,0.96)';
+      ctx.beginPath(); ctx.arc(s * 0.56, s * 0.05, s * 0.07, 0, Math.PI * 2); ctx.fill();
+      ctx.beginPath(); ctx.arc(s * 0.60, -s * 0.04, s * 0.04, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+    } else if (gesture === 'salute') {
+      ctx.beginPath();
+      ctx.moveTo(s * 0.23, s * 0.03);
+      ctx.lineTo(s * 0.44, -s * 0.16);
+      ctx.lineTo(s * 0.26, -s * 0.34);
+      ctx.stroke();
+      ctx.fillStyle = light ? 'rgba(228,240,246,0.96)' : 'rgba(222,236,246,0.96)';
+      ctx.beginPath(); ctx.arc(s * 0.24, -s * 0.35, s * 0.07, 0, Math.PI * 2); ctx.fill();
+    } else if (gesture === 'visor') {
+      ctx.beginPath();
+      ctx.moveTo(s * 0.24, s * 0.04);
+      ctx.lineTo(s * 0.34, -s * 0.24);
+      ctx.lineTo(s * 0.02, -s * 0.42);
+      ctx.stroke();
+      ctx.fillStyle = light ? 'rgba(228,240,246,0.96)' : 'rgba(222,236,246,0.96)';
+      ctx.beginPath(); ctx.arc(-s * 0.03, -s * 0.42, s * 0.07, 0, Math.PI * 2); ctx.fill();
+    } else {
+      const waveA = -0.95 + Math.sin(astronaut.wavePhase) * (gesture === 'spin' ? 0.30 : 0.50);
+      ctx.save();
+      ctx.translate(s * 0.25, s * 0.04);
+      ctx.rotate(waveA);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(s * 0.34, -s * 0.01);
+      ctx.lineTo(s * 0.58, s * 0.08);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(s * 0.60, s * 0.09, s * 0.07, 0, Math.PI * 2);
+      ctx.fillStyle = light ? 'rgba(228,240,246,0.95)' : 'rgba(222,236,246,0.95)';
+      ctx.fill();
+      ctx.restore();
+    }
 
     /* legs and boots */
     ctx.beginPath();
@@ -1008,8 +1280,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (astronaut && !astronaut.dragging) {
       const funny = ASTRONAUT_EXPLOSION_PHRASES[Math.floor(Math.random() * ASTRONAUT_EXPLOSION_PHRASES.length)];
-      triggerAstronautBubble(funny);
+      triggerAstronautBubble(funny, 'explosion');
       astronaut.moodBoostSec = 3.2;
+      setAstronautMood('excited', 3.4);
     }
 
     bh.state = 'exploding';
@@ -1917,6 +2190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lastTs = now;
 
     time += dtSec;
+    if (scrollReact.cooldownSec > 0) scrollReact.cooldownSec -= dtSec;
     ctx.clearRect(0, 0, W, H);
 
     if (intro.enabled) {
@@ -1947,6 +2221,8 @@ document.addEventListener('DOMContentLoaded', () => {
     drawMobileBlackHoles();
     drawComets();
     drawSuperPhotons();
+    drawStarStickers();
+    drawBrandMarks();
     drawAstronaut();
 
     raf = requestAnimationFrame(draw);
@@ -2011,14 +2287,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const x = e.clientX;
     const y = e.clientY;
 
+    const starIdx = hitStarSticker(x, y);
+    if (starIdx >= 0) {
+      starStickers.splice(starIdx, 1);
+      if (astronaut) {
+        setAstronautMood('excited', 3.2);
+        astronaut.moodBoostSec = 3.2;
+      }
+      const msg = ASTRONAUT_STICKER_PHRASES[Math.floor(Math.random() * ASTRONAUT_STICKER_PHRASES.length)];
+      triggerAstronautBubble(msg, 'sticker');
+      return;
+    }
+
     if (astronautHit(x, y)) {
       if (astronaut) {
         astronaut.moodBoostSec = 4;
         astronaut.hover = true;
         astronaut.dragMoved = false;
+        setAstronautMood('excited', 3.6);
       }
       const text = ASTRONAUT_CLICK_PHRASES[Math.floor(Math.random() * ASTRONAUT_CLICK_PHRASES.length)];
-      triggerAstronautBubble(text);
+      triggerAstronautBubble(text, 'click');
       return;
     }
 
@@ -2052,6 +2341,10 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (!lastVisible) {
       lastVisible = true;
       lastTs = performance.now();
+      if (astronaut) {
+        triggerAstronautBubble('Welcome back, commander.', 'event');
+        setAstronautMood('curious', 3.0);
+      }
       draw();
     }
   });
@@ -2085,8 +2378,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroBg = homeRoot.querySelector('.gn-hero-bg');
   if (heroBg) {
     const onScroll = () => {
+      const now = performance.now();
+      const yNow = window.scrollY || 0;
+      const dt = Math.max(16, now - scrollReact.lastTs);
+      const vy = Math.abs((yNow - scrollReact.lastY) / dt) * 1000;
+
       const y = clamp(window.scrollY * 0.15, 0, 80);
       heroBg.style.transform = `translateY(${y}px)`;
+
+      if (vy > 900 && scrollReact.cooldownSec <= 0 && astronaut && !document.hidden) {
+        triggerAstronautBubble('Hyperspace scroll detected. Wheee!', 'event');
+        setAstronautMood('excited', 2.4);
+        scrollReact.cooldownSec = 7.0;
+      }
+
+      scrollReact.lastY = yNow;
+      scrollReact.lastTs = now;
     };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
