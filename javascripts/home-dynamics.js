@@ -807,8 +807,59 @@ document.addEventListener('DOMContentLoaded', () => {
       ctx.save();
       ctx.font = '700 11px Space Mono, monospace';
       const padX = 10;
-      const tw = Math.min(220, ctx.measureText(text).width + padX * 2);
-      const th = 28;
+      const padY = 8;
+      const lineH = 14;
+      const maxBubbleW = clamp(W * 0.34, 180, 280);
+      const maxTextW = Math.max(120, maxBubbleW - padX * 2);
+
+      const words = text.trim().split(/\s+/).filter(Boolean);
+      const lines = [];
+      let line = '';
+
+      for (const word of words) {
+        const test = line ? `${line} ${word}` : word;
+        if (ctx.measureText(test).width <= maxTextW) {
+          line = test;
+          continue;
+        }
+
+        if (line) lines.push(line);
+
+        /* fallback for very long single token */
+        if (ctx.measureText(word).width > maxTextW) {
+          let chunk = '';
+          for (const ch of word) {
+            const chunkTest = chunk + ch;
+            if (ctx.measureText(chunkTest).width <= maxTextW) {
+              chunk = chunkTest;
+            } else {
+              lines.push(chunk);
+              chunk = ch;
+            }
+          }
+          line = chunk;
+        } else {
+          line = word;
+        }
+      }
+      if (line) lines.push(line);
+
+      const maxLines = 4;
+      let bubbleLines = lines;
+      if (bubbleLines.length > maxLines) {
+        bubbleLines = lines.slice(0, maxLines);
+        const last = bubbleLines[maxLines - 1];
+        let trimmed = last;
+        while (trimmed.length > 0 && ctx.measureText(`${trimmed}...`).width > maxTextW) {
+          trimmed = trimmed.slice(0, -1);
+        }
+        bubbleLines[maxLines - 1] = `${trimmed}...`;
+      }
+
+      let textW = 0;
+      for (const ln of bubbleLines) textW = Math.max(textW, ctx.measureText(ln).width);
+      const tw = Math.min(maxBubbleW, textW + padX * 2);
+      const th = Math.max(28, padY * 2 + lineH * bubbleLines.length);
       const bx = clamp(x + s * 1.2, 8, W - tw - 8);
       const by = clamp(y - s * 2.9, 8, H - th - 8);
 
@@ -834,8 +885,10 @@ document.addEventListener('DOMContentLoaded', () => {
         ? `rgba(0,98,116, ${(0.92 * ba).toFixed(3)})`
         : `rgba(205,250,245, ${(0.95 * ba).toFixed(3)})`;
       ctx.textAlign = 'left';
-      ctx.textBaseline = 'middle';
-      ctx.fillText(text, bx + padX, by + th * 0.56);
+      ctx.textBaseline = 'top';
+      for (let i = 0; i < bubbleLines.length; i++) {
+        ctx.fillText(bubbleLines[i], bx + padX, by + padY + i * lineH);
+      }
       ctx.restore();
     }
   };
