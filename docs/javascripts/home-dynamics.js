@@ -255,6 +255,154 @@ document.addEventListener('DOMContentLoaded', () => {
     'You are back. I am still on duty.',
     'Welcome home to the friendly side of space.',
   ];
+  const ASTRONAUT_GREETING_PHRASES = [
+    'Hello from low orbit.',
+    'Hi there. Astro is online.',
+    'Good to see you in this corner of space.',
+    'Astro reporting in with bright visor energy.',
+    'Welcome in. The orbit feels friendly today.',
+    'Nice to have you here, explorer.',
+    'Astro says hello and means it.',
+    'Greetings from the page periphery.',
+    'A fresh signal just arrived. Hi.',
+    'Astro is here and the mission looks good.',
+    'Hello, commander. Systems feel steady.',
+    'Welcome aboard this quiet little orbit.',
+    'A good visit has been detected.',
+    'Astro waves from the scenic route.',
+    'Good to have your attention for a moment.',
+    'Astro welcomes you to the calm side of the galaxy.',
+    'Hello again. I brought orbit-grade optimism.',
+    'Warm greeting from a very small astronaut.',
+  ];
+  const ASTRONAUT_TIME_PHRASES = {
+    morning: [
+      'Morning orbit looks clean and bright.',
+      'Good morning. Astro is fully pressurized.',
+      'Morning light makes this mission look sharp.',
+      'Fresh day, fresh signal, steady orbit.',
+      'The morning shift says hello.',
+      'Astro likes the calm precision of early hours.',
+      'Good morning. Time to do elegant work.',
+      'The page is awake and so am I.',
+    ],
+    afternoon: [
+      'Afternoon orbit check: still looking strong.',
+      'The midday signal is stable.',
+      'Afternoon energy detected. Nice pace.',
+      'Astro approves this productive part of the day.',
+      'Mid-orbit hours are good for sharp ideas.',
+      'Afternoon glow suits this mission.',
+      'A strong afternoon trajectory is forming.',
+      'This part of the day has nice momentum.',
+    ],
+    evening: [
+      'Evening orbit feels thoughtful and precise.',
+      'Astro likes the color of this hour.',
+      'Good evening. The page has a nice glow now.',
+      'Evening mode looks excellent on this mission.',
+      'The signal gets cinematic around this time.',
+      'Evening orbit invites good ideas.',
+      'Astro is cruising into a smart evening.',
+      'This is a good hour for calm progress.',
+    ],
+    night: [
+      'Night orbit is active and quietly beautiful.',
+      'Astro is on the night shift.',
+      'Late-hour signal still looks strong.',
+      'Night mode gives this mission extra atmosphere.',
+      'Space feels especially real at this hour.',
+      'Astro is keeping a careful eye on the stars.',
+      'A calm night orbit has entered the chat.',
+      'Quiet hours, clear signal, steady thoughts.',
+    ],
+  };
+  const ASTRONAUT_DAY_PHRASES = {
+    sunday: [
+      'Sunday orbit says take it steady.',
+      'Sunday has a soft-launch kind of mood.',
+      'Astro likes this quiet Sunday drift.',
+      'Sunday is good for big-picture thinking.',
+    ],
+    monday: [
+      'Monday mission briefing: strong start.',
+      'Astro is treating Monday like a launch window.',
+      'Monday orbit is locked in.',
+      'A clean Monday trajectory is forming.',
+    ],
+    tuesday: [
+      'Tuesday is excellent for careful progress.',
+      'Astro sees a sturdy Tuesday signal.',
+      'Tuesday orbit looks balanced and sharp.',
+      'This Tuesday has good engineering energy.',
+    ],
+    wednesday: [
+      'Wednesday is holding formation nicely.',
+      'Midweek orbit is stable and readable.',
+      'Astro calls this a solid Wednesday burn.',
+      'Wednesday feels precise today.',
+    ],
+    thursday: [
+      'Thursday orbit is moving with intent.',
+      'Astro likes the confident pace of Thursday.',
+      'Thursday is giving strong mission energy.',
+      'A very respectable Thursday signal is present.',
+    ],
+    friday: [
+      'Friday orbit has extra sparkle.',
+      'Astro can feel the Friday lift.',
+      'Friday signal is playful but controlled.',
+      'A good Friday deserves a tiny celebration spin.',
+    ],
+    saturday: [
+      'Saturday orbit is relaxed and bright.',
+      'Astro enjoys the easy rhythm of Saturday.',
+      'Saturday feels like open space with good coffee.',
+      'This Saturday trajectory is delightfully smooth.',
+    ],
+  };
+  const ASTRONAUT_MOOD_PHRASES = {
+    chill: [
+      'Astro is feeling steady and unbothered.',
+      'Calm orbit. Clear signal.',
+      'Everything feels nicely aligned right now.',
+      'Astro is in a smooth and thoughtful lane.',
+      'This is good quiet progress energy.',
+      'A calm mission is still a strong mission.',
+      'Astro is keeping the orbit balanced.',
+      'Steady mood. Good trajectory.',
+    ],
+    excited: [
+      'Astro is buzzing like a happy satellite.',
+      'This mood has excellent launch energy.',
+      'Excitement level: visibly orbital.',
+      'Astro is ready to wave at the universe.',
+      'The signal just got extra bright.',
+      'This mission has real momentum now.',
+      'Astro is doing tiny victory laps internally.',
+      'Very lively orbit right now.',
+    ],
+    curious: [
+      'Astro is in question-mark mode.',
+      'Curiosity is steering the capsule today.',
+      'There may be a clever pattern nearby.',
+      'Astro is leaning toward discovery.',
+      'This mood likes to inspect the details.',
+      'Curious orbit means something interesting is close.',
+      'Astro is peeking at possibilities.',
+      'Question-rich air detected inside the helmet.',
+    ],
+    sleepy: [
+      'Astro is moving in soft-focus mode.',
+      'Low-fi orbit activated.',
+      'This mood prefers gentle momentum.',
+      'Astro is calm, slow, and still watching carefully.',
+      'Sleepy orbit can still produce clever ideas.',
+      'A quieter mood has entered the cabin.',
+      'Astro is running on moonlight and manners.',
+      'Soft orbit, stable mission.',
+    ],
+  };
   const ASTRONAUT_EXPLOSION_PHRASES = [
     'Whoa! That black hole had drama.',
     'Kaboom confirmed. I meant to do that.',
@@ -272,63 +420,63 @@ document.addEventListener('DOMContentLoaded', () => {
     'You found a lucky star sticker.',
   ];
   const ASTRONAUT_BRAND_PHRASES = [
-    'OSS signal stamped in local space.',
-    'OSS beacon online.',
-    'Orbit tag: OSS locked and glowing.',
-    'Friendly mark deployed. OSS says hi.',
-    'OSS signature dropped into this star lane.',
+    'Machine Gnostics OSS signal stamped in local space.',
+    'Machine Gnostics OSS beacon online.',
+    'Orbit tag: Machine Gnostics OSS locked and glowing.',
+    'Friendly mark deployed. Machine Gnostics OSS says hi.',
+    'Machine Gnostics OSS signature dropped into this star lane.',
   ];
   const ASTRONAUT_MARKETING_PHRASES = [
-    'OSS turns data into delightful signals.',
-    'OSS makes insight feel like a launch sequence.',
+    'Machine Gnostics OSS turns data into delightful signals.',
+    'Machine Gnostics OSS makes insight feel like a launch sequence.',
     'Smart models, fun orbit, less noise.',
-    'OSS: where structure meets starlight.',
+    'Machine Gnostics OSS: where structure meets starlight.',
     'Better questions, brighter answers.',
-    'OSS keeps the signal and loses the drama.',
+    'Machine Gnostics OSS keeps the signal and loses the drama.',
     'Fun science for serious thinkers.',
-    'OSS makes pattern finding feel playful.',
+    'Machine Gnostics OSS makes pattern finding feel playful.',
     'Cosmic clarity for your next decision.',
-    'OSS: elegant learning for curious teams.',
+    'Machine Gnostics OSS: elegant learning for curious teams.',
     'Less guesswork, more gravity.',
-    'The OSS way: calm data, bold insight.',
-    'OSS helps ideas find orbit.',
+    'The Machine Gnostics OSS way: calm data, bold insight.',
+    'Machine Gnostics OSS helps ideas find orbit.',
     'Turn messy signals into a guided mission.',
-    'OSS is data, but with a smile.',
+    'Machine Gnostics OSS is data, but with a smile.',
     'Insight should be this smooth.',
-    'OSS: practical intelligence with cosmic polish.',
+    'Machine Gnostics OSS: practical intelligence with cosmic polish.',
     'Build models that behave like good satellites.',
-    'OSS keeps your analytics in formation.',
+    'Machine Gnostics OSS keeps your analytics in formation.',
     'Learn faster, steer cleaner.',
-    'OSS makes complexity feel friendly.',
+    'Machine Gnostics OSS makes complexity feel friendly.',
     'Tiny data, big clarity.',
-    'OSS: the fun side of rigorous thinking.',
+    'Machine Gnostics OSS: the fun side of rigorous thinking.',
     'Let the signal wear the crown.',
-    'OSS gives your data a cockpit.',
+    'Machine Gnostics OSS gives your data a cockpit.',
     'Beautiful structure for busy minds.',
-    'OSS: engineered for curious orbiters.',
+    'Machine Gnostics OSS: engineered for curious orbiters.',
     'Make your next metric actually mean something.',
-    'OSS turns friction into forward motion.',
+    'Machine Gnostics OSS turns friction into forward motion.',
     'Analytics with a little spark in the visor.',
-    'OSS helps teams see what matters.',
+    'Machine Gnostics OSS helps teams see what matters.',
     'Calm dashboards, sharper decisions.',
-    'OSS: where neat math meets neat vibes.',
+    'Machine Gnostics OSS: where neat math meets neat vibes.',
     'Put your data on a better trajectory.',
-    'OSS is science with style.',
-    'OSS keeps the mission readable.',
+    'Machine Gnostics OSS is science with style.',
+    'Machine Gnostics OSS keeps the mission readable.',
     'Make your model less noisy and more noble.',
-    'OSS turns raw signals into runway.',
+    'Machine Gnostics OSS turns raw signals into runway.',
     'Crisp insight for cosmic-scale questions.',
-    'OSS: friendly rigor for modern teams.',
+    'Machine Gnostics OSS: friendly rigor for modern teams.',
     'Data should feel this clear.',
-    'OSS makes the unknown less spooky.',
+    'Machine Gnostics OSS makes the unknown less spooky.',
     'Better logic, better launch.',
-    'OSS gives your pipeline a pulse.',
-    'Curious minds choose OSS.',
-    'OSS makes meaning pop.',
+    'Machine Gnostics OSS gives your pipeline a pulse.',
+    'Curious minds choose Machine Gnostics OSS.',
+    'Machine Gnostics OSS makes meaning pop.',
     'A better orbit for your numbers.',
-    'OSS: playful, precise, and practical.',
-    'Let OSS help the signal sing.',
-    'OSS is your friendly gravity well for insight.',
+    'Machine Gnostics OSS: playful, precise, and practical.',
+    'Let Machine Gnostics OSS help the signal sing.',
+    'Machine Gnostics OSS is your friendly gravity well for insight.',
   ];
   const ASTRONAUT_FRIDAY_SPECIAL = 'WEEKEND ORBIT: Friday detected. Keep the vibes in stable orbit.';
   const ASTRONAUT_TAGS = ['COMMS', 'EVA LOG', 'MISSION TIP', 'ORBIT NOTE'];
@@ -343,8 +491,8 @@ document.addEventListener('DOMContentLoaded', () => {
     { name: 'stellar', body: [249, 247, 252], band: [110, 236, 224], trim: [96, 118, 172], visor: [60, 72, 124] },
     { name: 'weekday', body: [245, 249, 250], band: [0, 212, 170], trim: [0, 118, 132], visor: [58, 94, 120] },
   ];
-  const ASTRO_BUBBLE_TIMER_MIN = 4.8;
-  const ASTRO_BUBBLE_TIMER_MAX = 6.4;
+  const ASTRO_BUBBLE_TIMER_MIN = 5.6;
+  const ASTRO_BUBBLE_TIMER_MAX = 7.6;
   const ASTRONAUT_PERSONALITIES = [
     { key: 'guide', label: 'Guide', defaultMood: 'chill', motion: { bob: 0.92, tilt: 0.74, wave: 0.94, leg: 0.92, surprise: 0.13 } },
     { key: 'spark', label: 'Spark', defaultMood: 'excited', motion: { bob: 1.16, tilt: 1.02, wave: 1.22, leg: 1.08, surprise: 0.22 } },
@@ -675,10 +823,14 @@ document.addEventListener('DOMContentLoaded', () => {
         suitDrift: rand(0, Math.PI * 2),
         bubble: {
           text: '',
-          meta: '',
+          metaPrompt: '',
+          statusRows: [],
           timerSec: 0,
-          cooldownSec: rand(3.5, 7.5),
+          cooldownSec: rand(8.5, 15.0),
           alpha: 0,
+          typingElapsedSec: 0,
+          typingChars: 0,
+          typingSpeed: 30,
         },
       };
       return;
@@ -783,6 +935,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const pickRandom = (items) => items[Math.floor(Math.random() * items.length)];
+
+  const getAstroTimeBucket = () => {
+    const hour = new Date().getHours();
+    if (hour < 5) return 'night';
+    if (hour < 12) return 'morning';
+    if (hour < 17) return 'afternoon';
+    if (hour < 21) return 'evening';
+    return 'night';
+  };
+
+  const getAstroDayKey = () => {
+    return ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()];
+  };
+
+  const pickAstroAmbientMessage = () => {
+    if (!astronaut) return pickRandom(ASTRONAUT_IDLE_PHRASES);
+    if (new Date().getDay() === 5 && Math.random() < 0.18) return ASTRONAUT_FRIDAY_SPECIAL;
+
+    const roll = Math.random();
+    if (roll < 0.16) return pickRandom(ASTRONAUT_GREETING_PHRASES);
+    if (roll < 0.38) return pickRandom(ASTRONAUT_TIME_PHRASES[getAstroTimeBucket()]);
+    if (roll < 0.56) return pickRandom(ASTRONAUT_DAY_PHRASES[getAstroDayKey()]);
+    if (roll < 0.76) return pickRandom(ASTRONAUT_MOOD_PHRASES[astronaut.mood] || ASTRONAUT_MOOD_PHRASES.chill);
+    if (astronaut.visitCount > 1 && roll < 0.84) return pickRandom(ASTRONAUT_RETURN_PHRASES);
+    return pickRandom(ASTRONAUT_IDLE_PHRASES);
+  };
+
   const formatCommsLine = (message, category = 'auto') => {
     const mood = astronaut ? astronaut.mood : 'chill';
     const moodTag = mood === 'excited' ? 'BUZZING' : mood === 'curious' ? 'CURIOUS' : mood === 'sleepy' ? 'LO-FI' : 'CALM';
@@ -797,7 +977,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const personality = astronaut ? astronaut.personalityLabel : 'Guide';
     const timeStamp = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     return {
-      meta: `ASTRO  ${moodTag}  ${personality}  ${tag}  ${timeStamp}`,
+      prompt: 'astro@orbit:~ %',
+      statusRows: [
+        { label: 'mood', value: moodTag.toLowerCase(), tone: 'mood' },
+        { label: 'persona', value: personality.toLowerCase(), tone: 'persona' },
+        { label: 'channel', value: tag.toLowerCase(), tone: 'tag' },
+        { label: 'time', value: timeStamp, tone: 'time' },
+      ],
       text: message,
     };
   };
@@ -847,18 +1033,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!astronaut) return;
     let text = forcedText;
     if (!text) {
-      if (new Date().getDay() === 5 && Math.random() < 0.28) {
-        text = ASTRONAUT_FRIDAY_SPECIAL;
-      } else {
-        text = ASTRONAUT_IDLE_PHRASES[Math.floor(Math.random() * ASTRONAUT_IDLE_PHRASES.length)];
-      }
+      text = pickAstroAmbientMessage();
     }
     const formatted = formatCommsLine(text, category);
     astronaut.bubble.text = formatted.text;
-    astronaut.bubble.meta = formatted.meta;
+    astronaut.bubble.metaPrompt = formatted.prompt;
+    astronaut.bubble.statusRows = formatted.statusRows;
     astronaut.bubble.category = category;
-    astronaut.bubble.timerSec = rand(ASTRO_BUBBLE_TIMER_MIN, ASTRO_BUBBLE_TIMER_MAX);
-    astronaut.bubble.cooldownSec = rand(5.0, 11.5);
+    astronaut.bubble.typingElapsedSec = 0;
+    astronaut.bubble.typingChars = 0;
+    astronaut.bubble.typingSpeed = rand(24, 32);
+    astronaut.bubble.timerSec = rand(ASTRO_BUBBLE_TIMER_MIN, ASTRO_BUBBLE_TIMER_MAX) + Math.min(text.length / astronaut.bubble.typingSpeed, 1.8);
+    astronaut.bubble.cooldownSec = rand(10.0, 18.0);
   };
 
   const maybeSpawnStarSticker = (dtSec) => {
@@ -1055,6 +1241,11 @@ document.addEventListener('DOMContentLoaded', () => {
     astronaut.bubble.cooldownSec -= dtSec;
     if (astronaut.bubble.timerSec > 0) {
       astronaut.bubble.timerSec -= dtSec;
+      astronaut.bubble.typingElapsedSec += dtSec;
+      astronaut.bubble.typingChars = Math.min(
+        astronaut.bubble.text.length,
+        Math.floor(astronaut.bubble.typingElapsedSec * astronaut.bubble.typingSpeed)
+      );
     } else if (astronaut.bubble.cooldownSec <= 0) {
       triggerAstronautBubble();
     }
@@ -1424,79 +1615,209 @@ document.addEventListener('DOMContentLoaded', () => {
     const ba = astronaut.bubble.alpha;
     if (ba > 0.01 && astronaut.bubble.text) {
       const text = astronaut.bubble.text;
-      const meta = astronaut.bubble.meta || '';
+      const metaPrompt = astronaut.bubble.metaPrompt || 'astro@orbit:~ %';
+      const statusRows = Array.isArray(astronaut.bubble.statusRows) ? astronaut.bubble.statusRows : [];
       const category = astronaut.bubble.category || 'auto';
       ctx.save();
-      ctx.font = '700 9px Space Mono, monospace';
       const padX = 10;
       const padY = 8;
-      const metaLineH = 11;
+      const promptLineH = 10;
+      const statusLineH = 9;
       const lineH = 12;
-      const maxBubbleW = clamp(W * 0.34, 180, 280);
+      const maxBubbleW = clamp(W * 0.22, 132, 168);
       const metaInset = category === 'brand' || category === 'marketing' ? 14 : 0;
-      const maxTextW = Math.max(120, maxBubbleW - padX * 2 - metaInset);
+      const maxTextW = Math.max(98, maxBubbleW - padX * 2 - metaInset);
+      const promptFont = '700 8px Space Mono, monospace';
+      const statusFont = '700 7.1px Space Mono, monospace';
+      const bodyFont = '700 9.35px Space Mono, monospace';
+      const wrapBubbleText = (input, font, limit, maxLineCount) => {
+        ctx.font = font;
+        const wordsIn = input.trim().split(/\s+/).filter(Boolean);
+        const wrapped = [];
+        let current = '';
 
-      const words = text.trim().split(/\s+/).filter(Boolean);
-      const lines = [];
-      let line = '';
-
-      for (const word of words) {
-        const test = line ? `${line} ${word}` : word;
-        if (ctx.measureText(test).width <= maxTextW) {
-          line = test;
-          continue;
-        }
-
-        if (line) lines.push(line);
-
-        /* fallback for very long single token */
-        if (ctx.measureText(word).width > maxTextW) {
-          let chunk = '';
-          for (const ch of word) {
-            const chunkTest = chunk + ch;
-            if (ctx.measureText(chunkTest).width <= maxTextW) {
-              chunk = chunkTest;
-            } else {
-              lines.push(chunk);
-              chunk = ch;
-            }
+        for (const word of wordsIn) {
+          const test = current ? `${current} ${word}` : word;
+          if (ctx.measureText(test).width <= limit) {
+            current = test;
+            continue;
           }
-          line = chunk;
-        } else {
-          line = word;
-        }
-      }
-      if (line) lines.push(line);
 
-      const maxLines = 4;
-      let bubbleLines = lines;
-      if (bubbleLines.length > maxLines) {
-        bubbleLines = lines.slice(0, maxLines);
-        const last = bubbleLines[maxLines - 1];
-        let trimmed = last;
-        while (trimmed.length > 0 && ctx.measureText(`${trimmed}...`).width > maxTextW) {
+          if (current) wrapped.push(current);
+
+          if (ctx.measureText(word).width > limit) {
+            let chunk = '';
+            for (const ch of word) {
+              const chunkTest = chunk + ch;
+              if (ctx.measureText(chunkTest).width <= limit) {
+                chunk = chunkTest;
+              } else {
+                wrapped.push(chunk);
+                chunk = ch;
+              }
+            }
+            current = chunk;
+          } else {
+            current = word;
+          }
+        }
+        if (current) wrapped.push(current);
+
+        if (wrapped.length <= maxLineCount) return wrapped;
+
+        const clipped = wrapped.slice(0, maxLineCount);
+        let trimmed = clipped[maxLineCount - 1];
+        while (trimmed.length > 0 && ctx.measureText(`${trimmed}...`).width > limit) {
           trimmed = trimmed.slice(0, -1);
         }
-        bubbleLines[maxLines - 1] = `${trimmed}...`;
-      }
+        clipped[maxLineCount - 1] = `${trimmed}...`;
+        return clipped;
+      };
 
-      let textW = ctx.measureText(meta).width;
-      for (const ln of bubbleLines) textW = Math.max(textW, ctx.measureText(ln).width);
-      const tw = Math.min(maxBubbleW, textW + padX * 2);
-      const th = Math.max(34, padY * 2 + metaLineH + 4 + lineH * bubbleLines.length);
-      const bx = clamp(x + s * 1.2, 8, W - tw - 8);
-      const by = clamp(y - s * 2.9, 8, H - th - 8);
+      const maxLines = 6;
+      const promptLines = wrapBubbleText(metaPrompt, promptFont, maxTextW, 2);
+      const fullBubbleLines = wrapBubbleText(text, bodyFont, maxTextW, maxLines);
+      const visibleText = text.slice(0, astronaut.bubble.typingChars);
+      const bubbleLines = wrapBubbleText(visibleText || ' ', bodyFont, maxTextW, maxLines);
+
+      ctx.font = promptFont;
+      let textW = metaInset;
+      for (const promptLine of promptLines) textW = Math.max(textW, ctx.measureText(promptLine).width + metaInset);
+      ctx.font = statusFont;
+      for (const row of statusRows) {
+        textW = Math.max(textW, ctx.measureText(`${row.label}: ${row.value}`).width + metaInset);
+      }
+      ctx.font = bodyFont;
+      for (const ln of fullBubbleLines) textW = Math.max(textW, ctx.measureText(ln).width);
+      const tw = clamp(textW + padX * 2 + metaInset, 128, maxBubbleW);
+      const promptBlockH = promptLineH * Math.max(1, promptLines.length);
+      const statusBlockH = statusRows.length * statusLineH;
+      const bodyOffsetY = padY + promptBlockH + statusBlockH + 8;
+      const th = Math.max(68, bodyOffsetY + padY + lineH * Math.max(1, fullBubbleLines.length));
+      const margin = 8;
+      const gap = Math.max(18, s * 0.48);
+      const astroLeft = x - s * 0.92;
+      const astroRight = x + s * 0.92;
+      const astroTop = y - s * 1.92;
+      const astroBottom = y + s * 1.68;
+      const roomRight = W - astroRight - margin;
+      const roomLeft = astroLeft - margin;
+      let placeRight = x >= W * 0.5;
+      if (placeRight && roomRight < tw + gap && roomLeft > roomRight) placeRight = false;
+      if (!placeRight && roomLeft < tw + gap && roomRight > roomLeft) placeRight = true;
+
+      let bx = placeRight
+        ? astroRight + gap
+        : astroLeft - gap - tw;
+      bx = clamp(bx, margin, W - tw - margin);
+
+      let by = y - th * 0.62;
+      const overlapsAstro = by + th > astroTop - 6 && by < astroBottom + 6;
+      if (overlapsAstro) {
+        const aboveY = astroTop - th - gap;
+        const belowY = astroBottom + gap;
+        const canPlaceAbove = aboveY >= margin;
+        const canPlaceBelow = belowY + th <= H - margin;
+        if (canPlaceAbove || (!canPlaceBelow && astroTop > H - astroBottom)) {
+          by = Math.max(margin, aboveY);
+        } else if (canPlaceBelow) {
+          by = belowY;
+        }
+      }
+      by = clamp(by, margin, H - th - margin);
+
+      const bubbleMidY = by + th * 0.5;
+      const tailOnRight = x >= bx + tw * 0.5;
+      const tailAnchorX = tailOnRight ? bx + tw : bx;
+      const tailAnchorY = clamp(bubbleMidY, by + 12, by + th - 12);
+      const tailTipX = x + (tailOnRight ? -s * 0.56 : s * 0.56);
+      const tailTipY = clamp(y - s * 0.18, astroTop + 12, astroBottom - 14);
+      const borderColor = light
+        ? `rgba(0,126,136, ${(0.60 * ba).toFixed(3)})`
+        : `rgba(90,238,174, ${(0.74 * ba).toFixed(3)})`;
+      const glowColor = light
+        ? `rgba(0,208,180, ${(0.16 * ba).toFixed(3)})`
+        : `rgba(74,255,200, ${(0.22 * ba).toFixed(3)})`;
+      const panelGradient = ctx.createLinearGradient(bx, by, bx, by + th);
+      if (light) {
+        panelGradient.addColorStop(0, `rgba(224,246,240, ${(0.88 * ba).toFixed(3)})`);
+        panelGradient.addColorStop(0.52, `rgba(196,232,226, ${(0.78 * ba).toFixed(3)})`);
+        panelGradient.addColorStop(1, `rgba(168,214,206, ${(0.72 * ba).toFixed(3)})`);
+      } else {
+        panelGradient.addColorStop(0, `rgba(4,14,12, ${(0.94 * ba).toFixed(3)})`);
+        panelGradient.addColorStop(0.54, `rgba(8,22,18, ${(0.90 * ba).toFixed(3)})`);
+        panelGradient.addColorStop(1, `rgba(2,10,8, ${(0.86 * ba).toFixed(3)})`);
+      }
+      const sheenGradient = ctx.createLinearGradient(bx, by, bx + tw, by + th);
+      sheenGradient.addColorStop(0, light
+        ? `rgba(255,255,255, ${(0.20 * ba).toFixed(3)})`
+        : `rgba(120,255,200, ${(0.08 * ba).toFixed(3)})`);
+      sheenGradient.addColorStop(0.35, 'rgba(255,255,255, 0)');
+      sheenGradient.addColorStop(1, light
+        ? `rgba(0,172,146, ${(0.08 * ba).toFixed(3)})`
+        : `rgba(0,210,166, ${(0.10 * ba).toFixed(3)})`);
+      const headerGlow = light
+        ? `rgba(0,128,118, ${(0.12 * ba).toFixed(3)})`
+        : `rgba(40,255,168, ${(0.14 * ba).toFixed(3)})`;
+      const scanColor = light
+        ? `rgba(0,122,112, ${(0.05 * ba).toFixed(3)})`
+        : `rgba(88,244,168, ${(0.06 * ba).toFixed(3)})`;
+      const panelRadius = 4;
+
+      ctx.save();
+      roundedRectPath(ctx, bx, by, tw, th, panelRadius);
+      ctx.clip();
+      ctx.fillStyle = panelGradient;
+      ctx.fillRect(bx, by, tw, th);
+      ctx.fillStyle = sheenGradient;
+      ctx.fillRect(bx, by, tw, th);
+      ctx.fillStyle = headerGlow;
+      ctx.fillRect(bx, by, tw, 14);
+      ctx.fillStyle = scanColor;
+      for (let sy = by + 20; sy < by + th - 6; sy += 8) {
+        ctx.fillRect(bx + 6, sy, tw - 12, 1);
+      }
+      ctx.restore();
+
+      ctx.strokeStyle = borderColor;
+      ctx.lineWidth = 1.15;
+      ctx.shadowBlur = 12;
+      ctx.shadowColor = glowColor;
+      roundedRectPath(ctx, bx, by, tw, th, panelRadius);
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      ctx.strokeStyle = light
+        ? `rgba(255,255,255, ${(0.34 * ba).toFixed(3)})`
+        : `rgba(176,250,255, ${(0.24 * ba).toFixed(3)})`;
+      ctx.lineWidth = 1;
+      roundedRectPath(ctx, bx + 2, by + 2, tw - 4, th - 4, 2.5);
+      ctx.stroke();
+
+      const cornerLen = 7;
+      ctx.strokeStyle = borderColor;
+      ctx.lineWidth = 1.15;
+      ctx.beginPath();
+      ctx.moveTo(bx + 7, by + cornerLen);
+      ctx.lineTo(bx + 7, by + 4);
+      ctx.lineTo(bx + 7 + cornerLen, by + 4);
+      ctx.moveTo(bx + tw - 7 - cornerLen, by + 4);
+      ctx.lineTo(bx + tw - 7, by + 4);
+      ctx.lineTo(bx + tw - 7, by + cornerLen);
+      ctx.moveTo(bx + 7, by + th - cornerLen);
+      ctx.lineTo(bx + 7, by + th - 4);
+      ctx.lineTo(bx + 7 + cornerLen, by + th - 4);
+      ctx.moveTo(bx + tw - 7 - cornerLen, by + th - 4);
+      ctx.lineTo(bx + tw - 7, by + th - 4);
+      ctx.lineTo(bx + tw - 7, by + th - cornerLen);
+      ctx.stroke();
 
       ctx.fillStyle = light
-        ? `rgba(250,255,255, ${(0.86 * ba).toFixed(3)})`
-        : `rgba(6,24,34, ${(0.82 * ba).toFixed(3)})`;
-      ctx.strokeStyle = light
-        ? `rgba(0,125,145, ${(0.40 * ba).toFixed(3)})`
-        : `rgba(120,235,225, ${(0.46 * ba).toFixed(3)})`;
-      ctx.lineWidth = 1;
-      roundedRectPath(ctx, bx, by, tw, th, 9);
-      ctx.fill();
-      ctx.stroke();
+        ? `rgba(0,126,136, ${(0.16 * ba).toFixed(3)})`
+        : `rgba(90,238,174, ${(0.18 * ba).toFixed(3)})`;
+      ctx.fillRect(bx + 8, by + 7, Math.min(18, tw * 0.22), 2);
+      ctx.fillRect(bx + tw - 18, by + 7, 8, 2);
+      ctx.fillRect(bx + 8, by + 17, tw - 16, 1);
 
       if (category === 'brand' || category === 'marketing') {
         const iconCx = bx + 13;
@@ -1518,11 +1839,20 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       ctx.beginPath();
-      ctx.moveTo(bx + 14, by + th);
-      ctx.lineTo(bx + 22, by + th);
-      ctx.lineTo(x + s * 0.44, y - s * 1.1);
+      if (tailOnRight) {
+        ctx.moveTo(tailAnchorX, tailAnchorY - 8);
+        ctx.lineTo(tailAnchorX, tailAnchorY + 8);
+      } else {
+        ctx.moveTo(tailAnchorX, tailAnchorY + 8);
+        ctx.lineTo(tailAnchorX, tailAnchorY - 8);
+      }
+      ctx.lineTo(tailTipX, tailTipY);
       ctx.closePath();
+      ctx.fillStyle = borderColor;
+      ctx.shadowBlur = 8;
+      ctx.shadowColor = glowColor;
       ctx.fill();
+      ctx.shadowBlur = 0;
 
       if (category === 'marketing') {
         ctx.fillStyle = light
@@ -1534,25 +1864,64 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       const textX = category === 'brand' || category === 'marketing' ? bx + padX + 14 : bx + padX;
-      const metaColor = astronaut.mood === 'excited'
-        ? `rgba(255,156,64, ${(0.96 * ba).toFixed(3)})`
-        : astronaut.mood === 'curious'
-          ? `rgba(0,145,186, ${(0.96 * ba).toFixed(3)})`
-          : astronaut.mood === 'sleepy'
-            ? `rgba(126,148,196, ${(0.96 * ba).toFixed(3)})`
-            : `rgba(0,212,170, ${(0.96 * ba).toFixed(3)})`;
-      ctx.fillStyle = metaColor;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
-      ctx.font = '700 8px Space Mono, monospace';
-      ctx.fillText(meta, textX, by + padY);
+      ctx.font = promptFont;
+      ctx.fillStyle = light
+        ? `rgba(0,94,96, ${(0.92 * ba).toFixed(3)})`
+        : `rgba(168,255,202, ${(0.96 * ba).toFixed(3)})`;
+      for (let i = 0; i < promptLines.length; i++) {
+        ctx.fillText(promptLines[i], textX, by + padY + i * promptLineH);
+      }
+
+      const toneColor = (tone) => {
+        if (tone === 'mood') {
+          return astronaut.mood === 'excited'
+            ? `rgba(255,166,92, ${(0.96 * ba).toFixed(3)})`
+            : astronaut.mood === 'curious'
+              ? `rgba(88,204,255, ${(0.96 * ba).toFixed(3)})`
+              : astronaut.mood === 'sleepy'
+                ? `rgba(154,174,228, ${(0.96 * ba).toFixed(3)})`
+                : `rgba(96,255,184, ${(0.96 * ba).toFixed(3)})`;
+        }
+        if (tone === 'persona') return `rgba(255,122,214, ${(0.94 * ba).toFixed(3)})`;
+        if (tone === 'tag') return `rgba(255,210,104, ${(0.94 * ba).toFixed(3)})`;
+        return `rgba(118,255,214, ${(0.94 * ba).toFixed(3)})`;
+      };
+
+      const statusY = by + padY + promptBlockH + 2;
+      ctx.font = statusFont;
+      for (let i = 0; i < statusRows.length; i++) {
+        const row = statusRows[i];
+        const rowY = statusY + i * statusLineH;
+        ctx.fillStyle = light
+          ? `rgba(0,88,84, ${(0.82 * ba).toFixed(3)})`
+          : `rgba(126,212,166, ${(0.84 * ba).toFixed(3)})`;
+        const labelText = `${row.label}: `;
+        ctx.fillText(labelText, textX, rowY);
+        const labelW = ctx.measureText(labelText).width;
+        ctx.fillStyle = toneColor(row.tone);
+        ctx.fillText(row.value, textX + labelW, rowY);
+      }
 
       ctx.fillStyle = light
-        ? `rgba(0,98,116, ${(0.92 * ba).toFixed(3)})`
-        : `rgba(205,250,245, ${(0.95 * ba).toFixed(3)})`;
-      ctx.font = '700 9.35px Space Mono, monospace';
+        ? `rgba(0,116,108, ${(0.18 * ba).toFixed(3)})`
+        : `rgba(86,240,172, ${(0.22 * ba).toFixed(3)})`;
+      ctx.fillRect(textX, by + padY + promptBlockH + statusBlockH + 2, tw - (textX - bx) - padX, 1);
+
+      ctx.fillStyle = light
+        ? `rgba(0,78,74, ${(0.96 * ba).toFixed(3)})`
+        : `rgba(180,255,214, ${(0.98 * ba).toFixed(3)})`;
+      ctx.font = bodyFont;
       for (let i = 0; i < bubbleLines.length; i++) {
-        ctx.fillText(bubbleLines[i], textX, by + padY + metaLineH + 4 + i * lineH);
+        ctx.fillText(bubbleLines[i], textX, by + bodyOffsetY + i * lineH);
+      }
+
+      if (astronaut.bubble.typingChars < text.length && Math.sin(time * 8.0) > -0.1) {
+        const lastLine = bubbleLines[Math.max(0, bubbleLines.length - 1)] || '';
+        const cursorY = by + bodyOffsetY + (bubbleLines.length - 1) * lineH;
+        const cursorX = textX + ctx.measureText(lastLine).width + 2;
+        ctx.fillRect(cursorX, cursorY + 1, 5, 9);
       }
       ctx.restore();
     }
