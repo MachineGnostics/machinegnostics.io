@@ -48,6 +48,42 @@
 .gn-home > section {
     position: relative;
     z-index: 1;
+    transition: opacity 0.9s ease, transform 0.9s ease, filter 0.9s ease;
+}
+
+.gn-home.gn-intro-active > section {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+.gn-home.gn-intro-reveal > section {
+    animation: gn-stardust-appear 1.05s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.gn-home.gn-intro-reveal > section:nth-of-type(2) { animation-delay: 0.08s; }
+.gn-home.gn-intro-reveal > section:nth-of-type(3) { animation-delay: 0.16s; }
+.gn-home.gn-intro-reveal > section:nth-of-type(4) { animation-delay: 0.24s; }
+.gn-home.gn-intro-reveal > section:nth-of-type(5) { animation-delay: 0.32s; }
+.gn-home.gn-intro-reveal > section:nth-of-type(6) { animation-delay: 0.40s; }
+
+@keyframes gn-stardust-appear {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.97);
+        filter: blur(4px) drop-shadow(0 0 2px rgba(0, 229, 255, 0.45));
+    }
+    30% {
+        opacity: 0.58;
+        transform: translateY(10px) scale(0.986);
+        filter: blur(1.8px) drop-shadow(0 0 10px rgba(0, 212, 170, 0.35));
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0);
+    }
 }
 
 .gn-home .gn-hero {
