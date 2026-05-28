@@ -108,6 +108,175 @@ document.addEventListener('DOMContentLoaded', () => {
   let galaxySmudges = [];
   let galaxyCore    = { x: 0, y: 0 };
 
+  /* first-visit intro: void -> big bang -> photon inflow */
+  let intro = {
+    enabled: false,
+    phase: 'done',
+    timerSec: 0,
+    center: { x: 0, y: 0 },
+    photons: [],
+    blastPhotons: [],
+    bangTriggered: false,
+    shockwaves: [],
+  };
+
+  const shouldRunIntro = () => {
+    return false;
+  };
+
+  const setIntroPageHidden = (hidden) => {
+    homeRoot.classList.toggle('gn-intro-active', hidden);
+  };
+
+  const triggerStardustReveal = () => {
+    homeRoot.classList.add('gn-intro-reveal');
+    setTimeout(() => {
+      homeRoot.classList.remove('gn-intro-reveal');
+    }, 1700);
+  };
+
+  const newIntroPhoton = (center) => {
+    const a = rand(0, Math.PI * 2);
+    const speed = rand(2.4, 6.2);
+    const palette = isLight() ? COMET_LIGHT : COMET_DARK;
+    const col = palette[Math.floor(Math.random() * palette.length)];
+    const jitter = Math.min(W, H) * 0.010;
+
+    return {
+      x: center.x + rand(-jitter, jitter),
+      y: center.y + rand(-jitter, jitter),
+      vx: Math.cos(a) * speed,
+      vy: Math.sin(a) * speed,
+      delaySec: rand(0, 1.20),
+      life: 1,
+      r: rand(0.9, 2.0),
+      pulse: rand(0, Math.PI * 2),
+      trail: [],
+      trailLen: Math.floor(rand(8, 18)),
+      color: col,
+    };
+  };
+
+  const newIntroBlastPhoton = (center) => {
+    const a = rand(0, Math.PI * 2);
+    const speed = rand(3.6, 8.8);
+    const palette = isLight() ? COMET_LIGHT : COMET_DARK;
+    const col = palette[Math.floor(Math.random() * palette.length)];
+    return {
+      x: center.x,
+      y: center.y,
+      vx: Math.cos(a) * speed,
+      vy: Math.sin(a) * speed,
+      life: rand(1.3, 2.2),
+      r: rand(0.9, 2.3),
+      pulse: rand(0, Math.PI * 2),
+      trail: [],
+      trailLen: Math.floor(rand(8, 16)),
+      color: col,
+    };
+  };
+
+  const initIntro = () => {
+    intro.enabled = true;
+    intro.phase = 'void';
+    intro.timerSec = 0;
+    intro.center = { x: W * 0.5, y: H * 0.5 };
+    /* performance-tuned outward photons with wide spread */
+    const n = Math.min(260, Math.max(90, Math.floor((W * H) / 14000)));
+    intro.photons = Array.from({ length: n }, () => newIntroPhoton(intro.center));
+    intro.blastPhotons = [];
+    intro.bangTriggered = false;
+    intro.shockwaves = [];
+    setIntroPageHidden(true);
+  };
+
+  const updateIntro = (dtSec) => {
+    intro.timerSec += dtSec;
+
+    if (intro.timerSec < 0.22) {
+      intro.phase = 'void';
+      return;
+    }
+    if (intro.timerSec < 1.08) {
+      intro.phase = 'sun';
+      return;
+    }
+    if (intro.timerSec < 1.88) {
+      intro.phase = 'bang';
+    } else if (intro.timerSec < 4.0) {
+      intro.phase = 'inflow';
+    } else {
+      intro.enabled = false;
+      intro.phase = 'done';
+      setIntroPageHidden(false);
+      triggerStardustReveal();
+      buildScene();
+      emitPhotonBurst(intro.center);
+      return;
+    }
+
+    if (!intro.bangTriggered && intro.timerSec >= 1.08) {
+      intro.bangTriggered = true;
+      /* reduced density for smooth playback while keeping dramatic spread */
+      const nBlast = Math.min(300, Math.max(120, Math.floor((W * H) / 10666)));
+      intro.blastPhotons = Array.from({ length: nBlast }, () => newIntroBlastPhoton(intro.center));
+      /* multiple very fast shock fronts so rings sweep beyond screen */
+      intro.shockwaves = [
+        { r: 0, speed: Math.min(W, H) * 1.15, alpha: 0.70 },
+        { r: 0, speed: Math.min(W, H) * 1.00, alpha: 0.58 },
+        { r: 0, speed: Math.min(W, H) * 0.88, alpha: 0.46 },
+        { r: 0, speed: Math.min(W, H) * 0.76, alpha: 0.38 },
+      ];
+    }
+
+    const flowTime = intro.timerSec - 1.88;
+    const frameScale = clamp(dtSec * 60, 0.45, 2.2);
+    for (const p of intro.photons) {
+      if (flowTime < p.delaySec) continue;
+
+      p.trail.push({ x: p.x, y: p.y });
+      if (p.trail.length > p.trailLen) p.trail.shift();
+
+      p.x += p.vx * frameScale;
+      p.y += p.vy * frameScale;
+      p.vx *= 0.998;
+      p.vy *= 0.998;
+      p.pulse += 0.06;
+
+      const outMargin = 150;
+      if (p.x < -outMargin || p.x > W + outMargin || p.y < -outMargin || p.y > H + outMargin) {
+        p.life = Math.max(0, p.life - dtSec * 4.0);
+      }
+      p.life = Math.max(0, p.life - dtSec * 0.22);
+    }
+
+    for (let i = intro.blastPhotons.length - 1; i >= 0; i--) {
+      const p = intro.blastPhotons[i];
+      p.life -= dtSec;
+      if (p.life <= 0) {
+        intro.blastPhotons.splice(i, 1);
+        continue;
+      }
+
+      p.trail.push({ x: p.x, y: p.y });
+      if (p.trail.length > p.trailLen) p.trail.shift();
+
+      p.x += p.vx * frameScale;
+      p.y += p.vy * frameScale;
+      p.vx *= 0.996;
+      p.vy *= 0.996;
+      p.pulse += 0.05;
+    }
+
+    const diag = Math.hypot(W, H) * 1.20;
+    for (let i = intro.shockwaves.length - 1; i >= 0; i--) {
+      const w = intro.shockwaves[i];
+      w.r += w.speed * dtSec;
+      w.alpha = Math.max(0, w.alpha - dtSec * 0.42);
+      if (w.r > diag || w.alpha <= 0.01) intro.shockwaves.splice(i, 1);
+    }
+  };
+
   /* ── canvas resize ────────────────────────────────────────────────── */
   const resize = () => {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -196,6 +365,10 @@ document.addEventListener('DOMContentLoaded', () => {
       { x: W*0.04, y: H*0.82, rx: W*0.028, ry: H*0.004, ang:  1.10, col: [195,240,255], a: 0.10 },
       { x: W*0.55, y: H*0.92, rx: W*0.022, ry: H*0.003, ang: -0.20, col: [220,200,255], a: 0.08 },
     ];
+
+    if (intro.enabled) {
+      initIntro();
+    }
   };
 
   const newMobHole = () => {
@@ -1005,6 +1178,207 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const drawIntro = () => {
+    ctx.fillStyle = '#00010a';
+    ctx.fillRect(0, 0, W, H);
+
+    /* slight camera-shake around detonation peak */
+    const shakeRise = clamp((intro.timerSec - 1.08) / 0.12, 0, 1);
+    const shakeFall = clamp((2.18 - intro.timerSec) / 0.62, 0, 1);
+    const shakeT = shakeRise * shakeFall;
+    const shakeAmp = 4.2 * shakeT * shakeT;
+    const shakeX = (Math.random() * 2 - 1) * shakeAmp + Math.sin(time * 62) * shakeAmp * 0.22;
+    const shakeY = (Math.random() * 2 - 1) * shakeAmp + Math.cos(time * 57) * shakeAmp * 0.22;
+
+    ctx.save();
+    ctx.translate(shakeX, shakeY);
+
+    const sunT = clamp((intro.timerSec - 0.22) / 0.86, 0, 1);
+    if (sunT > 0) {
+      const explodeStart = 1.08;
+      const postExplodeT = clamp((intro.timerSec - explodeStart) / 1.40, 0, 1);
+      const preExplodePulse = intro.timerSec < explodeStart
+        ? (0.92 + 0.08 * Math.sin(time * 8.8))
+        : 1;
+      /* after detonation: core should expand continuously (no breathing) */
+      const sunR = Math.min(W, H) * (0.020 + sunT * 0.075 + postExplodeT * 0.18) * preExplodePulse;
+      const sunFade = 1 - postExplodeT;
+
+      const corona = ctx.createRadialGradient(
+        intro.center.x, intro.center.y, 0,
+        intro.center.x, intro.center.y, sunR * 7
+      );
+      corona.addColorStop(0, `rgba(220,255,245, ${(0.82 * sunT * sunFade).toFixed(3)})`);
+      corona.addColorStop(0.20, `rgba(0,229,255, ${(0.68 * sunT * sunFade).toFixed(3)})`);
+      corona.addColorStop(0.45, `rgba(0,212,170, ${(0.42 * sunT * sunFade).toFixed(3)})`);
+      corona.addColorStop(0.74, `rgba(0,150,130, ${(0.20 * sunT * sunFade).toFixed(3)})`);
+      corona.addColorStop(1, 'transparent');
+      ctx.fillStyle = corona;
+      ctx.beginPath();
+      ctx.arc(intro.center.x, intro.center.y, sunR * 7, 0, Math.PI * 2);
+      ctx.fill();
+
+      const core = ctx.createRadialGradient(
+        intro.center.x, intro.center.y, 0,
+        intro.center.x, intro.center.y, sunR
+      );
+      core.addColorStop(0, `rgba(245,255,255, ${(0.98 * sunFade).toFixed(3)})`);
+      core.addColorStop(0.30, `rgba(188,255,246, ${(0.96 * sunFade).toFixed(3)})`);
+      core.addColorStop(0.65, `rgba(0,245,210, ${(0.92 * sunFade).toFixed(3)})`);
+      core.addColorStop(1, `rgba(0,195,165, ${(0.84 * sunFade).toFixed(3)})`);
+      ctx.fillStyle = core;
+      ctx.beginPath();
+      ctx.arc(intro.center.x, intro.center.y, sunR, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    const bangT = clamp((intro.timerSec - 1.08) / 0.80, 0, 1);
+    if (bangT > 0) {
+      const ease = Math.pow(bangT, 0.58);
+      const maxR = Math.hypot(W, H) * 0.72;
+      const coreR = 2 + ease * maxR;
+
+      const flash = ctx.createRadialGradient(
+        intro.center.x, intro.center.y, 0,
+        intro.center.x, intro.center.y, coreR
+      );
+      flash.addColorStop(0, `rgba(255,255,255, ${(0.95 - ease * 0.40).toFixed(3)})`);
+      flash.addColorStop(0.18, `rgba(185,255,248, ${(0.78 - ease * 0.36).toFixed(3)})`);
+      flash.addColorStop(0.50, `rgba(0,229,255, ${(0.48 - ease * 0.30).toFixed(3)})`);
+      flash.addColorStop(1, 'transparent');
+
+      ctx.fillStyle = flash;
+      ctx.beginPath();
+      ctx.arc(intro.center.x, intro.center.y, coreR, 0, Math.PI * 2);
+      ctx.fill();
+
+      for (let i = 0; i < 7; i++) {
+        const ringT = clamp((bangT - i * 0.14) / (1 - i * 0.14), 0, 1);
+        if (ringT <= 0) continue;
+        const rr = 8 + ringT * (Math.hypot(W, H) * (0.22 + i * 0.06));
+        const ra = (1 - ringT) * (0.52 - i * 0.06);
+
+        const split = 4.4 + i * 0.55 + bangT * 2.8;
+        ctx.lineWidth = Math.max(0.35, 1.2 - i * 0.16);
+
+        /* chromatic ring split: white core + cyan outward + green inward */
+        ctx.strokeStyle = `rgba(255,255,255, ${(ra * 0.92).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(intro.center.x, intro.center.y, rr, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.strokeStyle = `rgba(0,229,255, ${(ra * 0.78).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(intro.center.x, intro.center.y, rr + split, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.strokeStyle = `rgba(0,212,170, ${(ra * 0.76).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(intro.center.x, intro.center.y, Math.max(1, rr - split), 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    }
+
+    for (const w of intro.shockwaves) {
+      const oscillation = 1 + 0.015 * Math.sin((w.r * 0.045) + time * 10);
+      const rr = w.r * oscillation;
+      ctx.strokeStyle = `rgba(255,255,255, ${(w.alpha * 0.85).toFixed(3)})`;
+      ctx.lineWidth = 2.2;
+      ctx.beginPath();
+      ctx.arc(intro.center.x, intro.center.y, rr, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = `rgba(0,229,255, ${(w.alpha * 0.72).toFixed(3)})`;
+      ctx.lineWidth = 1.25;
+      ctx.beginPath();
+      ctx.arc(intro.center.x, intro.center.y, rr + 5, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.strokeStyle = `rgba(0,212,170, ${(w.alpha * 0.68).toFixed(3)})`;
+      ctx.lineWidth = 1.15;
+      ctx.beginPath();
+      ctx.arc(intro.center.x, intro.center.y, Math.max(1, rr - 5), 0, Math.PI * 2);
+      ctx.stroke();
+    }
+
+    for (const p of intro.blastPhotons) {
+      const life = clamp(p.life / 1.3, 0, 1);
+      const phase = 0.6 + 0.4 * Math.sin(p.pulse);
+      const headA = life * phase;
+
+      if (p.trail.length > 1) {
+        for (let t = 0; t < p.trail.length - 1; t++) {
+          const progress = (t + 1) / p.trail.length;
+          const ta = progress * life * 0.70;
+          ctx.strokeStyle = `rgba(${p.color[0]},${p.color[1]},${p.color[2]},${ta.toFixed(3)})`;
+          ctx.lineWidth = Math.max(0.25, p.r * 1.5 * progress);
+          ctx.beginPath();
+          ctx.moveTo(p.trail[t].x, p.trail[t].y);
+          ctx.lineTo(p.trail[t + 1].x, p.trail[t + 1].y);
+          ctx.stroke();
+        }
+      }
+
+      const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5.4);
+      halo.addColorStop(0, `rgba(255,255,255, ${(headA * 0.9).toFixed(3)})`);
+      halo.addColorStop(0.30, `rgba(${p.color[0]},${p.color[1]},${p.color[2]}, ${(headA * 0.66).toFixed(3)})`);
+      halo.addColorStop(0.66, `rgba(${p.color[0]},${p.color[1]},${p.color[2]}, ${(headA * 0.32).toFixed(3)})`);
+      halo.addColorStop(1, 'transparent');
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 5.4, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = `rgba(240,255,255, ${(headA * 0.95).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    const flowTime = intro.timerSec - 1.88;
+    if (flowTime <= 0) {
+      ctx.restore();
+      return;
+    }
+
+    for (const p of intro.photons) {
+      if (flowTime < p.delaySec || p.life <= 0) continue;
+
+      const phase = 0.6 + 0.4 * Math.sin(p.pulse);
+      const headA = p.life * phase;
+
+      if (p.trail.length > 1) {
+        for (let t = 0; t < p.trail.length - 1; t++) {
+          const progress = (t + 1) / p.trail.length;
+          const ta = progress * p.life * 0.55;
+          ctx.strokeStyle = `rgba(${p.color[0]},${p.color[1]},${p.color[2]}, ${ta.toFixed(3)})`;
+          ctx.lineWidth = Math.max(0.2, p.r * 1.3 * progress);
+          ctx.beginPath();
+          ctx.moveTo(p.trail[t].x, p.trail[t].y);
+          ctx.lineTo(p.trail[t + 1].x, p.trail[t + 1].y);
+          ctx.stroke();
+        }
+      }
+
+      const halo = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+      halo.addColorStop(0, `rgba(255,255,255, ${(headA * 0.95).toFixed(3)})`);
+      halo.addColorStop(0.28, `rgba(${p.color[0]},${p.color[1]},${p.color[2]}, ${(headA * 0.60).toFixed(3)})`);
+      halo.addColorStop(0.65, `rgba(${p.color[0]},${p.color[1]},${p.color[2]}, ${(headA * 0.25).toFixed(3)})`);
+      halo.addColorStop(1, 'transparent');
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = `rgba(255,255,255, ${(headA * 0.9).toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    ctx.restore();
+  };
+
   /* ── main render loop ────────────────────────────────────────────── */
   let lastVisible = true;
   let lastTs = performance.now();
@@ -1015,6 +1389,17 @@ document.addEventListener('DOMContentLoaded', () => {
     lastTs = now;
 
     time += dtSec;
+    ctx.clearRect(0, 0, W, H);
+
+    if (intro.enabled) {
+      updateIntro(dtSec);
+      if (intro.enabled) {
+        drawIntro();
+        raf = requestAnimationFrame(draw);
+        return;
+      }
+    }
+
     burstTimerSec -= dtSec;
     if (burstTimerSec <= 0) {
       emitPhotonBurst();
@@ -1024,7 +1409,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateSuperPhotons(dtSec);
     updateMobHoles(dtSec);     /* advance black-hole positions before grid uses them */
-    ctx.clearRect(0, 0, W, H);
 
     drawGalaxy();
     drawNebulae();
@@ -1059,6 +1443,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('touchend', () => { mouse.active = false; }, { passive: true });
 
   document.addEventListener('click', e => {
+    if (intro.enabled) return;
+
     const x = e.clientX;
     const y = e.clientY;
 
@@ -1101,6 +1487,9 @@ document.addEventListener('DOMContentLoaded', () => {
     .observe(document.documentElement, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
   new MutationObserver(() => buildScene())
     .observe(document.body, { attributes: true, attributeFilter: ['data-md-color-scheme'] });
+
+  intro.enabled = shouldRunIntro();
+  setIntroPageHidden(intro.enabled);
 
   resize();
   draw();
