@@ -16,6 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const rand = (lo, hi) => lo + Math.random() * (hi - lo);
   const lerp = (a, b, t) => a + (b - a) * t;
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+  const roundedRectPath = (c, x, y, w, h, r) => {
+    const rr = Math.max(0, Math.min(r, Math.min(w, h) * 0.5));
+    c.beginPath();
+    c.moveTo(x + rr, y);
+    c.lineTo(x + w - rr, y);
+    c.quadraticCurveTo(x + w, y, x + w, y + rr);
+    c.lineTo(x + w, y + h - rr);
+    c.quadraticCurveTo(x + w, y + h, x + w - rr, y + h);
+    c.lineTo(x + rr, y + h);
+    c.quadraticCurveTo(x, y + h, x, y + h - rr);
+    c.lineTo(x, y + rr);
+    c.quadraticCurveTo(x, y, x + rr, y);
+    c.closePath();
+  };
 
   /* ── colour helpers ───────────────────────────────────────────────── */
   const TEAL  = [0, 212, 170];
@@ -102,6 +116,55 @@ document.addEventListener('DOMContentLoaded', () => {
   let burstActiveSec = 0;
   let superPhotonTimerSec = 10;
   let superPhotons = [];
+  let astronautSuppressClick = false;
+
+  /* tiny fun astronaut */
+  let astronaut = null;
+  const ASTRONAUT_IDLE_PHRASES = [
+    'You are awesome!',
+    'Keep exploring!',
+    'Great work, human!',
+    'You got this!',
+    'Brilliant mind detected!',
+    'Space says hi!',
+    'Curiosity level: legendary.',
+    'Your ideas have escape velocity.',
+    'Tiny astronaut approves this mission.',
+    'Science mode looks good on you.',
+    'You make this galaxy brighter.',
+    'Stellar focus, captain!',
+    'Breathe in, brilliance out.',
+    'Your future self says thanks.',
+    'I see genius in this orbit.',
+    'Entropy says hi, order says wow.',
+  ];
+  const ASTRONAUT_CLICK_PHRASES = [
+    'Can I help you?',
+    'What up?',
+    'Write me email, I am busy now!',
+    'Mission support online. Need anything?',
+    'Beep boop. Emotional support astronaut here.',
+    'I wave, therefore I am.',
+    'Status report: you are doing great.',
+    'Coffee? I only have stardust.',
+    'You clicked me. I feel important.',
+    'Need ideas? I have a whole nebula.',
+    'I can totally keep a secret. Probably.',
+    'We got this, commander!',
+    'Tell me your next bold move.',
+    'Plot twist: you are awesome.',
+    'My schedule is chaos, but for you I have 8 seconds.',
+  ];
+  const ASTRONAUT_EXPLOSION_PHRASES = [
+    'Whoa! That black hole had drama.',
+    'Kaboom confirmed. I meant to do that.',
+    'That was scientifically spicy.',
+    'Reminder: do not poke singularities.',
+    'Explosion rating: 11 out of 10.',
+    'Okay... that got personal.',
+    'Black hole said goodbye very loudly.',
+    'I call that a gravity mic drop.',
+  ];
 
   /* galaxy background — stardust band + core + distant galaxies */
   let galaxyDust    = [];
@@ -366,8 +429,414 @@ document.addEventListener('DOMContentLoaded', () => {
       { x: W*0.55, y: H*0.92, rx: W*0.022, ry: H*0.003, ang: -0.20, col: [220,200,255], a: 0.08 },
     ];
 
+    initAstronaut();
+
     if (intro.enabled) {
       initIntro();
+    }
+  };
+
+  const initAstronaut = () => {
+    const size = clamp(Math.min(W, H) * 0.013, 8.4, 14.2);
+
+    if (!astronaut) {
+      const px = rand(0, 1) < 0.5 ? rand(W * 0.05, W * 0.22) : rand(W * 0.78, W * 0.95);
+      astronaut = {
+        x: px,
+        y: rand(H * 0.16, H * 0.86),
+        vx: rand(-0.24, 0.24),
+        vy: rand(-0.18, 0.18),
+        targetVx: rand(-0.24, 0.24),
+        targetVy: rand(-0.18, 0.18),
+        targetX: px,
+        targetY: rand(H * 0.16, H * 0.86),
+        driftTimerSec: rand(2.2, 5.5),
+        bobPhase: rand(0, Math.PI * 2),
+        wavePhase: rand(0, Math.PI * 2),
+        moodBoostSec: 0,
+        hover: false,
+        dragging: false,
+        dragOffsetX: 0,
+        dragOffsetY: 0,
+        dragMoved: false,
+        lastDragX: px,
+        lastDragY: rand(H * 0.16, H * 0.86),
+        lastDragTs: performance.now(),
+        size,
+        suitDrift: rand(0, Math.PI * 2),
+        bubble: {
+          text: '',
+          timerSec: 0,
+          cooldownSec: rand(3.5, 7.5),
+          alpha: 0,
+        },
+      };
+      return;
+    }
+
+    astronaut.size = size;
+    astronaut.x = clamp(astronaut.x, 28, W - 28);
+    astronaut.y = clamp(astronaut.y, 28, H - 28);
+  };
+
+  const pickAstronautTarget = () => {
+    const margin = Math.max(26, astronaut ? astronaut.size * 2.2 : 28);
+    const side = Math.floor(rand(0, 4));
+    const innerL = W * 0.24;
+    const innerR = W * 0.76;
+    const innerT = H * 0.20;
+    const innerB = H * 0.80;
+    if (side === 0) return { x: rand(margin, innerL), y: rand(margin, H - margin) };      /* left band */
+    if (side === 1) return { x: rand(innerR, W - margin), y: rand(margin, H - margin) };   /* right band */
+    if (side === 2) return { x: rand(margin, W - margin), y: rand(margin, innerT) };        /* top band */
+    return { x: rand(margin, W - margin), y: rand(innerB, H - margin) };                     /* bottom band */
+  };
+
+  const astronautInCenterZone = (ax, ay) => {
+    return ax > W * 0.25 && ax < W * 0.75 && ay > H * 0.22 && ay < H * 0.80;
+  };
+
+  const beginAstronautDrag = (px, py) => {
+    if (!astronaut || !astronautHit(px, py)) return false;
+    astronaut.dragging = true;
+    astronaut.dragOffsetX = astronaut.x - px;
+    astronaut.dragOffsetY = astronaut.y - py;
+    astronaut.dragMoved = false;
+    astronaut.lastDragX = px;
+    astronaut.lastDragY = py;
+    astronaut.lastDragTs = performance.now();
+    astronaut.hover = true;
+    astronaut.moodBoostSec = 4;
+    return true;
+  };
+
+  const moveAstronautDrag = (px, py) => {
+    if (!astronaut || !astronaut.dragging) return;
+    const margin = Math.max(20, astronaut.size * 1.6);
+    const nx = clamp(px + astronaut.dragOffsetX, margin, W - margin);
+    const ny = clamp(py + astronaut.dragOffsetY, margin, H - margin);
+
+    if (Math.hypot(nx - astronaut.x, ny - astronaut.y) > 1.1) astronaut.dragMoved = true;
+
+    const now = performance.now();
+    const dt = Math.max(8, now - astronaut.lastDragTs);
+    astronaut.vx = clamp((nx - astronaut.x) / dt * 7.8, -1.5, 1.5);
+    astronaut.vy = clamp((ny - astronaut.y) / dt * 7.8, -1.5, 1.5);
+    astronaut.lastDragX = px;
+    astronaut.lastDragY = py;
+    astronaut.lastDragTs = now;
+
+    astronaut.x = nx;
+    astronaut.y = ny;
+  };
+
+  const endAstronautDrag = () => {
+    if (!astronaut || !astronaut.dragging) return;
+    astronaut.dragging = false;
+    astronaut.driftTimerSec = rand(1.2, 2.6);
+    if (astronaut.dragMoved) astronautSuppressClick = true;
+  };
+
+  const triggerAstronautBubble = (forcedText = null) => {
+    if (!astronaut) return;
+    const text = forcedText || ASTRONAUT_IDLE_PHRASES[Math.floor(Math.random() * ASTRONAUT_IDLE_PHRASES.length)];
+    astronaut.bubble.text = text;
+    astronaut.bubble.timerSec = rand(2.2, 3.4);
+    astronaut.bubble.cooldownSec = rand(5.0, 11.5);
+  };
+
+  const astronautHit = (x, y) => {
+    if (!astronaut) return false;
+    const hitR = astronaut.size * 2.7;
+    return Math.hypot(x - astronaut.x, y - astronaut.y) <= hitR;
+  };
+
+  const updateAstronaut = (dtSec) => {
+    if (!astronaut) return;
+
+    const frameScale = clamp(dtSec * 60, 0.45, 2.2);
+    if (!astronaut.dragging) {
+      astronaut.driftTimerSec -= dtSec;
+      const reachTarget = Math.hypot(astronaut.x - astronaut.targetX, astronaut.y - astronaut.targetY) < Math.max(18, astronaut.size * 2.2);
+      if (astronaut.driftTimerSec <= 0 || reachTarget || astronautInCenterZone(astronaut.x, astronaut.y)) {
+        const target = pickAstronautTarget();
+        astronaut.targetX = target.x;
+        astronaut.targetY = target.y;
+        astronaut.driftTimerSec = rand(1.4, 3.6);
+      }
+
+      const dx = astronaut.targetX - astronaut.x;
+      const dy = astronaut.targetY - astronaut.y;
+      const d = Math.hypot(dx, dy) + 0.001;
+      const desiredVx = (dx / d) * clamp(d / 180, 0.09, 0.42);
+      const desiredVy = (dy / d) * clamp(d / 180, 0.07, 0.34);
+
+      astronaut.targetVx = desiredVx;
+      astronaut.targetVy = desiredVy;
+      astronaut.vx = lerp(astronaut.vx, astronaut.targetVx, 0.032 * frameScale);
+      astronaut.vy = lerp(astronaut.vy, astronaut.targetVy, 0.032 * frameScale);
+
+      /* center-avoidance push keeps idle motion near page periphery */
+      if (astronautInCenterZone(astronaut.x, astronaut.y)) {
+        const cx = W * 0.5;
+        const cy = H * 0.5;
+        const ex = astronaut.x - cx;
+        const ey = astronaut.y - cy;
+        const ed = Math.hypot(ex, ey) + 0.001;
+        astronaut.vx += (ex / ed) * 0.06 * frameScale;
+        astronaut.vy += (ey / ed) * 0.06 * frameScale;
+      }
+
+      astronaut.x += astronaut.vx * frameScale;
+      astronaut.y += astronaut.vy * frameScale;
+    }
+
+    const margin = Math.max(20, astronaut.size * 1.6);
+    astronaut.x = clamp(astronaut.x, margin, W - margin);
+    astronaut.y = clamp(astronaut.y, margin, H - margin);
+    astronaut.bobPhase += 0.014 * frameScale;
+    astronaut.wavePhase += (astronaut.hover || astronaut.dragging ? 0.20 : 0.11) * frameScale;
+    astronaut.suitDrift += 0.012 * frameScale;
+
+    astronaut.bubble.cooldownSec -= dtSec;
+    if (astronaut.bubble.timerSec > 0) {
+      astronaut.bubble.timerSec -= dtSec;
+    } else if (astronaut.bubble.cooldownSec <= 0) {
+      triggerAstronautBubble();
+    }
+
+    const bubbleT = astronaut.bubble.timerSec;
+    if (bubbleT > 0) {
+      const inA = clamp((3.4 - bubbleT) / 0.25, 0, 1);
+      const outA = clamp(bubbleT / 0.45, 0, 1);
+      astronaut.bubble.alpha = Math.min(inA, outA);
+    } else {
+      astronaut.bubble.alpha = 0;
+    }
+
+    if (astronaut.moodBoostSec > 0) astronaut.moodBoostSec -= dtSec;
+  };
+
+  const drawAstronaut = () => {
+    if (!astronaut) return;
+
+    const x = astronaut.x;
+    const y = astronaut.y + Math.sin(astronaut.bobPhase) * astronaut.size * 0.32;
+    const s = astronaut.size;
+    const light = isLight();
+    const mood = astronaut.moodBoostSec > 0 ? clamp(astronaut.moodBoostSec / 4, 0, 1) : 0;
+
+    const glowA = (light ? 0.06 : 0.13) + (astronaut.hover ? 0.06 : 0) + mood * 0.08;
+    const glow = ctx.createRadialGradient(x, y, 0, x, y, s * 4.6);
+    glow.addColorStop(0, light ? `rgba(0,145,165,${(glowA * 1.0).toFixed(3)})` : `rgba(0,229,255,${(glowA * 1.0).toFixed(3)})`);
+    glow.addColorStop(0.42, light ? `rgba(0,132,152,${(glowA * 0.45).toFixed(3)})` : `rgba(0,212,170,${(glowA * 0.50).toFixed(3)})`);
+    glow.addColorStop(1, 'transparent');
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(x, y, s * 4.6, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.rotate(Math.sin(astronaut.bobPhase * 0.8) * 0.06);
+
+    /* detached suit piece drifting in space */
+    const sx = s * (1.95 + Math.sin(astronaut.suitDrift) * 0.28);
+    const sy = s * (-0.58 + Math.cos(astronaut.suitDrift * 0.9) * 0.20);
+    ctx.save();
+    ctx.translate(sx, sy);
+    ctx.rotate(Math.sin(astronaut.suitDrift) * 0.38);
+    const pieceGrad = ctx.createLinearGradient(-s * 0.22, -s * 0.18, s * 0.22, s * 0.18);
+    pieceGrad.addColorStop(0, light ? 'rgba(170,190,202,0.88)' : 'rgba(176,210,224,0.88)');
+    pieceGrad.addColorStop(1, light ? 'rgba(108,132,146,0.88)' : 'rgba(118,150,170,0.88)');
+    ctx.fillStyle = pieceGrad;
+    roundedRectPath(ctx, -s * 0.24, -s * 0.18, s * 0.50, s * 0.36, 2.2);
+    ctx.fill();
+    ctx.strokeStyle = light ? 'rgba(0,110,132,0.34)' : 'rgba(120,220,245,0.48)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+    ctx.restore();
+
+    /* tether strand */
+    ctx.strokeStyle = light ? 'rgba(128,146,158,0.36)' : 'rgba(176,196,212,0.36)';
+    ctx.setLineDash([2.0, 2.2]);
+    ctx.lineWidth = 0.7;
+    ctx.beginPath();
+    ctx.moveTo(s * 0.70, -s * 0.08);
+    ctx.quadraticCurveTo(s * 1.10, -s * 0.24, sx - s * 0.15, sy);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* backpack */
+    const bagGrad = ctx.createLinearGradient(-s * 0.50, -s * 0.15, -s * 0.05, s * 0.75);
+    bagGrad.addColorStop(0, light ? 'rgba(168,186,198,0.96)' : 'rgba(170,196,214,0.96)');
+    bagGrad.addColorStop(1, light ? 'rgba(118,140,154,0.96)' : 'rgba(120,148,166,0.96)');
+    ctx.fillStyle = bagGrad;
+    roundedRectPath(ctx, -s * 0.54, -s * 0.12, s * 0.38, s * 0.86, 2.8);
+    ctx.fill();
+
+    /* torso */
+    const torsoGrad = ctx.createLinearGradient(-s * 0.44, -s * 0.06, s * 0.36, s * 1.20);
+    torsoGrad.addColorStop(0, light ? 'rgba(245,250,252,0.97)' : 'rgba(240,248,252,0.96)');
+    torsoGrad.addColorStop(0.52, light ? 'rgba(218,230,236,0.97)' : 'rgba(210,224,232,0.96)');
+    torsoGrad.addColorStop(1, light ? 'rgba(188,205,214,0.97)' : 'rgba(182,198,210,0.96)');
+    ctx.fillStyle = torsoGrad;
+    ctx.beginPath();
+    ctx.ellipse(-s * 0.02, s * 0.36, s * 0.52, s * 0.88, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = light ? 'rgba(0,136,156,0.72)' : 'rgba(0,230,214,0.80)';
+    ctx.lineWidth = 1.0;
+    ctx.stroke();
+
+    /* high-visibility suit bands */
+    ctx.fillStyle = light ? 'rgba(255,136,38,0.88)' : 'rgba(255,156,64,0.90)';
+    roundedRectPath(ctx, -s * 0.34, s * 0.08, s * 0.62, s * 0.08, 1.6);
+    ctx.fill();
+    roundedRectPath(ctx, -s * 0.20, s * 0.78, s * 0.36, s * 0.07, 1.4);
+    ctx.fill();
+
+    /* chest details */
+    ctx.fillStyle = light ? 'rgba(136,156,170,0.72)' : 'rgba(144,166,182,0.78)';
+    roundedRectPath(ctx, -s * 0.20, s * 0.26, s * 0.26, s * 0.18, 2.2);
+    ctx.fill();
+    ctx.fillStyle = light ? 'rgba(0,128,92,0.75)' : 'rgba(0,210,140,0.82)';
+    ctx.beginPath();
+    ctx.arc(-s * 0.10, s * 0.35, s * 0.03, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* helmet shell */
+    const helmetShell = ctx.createRadialGradient(-s * 0.06, -s * 0.50, s * 0.05, 0, -s * 0.36, s * 0.64);
+    helmetShell.addColorStop(0, light ? 'rgba(245,252,255,0.98)' : 'rgba(236,248,255,0.96)');
+    helmetShell.addColorStop(1, light ? 'rgba(188,206,220,0.96)' : 'rgba(176,198,214,0.96)');
+    ctx.fillStyle = helmetShell;
+    ctx.beginPath();
+    ctx.arc(0, -s * 0.38, s * 0.60, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = light ? 'rgba(0,128,150,0.64)' : 'rgba(0,226,214,0.72)';
+    ctx.lineWidth = 0.9;
+    ctx.stroke();
+
+    ctx.strokeStyle = light ? 'rgba(255,146,46,0.72)' : 'rgba(255,170,84,0.76)';
+    ctx.lineWidth = 1.0;
+    ctx.beginPath();
+    ctx.arc(0, -s * 0.38, s * 0.60, 0.12 * Math.PI, 0.88 * Math.PI);
+    ctx.stroke();
+
+    /* visor */
+    const visorGrad = ctx.createRadialGradient(-s * 0.12, -s * 0.52, s * 0.02, 0, -s * 0.40, s * 0.38);
+    visorGrad.addColorStop(0, light ? 'rgba(120,164,188,0.82)' : 'rgba(120,178,210,0.80)');
+    visorGrad.addColorStop(0.58, light ? 'rgba(44,92,118,0.86)' : 'rgba(26,76,104,0.86)');
+    visorGrad.addColorStop(1, light ? 'rgba(20,58,80,0.86)' : 'rgba(10,42,64,0.88)');
+    ctx.fillStyle = visorGrad;
+    ctx.beginPath();
+    ctx.arc(0, -s * 0.40, s * 0.40, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* visor reflections */
+    ctx.fillStyle = 'rgba(220,248,255,0.42)';
+    ctx.beginPath();
+    ctx.ellipse(-s * 0.16, -s * 0.52, s * 0.11, s * 0.05, -0.48, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = 'rgba(190,236,248,0.22)';
+    ctx.beginPath();
+    ctx.ellipse(s * 0.02, -s * 0.46, s * 0.07, s * 0.03, -0.25, 0, Math.PI * 2);
+    ctx.fill();
+
+    /* subtle happy cue inside visor */
+    ctx.strokeStyle = 'rgba(212,245,255,0.38)';
+    ctx.lineWidth = 0.8;
+    ctx.beginPath();
+    ctx.arc(0, -s * 0.30, s * 0.09, 0.25, Math.PI - 0.25);
+    ctx.stroke();
+
+    /* left arm */
+    ctx.strokeStyle = light ? 'rgba(220,234,242,0.92)' : 'rgba(216,232,242,0.94)';
+    ctx.lineWidth = 1.7;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.22, s * 0.04);
+    ctx.lineTo(-s * 0.52, -s * 0.02);
+    ctx.lineTo(-s * 0.72, s * 0.06);
+    ctx.stroke();
+
+    /* right arm waving with forearm articulation */
+    const waveA = -0.95 + Math.sin(astronaut.wavePhase) * 0.50;
+    ctx.save();
+    ctx.translate(s * 0.25, s * 0.04);
+    ctx.rotate(waveA);
+    ctx.beginPath();
+    ctx.moveTo(0, 0);
+    ctx.lineTo(s * 0.34, -s * 0.01);
+    ctx.lineTo(s * 0.58, s * 0.08);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(s * 0.60, s * 0.09, s * 0.07, 0, Math.PI * 2);
+    ctx.fillStyle = light ? 'rgba(228,240,246,0.95)' : 'rgba(222,236,246,0.95)';
+    ctx.fill();
+    ctx.restore();
+
+    /* legs and boots */
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.16, s * 1.02);
+    ctx.lineTo(-s * 0.22, s * 1.42);
+    ctx.moveTo(s * 0.16, s * 1.02);
+    ctx.lineTo(s * 0.22, s * 1.42);
+    ctx.stroke();
+
+    ctx.fillStyle = light ? 'rgba(170,188,200,0.96)' : 'rgba(164,186,202,0.96)';
+    roundedRectPath(ctx, -s * 0.30, s * 1.38, s * 0.16, s * 0.09, 1.6);
+    ctx.fill();
+    roundedRectPath(ctx, s * 0.14, s * 1.38, s * 0.16, s * 0.09, 1.6);
+    ctx.fill();
+
+    /* tiny RCS thruster blink */
+    const thrusterA = 0.10 + 0.12 * (0.5 + 0.5 * Math.sin(astronaut.suitDrift * 3.4));
+    ctx.fillStyle = light
+      ? `rgba(0,145,186,${thrusterA.toFixed(3)})`
+      : `rgba(132,232,255,${thrusterA.toFixed(3)})`;
+    ctx.beginPath();
+    ctx.arc(-s * 0.56, s * 0.44, s * 0.05, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+
+    /* speech cloud */
+    const ba = astronaut.bubble.alpha;
+    if (ba > 0.01 && astronaut.bubble.text) {
+      const text = astronaut.bubble.text;
+      ctx.save();
+      ctx.font = '700 11px Space Mono, monospace';
+      const padX = 10;
+      const tw = Math.min(220, ctx.measureText(text).width + padX * 2);
+      const th = 28;
+      const bx = clamp(x + s * 1.2, 8, W - tw - 8);
+      const by = clamp(y - s * 2.9, 8, H - th - 8);
+
+      ctx.fillStyle = light
+        ? `rgba(250,255,255, ${(0.86 * ba).toFixed(3)})`
+        : `rgba(6,24,34, ${(0.82 * ba).toFixed(3)})`;
+      ctx.strokeStyle = light
+        ? `rgba(0,125,145, ${(0.40 * ba).toFixed(3)})`
+        : `rgba(120,235,225, ${(0.46 * ba).toFixed(3)})`;
+      ctx.lineWidth = 1;
+      roundedRectPath(ctx, bx, by, tw, th, 9);
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(bx + 14, by + th);
+      ctx.lineTo(bx + 22, by + th);
+      ctx.lineTo(x + s * 0.44, y - s * 1.1);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.fillStyle = light
+        ? `rgba(0,98,116, ${(0.92 * ba).toFixed(3)})`
+        : `rgba(205,250,245, ${(0.95 * ba).toFixed(3)})`;
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(text, bx + padX, by + th * 0.56);
+      ctx.restore();
     }
   };
 
@@ -483,6 +952,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const triggerHoleExplosion = (bh) => {
     if (!bh || bh.state !== 'active') return;
+
+    if (astronaut && !astronaut.dragging) {
+      const funny = ASTRONAUT_EXPLOSION_PHRASES[Math.floor(Math.random() * ASTRONAUT_EXPLOSION_PHRASES.length)];
+      triggerAstronautBubble(funny);
+      astronaut.moodBoostSec = 3.2;
+    }
 
     bh.state = 'exploding';
     bh.explodeTimerSec = 1.8;
@@ -1409,6 +1884,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateSuperPhotons(dtSec);
     updateMobHoles(dtSec);     /* advance black-hole positions before grid uses them */
+    updateAstronaut(dtSec);
 
     drawGalaxy();
     drawNebulae();
@@ -1418,6 +1894,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawMobileBlackHoles();
     drawComets();
     drawSuperPhotons();
+    drawAstronaut();
 
     raf = requestAnimationFrame(draw);
   };
@@ -1430,23 +1907,67 @@ document.addEventListener('DOMContentLoaded', () => {
     mouse.x = e.clientX;
     mouse.y = e.clientY;
     mouse.active = true;
+    moveAstronautDrag(e.clientX, e.clientY);
+    if (astronaut) astronaut.hover = astronautHit(e.clientX, e.clientY);
   }, { passive: true });
-  document.addEventListener('mouseleave', () => { mouse.active = false; });
+  document.addEventListener('mouseleave', () => {
+    mouse.active = false;
+    if (astronaut) astronaut.hover = false;
+    endAstronautDrag();
+  });
+
+  document.addEventListener('mousedown', e => {
+    if (intro.enabled) return;
+    beginAstronautDrag(e.clientX, e.clientY);
+  }, { passive: true });
+
+  document.addEventListener('mouseup', () => {
+    endAstronautDrag();
+  }, { passive: true });
+
   /* touch support */
+  document.addEventListener('touchstart', e => {
+    if (intro.enabled) return;
+    if (e.touches.length > 0) {
+      beginAstronautDrag(e.touches[0].clientX, e.touches[0].clientY);
+    }
+  }, { passive: true });
+
   document.addEventListener('touchmove', e => {
     if (e.touches.length > 0) {
       mouse.x = e.touches[0].clientX;
       mouse.y = e.touches[0].clientY;
       mouse.active = true;
+      moveAstronautDrag(e.touches[0].clientX, e.touches[0].clientY);
     }
   }, { passive: true });
-  document.addEventListener('touchend', () => { mouse.active = false; }, { passive: true });
+  document.addEventListener('touchend', () => {
+    mouse.active = false;
+    if (astronaut) astronaut.hover = false;
+    endAstronautDrag();
+  }, { passive: true });
 
   document.addEventListener('click', e => {
     if (intro.enabled) return;
 
+    if (astronautSuppressClick) {
+      astronautSuppressClick = false;
+      return;
+    }
+
     const x = e.clientX;
     const y = e.clientY;
+
+    if (astronautHit(x, y)) {
+      if (astronaut) {
+        astronaut.moodBoostSec = 4;
+        astronaut.hover = true;
+        astronaut.dragMoved = false;
+      }
+      const text = ASTRONAUT_CLICK_PHRASES[Math.floor(Math.random() * ASTRONAUT_CLICK_PHRASES.length)];
+      triggerAstronautBubble(text);
+      return;
+    }
 
     /* click black hole -> immediate explosion */
     let target = null;
