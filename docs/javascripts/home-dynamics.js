@@ -127,6 +127,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* tiny fun astronaut */
   let astronaut = null;
+  const ASTRONAUT_UNLOCK_PROMPTS = [
+    'Double click me to unlock my orbit.',
+    'Double click to free Astro for a drift run.',
+    'Astro is docked. Double click if you want free roam.',
+    'Need a moving copilot? Double click and I will roam.',
+    'Double click me and I will cruise around the stars.',
+    'Double click on me and I will be free in space.',
+  ];
   const ASTRONAUT_IDLE_PHRASES = [
     'You are awesome!',
     'Keep exploring!',
@@ -178,6 +186,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'I trust your next move.',
     'The nebula noticed that.',
     'You just improved the universe.',
+    'Click Connect to get in touch with us anytime.',
+    'Try Machine Gnostics OSS by clicking the Install button.',
+    'Go through the FAQ. It is full of mission-ready answers.',
+    'We are happy to provide support whenever you need it.',
+    'Double click on me and I will be free in space.',
   ];
   const ASTRONAUT_CLICK_PHRASES = [
     'Hey, Aestro is awake and available.',
@@ -274,6 +287,9 @@ document.addEventListener('DOMContentLoaded', () => {
     'Astro welcomes you to the calm side of the galaxy.',
     'Hello again. I brought orbit-grade optimism.',
     'Warm greeting from a very small astronaut.',
+    'Hello commander. Click Connect if you want to get in touch.',
+    'Greetings. Try Machine Gnostics OSS by clicking Install.',
+    'Hi there. We are happy to provide support.',
   ];
   const ASTRONAUT_TIME_PHRASES = {
     morning: [
@@ -477,6 +493,10 @@ document.addEventListener('DOMContentLoaded', () => {
     'Machine Gnostics OSS: playful, precise, and practical.',
     'Let Machine Gnostics OSS help the signal sing.',
     'Machine Gnostics OSS is your friendly gravity well for insight.',
+    'Want to talk? Click the Connect button and get in touch.',
+    'Try Machine Gnostics OSS by clicking the Install button.',
+    'Go through the FAQ for quick answers and mission tips.',
+    'We are happy to provide support for your next step.',
   ];
   const ASTRONAUT_FRIDAY_SPECIAL = 'WEEKEND ORBIT: Friday detected. Keep the vibes in stable orbit.';
   const ASTRONAUT_TAGS = ['COMMS', 'EVA LOG', 'MISSION TIP', 'ORBIT NOTE'];
@@ -784,15 +804,16 @@ document.addEventListener('DOMContentLoaded', () => {
         visitCount = 1;
       }
       const personality = ASTRONAUT_PERSONALITIES[(visitCount - 1) % ASTRONAUT_PERSONALITIES.length];
+      const dock = getAstronautDockPosition('right');
       astronaut = {
-        x: px,
-        y: rand(H * 0.16, H * 0.86),
+        x: dock.x,
+        y: dock.y,
         vx: rand(-0.24, 0.24),
         vy: rand(-0.18, 0.18),
         targetVx: rand(-0.24, 0.24),
         targetVy: rand(-0.18, 0.18),
-        targetX: px,
-        targetY: rand(H * 0.16, H * 0.86),
+        targetX: dock.x,
+        targetY: dock.y,
         driftTimerSec: rand(2.2, 5.5),
         bobPhase: rand(0, Math.PI * 2),
         wavePhase: rand(0, Math.PI * 2),
@@ -811,6 +832,12 @@ document.addEventListener('DOMContentLoaded', () => {
         personalityKey: personality.key,
         personalityLabel: personality.label,
         visitCount,
+        movementMode: 'locked',
+        dockSide: 'right',
+        dockX: dock.x,
+        dockY: dock.y,
+        requestUnlockTimerSec: rand(10.0, 18.0),
+        requestSignalSec: 0,
         hover: false,
         dragging: false,
         dragOffsetX: 0,
@@ -837,6 +864,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     astronaut.size = size;
+    const dock = getAstronautDockPosition(astronaut.dockSide || 'right');
+    astronaut.dockX = dock.x;
+    astronaut.dockY = dock.y;
+    if (astronaut.movementMode === 'locked') {
+      astronaut.x = dock.x;
+      astronaut.y = dock.y;
+      astronaut.targetX = dock.x;
+      astronaut.targetY = dock.y;
+      astronaut.vx = 0;
+      astronaut.vy = 0;
+    } else if (astronaut.movementMode === 'returning') {
+      astronaut.targetX = dock.x;
+      astronaut.targetY = dock.y;
+    }
     astronaut.x = clamp(astronaut.x, 28, W - 28);
     astronaut.y = clamp(astronaut.y, 28, H - 28);
   };
@@ -906,6 +947,56 @@ document.addEventListener('DOMContentLoaded', () => {
       astronaut.gesture = 'spin';
       astronaut.gestureTimerSec = Math.max(astronaut.gestureTimerSec, 1.2);
     }
+  };
+
+  const getAstronautDockPosition = (side = 'right') => {
+    const size = astronaut ? astronaut.size : Math.max(14, Math.min(W, H) * 0.022);
+    const margin = Math.max(24, size * 1.95);
+    const headerEl = document.querySelector('.md-header');
+    const headerOffset = headerEl ? headerEl.getBoundingClientRect().height : 0;
+    return {
+      x: side === 'left' ? margin + size * 0.2 : W - margin - size * 0.2,
+      y: Math.max(margin + size * 0.88, headerOffset + size * 1.65),
+    };
+  };
+
+  const setAstronautMovementMode = (mode) => {
+    if (!astronaut) return;
+    astronaut.movementMode = mode;
+    if (mode === 'locked' || mode === 'returning') {
+      const dock = getAstronautDockPosition(astronaut.dockSide || 'right');
+      astronaut.dockX = dock.x;
+      astronaut.dockY = dock.y;
+      astronaut.targetX = dock.x;
+      astronaut.targetY = dock.y;
+      astronaut.requestSignalSec = mode === 'locked' ? astronaut.requestSignalSec : 0;
+    } else {
+      const target = pickAstronautTarget();
+      astronaut.targetX = target.x;
+      astronaut.targetY = target.y;
+      astronaut.driftTimerSec = rand(1.2, 3.2);
+      astronaut.requestSignalSec = 0;
+    }
+  };
+
+  const toggleAstronautDockLock = () => {
+    if (!astronaut) return;
+    if (astronaut.movementMode === 'locked') {
+      setAstronautMovementMode('roaming');
+      astronaut.requestUnlockTimerSec = rand(18.0, 30.0);
+      astronaut.moodBoostSec = 3.4;
+      setAstronautMood('excited', 4.2);
+      astronaut.gesture = 'wave';
+      astronaut.gestureTimerSec = rand(2.0, 3.0);
+      triggerAstronautBubble('Unlock received. Astro is free to roam.', 'event');
+      return;
+    }
+
+    setAstronautMovementMode('returning');
+    astronaut.requestUnlockTimerSec = rand(16.0, 28.0);
+    astronaut.gesture = 'salute';
+    astronaut.gestureTimerSec = rand(1.6, 2.8);
+    triggerAstronautBubble('Return command accepted. Floating back to dock.', 'event');
   };
 
   const pickAstronautGesture = () => {
@@ -990,6 +1081,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const beginAstronautDrag = (px, py) => {
     if (!astronaut || !astronautHit(px, py)) return false;
+    if (astronaut.movementMode === 'locked' || astronaut.movementMode === 'returning') return false;
     astronaut.dragging = true;
     astronaut.dragOffsetX = astronaut.x - px;
     astronaut.dragOffsetY = astronaut.y - py;
@@ -1187,14 +1279,37 @@ document.addEventListener('DOMContentLoaded', () => {
       setAstronautMood('excited', 2.2);
     }
 
+    if (astronaut.requestSignalSec > 0) astronaut.requestSignalSec -= dtSec;
+    if (astronaut.movementMode === 'locked') {
+      astronaut.requestUnlockTimerSec -= dtSec;
+      if (astronaut.requestUnlockTimerSec <= 0 && astronaut.bubble.timerSec <= 0.05 && astronaut.bubble.cooldownSec <= 0.5) {
+        const prompt = ASTRONAUT_UNLOCK_PROMPTS[Math.floor(Math.random() * ASTRONAUT_UNLOCK_PROMPTS.length)];
+        astronaut.requestSignalSec = 5.4;
+        astronaut.gesture = 'visor';
+        astronaut.gestureTimerSec = rand(1.8, 3.0);
+        triggerAstronautBubble(prompt, 'event');
+        astronaut.requestUnlockTimerSec = rand(22.0, 36.0);
+      }
+    }
+
     if (!astronaut.dragging) {
-      astronaut.driftTimerSec -= dtSec;
+      const isLocked = astronaut.movementMode === 'locked';
+      const isReturning = astronaut.movementMode === 'returning';
       const reachTarget = Math.hypot(astronaut.x - astronaut.targetX, astronaut.y - astronaut.targetY) < Math.max(18, astronaut.size * 2.2);
-      if (astronaut.driftTimerSec <= 0 || reachTarget || astronautInCenterZone(astronaut.x, astronaut.y)) {
-        const target = pickAstronautTarget();
-        astronaut.targetX = target.x;
-        astronaut.targetY = target.y;
-        astronaut.driftTimerSec = rand(1.4, 3.6);
+      if (isLocked) {
+        astronaut.targetX = astronaut.dockX;
+        astronaut.targetY = astronaut.dockY;
+      } else if (isReturning) {
+        astronaut.targetX = astronaut.dockX;
+        astronaut.targetY = astronaut.dockY;
+      } else {
+        astronaut.driftTimerSec -= dtSec;
+        if (astronaut.driftTimerSec <= 0 || reachTarget || astronautInCenterZone(astronaut.x, astronaut.y)) {
+          const target = pickAstronautTarget();
+          astronaut.targetX = target.x;
+          astronaut.targetY = target.y;
+          astronaut.driftTimerSec = rand(1.4, 3.6);
+        }
       }
 
       const dx = astronaut.targetX - astronaut.x;
@@ -1205,15 +1320,16 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (astronaut.mood === 'curious') speedMood = 1.10;
       else if (astronaut.mood === 'excited') speedMood = 1.22;
 
-      const desiredVx = (dx / d) * clamp(d / 180, 0.09, 0.42) * speedMood;
-      const desiredVy = (dy / d) * clamp(d / 180, 0.07, 0.34) * speedMood;
+      const speedScale = isLocked ? 0.28 : isReturning ? 0.74 : 1.0;
+      const desiredVx = (dx / d) * clamp(d / 180, isLocked ? 0.02 : 0.09, isLocked ? 0.18 : isReturning ? 0.34 : 0.42) * speedMood * speedScale;
+      const desiredVy = (dy / d) * clamp(d / 180, isLocked ? 0.02 : 0.07, isLocked ? 0.16 : isReturning ? 0.28 : 0.34) * speedMood * speedScale;
 
       astronaut.targetVx = desiredVx;
       astronaut.targetVy = desiredVy;
-      astronaut.vx = lerp(astronaut.vx, astronaut.targetVx, 0.032 * frameScale);
-      astronaut.vy = lerp(astronaut.vy, astronaut.targetVy, 0.032 * frameScale);
+      astronaut.vx = lerp(astronaut.vx, astronaut.targetVx, (isLocked ? 0.10 : isReturning ? 0.05 : 0.032) * frameScale);
+      astronaut.vy = lerp(astronaut.vy, astronaut.targetVy, (isLocked ? 0.10 : isReturning ? 0.05 : 0.032) * frameScale);
 
-      if (astronautInCenterZone(astronaut.x, astronaut.y)) {
+      if (!isLocked && !isReturning && astronautInCenterZone(astronaut.x, astronaut.y)) {
         const cx = W * 0.5;
         const cy = H * 0.5;
         const ex = astronaut.x - cx;
@@ -1225,6 +1341,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
       astronaut.x += astronaut.vx * frameScale;
       astronaut.y += astronaut.vy * frameScale;
+
+      if (isReturning && d < Math.max(10, astronaut.size * 0.65)) {
+        setAstronautMovementMode('locked');
+        astronaut.x = astronaut.dockX;
+        astronaut.y = astronaut.dockY;
+        astronaut.vx = 0;
+        astronaut.vy = 0;
+        astronaut.requestUnlockTimerSec = rand(18.0, 32.0);
+        astronaut.gesture = 'salute';
+        astronaut.gestureTimerSec = rand(1.2, 2.2);
+        triggerAstronautBubble('Dock restored. Double click if you want another orbit run.', 'event');
+      }
     }
 
     const margin = Math.max(20, astronaut.size * 1.6);
@@ -1360,6 +1488,24 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.strokeStyle = cueColor;
     ctx.fillStyle = cueColor;
     ctx.lineWidth = 1.2;
+
+    if (astronaut.requestSignalSec > 0) {
+      const signalA = clamp(astronaut.requestSignalSec / 5.4, 0, 1) * (0.55 + 0.45 * Math.sin(time * 7.5));
+      const signalColor = light
+        ? `rgba(0,136,170, ${(0.78 * signalA).toFixed(3)})`
+        : `rgba(114,244,232, ${(0.88 * signalA).toFixed(3)})`;
+      ctx.strokeStyle = signalColor;
+      ctx.fillStyle = signalColor;
+      ctx.lineWidth = 1.15;
+      ctx.beginPath();
+      ctx.arc(0, -4, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+      for (const rr of [6, 10, 14]) {
+        ctx.beginPath();
+        ctx.arc(0, -4, rr, 1.18 * Math.PI, 1.82 * Math.PI);
+        ctx.stroke();
+      }
+    }
 
     if (astronaut.mood === 'excited') {
       for (const [dx, dy, r] of [[-10, -2, 1.8], [0, -10, 2.4], [10, -2, 1.8]]) {
@@ -1608,6 +1754,47 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.beginPath();
     ctx.arc(-s * 0.56, s * 0.44, s * 0.05, 0, Math.PI * 2);
     ctx.fill();
+
+    const travelSpeed = Math.hypot(astronaut.vx, astronaut.vy);
+    if (astronaut.movementMode !== 'locked' && travelSpeed > 0.025) {
+      const dirX = astronaut.vx / (travelSpeed + 0.0001);
+      const dirY = astronaut.vy / (travelSpeed + 0.0001);
+      const thrust = clamp(travelSpeed / 0.34, 0.35, 1.0);
+      const sideDriftX = -dirY * s * 0.10;
+      const sideDriftY = dirX * s * 0.10;
+      const suitExhaustX = -dirX * s * 0.18 + sideDriftX;
+      const suitExhaustY = s * 0.28 - dirY * s * 0.18 + sideDriftY;
+      ctx.strokeStyle = light
+        ? `rgba(0,170,210, ${(0.24 + thrust * 0.24).toFixed(3)})`
+        : `rgba(126,244,255, ${(0.30 + thrust * 0.30).toFixed(3)})`;
+      ctx.lineWidth = s * (0.035 + thrust * 0.012);
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(suitExhaustX, suitExhaustY);
+      ctx.lineTo(
+        suitExhaustX - dirX * s * (0.34 + thrust * 0.20),
+        suitExhaustY - dirY * s * (0.34 + thrust * 0.20)
+      );
+      ctx.stroke();
+
+      for (let i = 0; i < 5; i++) {
+        const puff = 1 - i / 3;
+        const ox = suitExhaustX - dirX * s * (0.10 + i * 0.18 + thrust * 0.12) + Math.sin(time * 10 + i) * s * 0.035;
+        const oy = suitExhaustY - dirY * s * (0.08 + i * 0.16 + thrust * 0.10) + Math.cos(time * 9 + i) * s * 0.035;
+        ctx.fillStyle = light
+          ? `rgba(255,176,96, ${(0.30 + puff * 0.24 * thrust).toFixed(3)})`
+          : `rgba(255,204,112, ${(0.36 + puff * 0.28 * thrust).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(ox, oy, s * (0.07 + puff * 0.06 * thrust), 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = light
+          ? `rgba(0,148,182, ${(0.22 + puff * 0.14 * thrust).toFixed(3)})`
+          : `rgba(110,244,255, ${(0.26 + puff * 0.16 * thrust).toFixed(3)})`;
+        ctx.beginPath();
+        ctx.arc(ox - dirX * s * 0.11, oy - dirY * s * 0.11, s * (0.05 + puff * 0.04 * thrust), 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
     ctx.restore();
 
@@ -3097,6 +3284,12 @@ document.addEventListener('DOMContentLoaded', () => {
       burstTimerSec = 60;
     }
   }, { passive: true });
+
+  document.addEventListener('dblclick', e => {
+    if (intro.enabled || !astronaut) return;
+    if (!astronautHit(e.clientX, e.clientY)) return;
+    toggleAstronautDockLock();
+  });
 
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
