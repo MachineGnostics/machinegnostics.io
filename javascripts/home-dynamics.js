@@ -525,6 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let galaxyDust    = [];
   let galaxySmudges = [];
   let galaxyCore    = { x: 0, y: 0 };
+  let solarSystems  = [];
 
   /* first-visit intro: void -> big bang -> photon inflow */
   let intro = {
@@ -733,9 +734,9 @@ document.addEventListener('DOMContentLoaded', () => {
     comets = Array.from({ length: pn }, () => newComet());
 
     /* mobile black holes — 4 small freely-drifting holes */
-    /* stagger initial age so the 4 holes don't explode at the same time */
+    /* stagger initial age so lifecycle transitions are naturally offset */
     mobHoles = Array.from({ length: 4 }, (_, i) => {
-      const bh = newMobHole();
+      const bh = initMobHole(newMobHole());
       bh.ageSec += i * 8;
       return bh;
     });
@@ -783,6 +784,45 @@ document.addEventListener('DOMContentLoaded', () => {
       { x: W*0.04, y: H*0.82, rx: W*0.028, ry: H*0.004, ang:  1.10, col: [195,240,255], a: 0.10 },
       { x: W*0.55, y: H*0.92, rx: W*0.022, ry: H*0.003, ang: -0.20, col: [220,200,255], a: 0.08 },
     ];
+
+    /* mini solar systems: exactly two (left + right), gently floating */
+    solarSystems = [0, 1].map(side => {
+      const onLeft = side === 0;
+      const sx = onLeft ? rand(W * 0.12, W * 0.34) : rand(W * 0.66, W * 0.88);
+      const sy = rand(H * 0.14, H * 0.84);
+      const starR = rand(2.2, 4.2);
+      const planetCount = Math.floor(rand(3, 5));
+      const starCol = isLight() ? [160, 118, 36] : [255, 226, 140];
+      const baseOrbitSpeed = rand(0.170, 0.260);
+      const planets = Array.from({ length: planetCount }, (_, i) => {
+        const ring = starR * (2.6 + i * rand(1.15, 1.45));
+        const speedScale = Math.max(0.34, 1.00 - i * rand(0.18, 0.28));
+        return {
+          orbitR: ring,
+          orbitYScale: rand(0.72, 1.0),
+          orbitRot: rand(0, Math.PI * 2),
+          phase: rand(0, Math.PI * 2),
+          speed: baseOrbitSpeed * speedScale,
+          r: rand(0.65, 1.45),
+          col: isLight()
+            ? [Math.floor(rand(0, 120)), Math.floor(rand(100, 165)), Math.floor(rand(90, 170))]
+            : [Math.floor(rand(120, 230)), Math.floor(rand(160, 245)), Math.floor(rand(170, 255))],
+        };
+      });
+      return {
+        x: sx,
+        y: sy,
+        driftAx: rand(12, 26),
+        driftAy: rand(8, 20),
+        driftSpeedX: rand(0.010, 0.028),
+        driftSpeedY: rand(0.008, 0.022),
+        driftPhaseX: rand(0, Math.PI * 2),
+        driftPhaseY: rand(0, Math.PI * 2),
+        starR,
+        starCol,
+        planets,
+      };
+    });
 
     initAstronaut();
 
@@ -2114,6 +2154,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const makeBirthParticles = (x, y, targetR, count = 26) => {
+    const parts = [];
+    for (let i = 0; i < count; i++) {
+      const a = rand(0, Math.PI * 2);
+      const d = rand(targetR * 2.6, targetR * 5.4);
+      parts.push({
+        x: x + Math.cos(a) * d,
+        y: y + Math.sin(a) * d,
+        vx: Math.cos(a + Math.PI * 0.5) * rand(0.02, 0.10),
+        vy: Math.sin(a + Math.PI * 0.5) * rand(0.02, 0.10),
+        alpha: rand(0.22, 0.55),
+        size: rand(0.45, 1.35),
+      });
+    }
+    return parts;
+  };
+
+  const startHoleBirth = (bh, keepPosition = true) => {
+    if (!keepPosition) {
+      bh.x = rand(W * 0.08, W * 0.92);
+      bh.y = rand(H * 0.08, H * 0.92);
+    }
+    bh.state = 'birthing';
+    bh.birthDurationSec = rand(2.2, 3.3);
+    bh.birthTimerSec = bh.birthDurationSec;
+    bh.renderAlpha = 0;
+    bh.r = Math.max(1, bh.baseR * 0.08);
+    bh.birthParticles = makeBirthParticles(bh.x, bh.y, bh.baseR, Math.floor(rand(22, 34)));
+  };
+
   const newMobHole = () => {
     const angle = rand(0, Math.PI * 2);
     const spd   = rand(0.12, 0.38);
@@ -2128,15 +2198,26 @@ document.addEventListener('DOMContentLoaded', () => {
       r:             baseR,
       phase:         rand(0, Math.PI * 2),
       turn:          rand(-0.005, 0.005),
+      lensPulse:     0,
       consumed:      0,
       capturedCount: 0,
-      lifeSpanSec:   60,
+      lifeSpanSec:   100,
       ageSec:        rand(0, 14),
-      state:         'active',        /* 'active' | 'exploding' */
-      explodeTimerSec: 0,
-      explodeRing:   0,
-      flashAlpha:    0,
+      state:         'birthing',      /* 'birthing' | 'active' | 'fading' */
+      birthTimerSec: 0,
+      birthDurationSec: 0,
+      birthParticles: [],
+      fadeTimerSec:  0,
+      fadeDurationSec: 2.8,
+      renderAlpha:   1,
+      ripples:       [],
+      rippleTimerSec: rand(2.8, 5.2),
     };
+  };
+
+  const initMobHole = (bh) => {
+    startHoleBirth(bh, true);
+    return bh;
   };
 
   const newComet = () => {
@@ -2224,47 +2305,37 @@ document.addEventListener('DOMContentLoaded', () => {
     if (comets.length > maxC) comets.splice(0, comets.length - maxC);
   };
 
-  const triggerHoleExplosion = (bh) => {
+  const triggerHoleExplosion = (bh, options = {}) => {
     if (!bh || bh.state !== 'active') return;
 
-    if (astronaut && !astronaut.dragging) {
-      const funny = ASTRONAUT_EXPLOSION_PHRASES[Math.floor(Math.random() * ASTRONAUT_EXPLOSION_PHRASES.length)];
-      triggerAstronautBubble(funny, 'explosion');
-      astronaut.moodBoostSec = 3.2;
-      setAstronautMood('excited', 3.4);
-    }
+    const fromClick = !!options.fromClick;
 
-    bh.state = 'exploding';
-    bh.explodeTimerSec = 1.8;
-    bh.flashAlpha = 1.0;
+    bh.state = 'fading';
+    bh.fadeDurationSec = fromClick ? 0.65 : 2.8;
+    bh.fadeTimerSec = bh.fadeDurationSec;
+    bh.renderAlpha = fromClick ? 0.02 : Math.min(1, bh.renderAlpha || 1);
+
+    const rippleBurst = fromClick ? 3 : 1;
+    for (let i = 0; i < rippleBurst; i++) {
+      bh.ripples.push({
+        r: bh.r * (1.05 + i * 0.18),
+        speed: Math.min(W, H) * (fromClick ? rand(0.075, 0.110) : rand(0.050, 0.080)),
+        alpha: fromClick ? (isLight() ? 0.12 : 0.18) : (isLight() ? 0.08 : 0.11),
+        band: bh.r * (fromClick ? rand(2.0, 3.0) : rand(1.6, 2.4)),
+      });
+    }
 
     /* release all orbiting comets outward (slower repulsion) */
     for (const p of comets) {
       if (p.capturedBy === bh) {
         const oa = (p.orbitAngle || 0) + rand(-0.9, 0.9);
-        p.vx = Math.cos(oa) * rand(0.8, 1.9);
-        p.vy = Math.sin(oa) * rand(0.8, 1.9);
+        p.vx = Math.cos(oa) * rand(0.06, 0.24);
+        p.vy = Math.sin(oa) * rand(0.06, 0.24);
+        p.releaseSlowSec = fromClick ? 2.4 : 1.8;
         p.capturedBy = null;
         p.trail = [];
       }
     }
-
-    /* emit burst photons in all directions */
-    const burst = clamp(12 + Math.floor(bh.consumed * 1.3), 12, 24);
-    for (let i = 0; i < burst; i++) {
-      const ba = (i / burst) * Math.PI * 2 + rand(-0.35, 0.35);
-      const bs = rand(1.0, 2.4);
-      const c  = newComet();
-      c.x = bh.x;
-      c.y = bh.y;
-      c.vx = Math.cos(ba) * bs;
-      c.vy = Math.sin(ba) * bs;
-      c.trail = [];
-      comets.push(c);
-    }
-
-    const maxC = Math.max(90, Math.floor((W * H) / 11000));
-    if (comets.length > maxC) comets.splice(0, comets.length - maxC);
   };
 
   /* ── gravity warp offset ─────────────────────────────────────────── */
@@ -2281,6 +2352,31 @@ document.addEventListener('DOMContentLoaded', () => {
       const d = Math.sqrt(d2) + 0.001;
       dx -= (ex / d) * strength;
       dy -= (ey / d) * strength;
+
+      if (mobHoles.includes(w) && w.state === 'active') {
+        const lensZone = w.r * 8.5;
+        if (d < lensZone) {
+          const t = clamp(1 - d / lensZone, 0, 1);
+          const tx = -(ey / d);
+          const ty = (ex / d);
+          const swirl = w.mass * (0.8 + t * 2.2) * (0.55 + t * 0.45);
+          dx += tx * swirl;
+          dy += ty * swirl;
+        }
+
+        /* sparse ripple fronts: low-contrast radial deformation */
+        if (w.ripples && w.ripples.length) {
+          for (const rp of w.ripples) {
+            const band = rp.band;
+            const distToFront = Math.abs(d - rp.r);
+            if (distToFront > band) continue;
+            const t = 1 - distToFront / band;
+            const radial = t * (rp.alpha || 0) * w.mass * 1.25;
+            dx += (ex / d) * radial;
+            dy += (ey / d) * radial;
+          }
+        }
+      }
     }
 
     /* super photons distort local space-time like tiny fast black holes */
@@ -2303,38 +2399,148 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ── update: mobile black holes (positions + lifecycle state machine) ── */
   const updateMobHoles = (dtSec) => {
     const frameScale = clamp(dtSec * 60, 0.45, 2.2);
+
+    const activeHoles = mobHoles.filter(bh => bh.state === 'active');
+    for (let i = 0; i < activeHoles.length; i++) {
+      for (let j = i + 1; j < activeHoles.length; j++) {
+        const a = activeHoles[i];
+        const b = activeHoles[j];
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        const d = Math.hypot(dx, dy) + 0.001;
+        const nx = dx / d;
+        const ny = dy / d;
+        const tx = -ny;
+        const ty = nx;
+
+        const influenceR = (a.r + b.r) * 8;
+        if (d < influenceR) {
+          const t = clamp((influenceR - d) / influenceR, 0, 1);
+          const g = ((a.mass + b.mass) * 0.009 * t) / (1 + d * 0.012);
+          a.vx += nx * g * frameScale;
+          a.vy += ny * g * frameScale;
+          b.vx -= nx * g * frameScale;
+          b.vy -= ny * g * frameScale;
+
+          const orbitKick = (0.003 + t * 0.010) * frameScale;
+          a.vx += tx * orbitKick;
+          a.vy += ty * orbitKick;
+          b.vx -= tx * orbitKick;
+          b.vy -= ty * orbitKick;
+
+          a.lensPulse = Math.max(a.lensPulse, t * 0.9);
+          b.lensPulse = Math.max(b.lensPulse, t * 0.9);
+        }
+
+        const minSep = (a.r + b.r) * 1.2;
+        if (d < minSep) {
+          const push = (minSep - d) * 0.5;
+          a.x -= nx * push;
+          a.y -= ny * push;
+          b.x += nx * push;
+          b.y += ny * push;
+        }
+      }
+    }
+
     for (const bh of mobHoles) {
 
-      /* ── EXPLODING: animate shockwave, then respawn ── */
-      if (bh.state === 'exploding') {
-        bh.explodeTimerSec -= dtSec;
-        bh.explodeRing += Math.min(W, H) * 0.16 * dtSec; /* 2x slower repel wave */
-        bh.flashAlpha = clamp(bh.explodeTimerSec / 0.95, 0, 1);
-        if (bh.explodeTimerSec <= 0) {
+      /* ── BIRTHING: seed particles converge, then hole stabilizes ── */
+      if (bh.state === 'birthing') {
+        bh.birthTimerSec -= dtSec;
+        const bornT = clamp(1 - (bh.birthTimerSec / Math.max(0.001, bh.birthDurationSec)), 0, 1);
+        const ease = bornT * bornT * (3 - 2 * bornT);
+        bh.renderAlpha = ease;
+        bh.r = Math.max(1, bh.baseR * (0.08 + 0.92 * ease));
+
+        if (bh.birthParticles && bh.birthParticles.length) {
+          for (let pi = bh.birthParticles.length - 1; pi >= 0; pi--) {
+            const sp = bh.birthParticles[pi];
+            const ex = bh.x - sp.x;
+            const ey = bh.y - sp.y;
+            const d = Math.hypot(ex, ey) + 0.001;
+            const nx = ex / d;
+            const ny = ey / d;
+            const tx = -ny;
+            const ty = nx;
+            const pull = (0.030 + (1 - bornT) * 0.020) * frameScale;
+            sp.vx += nx * pull + tx * 0.004 * frameScale;
+            sp.vy += ny * pull + ty * 0.004 * frameScale;
+            sp.vx *= 0.965;
+            sp.vy *= 0.965;
+            sp.x += sp.vx * frameScale;
+            sp.y += sp.vy * frameScale;
+            sp.alpha = Math.max(0, sp.alpha - dtSec * 0.14);
+            if (d < bh.r * 0.62 || sp.alpha <= 0.01) {
+              bh.birthParticles.splice(pi, 1);
+            }
+          }
+        }
+
+        if (bh.birthTimerSec <= 0) {
+          bh.state = 'active';
+          bh.renderAlpha = 1;
+          bh.r = bh.baseR;
+          bh.birthParticles = [];
+        }
+        continue;
+      }
+
+      /* ── FADING: smooth decay, then clean respawn ── */
+      if (bh.state === 'fading') {
+        bh.fadeTimerSec -= dtSec;
+        const tFade = clamp(bh.fadeTimerSec / Math.max(0.001, bh.fadeDurationSec), 0, 1);
+        bh.renderAlpha = tFade;
+        bh.r *= 1 + dtSec * 0.06;
+        if (bh.fadeTimerSec <= 0) {
           /* respawn at fresh random position */
           const a2 = rand(0, Math.PI * 2), s2 = rand(0.12, 0.38);
           bh.x = rand(W * 0.08, W * 0.92);  bh.y = rand(H * 0.08, H * 0.92);
           bh.vx = Math.cos(a2) * s2;        bh.vy = Math.sin(a2) * s2;
           bh.turn = rand(-0.005, 0.005);
+          bh.lensPulse = 0;
           bh.consumed = 0;
           bh.capturedCount = 0;
           bh.ageSec = 0;
           bh.r = bh.baseR;
-          bh.state = 'active';
-          bh.explodeRing = 0;
-          bh.flashAlpha = 0;
+          bh.renderAlpha = 0;
+          bh.ripples = [];
+          bh.rippleTimerSec = rand(2.8, 5.2);
+          startHoleBirth(bh, true);
         }
         continue;
       }
 
       /* ── ACTIVE: drift + lifecycle countdown ── */
       const angle = Math.atan2(bh.vy, bh.vx) + bh.turn * frameScale;
-      const spd   = Math.sqrt(bh.vx * bh.vx + bh.vy * bh.vy);
+      const spd = clamp(Math.sqrt(bh.vx * bh.vx + bh.vy * bh.vy), 0.05, 0.70);
       bh.vx = Math.cos(angle) * spd;
       bh.vy = Math.sin(angle) * spd;
       bh.x += bh.vx * frameScale;
       bh.y += bh.vy * frameScale;
       bh.phase += 0.014 * frameScale;
+      bh.lensPulse = Math.max(0, (bh.lensPulse || 0) - dtSec * 0.5);
+      bh.renderAlpha = lerp(bh.renderAlpha || 0, 1, 0.05);
+
+      bh.rippleTimerSec -= dtSec;
+      if (bh.rippleTimerSec <= 0) {
+        bh.ripples.push({
+          r: bh.r * 1.15,
+          speed: Math.min(W, H) * rand(0.050, 0.080),
+          alpha: isLight() ? 0.08 : 0.11,
+          band: bh.r * rand(1.6, 2.4),
+        });
+        bh.rippleTimerSec = rand(2.8, 5.2);
+      }
+      for (let ri = bh.ripples.length - 1; ri >= 0; ri--) {
+        const rp = bh.ripples[ri];
+        rp.r += rp.speed * dtSec;
+        rp.alpha = Math.max(0, rp.alpha - dtSec * 0.030);
+        if (rp.alpha <= 0.004 || rp.r > Math.hypot(W, H) * 0.55) {
+          bh.ripples.splice(ri, 1);
+        }
+      }
+
       if (bh.x < -90)    bh.x = W + 90;
       if (bh.x > W + 90) bh.x = -90;
       if (bh.y < -90)    bh.y = H + 90;
@@ -2533,6 +2739,60 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.globalAlpha = 1;
   };
 
+  const drawMiniSolarSystems = () => {
+    const light = isLight();
+    for (const sys of solarSystems) {
+      const cx = sys.x + Math.sin(time * sys.driftSpeedX + sys.driftPhaseX) * sys.driftAx;
+      const cy = sys.y + Math.cos(time * sys.driftSpeedY + sys.driftPhaseY) * sys.driftAy;
+      const pulse = 0.90 + 0.10 * Math.sin(time * 1.25 + sys.driftPhaseX * 0.7);
+
+      const starGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, sys.starR * (4.2 + 0.8 * pulse));
+      if (light) {
+        starGlow.addColorStop(0, `rgba(${sys.starCol[0]},${sys.starCol[1]},${sys.starCol[2]},${(0.23 + 0.10 * pulse).toFixed(3)})`);
+        starGlow.addColorStop(1, 'transparent');
+      } else {
+        starGlow.addColorStop(0, `rgba(${sys.starCol[0]},${sys.starCol[1]},${sys.starCol[2]},${(0.30 + 0.12 * pulse).toFixed(3)})`);
+        starGlow.addColorStop(1, 'transparent');
+      }
+      ctx.fillStyle = starGlow;
+      ctx.beginPath();
+      ctx.arc(cx, cy, sys.starR * (4.2 + 0.8 * pulse), 0, Math.PI * 2);
+      ctx.fill();
+
+      const starCoreAlpha = light ? (0.58 + 0.10 * pulse) : (0.78 + 0.10 * pulse);
+      ctx.fillStyle = `rgba(${sys.starCol[0]},${sys.starCol[1]},${sys.starCol[2]},${starCoreAlpha.toFixed(3)})`;
+      ctx.beginPath();
+      ctx.arc(cx, cy, sys.starR * (0.96 + 0.07 * pulse), 0, Math.PI * 2);
+      ctx.fill();
+
+      for (const p of sys.planets) {
+        /* visible orbital trajectory */
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(p.orbitRot);
+        ctx.scale(1, p.orbitYScale);
+        ctx.strokeStyle = light ? 'rgba(0,120,130,0.18)' : 'rgba(130,210,220,0.24)';
+        ctx.lineWidth = 0.62;
+        ctx.beginPath();
+        ctx.arc(0, 0, p.orbitR, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+
+        const a = p.phase + time * p.speed;
+        const lx = Math.cos(a) * p.orbitR;
+        const ly = Math.sin(a) * p.orbitR * p.orbitYScale;
+        const cosR = Math.cos(p.orbitRot), sinR = Math.sin(p.orbitRot);
+        const px = cx + lx * cosR - ly * sinR;
+        const py = cy + lx * sinR + ly * cosR;
+
+        ctx.fillStyle = `rgba(${p.col[0]},${p.col[1]},${p.col[2]},${light ? '0.55' : '0.72'})`;
+        ctx.beginPath();
+        ctx.arc(px, py, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+  };
+
   /* ── draw: space-time curvature grid ─────────────────────────────── */
   const drawGrid = () => {
     const cols = 24, rows = 15;
@@ -2547,11 +2807,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const minD2 = Math.min(...wArr.map(w =>
         (gx - w.x) ** 2 + (gy - w.y) ** 2
       ));
+      let bhBoost = 0;
+      for (const bh of mobHoles) {
+        if (bh.state !== 'active') continue;
+        const d = Math.hypot(gx - bh.x, gy - bh.y);
+        const zone = bh.r * 9.5;
+        if (d < zone) {
+          const t = 1 - d / zone;
+          bhBoost = Math.max(bhBoost, t * 0.22);
+        }
+      }
       const scale = Math.min(W, H) * 0.55;
       const t = clamp(Math.sqrt(minD2) / scale, 0, 1);
-      return light
+      const base = light
         ? lerp(0.22, 0.07, t)
         : lerp(0.18, 0.05, t);
+      return clamp(base + bhBoost, 0, light ? 0.40 : 0.34);
     };
 
     /* horizontal lines */
@@ -2582,6 +2853,30 @@ document.addEventListener('DOMContentLoaded', () => {
         else            ctx.lineTo(px, py);
       }
       ctx.stroke();
+    }
+
+    /* subtle bright grid nodes around black holes for local space-time shine */
+    for (let i = 0; i <= cols; i++) {
+      for (let j = 0; j <= rows; j++) {
+        const gx = i * cw, gy = j * ch;
+        let nodeA = 0;
+        for (const bh of mobHoles) {
+          if (bh.state !== 'active') continue;
+          const d = Math.hypot(gx - bh.x, gy - bh.y);
+          const zone = bh.r * 7.4;
+          if (d < zone) {
+            const t = 1 - d / zone;
+            nodeA = Math.max(nodeA, (light ? 0.16 : 0.13) * t);
+          }
+        }
+        if (nodeA < 0.02) continue;
+        const { dx, dy } = warpAt(gx, gy);
+        const px = gx + dx, py = gy + dy;
+        ctx.fillStyle = rgba(CYAN, nodeA);
+        ctx.beginPath();
+        ctx.arc(px, py, light ? 0.65 : 0.55, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
 
     ctx.restore();
@@ -2634,46 +2929,66 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const bh of mobHoles) {
       const { x, y, r, mass, phase } = bh;
 
-      /* ── EXPLODING: shockwave flash ── */
-      if (bh.state === 'exploding') {
-        const fa = bh.flashAlpha;
-        /* central flash bloom */
-        if (fa > 0.04) {
-          const fr = r * 10 * fa;
-          const fl = ctx.createRadialGradient(x, y, 0, x, y, fr);
-          fl.addColorStop(0,    rgba(WHITE, fa * 0.92));
-          fl.addColorStop(0.22, rgba(CYAN,  fa * 0.72));
-          fl.addColorStop(0.55, rgba(TEAL,  fa * 0.38));
-          fl.addColorStop(1,   'transparent');
-          ctx.beginPath(); ctx.arc(x, y, fr, 0, Math.PI * 2);
-          ctx.fillStyle = fl; ctx.fill();
-        }
-        /* expanding shockwave rings */
-        if (bh.explodeRing > 0) {
-          const t = clamp(1 - fa, 0, 1);
-          for (let i = 0; i < 4; i++) {
-            const wavePhase = t * 6.5 + i * 1.25;
-            const ripple = Math.sin(wavePhase) * (2.2 - i * 0.35);
-            const rr = bh.explodeRing * (1 - i * 0.16) + ripple;
-            if (rr <= 1) continue;
+      if (bh.state === 'birthing') {
+        const ba = clamp(bh.renderAlpha || 0, 0, 1);
 
-            const wa = clamp(fa * (0.55 - i * 0.10), 0, 1);
-            ctx.lineWidth = Math.max(0.22, 0.56 - i * 0.08); /* thin water-wave lines */
-            ctx.strokeStyle = i % 2 === 0
-              ? rgba(WHITE, wa)
-              : rgba(TEAL, wa * 0.95);
+        if (bh.birthParticles && bh.birthParticles.length) {
+          for (const sp of bh.birthParticles) {
+            const pa = sp.alpha * (light ? 0.75 : 1.0) * (0.65 + ba * 0.35);
+            if (pa < 0.01) continue;
+            ctx.fillStyle = rgba(CYAN, pa);
             ctx.beginPath();
-            ctx.arc(x, y, rr, 0, Math.PI * 2);
-            ctx.stroke();
+            ctx.arc(sp.x, sp.y, sp.size, 0, Math.PI * 2);
+            ctx.fill();
           }
         }
-        continue; /* skip normal visuals */
+
+        const seedGlow = ctx.createRadialGradient(x, y, 0, x, y, r * 3.2);
+        seedGlow.addColorStop(0, rgba(TEAL, (light ? 0.10 : 0.16) * ba));
+        seedGlow.addColorStop(0.55, rgba(CYAN, (light ? 0.06 : 0.10) * ba));
+        seedGlow.addColorStop(1, 'transparent');
+        ctx.beginPath();
+        ctx.arc(x, y, r * 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = seedGlow;
+        ctx.fill();
+
+        const seedCore = ctx.createRadialGradient(x, y, 0, x, y, r);
+        seedCore.addColorStop(0, light ? 'rgba(0,0,0,0.88)' : 'rgba(0,4,10,0.84)');
+        seedCore.addColorStop(1, 'rgba(0,0,0,0)');
+        ctx.beginPath();
+        ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = seedCore;
+        ctx.fill();
+        continue;
+      }
+
+      /* ── FADING: restrained decay visuals ── */
+      if (bh.state === 'fading') {
+        const fa = clamp(bh.renderAlpha || 0, 0, 1);
+        if (fa <= 0.01) continue;
+        ctx.save();
+        ctx.globalAlpha = fa;
+        const fadeGlow = ctx.createRadialGradient(x, y, r * 0.4, x, y, r * 6.2);
+        fadeGlow.addColorStop(0, rgba(TEAL, light ? 0.10 : 0.14));
+        fadeGlow.addColorStop(0.45, rgba(CYAN, light ? 0.06 : 0.09));
+        fadeGlow.addColorStop(1, 'transparent');
+        ctx.beginPath();
+        ctx.arc(x, y, r * 6.2, 0, Math.PI * 2);
+        ctx.fillStyle = fadeGlow;
+        ctx.fill();
+        ctx.restore();
       }
 
       /* ── ACTIVE ── */
       const pulse        = 0.82 + 0.18 * Math.sin(time * 0.9 + phase);
       const accreteBoost = 1 + (bh.capturedCount || 0) * 0.28; /* glow brightens as comets spiral in */
       const halfLife = bh.ageSec >= (bh.lifeSpanSec * 0.5);
+      const lensBoost = 1 + (bh.lensPulse || 0) * 0.8;
+      const alpha = clamp(bh.renderAlpha || 1, 0, 1);
+      if (alpha <= 0.01) continue;
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
 
       /* outer lensing glow */
       const glow = ctx.createRadialGradient(x, y, r * 0.5, x, y, r * 7);
@@ -2691,6 +3006,27 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.strokeStyle = rgba(TEAL, waveA);
         ctx.lineWidth   = 0.9 * (1 - wavePhase * 0.65);
         ctx.beginPath(); ctx.arc(x, y, waveR, 0, Math.PI * 2); ctx.stroke();
+      }
+
+      const einsteinA = (light ? 0.16 : 0.24) * mass * lensBoost;
+      if (einsteinA > 0.02) {
+        ctx.strokeStyle = rgba(CYAN, einsteinA);
+        ctx.lineWidth = 0.9;
+        ctx.beginPath();
+        ctx.arc(x, y, r * 2.7 + Math.sin(time * 1.6 + phase) * 0.5, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      if (bh.ripples && bh.ripples.length) {
+        for (const rp of bh.ripples) {
+          const ra = rp.alpha * (light ? 0.75 : 0.95);
+          if (ra < 0.01) continue;
+          ctx.strokeStyle = rgba(TEAL, ra);
+          ctx.lineWidth = Math.max(0.18, rp.band * 0.06);
+          ctx.beginPath();
+          ctx.arc(x, y, rp.r, 0, Math.PI * 2);
+          ctx.stroke();
+        }
       }
 
       /* photon sphere ring */
@@ -2722,6 +3058,8 @@ document.addEventListener('DOMContentLoaded', () => {
       core.addColorStop(1,    'rgba(0,0,0,0)');
       ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
       ctx.fillStyle = core; ctx.fill();
+
+      ctx.restore();
     }
   };
 
@@ -2778,6 +3116,12 @@ document.addEventListener('DOMContentLoaded', () => {
         p.trail.push({ x: p.x, y: p.y });
         if (p.trail.length > p.trailLen) p.trail.shift();
 
+        if (p.releaseSlowSec && p.releaseSlowSec > 0) {
+          p.releaseSlowSec = Math.max(0, p.releaseSlowSec - 0.016);
+          p.vx *= 0.965;
+          p.vy *= 0.965;
+        }
+
         /* cursor repulsion */
         if (mouse.active) {
           const cx = p.x - mouse.x, cy = p.y - mouse.y;
@@ -2806,6 +3150,18 @@ document.addEventListener('DOMContentLoaded', () => {
           if (d < bh.r * 18) {
             const f = (bh.mass * 0.022) / (d * 0.010 + 1);
             p.vx += (ex / d) * f;  p.vy += (ey / d) * f;
+          }
+
+          /* ripple fronts add gentle path deformation */
+          if (bh.ripples && bh.ripples.length) {
+            for (const rp of bh.ripples) {
+              const distToFront = Math.abs(d - rp.r);
+              if (distToFront > rp.band) continue;
+              const t = 1 - distToFront / rp.band;
+              const rf = t * rp.alpha * bh.mass;
+              p.vx += (ex / d) * rf * 0.040;
+              p.vy += (ey / d) * rf * 0.040;
+            }
           }
 
           /* capture into spiral when close enough */
@@ -3165,6 +3521,7 @@ document.addEventListener('DOMContentLoaded', () => {
     drawGalaxy();
     drawNebulae();
     drawStars();
+    drawMiniSolarSystems();
     drawGrid();
     drawGravityWells();
     drawMobileBlackHoles();
@@ -3262,7 +3619,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    /* click black hole -> immediate explosion */
+    /* click black hole -> start smooth fade/respawn lifecycle */
     let target = null;
     let nearest = Infinity;
     for (const bh of mobHoles) {
@@ -3274,7 +3631,7 @@ document.addEventListener('DOMContentLoaded', () => {
         target = bh;
       }
     }
-    if (target) triggerHoleExplosion(target);
+    if (target) triggerHoleExplosion(target, { fromClick: true });
 
     /* each 3 clicks -> photon burst + reset 60s timer */
     burstClickCount++;
