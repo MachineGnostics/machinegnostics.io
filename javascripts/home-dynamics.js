@@ -114,6 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let burstTimerSec = 60;
   let burstClickCount = 0;
   let burstActiveSec = 0;
+  let holeBurstEvents = [];
+  let holeBurstSeq = 0;
   let superPhotonTimerSec = 10;
   let superPhotons = [];
   let astronautSuppressClick = false;
@@ -428,6 +430,20 @@ document.addEventListener('DOMContentLoaded', () => {
     'Okay... that got personal.',
     'Black hole said goodbye very loudly.',
     'I call that a gravity mic drop.',
+  ];
+  const ASTRONAUT_BLACKHOLE_ALERT_PHRASES = [
+    'Black hole identified. Time to run.',
+    'Singularity nearby. Astro requests maximum nope.',
+    'Gravity spike detected. I am leaving politely.',
+    'That black hole looks hungry. Retreat mode on.',
+    'Warning: cosmic vacuum cleaner ahead.',
+    'My tiny astronaut instincts say run now.',
+    'Event horizon vibes are bad. Backing away.',
+    'Nope radius entered. Astro is boosting out.',
+    'Black hole at close range. This is not a drill.',
+    'I enjoy science, not spaghettification. Retreating.',
+    'Gravity got weird. Astro is out of here.',
+    'Singularity says come closer. Astro says absolutely not.',
   ];
   const ASTRONAUT_STICKER_PHRASES = [
     'Stellar catch! +1 cosmic point.',
@@ -878,6 +894,9 @@ document.addEventListener('DOMContentLoaded', () => {
         dockY: dock.y,
         requestUnlockTimerSec: rand(10.0, 18.0),
         requestSignalSec: 0,
+        burstReactionCooldownSec: 0,
+        blackHoleAlertCooldownSec: 0,
+        blackHoleWarningArmed: false,
         hover: false,
         dragging: false,
         dragOffsetX: 0,
@@ -1292,11 +1311,36 @@ document.addEventListener('DOMContentLoaded', () => {
   const updateAstronaut = (dtSec) => {
     if (!astronaut) return;
 
+    for (let i = holeBurstEvents.length - 1; i >= 0; i--) {
+      const ev = holeBurstEvents[i];
+      ev.ttlSec -= dtSec;
+      if (ev.ttlSec <= 0) holeBurstEvents.splice(i, 1);
+    }
+
     const frameScale = clamp(dtSec * 60, 0.45, 2.2);
     const personality = getAstronautPersonality();
     astronaut.moodTimerSec -= dtSec;
     astronaut.gestureTimerSec -= dtSec;
     astronaut.surpriseTimerSec -= dtSec;
+    astronaut.burstReactionCooldownSec = Math.max(0, (astronaut.burstReactionCooldownSec || 0) - dtSec);
+    astronaut.blackHoleAlertCooldownSec = Math.max(0, (astronaut.blackHoleAlertCooldownSec || 0) - dtSec);
+
+    for (let i = holeBurstEvents.length - 1; i >= 0; i--) {
+      const ev = holeBurstEvents[i];
+      if (ev.reactedToAstro) continue;
+      const d = Math.hypot(astronaut.x - ev.x, astronaut.y - ev.y);
+      if (d > ev.notifyRadius) continue;
+      ev.reactedToAstro = true;
+      if (astronaut.burstReactionCooldownSec > 0) continue;
+      setAstronautMood('excited', 4.6);
+      astronaut.gesture = Math.random() < 0.5 ? 'visor' : 'spin';
+      astronaut.gestureTimerSec = rand(1.8, 2.8);
+      astronaut.moodBoostSec = Math.max(astronaut.moodBoostSec, 2.8);
+      const msg = ASTRONAUT_EXPLOSION_PHRASES[Math.floor(Math.random() * ASTRONAUT_EXPLOSION_PHRASES.length)];
+      triggerAstronautBubble(msg, 'event');
+      astronaut.burstReactionCooldownSec = 3.6;
+      break;
+    }
 
     if (astronaut.moodTimerSec <= 0) {
       setAstronautMood(ASTRONAUT_MOODS[Math.floor(Math.random() * ASTRONAUT_MOODS.length)]);
@@ -1360,12 +1404,51 @@ document.addEventListener('DOMContentLoaded', () => {
       else if (astronaut.mood === 'curious') speedMood = 1.10;
       else if (astronaut.mood === 'excited') speedMood = 1.22;
 
+      let nearestBH = null;
+      let nearestDist = Infinity;
+      for (const bh of mobHoles) {
+        if (bh.state !== 'active') continue;
+        const d = Math.hypot(astronaut.x - bh.x, astronaut.y - bh.y);
+        if (d < nearestDist) {
+          nearestDist = d;
+          nearestBH = bh;
+        }
+      }
+
+      let avoidVx = 0;
+      let avoidVy = 0;
+      if (nearestBH) {
+        const dxBH = astronaut.x - nearestBH.x;
+        const dyBH = astronaut.y - nearestBH.y;
+        const dBH = Math.hypot(dxBH, dyBH) + 0.001;
+        const dangerR = Math.max(120, nearestBH.r * 10.8);
+        const panic = clamp(1 - dBH / dangerR, 0, 1);
+        if (panic > 0) {
+          speedMood *= (1 + panic * 0.95);
+          avoidVx = (dxBH / dBH) * (0.18 + panic * 0.62);
+          avoidVy = (dyBH / dBH) * (0.16 + panic * 0.56);
+
+          if (!astronaut.blackHoleWarningArmed && astronaut.blackHoleAlertCooldownSec <= 0 && astronaut.bubble.timerSec <= 0.75) {
+            const warn = ASTRONAUT_BLACKHOLE_ALERT_PHRASES[Math.floor(Math.random() * ASTRONAUT_BLACKHOLE_ALERT_PHRASES.length)];
+            triggerAstronautBubble(warn, 'event');
+            setAstronautMood('excited', 5.2);
+            astronaut.gesture = Math.random() < 0.5 ? 'salute' : 'visor';
+            astronaut.gestureTimerSec = rand(1.9, 3.0);
+            astronaut.moodBoostSec = Math.max(astronaut.moodBoostSec, 3.0);
+            astronaut.blackHoleAlertCooldownSec = rand(5.0, 8.0);
+            astronaut.blackHoleWarningArmed = true;
+          }
+        } else if (astronaut.blackHoleWarningArmed && dBH > dangerR * 1.10) {
+          astronaut.blackHoleWarningArmed = false;
+        }
+      }
+
       const speedScale = isLocked ? 0.28 : isReturning ? 0.74 : 1.0;
       const desiredVx = (dx / d) * clamp(d / 180, isLocked ? 0.02 : 0.09, isLocked ? 0.18 : isReturning ? 0.34 : 0.42) * speedMood * speedScale;
       const desiredVy = (dy / d) * clamp(d / 180, isLocked ? 0.02 : 0.07, isLocked ? 0.16 : isReturning ? 0.28 : 0.34) * speedMood * speedScale;
 
-      astronaut.targetVx = desiredVx;
-      astronaut.targetVy = desiredVy;
+      astronaut.targetVx = desiredVx + avoidVx;
+      astronaut.targetVy = desiredVy + avoidVy;
       astronaut.vx = lerp(astronaut.vx, astronaut.targetVx, (isLocked ? 0.10 : isReturning ? 0.05 : 0.032) * frameScale);
       astronaut.vy = lerp(astronaut.vy, astronaut.targetVy, (isLocked ? 0.10 : isReturning ? 0.05 : 0.032) * frameScale);
 
@@ -2309,6 +2392,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!bh || bh.state !== 'active') return;
 
     const fromClick = !!options.fromClick;
+
+    holeBurstEvents.push({
+      id: ++holeBurstSeq,
+      x: bh.x,
+      y: bh.y,
+      ttlSec: fromClick ? 3.2 : 2.4,
+      notifyRadius: Math.max(170, bh.r * (fromClick ? 14.0 : 12.0)),
+      reactedToAstro: false,
+    });
+    if (holeBurstEvents.length > 18) holeBurstEvents.splice(0, holeBurstEvents.length - 18);
 
     bh.state = 'fading';
     bh.fadeDurationSec = fromClick ? 0.65 : 2.8;
