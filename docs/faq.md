@@ -21,6 +21,13 @@
 		</div>
 
 		<div class="gn-faq-item">
+			<h3>What does the term "gnostics" mean in the context of Machine (Mathematical) Gnostics?</h3>
+			<p>
+				The term "gnostics" comes from the ancient Greek word <em>gnosis</em>, meaning "knowledge" or the "art of knowing." In Machine (Mathematical) Gnostics, it is used purely in this scientific sense of acquiring knowledge, with no intended religious or mystical meaning.
+			</p>
+		</div>
+
+		<div class="gn-faq-item">
 			<h3>What does “Small Data, Big Impact” mean?</h3>
 			<p>
 				It means high-impact decisions can be improved even when you only have limited observations. Instead of waiting for massive data collection, you can act earlier on rare events, edge cases, and expensive operational failures.
