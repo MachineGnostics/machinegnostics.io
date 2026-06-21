@@ -265,12 +265,12 @@ if page == "overview":
     st.markdown(
         """
         <div class="problem-banner">
-            <h3>🎯 Problem Definition — Why Classical Statistics Can Mislead</h3>
+            <h3>🎯 Small Data, Big Insights - Machine Gnostics</h3>
             <p>
             The <b>Anscombe Quartet</b> (1973) consists of 4 datasets that are <i>statistically identical</i>
             under classical measures (same mean, median, correlation, R², RMSE) yet are visually and
             structurally completely different. This exposes a critical weakness of traditional statistics.<br><br>
-            <b>Machine Gnostics</b> applies an information-theoretic framework that assigns adaptive weights
+            <b>Machine Gnostics</b> applies a Mathematical Gnostics framework that assigns adaptive weights
             to data points, producing metrics that are more sensitive to the true data structure.
             This app benchmarks the MG change quantitatively using <b>%&nbsp;KPIs</b>.
             </p>

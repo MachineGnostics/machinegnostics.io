@@ -27,7 +27,10 @@ except Exception:
 	XGBOOST_AVAILABLE = False
 
 from machinegnostics.data import make_anscombe_check_data
+from machinegnostics.metrics import correlation as mg_correlation
+from machinegnostics.metrics import mean as mg_mean
 from machinegnostics.metrics import robr2
+from machinegnostics.metrics import root_mean_squared_error as mg_rmse
 from machinegnostics.models import (
 	GnosticBoostingRegressor,
 	GnosticDecisionTreeRegressor,
@@ -614,15 +617,19 @@ def main() -> None:
 
 		with st.expander("Additional options", expanded=False):
 			poly_degree = st.slider("Polynomial degree", min_value=2, max_value=6, value=3, step=1)
-			rf_estimators = st.slider("Random Forest trees", min_value=50, max_value=500, value=200, step=25)
-			rf_depth = st.slider("Random Forest depth", min_value=1, max_value=10, value=4, step=1)
-			xgb_estimators = st.slider("XGBoost trees", min_value=25, max_value=400, value=150, step=25)
+			rf_estimators = st.slider("Random Forest trees", min_value=10, max_value=300, value=10, step=10)
+			rf_depth = st.slider("Random Forest depth", min_value=1, max_value=10, value=3, step=1)
+			xgb_estimators = st.slider("XGBoost trees", min_value=10, max_value=300, value=10, step=10)
 			xgb_depth = st.slider("XGBoost depth", min_value=1, max_value=8, value=3, step=1)
 			random_state = st.number_input("Random seed", min_value=0, max_value=9999, value=42, step=1)
 			show_weights = st.checkbox("Show MG weight plots", value=False)
 
 		if not XGBOOST_AVAILABLE:
 			st.warning("xgboost is not available in this environment.")
+
+		st.markdown("---")
+		st.markdown("### Machine Gnostics")
+		st.markdown("[www.machinegnostics.com](https://www.machinegnostics.com)")
 
 	if run_clicked:
 		st.session_state["reg_benchmark_cfg"] = {
@@ -695,27 +702,54 @@ def main() -> None:
 		unsafe_allow_html=True,
 	)
 
+	st.markdown(
+		"""
+		<div class="callout">
+		<b>NOTE:</b> The excellence of MG is not always captured by a single number. Use these KPI cards for quick direction,
+		then rely on the visual fit plots to understand how each model behaves on the data geometry.
+		</div>
+		""",
+		unsafe_allow_html=True,
+	)
+
+	st.markdown(
+		"""
+		<div class="callout">
+		<b>NOTE:</b> Machine Gnostics is a newer modeling approach designed to work especially well on small datasets.
+		Its objective and weighting strategy are different from regular ML, so MG metrics can differ from classical
+		or standard machine learning metrics even on the same data.
+		</div>
+		""",
+		unsafe_allow_html=True,
+	)
+
 	top_row = st.columns(4)
 
-	if pair_df.empty:
-		mg_better_rmse = 0
-		avg_rmse_improvement = 0.0
-		avg_r2_improvement = 0.0
-		best_pair_label = "-"
-	else:
-		mg_better_rmse = int((pair_df["RMSE Improvement %"] > 0).sum())
-		avg_rmse_improvement = float(pair_df["RMSE Improvement %"].mean())
-		avg_r2_improvement = float(pair_df["R2 Improvement %"].mean())
-		best_pair_row = pair_df.sort_values("RMSE Improvement %", ascending=False).iloc[0]
-		best_pair_label = str(best_pair_row["Pair"])
+	linear_row = current[current["Model"] == "Linear OLS"].iloc[0]
+	mg_linear_row = current[current["Model"] == "MG Linear"].iloc[0]
+
+	cl_mean = float(np.mean(y))
+	mg_mean_val = float(mg_mean(y))
+	cl_corr = float(np.corrcoef(x, y)[0, 1]) if len(y) > 1 else float("nan")
+	mg_corr = float(mg_correlation(x, y)) if len(y) > 1 else float("nan")
+
+	cl_rmse = float(linear_row["rmse"])
+	mg_y_pred = np.asarray(mg_linear_row["y_pred"], dtype=float).reshape(-1)
+	mg_weights = mg_linear_row["weights"]
+	mg_weights_arr = np.asarray(mg_weights, dtype=float).reshape(-1) if mg_weights is not None else None
+	mg_rmse_val = float(mg_rmse(y, mg_y_pred))
+
+	cl_r2 = float(linear_row["r2"])
+	mg_r2_val = float(robr2(y, mg_y_pred, w=mg_weights_arr)) if mg_weights_arr is not None else float("nan")
 
 	with top_row[0]:
 		st.markdown(
 			f"""
 			<div class="kpi">
-				<div class="kpi-label">MG Better RMSE (Pairs)</div>
-				<div class="kpi-value">{mg_better_rmse}/{len(pair_df)}</div>
-				<div class="kpi-sub">Positive means MG has lower RMSE</div>
+				<div class="kpi-label">Mean</div>
+				<div class="kpi-value good">{format_float(mg_mean_val)}</div>
+				<div class="kpi-sub warn">Classical: {format_float(cl_mean)}</div>
+				<div class="kpi-sub">MG shown first for direct comparison</div>
 			</div>
 			""",
 			unsafe_allow_html=True,
@@ -724,9 +758,10 @@ def main() -> None:
 		st.markdown(
 			f"""
 			<div class="kpi">
-				<div class="kpi-label">Avg MG RMSE Improvement</div>
-				<div class="kpi-value">{avg_rmse_improvement:+.1f}%</div>
-				<div class="kpi-sub">Higher is better for MG</div>
+				<div class="kpi-label">Correlation</div>
+				<div class="kpi-value good">{format_float(mg_corr)}</div>
+				<div class="kpi-sub warn">Classical: {format_float(cl_corr)}</div>
+				<div class="kpi-sub">Closer to 1.0 indicates stronger fit</div>
 			</div>
 			""",
 			unsafe_allow_html=True,
@@ -735,9 +770,10 @@ def main() -> None:
 		st.markdown(
 			f"""
 			<div class="kpi">
-				<div class="kpi-label">Avg MG R2 Improvement</div>
-				<div class="kpi-value">{avg_r2_improvement:+.1f}%</div>
-				<div class="kpi-sub">R2 gain vs paired classical</div>
+				<div class="kpi-label">RMSE</div>
+				<div class="kpi-value good">{format_float(mg_rmse_val)}</div>
+				<div class="kpi-sub warn">Classical: {format_float(cl_rmse)}</div>
+				<div class="kpi-sub">Lower is better</div>
 			</div>
 			""",
 			unsafe_allow_html=True,
@@ -746,9 +782,10 @@ def main() -> None:
 		st.markdown(
 			f"""
 			<div class="kpi">
-				<div class="kpi-label">Best MG Pair</div>
-				<div class="kpi-value">{best_pair_label}</div>
-				<div class="kpi-sub">Highest RMSE improvement by MG</div>
+				<div class="kpi-label">R2 (Robust)</div>
+				<div class="kpi-value good">{format_float(mg_r2_val)}</div>
+				<div class="kpi-sub warn">Classical: {format_float(cl_r2)}</div>
+				<div class="kpi-sub">Higher is better</div>
 			</div>
 			""",
 			unsafe_allow_html=True,
@@ -763,29 +800,33 @@ def main() -> None:
 		st.pyplot(fig_preview, use_container_width=True)
 		plt.close(fig_preview)
 
-	st.markdown('<div class="section-title">Benchmark table</div>', unsafe_allow_html=True)
-	table = current[["Model", "Family", "r2", "rmse", "mae", "corr", "robr2", "R2 Rank", "RMSE Rank", "Overall Rank"]].copy()
-	table = table.rename(columns={"r2": "R2", "rmse": "RMSE", "mae": "MAE", "corr": "Correlation", "robr2": "RobR2"})
-	for col in ["R2", "RMSE", "MAE", "Correlation", "RobR2"]:
-		table[col] = table[col].map(lambda v: format_float(float(v)) if v is not None and not (isinstance(v, float) and np.isnan(v)) else "-")
-	st.dataframe(table, use_container_width=True, hide_index=True)
+	show_detail_tables = st.toggle("Show additional detailed tables", value=False)
+
+	if show_detail_tables:
+		st.markdown('<div class="section-title">Benchmark table</div>', unsafe_allow_html=True)
+		table = current[["Model", "Family", "r2", "rmse", "mae", "corr", "robr2", "R2 Rank", "RMSE Rank", "Overall Rank"]].copy()
+		table = table.rename(columns={"r2": "R2", "rmse": "RMSE", "mae": "MAE", "corr": "Correlation", "robr2": "RobR2"})
+		for col in ["R2", "RMSE", "MAE", "Correlation", "RobR2"]:
+			table[col] = table[col].map(lambda v: format_float(float(v)) if v is not None and not (isinstance(v, float) and np.isnan(v)) else "-")
+		st.dataframe(table, use_container_width=True, hide_index=True)
 
 	st.markdown('<div class="section-title">Pairwise MG vs Classical Comparison</div>', unsafe_allow_html=True)
 	if pair_df.empty:
 		st.warning("No pairwise MG-vs-classical models available with current options.")
 	else:
-		show_pairs = pair_df[
-			[
-				"Pair",
-				"Classical R2",
-				"MG R2",
-				"R2 Improvement Label",
-				"Classical RMSE",
-				"MG RMSE",
-				"RMSE Improvement Label",
-			]
-		].copy()
-		st.dataframe(show_pairs, use_container_width=True, hide_index=True)
+		if show_detail_tables:
+			show_pairs = pair_df[
+				[
+					"Pair",
+					"Classical R2",
+					"MG R2",
+					"R2 Improvement Label",
+					"Classical RMSE",
+					"MG RMSE",
+					"RMSE Improvement Label",
+				]
+			].copy()
+			st.dataframe(show_pairs, use_container_width=True, hide_index=True)
 
 		pair_tabs = st.tabs([str(item["pair"]) for item in pair_details])
 		for tab, detail in zip(pair_tabs, pair_details):
@@ -832,7 +873,7 @@ def main() -> None:
 		"""
 		<div class="callout">
 		For each classical model, the paired MG model is re-run and compared directly. Use RMSE Improvement % as the main
-		benchmark (positive means MG is better), then validate with R2 Improvement % and the pairwise fit plots.
+		benchmark, then validate with R2 Improvement % and the pairwise fit plots.
 		</div>
 		""",
 		unsafe_allow_html=True,
