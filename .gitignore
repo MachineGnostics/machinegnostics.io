@@ -177,3 +177,6 @@ examples/mlruns
 
 .DS_Store
 .github
+
+# claude
+.claude
