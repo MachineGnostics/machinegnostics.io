@@ -3,78 +3,90 @@
 	<canvas class="gn-web-canvas" aria-hidden="true"></canvas>
 	<section class="gn-hero gn-reveal">
 		<div class="gn-hero-bg"></div>
-		<p class="gn-overline">UNLOCK CERTAINTY IN DATA</p>
-		<h1>Machine Gnostic Consulting Services</h1>
+		<p class="gn-overline">PARTNER & COLLABORATION</p>
+		<h1>Convert small datasets into a measurable and competitive advantage.</h1>
 		<p class="gn-subtitle">
-			Transform your most challenging data problems with mathematical rigor. From audit to collaboration, we guide you through the gnostic revolution.
+			We co-develop one data-scarce, high-cost-of-failure problem at a time, with explainable outcomes and publishable rigor. This is a selective collaboration program, not high-volume consulting.
 		</p>
 		<div class="gn-actions">
-			<a href="/contact/" class="md-button md-button--primary">Request Free Assessment</a>
-			<a href="https://docs.machinegnostics.com/latest/" class="md-button">Learn More</a>
+			<a href="/contact/" class="md-button md-button--primary">Apply to Partner</a>
+			<a href="#selection-criteria" class="md-button">See Selection Criteria</a>
 		</div>
 	</section>
 
 	<section class="gn-section gn-reveal">
-		<h2>Our Consulting Services</h2>
+		<h2>What This Engagement Is</h2>
 		<p>
-			We work with organizations to identify where <span style="color: #FF8C00; font-weight: bold;"> Machine Gnostics (Machine Learning Powered by Mathematical Gnostics)</span> can solve the unsolvable.
+			This program is designed for teams facing rare but expensive failures where conventional approaches need large volumes of data. We focus on one partnership at a time to build measurable outcomes and a credible public case study.
 		</p>
 	</section>
 
 	<section class="gn-section gn-reveal" id="services">
-		<h2>Four Forms of Engagement</h2>
+		<h2>How We Collaborate</h2>
 		<div class="gn-features">
 			<article class="gn-feature">
-				<h3>Machine Gnostic Audit</h3>
+				<h3>Problem Framing Sprint</h3>
 				<p>
-					A comprehensive evaluation of your data infrastructure and machine learning pipeline. We identify where standard statistical approaches fall short and where Mathematical Gnostics can deliver breakthrough results.
+					Jointly scope a target failure mode, data constraints, and success criteria so everyone agrees on the measurable business outcome.
 				</p>
 				<div class="gn-tags">
-					<span>Data Assessment</span>
-					<span>Gap Analysis</span>
-					<span>Roadmap Planning</span>
+					<span>Outcome Definition</span>
+					<span>Failure Economics</span>
+					<span>Scope Control</span>
 				</div>
-				<a href="/contact/">Request Audit →</a>
+				<a href="/contact/">Discuss Your Case →</a>
 			</article>
 
 			<article class="gn-feature">
-				<h3>Solving End-to-End Problems</h3>
+				<h3>Co-Development Build</h3>
 				<p>
-					We implement complete gnostic solutions for your specific business challenges. From data processing through model deployment, we handle every step with deterministic reasoning and full transparency.
+					Build and validate a deterministic solution together, from data preparation through deployment-ready outputs, with full traceability.
 				</p>
 				<div class="gn-tags">
-					<span>Full Implementation</span>
-					<span>Custom Development</span>
-					<span>Production Ready</span>
+					<span>Implementation</span>
+					<span>Validation</span>
+					<span>Deployment Path</span>
 				</div>
-				<a href="/contact/">Discuss Your Challenge →</a>
+				<a href="/contact/">Apply to Co-Develop →</a>
 			</article>
 
 			<article class="gn-feature">
-				<h3>Research Collaboration</h3>
+				<h3>Reference Case Publication</h3>
 				<p>
-					Partner with our research team to apply Machine Gnostics to novel problems. Co-author papers, develop new methodologies, and advance the field together.
+					Document the methodology, evidence, and results as a public benchmark story to support technical and executive buy-in.
 				</p>
 				<div class="gn-tags">
-					<span>Joint Research</span>
-					<span>Publication</span>
-					<span>Innovation</span>
+					<span>Case Study</span>
+					<span>Public Proof</span>
+					<span>Credibility Signal</span>
 				</div>
-				<a href="/contact/">Propose Collaboration →</a>
+				<a href="/contact/">Co-Publish Results →</a>
 			</article>
 
 			<article class="gn-feature">
-				<h3>Co-Development of Machine Gnostics</h3>
+				<h3>Knowledge Transfer</h3>
 				<p>
-					Help shape the future of Mathematical Gnostics. Contribute to core library development, new features, or specialized modules tailored to specific domains.
+					Equip your team to operate, maintain, and extend the solution after delivery, including implementation patterns for future projects.
 				</p>
 				<div class="gn-tags">
-					<span>Open Source</span>
-					<span>Core Development</span>
-					<span>Impact at Scale</span>
+					<span>Team Enablement</span>
+					<span>Playbooks</span>
+					<span>Operational Readiness</span>
 				</div>
-				<a href="/contact/">Get Involved →</a>
+				<a href="/contact/">Plan Internal Adoption →</a>
 			</article>
+		</div>
+	</section>
+
+	<section class="gn-section gn-reveal" id="selection-criteria">
+		<h2>Selection Criteria</h2>
+		<div class="gn-pill-grid">
+			<span>Scarce or Noisy Data</span>
+			<span>High Cost of Failure</span>
+			<span>Willingness to Co-Publish</span>
+			<span>Executive Sponsorship</span>
+			<span>Technical Stakeholder Access</span>
+			<span>Clear Success Metric</span>
 		</div>
 	</section>
 
@@ -82,23 +94,23 @@
 		<h2>Why Partner with Us?</h2>
 		<div class="gn-pill-grid">
 			<span>Deep Mathematical Expertise</span>
-			<span>Proven Track Record</span>
 			<span>Transparent Methodology</span>
 			<span>Deterministic Results</span>
 			<span>Small-Sample Excellence</span>
 			<span>Noise-Robust Models</span>
 			<span>Full Explainability</span>
 			<span>End-to-End Traceability</span>
+			<span>Selective Collaboration</span>
 		</div>
 	</section>
 
 	<section class="gn-section gn-cta gn-reveal">
-		<h2>Begin Your Free Assessment</h2>
+		<h2>Apply for the Next Open Slot</h2>
 		<p>
-			Tell us about your data challenge. Our team will evaluate your situation and show you how Machine Gnostics can unlock certainty where traditional approaches are falling short.
+			We prioritize one founding partner per cycle. Share your failure mode, current data reality, and what success must look like.
 		</p>
 		<div class="gn-actions">
-			<a href="/contact/" class="md-button md-button--primary">Request Free Assessment</a>
+			<a href="/contact/" class="md-button md-button--primary">Apply to Partner</a>
 		</div>
 	</section>
 </div>

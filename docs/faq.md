@@ -14,50 +14,72 @@
 		<h2>General Questions</h2>
 		
 		<div class="gn-faq-item">
-			<h3>What is Machine Gnostics?</h3>
+			<h3>What is Machine Gnostics in business terms?</h3>
 			<p>
-				Machine Gnostics is a Python ecosystem implementing Mathematical Gnostics—a non-statistical approach to data analysis, machine learning, and neural networks. It's built on principles from Riemannian geometry, relativistic mechanics, thermodynamic entropy theory, and deterministic algebra, offering robust alternatives to traditional statistical methods.
+				Machine Gnostics is an assumption-free analytics and AI approach designed for small, high-value, noisy datasets. It helps teams extract actionable insights when decisions are costly and data is limited.
 			</p>
 		</div>
 
 		<div class="gn-faq-item">
-			<h3>How is Machine Gnostics different from scikit-learn, TensorFlow, or PyTorch?</h3>
+			<h3>What does “Small Data, Big Impact” mean?</h3>
 			<p>
-				Traditional ML frameworks rely on primary on statistical theories that often fail in real-world scenarios. Machine Gnostics uses Mathematical Gnostics principles rooted in geometry and physics instead. Our models work exceptionally well with small datasets, noisy data, and corrupted inputs—situations where traditional methods struggle. 
+				It means high-impact decisions can be improved even when you only have limited observations. Instead of waiting for massive data collection, you can act earlier on rare events, edge cases, and expensive operational failures.
 			</p>
 		</div>
 
 		<div class="gn-faq-item">
-			<h3>Do I need a PhD in mathematics to use Machine Gnostics?</h3>
+			<h3>What is an expensive data problem?</h3>
 			<p>
-				No. While the underlying theory is rigorous, our APIs are designed to be Pythonic and intuitive. If you can use scikit-learn or pandas, you can use Machine Gnostics. We provide extensive documentation, examples, and a supportive community. The mathematics is there when you need it, but not required for basic usage.
+				An expensive data problem is where each data point is costly to generate, collect, or label, and each failure has high business consequences. Examples include industrial failures, quality escapes, safety events, regulated validation cycles, and specialized R&amp;D data.
 			</p>
 		</div>
 
 		<div class="gn-faq-item">
-			<h3>Is Machine Gnostics open source?</h3>
+			<h3>Why does small-data industry analytics often hit bottlenecks?</h3>
 			<p>
-				Yes. The core library is open source and available on <a href="https://github.com/MachineGnostics/machinegnostics">GitHub</a>. We believe in transparent, community-driven development. Contributions from developers worldwide are welcome.
+				Most pipelines assume large, clean, frequently refreshed datasets. Small-data industries face sparse events, noisy sensors, and long feedback loops. This creates a bottleneck where conventional approaches either overfit or fail to produce trustworthy signals.
 			</p>
 		</div>
 
 		<div class="gn-faq-item">
-			<h3>Can I use Machine Gnostics in production?</h3>
+			<h3>How does Machine Gnostics support lean infrastructure?</h3>
 			<p>
-				Absolutely. Machine Gnostics is designed for production environments. Machine Gnostics works well with Mlflow.
+				Machine Gnostics is Python-native and practical for teams that cannot maintain heavy AI infrastructure. You can work with constrained datasets and focused workflows, reducing dependency on large-scale data engineering just to get useful results.
 			</p>
 		</div>
 
 		<div class="gn-faq-item">
-			<h3>What problem does Machine Gnostics solve best?</h3>
+			<h3>Is this “Statistics vs Machine Gnostics”?</h3>
 			<p>
-				Machine Gnostics excels when:
-				<ul>
-					<li>You have small or limited datasets (traditional ML fails here)</li>
-					<li>Your data is noisy or corrupted (we're noise-robust)</li>
-					<li>You need explainability and interpretability (we're deterministic)</li>
-					<li>You want to explore new science and technology!</li>
-				</ul>
+				No exactly! Machine (Mathematical) Gnostics is a complementary lens. It helps surface additional structure and decision signals that may be missed by purely statistical pipelines, especially in scarce-data contexts.
+			</p>
+		</div>
+
+		<div class="gn-faq-item">
+			<h3>What does assumption-free approach mean?</h3>
+			<p>
+				Assumption-free means the approach does not depend on strong distribution assumptions to become useful. Instead of forcing your data into idealized statistical forms, Machine Gnostics analyzes underlying structure directly and works with the data reality you have.
+			</p>
+		</div>
+
+		<div class="gn-faq-item">
+			<h3>Can Machine Gnostics deliver operational excellence in small-data industries?</h3>
+			<p>
+				Yes. It is built for cases where rare failures and high-stakes decisions matter most. Teams can improve reliability, detect critical patterns earlier, and prioritize actions with greater confidence from limited data.
+			</p>
+		</div>
+
+		<div class="gn-faq-item">
+			<h3>Is Machine Gnostics open source, and is a business license available?</h3>
+			<p>
+				Yes. The core library is open source and available on <a href="https://github.com/MachineGnostics/machinegnostics">GitHub</a>. If your organization needs embedding or proprietary deployment terms, you can <a href="/contact/">contact us</a> to discuss business licensing options.
+			</p>
+		</div>
+
+		<div class="gn-faq-item">
+			<h3>How can I get started quickly?</h3>
+			<p>
+				Start with the <a href="https://docs.machinegnostics.com/latest/installation/">installation guide</a>, run a worked example, and evaluate Machine Gnostics on your own constrained dataset.
 			</p>
 		</div>
 	</section>

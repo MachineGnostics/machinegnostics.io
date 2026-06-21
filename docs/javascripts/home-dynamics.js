@@ -3817,4 +3817,30 @@ document.addEventListener('DOMContentLoaded', () => {
     link.target = '_blank';
     link.rel    = 'noopener noreferrer';
   });
+
+  /* interactive flip cards */
+  homeRoot.querySelectorAll('[data-flip-card]').forEach(card => {
+    const toggles = card.querySelectorAll('.gn-flip-toggle');
+    const setExpanded = expanded => {
+      toggles.forEach(btn => btn.setAttribute('aria-expanded', expanded ? 'true' : 'false'));
+    };
+
+    const toggleCard = () => {
+      const isFlipped = card.classList.toggle('is-flipped');
+      setExpanded(isFlipped);
+    };
+
+    toggles.forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        toggleCard();
+      });
+      btn.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          toggleCard();
+        }
+      });
+    });
+  });
 });
