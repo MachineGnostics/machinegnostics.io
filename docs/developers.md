@@ -55,7 +55,7 @@
 			<article class="gn-feature">
 				<h3>New Explainability</h3>
 				<p>
-					Every decision is traceable. Every parameter is interpretable. Every result can be explained from mathematical gnostic's principles. This is like a Black-Box X-ray!
+					Every decision is traceable. Every parameter is interpretable. Every result can be explained from mathematical gnostic principles. This is like a Black-Box X-ray.
 				</p>
 				<div class="gn-tags">
 					<span>Fully Explainable</span>
@@ -91,7 +91,7 @@
 					<span>Gnostic Distribution Functions</span>
 					<span>Gnostics Tests</span>
 				</div>
-				<a href="https://docs.machinegnostics.com/latest/da/da_models/" target="_blank">Explore GDA Docs →</a>
+				<a href="https://docs.machinegnostics.com/latest/da/da_models/" target="_blank" rel="noopener noreferrer">Explore GDA Docs →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -104,26 +104,26 @@
 					<span>Regression</span>
 					<span>Clustering</span>
 				</div>
-				<a href="https://docs.machinegnostics.com/latest/models/ml_models/" target="_blank">Explore ML Models →</a>
+				<a href="https://docs.machinegnostics.com/latest/models/ml_models/" target="_blank" rel="noopener noreferrer">Explore ML Models →</a>
 			</article>
 
 			<article class="gn-feature">
 				<h3>MAGNET — Deep Gnostic Learning</h3>
 				<p>
-					Next-generation Machine Gnostic Neural Networks (MAGNET) built on mathematical gnostic principles. Noise-immune. Thermodynamically grounded. Easy to use. Designed for the way modern AI should work.
+					The current MAGNET stack brings Machine Gnostic Neural Networks into practical workflows with mathematical gnostic principles, thermodynamic grounding, and an easier path to experimentation.
 				</p>
 				<div class="gn-tags">
 					<span>Neural Networks</span>
 					<span>Easy API</span>
 					<span>Noise Immunity</span>
 				</div>
-				<a href="https://docs.machinegnostics.com/latest/magnet/magnet/" target="_blank">Explore MAGNET →</a>
+				<a href="https://docs.machinegnostics.com/latest/magnet/magnet/" target="_blank" rel="noopener noreferrer">Explore MAGNET →</a>
 			</article>
 
 			<article class="gn-feature">
-				<h3>MAGNET (Deep Learning) — Coming Soon</h3>
+				<h3>MAGNET Advanced Tooling — In Active Development</h3>
 				<p>
-					We're building the next evolution. Advanced deep learning capabilities rooted in Mathematical Gnostics. Early access available to partners and contributors.
+					We are extending MAGNET with more advanced deep learning capabilities, evaluation workflows, and contributor-facing tooling. Early access is available to partners and contributors.
 				</p>
 				<div class="gn-tags">
 					<span>Alpha/Beta</span>
@@ -160,7 +160,7 @@
                 <p>    
                     and start building. Full documentation and examples available. Dive into Jupyter notebooks and learn by doing.
 				</p>
-				<a href="https://docs.machinegnostics.com/latest/" target="_blank">Documentation →</a>
+				<a href="https://docs.machinegnostics.com/latest/" target="_blank" rel="noopener noreferrer">Documentation →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -168,7 +168,7 @@
 				<p>
 					Connect with other developers, ask questions, share your projects. Our Discord community is active and welcoming. Join discussions in our GitHub issues.
 				</p>
-				<a href="https://discord.gg/WMMUaeJe2X" target="_blank">Join Discord →</a>
+				<a href="https://discord.gg/WMMUaeJe2X" target="_blank" rel="noopener noreferrer">Join Discord →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -176,7 +176,7 @@
 				<p>
 					Build new features. Improve performance. Write tests. Contribute documentation. Become a core maintainer. Together, we're advancing the future of AI.
 				</p>
-				<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank">Contribute on GitHub →</a>
+				<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank" rel="noopener noreferrer">Contribute on GitHub →</a>
 			</article>
 		</div>
 	</section>

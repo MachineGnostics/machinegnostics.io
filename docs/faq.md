@@ -58,7 +58,7 @@
 		<div class="gn-faq-item">
 			<h3>Is this “Statistics vs Machine Gnostics”?</h3>
 			<p>
-				No exactly! Machine (Mathematical) Gnostics is a complementary lens. It helps surface additional structure and decision signals that may be missed by purely statistical pipelines, especially in scarce-data contexts.
+				Not exactly. Machine (Mathematical) Gnostics is a complementary lens. It helps surface additional structure and decision signals that may be missed by purely statistical pipelines, especially in scarce-data contexts.
 			</p>
 		</div>
 

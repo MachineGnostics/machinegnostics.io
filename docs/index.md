@@ -10,7 +10,7 @@
 		</p>
 		<div class="gn-actions">
 			<a href="https://docs.machinegnostics.com/latest/installation/" class="md-button md-button--primary">Install Machine Gnostics</a>
-			<a href="https://machinegnostics-anscombe-banchmark.streamlit.app" class="md-button" target="_blank" rel="noopener noreferrer">Explore Banchmark</a>
+			<a href="https://machinegnostics-anscombe-banchmark.streamlit.app" class="md-button" target="_blank" rel="noopener noreferrer">Explore Benchmark</a>
 		</div>
 	</section>
 
@@ -61,7 +61,7 @@
 			Watch this introductory video to understand how Machine Gnostics revolutionizes machine learning with non-statistical methods.
 		</p>
 		<div style="text-align: center; margin-top: 1rem;">
-			<iframe width="560" height="315" src="https://www.youtube.com/embed/YRYL0Yz-1tw" title="Introduction to Machine Gnostics" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width: 100%; width: 100%; height: auto; aspect-ratio: 16/9; border-radius: 0.5rem;"></iframe>
+			<iframe width="560" height="315" src="https://www.youtube.com/embed/YRYL0Yz-1tw" title="Introduction to Machine Gnostics" loading="lazy" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="max-width: 100%; width: 100%; height: auto; aspect-ratio: 16/9; border-radius: 0.5rem;"></iframe>
 		</div>
 	</section>
 
@@ -76,7 +76,7 @@
 							Detect useful relationships in sparse, noisy data without relying on fragile statistical assumptions.
 						</p>
 						<div class="gn-tags">
-							<span>Aussmption Free Analysis</span>
+							<span>Assumption-Free Analysis</span>
 							<span>Small-Sample Reliability</span>
 						</div>
 						<button class="gn-flip-toggle" type="button" aria-expanded="false">Click to view method</button>
@@ -91,7 +91,7 @@
 							<span>Riemannian Geometry</span>
 							<span>Small-Sample Theory</span>
 						</div>
-						<a href="https://docs.machinegnostics.com/latest/da/da_models/" target="_blank">Explore Data Analysis Modules →</a>
+						<a href="https://docs.machinegnostics.com/latest/da/da_models/" target="_blank" rel="noopener noreferrer">Explore Data Analysis Modules →</a>
 						<button class="gn-flip-toggle" type="button" aria-expanded="false">Back to outcomes</button>
 					</div>
 				</div>
@@ -120,7 +120,7 @@
 							<span>Thermodynamic Models</span>
 							<span>Explainability</span>
 						</div>
-						<a href="https://docs.machinegnostics.com/latest/models/ml_models/" target="_blank">Explore ML Models →</a>
+						<a href="https://docs.machinegnostics.com/latest/models/ml_models/" target="_blank" rel="noopener noreferrer">Explore ML Models →</a>
 						<button class="gn-flip-toggle" type="button" aria-expanded="false">Back to outcomes</button>
 					</div>
 				</div>
@@ -149,7 +149,7 @@
 							<span>Thermodynamic Models</span>
 							<span>Noise Immunity</span>
 						</div>
-						<a href="https://docs.machinegnostics.com/latest/magnet/magnet/" target="_blank">Explore MAGNET →</a>
+						<a href="https://docs.machinegnostics.com/latest/magnet/magnet/" target="_blank" rel="noopener noreferrer">Explore MAGNET →</a>
 						<button class="gn-flip-toggle" type="button" aria-expanded="false">Back to outcomes</button>
 					</div>
 				</div>
@@ -158,9 +158,9 @@
 	</section>
 
 	<section class="gn-section gn-reveal" id="proof-layer" style="text-align: center;">
-		<h2>Machine Gnostic Banchmarch</h2>
+		<h2>Machine Gnostics Benchmark</h2>
 		<p>
-			# Our benchmark program is in progress. Current positioning is deliberate: comparable predictive quality with less data, not broad claims against every ML stack.
+			Our benchmark program is in progress. Current positioning is deliberate: comparable predictive quality with less data, not broad claims against every ML stack.
 			Benchmarking small datasets with the Anscombe Quartet — revealing insights statistics alone can't see.
 		</p>
 		<div class="gn-actions">
@@ -185,7 +185,7 @@
 			<article class="gn-card">
 				<h3>Researcher</h3>
 				<p>Review the theory, derivations, and technical concepts behind the implementation.</p>
-				<p><a href="https://docs.machinegnostics.com/latest/mg/concepts/" target="_blank">See the Theory →</a></p>
+				<p><a href="https://docs.machinegnostics.com/latest/mg/concepts/" target="_blank" rel="noopener noreferrer">See the Theory →</a></p>
 			</article>
 			<article class="gn-card">
 				<h3>Business Leader</h3>
@@ -209,7 +209,7 @@
 			<span>Data as Mass-Less Particles</span>
 			<span>Gnostic Uncertainty</span>
 		</div>
-		<p><a href="https://docs.machinegnostics.com/latest/mg/concepts/" target="_blank">Read the Principles →</a></p>
+		<p><a href="https://docs.machinegnostics.com/latest/mg/concepts/" target="_blank" rel="noopener noreferrer">Read the Principles →</a></p>
 	</section>
 
 	<section class="gn-section gn-reveal" id="licensing-clarity" style="text-align: center;">
@@ -217,7 +217,7 @@
 		<p>
 			Machine Gnostics is open-source under GPLv3. If your deployment model requires embedding in proprietary products, contact us to discuss commercial licensing paths.
 		</p>
-		<p><a href="/contact/">Discuss Licensing Options →</a></p>
+		<p><a href="/contact/?intent=licensing">Discuss Licensing Options →</a></p>
 	</section>
 
 	<section class="gn-section gn-cta gn-reveal" id="founding-partner-program">
@@ -227,7 +227,7 @@
 			We work with one partner at a time on a high-value, data-scarce problem we co-develop and publicly document. You get favorable terms; the industry gets the reference case.
 		</p>
 		<div class="gn-actions">
-			<a href="/contact/" class="md-button md-button--primary">Apply to Partner</a>
+			<a href="/contact/?intent=partnership" class="md-button md-button--primary">Apply to Partner</a>
 			<a href="/consultancy/#selection-criteria" class="md-button">See Selection Criteria</a>
 		</div>
 		
@@ -240,7 +240,7 @@
 		</p>
 		<div class="gn-actions">
 			<a href="https://docs.machinegnostics.com/latest/installation/" class="md-button md-button--primary">Install Machine Gnostics</a>
-			<a href="/contact/" class="md-button">Talk to the Team</a>
+			<a href="/contact/?intent=general" class="md-button">Talk to the Team</a>
 		</div>
 	</section>
 </div>

@@ -33,6 +33,17 @@
 			Prefer to fill out a form? Use this to tell us more about your inquiry, and we'll get back to you promptly.
 		</p>
 		<form action="https://formsubmit.co/info.machinegnostics@gmail.com" method="POST" class="gn-contact-form">
+			<div class="gn-form-group">
+				<label for="inquiry-type">Inquiry Type</label>
+				<select id="inquiry-type" name="inquiry_type" required>
+					<option value="general">General Inquiry</option>
+					<option value="partnership">Partnership</option>
+					<option value="co-development">Co-Development</option>
+					<option value="licensing">Licensing</option>
+					<option value="technical">Technical Question</option>
+					<option value="community">Community / Media</option>
+				</select>
+			</div>
 			<div class="gn-form-row">
 				<div class="gn-form-group">
 					<label for="name">First Name</label>
@@ -59,26 +70,50 @@
 			<input type="hidden" name="_captcha" value="false">
 			<input type="hidden" id="subject-field" name="_subject" value="">
 			<button type="submit" class="md-button md-button--primary">Send Message</button>
+			<p id="form-status" class="gn-form-status" aria-live="polite"></p>
 		</form>
 		<script>
 			// Form submission handler
-			document.querySelector('.gn-contact-form').addEventListener('submit', function(e) {
+			const contactForm = document.querySelector('.gn-contact-form');
+			if (contactForm) {
+				const intentMap = {
+					partnership: 'Partnership',
+					'co-development': 'Co-Development',
+					licensing: 'Licensing',
+					technical: 'Technical Question',
+					community: 'Community / Media',
+					general: 'General Inquiry'
+				};
+
+				const params = new URLSearchParams(window.location.search);
+				const requestedIntent = params.get('intent');
+				const inquiryTypeField = document.getElementById('inquiry-type');
+				if (requestedIntent && intentMap[requestedIntent] && inquiryTypeField) {
+					inquiryTypeField.value = requestedIntent;
+				}
+
+				contactForm.addEventListener('submit', function(e) {
 				e.preventDefault();
 				
 				const form = this;
 				const button = form.querySelector('button[type="submit"]');
+				const status = document.getElementById('form-status');
 				const originalText = button.textContent;
 				
 				// Validate honeypot
 				const honeypot = form.querySelector('input[name="_honey"]');
 				if (honeypot && honeypot.value !== '') {
-					alert('Spam detected. Please try again.');
+					showErrorMessage('Spam protection was triggered. Please refresh the page and try again.');
 					return false;
 				}
 				
 				// Disable button
 				button.disabled = true;
 				button.textContent = 'Sending...';
+				if (status) {
+					status.textContent = 'Submitting your message...';
+					status.dataset.state = 'pending';
+				}
 				
 				// Prepare form data
 				const formData = new FormData(form);
@@ -86,8 +121,10 @@
 				// Create unique subject with sender's name and timestamp
 				const name = document.getElementById('name').value;
 				const surname = document.getElementById('surname').value;
+				const inquiryType = inquiryTypeField ? inquiryTypeField.value : 'general';
+				const inquiryLabel = intentMap[inquiryType] || intentMap.general;
 				const timestamp = new Date().toLocaleString();
-				const subject = `New Contact Form: ${name} ${surname} - ${timestamp}`;
+				const subject = `[${inquiryLabel}] ${name} ${surname} - ${timestamp}`;
 				
 				formData.set('_subject', subject);
 				
@@ -103,13 +140,16 @@
 				})
 				.then(response => {
 					clearTimeout(timeoutId);
+					if (!response.ok) {
+						throw new Error(`Submission failed with status ${response.status}`);
+					}
 					showSuccessMessage();
 				})
-				.catch(error => {
+				.catch(() => {
 					clearTimeout(timeoutId);
-					// Show success message even on error (FormSubmit processes in background)
-					console.log('Form submitted (may still be processing)');
-					showSuccessMessage();
+					button.disabled = false;
+					button.textContent = originalText;
+					showErrorMessage('We could not confirm delivery. Please try again or email us directly at info.machinegnostics@gmail.com.');
 				});
 				
 				function showSuccessMessage() {
@@ -118,7 +158,15 @@
 						formElement.innerHTML = '<div style="text-align: center; padding: 2rem;"><h3 style="color: var(--md-primary-fg-color);">✓ Thank You!</h3><p>Thank you for connecting with us. Your enquiry has been successfully submitted and is being carefully reviewed by our team. We will be in touch shortly to explore how we can best support your objectives. We value your time and your ambition.</p><a href="/" class="md-button md-button--primary" style="margin-top: 1rem;">Back to Home</a></div>';
 					}
 				}
+
+				function showErrorMessage(message) {
+					if (status) {
+						status.textContent = message;
+						status.dataset.state = 'error';
+					}
+				}
 			});
+			}
 		</script>
 		<small style="display: block; text-align: center; margin-top: 1rem;">Your message is important to us. We'll respond as soon as possible.</small>
 	</section>
@@ -129,7 +177,7 @@
 			Want to chat with our community in real-time? Join our Discord server where you can discuss Machine Gnostics, ask questions, share projects, and collaborate with other developers.
 		</p>
 		<div class="gn-actions">
-			<a href="https://discord.gg/WMMUaeJe2X" target="_blank" class="md-button md-button--primary">Join Our Discord Community</a>
+			<a href="https://discord.gg/WMMUaeJe2X" target="_blank" rel="noopener noreferrer" class="md-button md-button--primary">Join Our Discord Community</a>
 		</div>
 	</section>
 
@@ -137,17 +185,33 @@
 		<h2>Follow Us Everywhere</h2>
 		<p>Stay updated with the latest in Mathematical Gnostics and join our growing community.</p>
 		<div class="gn-social-links">
-			<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank" title="GitHub">GitHub</a>
-			<a href="https://discord.gg/WMMUaeJe2X" target="_blank" title="Discord">Discord</a>
-			<a href="https://www.linkedin.com/company/109036022/" target="_blank" title="LinkedIn">LinkedIn</a>
-			<a href="https://pypi.org/project/machinegnostics/" target="_blank" title="PyPI">PyPI</a>
-			<a href="https://www.instagram.com/machinegnostics/" target="_blank" title="Instagram">Instagram</a>
-			<a href="https://www.youtube.com/@MachineGnostics" target="_blank" title="YouTube">YouTube</a>
+			<a href="https://github.com/MachineGnostics/machinegnostics" target="_blank" rel="noopener noreferrer" title="GitHub">GitHub</a>
+			<a href="https://discord.gg/WMMUaeJe2X" target="_blank" rel="noopener noreferrer" title="Discord">Discord</a>
+			<a href="https://www.linkedin.com/company/109036022/" target="_blank" rel="noopener noreferrer" title="LinkedIn">LinkedIn</a>
+			<a href="https://pypi.org/project/machinegnostics/" target="_blank" rel="noopener noreferrer" title="PyPI">PyPI</a>
+			<a href="https://www.instagram.com/machinegnostics/" target="_blank" rel="noopener noreferrer" title="Instagram">Instagram</a>
+			<a href="https://www.youtube.com/@MachineGnostics" target="_blank" rel="noopener noreferrer" title="YouTube">YouTube</a>
 		</div>
 	</section>
 </div>
 
 <style>
+.gn-form-status {
+	min-height: 1.25rem;
+	margin: 0.75rem 0 0;
+	font-size: 0.85rem;
+	text-align: center;
+	color: color-mix(in srgb, var(--md-default-fg-color), white 10%);
+}
+
+.gn-form-status[data-state="pending"] {
+	color: var(--md-default-fg-color);
+}
+
+.gn-form-status[data-state="error"] {
+	color: #ff8a80;
+}
+
 .gn-email-box {
 	margin: 1.5rem 0;
 	padding: 1.5rem;
@@ -173,6 +237,22 @@
 .gn-email-link:hover {
 	background-color: color-mix(in srgb, var(--md-primary-fg-color), transparent 90%);
 	text-decoration: underline;
+}
+
+.gn-contact-form select {
+	width: 100%;
+	padding: 0.75rem 0.9rem;
+	border-radius: 0.65rem;
+	border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 70%);
+	background: color-mix(in srgb, var(--md-default-bg-color), #111 4%);
+	color: var(--md-default-fg-color);
+	font: inherit;
+}
+
+.gn-contact-form select:focus {
+	outline: none;
+	border-color: color-mix(in srgb, var(--md-primary-fg-color), transparent 25%);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--md-primary-fg-color), transparent 85%);
 }
 
 .gn-contact-channels {

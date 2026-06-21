@@ -9,7 +9,7 @@
 			We co-develop one data-scarce, high-cost-of-failure problem at a time, with explainable outcomes and publishable rigor. This is a selective collaboration program, not high-volume consulting.
 		</p>
 		<div class="gn-actions">
-			<a href="/contact/" class="md-button md-button--primary">Apply to Partner</a>
+			<a href="/contact/?intent=partnership" class="md-button md-button--primary">Apply to Partner</a>
 			<a href="#selection-criteria" class="md-button">See Selection Criteria</a>
 		</div>
 	</section>
@@ -34,7 +34,7 @@
 					<span>Failure Economics</span>
 					<span>Scope Control</span>
 				</div>
-				<a href="/contact/">Discuss Your Case →</a>
+				<a href="/contact/?intent=partnership">Discuss Your Case →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -47,7 +47,7 @@
 					<span>Validation</span>
 					<span>Deployment Path</span>
 				</div>
-				<a href="/contact/">Apply to Co-Develop →</a>
+				<a href="/contact/?intent=co-development">Apply to Co-Develop →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -60,7 +60,7 @@
 					<span>Public Proof</span>
 					<span>Credibility Signal</span>
 				</div>
-				<a href="/contact/">Co-Publish Results →</a>
+				<a href="/contact/?intent=community">Co-Publish Results →</a>
 			</article>
 
 			<article class="gn-feature">
@@ -73,7 +73,7 @@
 					<span>Playbooks</span>
 					<span>Operational Readiness</span>
 				</div>
-				<a href="/contact/">Plan Internal Adoption →</a>
+				<a href="/contact/?intent=technical">Plan Internal Adoption →</a>
 			</article>
 		</div>
 	</section>
@@ -110,7 +110,7 @@
 			We prioritize one founding partner per cycle. Share your failure mode, current data reality, and what success must look like.
 		</p>
 		<div class="gn-actions">
-			<a href="/contact/" class="md-button md-button--primary">Apply to Partner</a>
+			<a href="/contact/?intent=partnership" class="md-button md-button--primary">Apply to Partner</a>
 		</div>
 	</section>
 </div>
