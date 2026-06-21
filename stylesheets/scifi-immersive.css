@@ -5,7 +5,7 @@
    Colors: Teal #00d4aa | Cyan #00e5ff | Green #00e676 | Void #020c0f
    ======================================================================= */
 
-@import url('../assets/external/fonts.googleapis.com/css2.2404ceff.css');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
 /* ── 0. Custom Properties ─────────────────────────────────────────────── */
 :root {

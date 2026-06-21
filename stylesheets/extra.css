@@ -12,7 +12,7 @@
     color: #00695c; /* Darker teal on hover */
 }
 
-@import url('../assets/external/fonts.googleapis.com/css2.aed57817.css');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&display=swap');
 
 .md-content .md-typeset {
     max-width: 100%;
