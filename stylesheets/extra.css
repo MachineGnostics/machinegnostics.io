@@ -117,6 +117,10 @@
     letter-spacing: -0.01em;
 }
 
+.gn-home .gn-hero h1 {
+    font-size: calc(var(--md-typeset-h1-size, 2.2rem) * 0.8);
+}
+
 .gn-home .gn-overline {
     margin: 0 0 .75rem;
     font-size: .72rem;
@@ -180,6 +184,73 @@
                 color-mix(in srgb, var(--md-primary-fg-color), transparent 92%) 0%,
                 color-mix(in srgb, var(--md-default-bg-color), #111 8%) 100%);
     transition: transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.gn-home .gn-flip-card {
+    perspective: 1200px;
+    min-height: 320px;
+    padding: 0;
+    overflow: hidden;
+}
+
+.gn-home .gn-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 320px;
+    transform-style: preserve-3d;
+    transition: transform .6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.gn-home .gn-flip-card.is-flipped .gn-flip-inner {
+    transform: rotateY(180deg);
+}
+
+.gn-home .gn-flip-face {
+    position: absolute;
+    inset: 0;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.gn-home .gn-flip-front {
+    z-index: 2;
+}
+
+.gn-home .gn-flip-back {
+    transform: rotateY(180deg);
+}
+
+.gn-home .gn-flip-toggle {
+    margin-top: auto;
+    align-self: flex-start;
+    border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 55%);
+    background: color-mix(in srgb, var(--md-primary-fg-color), transparent 90%);
+    color: var(--md-default-fg-color);
+    border-radius: .55rem;
+    padding: .45rem .72rem;
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
+}
+
+.gn-home .gn-flip-toggle:hover,
+.gn-home .gn-flip-toggle:focus-visible {
+    border-color: color-mix(in srgb, var(--md-primary-fg-color), transparent 22%);
+    background: color-mix(in srgb, var(--md-primary-fg-color), transparent 80%);
+    transform: translateY(-1px);
+    outline: none;
+}
+
+.gn-home .gn-meta {
+    margin-top: .9rem;
+    font-size: .82rem;
+    opacity: .88;
 }
 
 .gn-home .gn-card:hover,
@@ -388,8 +459,8 @@
         border-radius: 0.75rem;
     }
 
-    .gn-home h1 {
-        font-size: 1.75rem;
+    .gn-home .gn-hero h1 {
+        font-size: 1.4rem;
         line-height: 1.22;
     }
 
@@ -421,6 +492,11 @@
     .gn-contact-form {
         max-width: 100%;
     }
+
+    .gn-home .gn-flip-card,
+    .gn-home .gn-flip-inner {
+        min-height: 340px;
+    }
 }
 
 /* ── Responsive: Mobile portrait (≤480px) ─────────────────────────── */
@@ -430,8 +506,8 @@
         border-radius: 0.5rem;
     }
 
-    .gn-home h1 {
-        font-size: 1.45rem;
+    .gn-home .gn-hero h1 {
+        font-size: 1.16rem;
     }
 
     .gn-home .gn-subtitle {
