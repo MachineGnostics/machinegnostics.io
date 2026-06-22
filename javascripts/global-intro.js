@@ -7,6 +7,7 @@
   'use strict';
 
   const SKIP_KEY = 'gn-skip-intro-next-load';
+  const PLAYED_KEY = 'gn-global-intro-played';
   const DURATION_SEC = 4.0;
 
   const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -36,6 +37,16 @@
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return true;
     }
+
+    // Play the global intro only once for this browser/profile.
+    try {
+      if (localStorage.getItem(PLAYED_KEY) === '1') {
+        return true;
+      }
+    } catch {
+      /* no-op */
+    }
+
     try {
       if (sessionStorage.getItem(SKIP_KEY) === '1') {
         sessionStorage.removeItem(SKIP_KEY);
@@ -818,6 +829,14 @@
   const init = () => {
     markInternalNavLinks();
     if (shouldSkipIntro()) return;
+
+    // Mark as played before start so consent-triggered reloads don't replay.
+    try {
+      localStorage.setItem(PLAYED_KEY, '1');
+    } catch {
+      /* no-op */
+    }
+
     runIntro();
   };
 
