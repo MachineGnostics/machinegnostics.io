@@ -217,34 +217,31 @@
     -webkit-backface-visibility: hidden;
 }
 
+.gn-home .gn-flip-corner {
+    position: absolute;
+    top: .72rem;
+    right: .72rem;
+    width: 1.55rem;
+    height: 1.55rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    font-size: .86rem;
+    font-weight: 700;
+    line-height: 1;
+    color: color-mix(in srgb, var(--md-default-fg-color), white 22%);
+    border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 58%);
+    background: color-mix(in srgb, var(--md-primary-fg-color), transparent 89%);
+    pointer-events: none;
+}
+
 .gn-home .gn-flip-front {
     z-index: 2;
 }
 
 .gn-home .gn-flip-back {
     transform: rotateY(180deg);
-}
-
-.gn-home .gn-flip-toggle {
-    margin-top: auto;
-    align-self: flex-start;
-    border: 1px solid color-mix(in srgb, var(--md-primary-fg-color), transparent 55%);
-    background: color-mix(in srgb, var(--md-primary-fg-color), transparent 90%);
-    color: var(--md-default-fg-color);
-    border-radius: .55rem;
-    padding: .45rem .72rem;
-    font-size: .82rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: border-color .2s ease, background-color .2s ease, transform .2s ease;
-}
-
-.gn-home .gn-flip-toggle:hover,
-.gn-home .gn-flip-toggle:focus-visible {
-    border-color: color-mix(in srgb, var(--md-primary-fg-color), transparent 22%);
-    background: color-mix(in srgb, var(--md-primary-fg-color), transparent 80%);
-    transform: translateY(-1px);
-    outline: none;
 }
 
 .gn-home .gn-meta {

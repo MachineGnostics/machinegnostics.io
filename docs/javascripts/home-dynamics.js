@@ -3820,27 +3820,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* interactive flip cards */
   homeRoot.querySelectorAll('[data-flip-card]').forEach(card => {
-    const toggles = card.querySelectorAll('.gn-flip-toggle');
-    const setExpanded = expanded => {
-      toggles.forEach(btn => btn.setAttribute('aria-expanded', expanded ? 'true' : 'false'));
-    };
-
     const toggleCard = () => {
-      const isFlipped = card.classList.toggle('is-flipped');
-      setExpanded(isFlipped);
+      card.classList.toggle('is-flipped');
     };
 
-    toggles.forEach(btn => {
-      btn.addEventListener('click', e => {
+    card.addEventListener('click', e => {
+      // Let links and controls behave normally.
+      const interactive = e.target.closest('a, button, input, textarea, select, label');
+      if (interactive) return;
+      toggleCard();
+    });
+
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         toggleCard();
-      });
-      btn.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          toggleCard();
-        }
-      });
+      }
     });
   });
 });

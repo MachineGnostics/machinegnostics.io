@@ -68,9 +68,10 @@
 	<section class="gn-section gn-reveal" id="core-features">
 		<h2>Core Features</h2>
 		<div class="gn-features">
-			<article class="gn-feature gn-flip-card" data-flip-card>
+			<article class="gn-feature gn-flip-card" data-flip-card tabindex="0" role="button" aria-label="Flip card to view method details">
 				<div class="gn-flip-inner">
 					<div class="gn-flip-face gn-flip-front">
+						<span class="gn-flip-corner" aria-hidden="true">↺</span>
 						<h3>See structure in data too small for statistics</h3>
 						<p>
 							Detect useful relationships in sparse, noisy data without relying on fragile statistical assumptions.
@@ -79,9 +80,9 @@
 							<span>Assumption-Free Analysis</span>
 							<span>Small-Sample Reliability</span>
 						</div>
-						<button class="gn-flip-toggle" type="button" aria-expanded="false">Click to view method</button>
 					</div>
 					<div class="gn-flip-face gn-flip-back">
+						<span class="gn-flip-corner" aria-hidden="true">↺</span>
 						<h3>Mechanism</h3>
 						<p>
 							Built on GDFs, Riemannian geometry, and small-sample theory to expose deterministic structure from limited observations.
@@ -92,14 +93,14 @@
 							<span>Small-Sample Theory</span>
 						</div>
 						<a href="https://docs.machinegnostics.com/latest/da/da_models/" target="_blank" rel="noopener noreferrer">Explore Data Analysis Modules →</a>
-						<button class="gn-flip-toggle" type="button" aria-expanded="false">Back to outcomes</button>
 					</div>
 				</div>
 			</article>
 
-			<article class="gn-feature gn-flip-card" data-flip-card>
+			<article class="gn-feature gn-flip-card" data-flip-card tabindex="0" role="button" aria-label="Flip card to view method details">
 				<div class="gn-flip-inner">
 					<div class="gn-flip-face gn-flip-front">
+						<span class="gn-flip-corner" aria-hidden="true">↺</span>
 						<h3>Predictions you can explain to an auditor</h3>
 						<p>
 							Deploy models that remain inspectable, traceable, and defensible in regulated or high-accountability environments.
@@ -108,9 +109,9 @@
 							<span>Audit-Ready Outputs</span>
 							<span>Deterministic Traceability</span>
 						</div>
-						<button class="gn-flip-toggle" type="button" aria-expanded="false">Click to view method</button>
 					</div>
 					<div class="gn-flip-face gn-flip-back">
+						<span class="gn-flip-corner" aria-hidden="true">↺</span>
 						<h3>Mechanism</h3>
 						<p>
 							Residual entropy and thermodynamic models preserve explainability while supporting practical ML workflows.
@@ -121,14 +122,14 @@
 							<span>Explainability</span>
 						</div>
 						<a href="https://docs.machinegnostics.com/latest/models/ml_models/" target="_blank" rel="noopener noreferrer">Explore ML Models →</a>
-						<button class="gn-flip-toggle" type="button" aria-expanded="false">Back to outcomes</button>
 					</div>
 				</div>
 			</article>
 
-			<article class="gn-feature gn-flip-card" data-flip-card>
+			<article class="gn-feature gn-flip-card" data-flip-card tabindex="0" role="button" aria-label="Flip card to view method details">
 				<div class="gn-flip-inner">
 					<div class="gn-flip-face gn-flip-front">
+						<span class="gn-flip-corner" aria-hidden="true">↺</span>
 						<h3>Neural nets that hold up when data is scarce</h3>
 						<p>
 							MAGNET extends deep learning into noise-heavy, low-data settings where conventional networks can become brittle.
@@ -137,9 +138,9 @@
 							<span>Scarce-Data Robustness</span>
 							<span>Production-Oriented APIs</span>
 						</div>
-						<button class="gn-flip-toggle" type="button" aria-expanded="false">Click to view method</button>
 					</div>
 					<div class="gn-flip-face gn-flip-back">
+						<span class="gn-flip-corner" aria-hidden="true">↺</span>
 						<h3>MAGNET Mechanism</h3>
 						<p>
 							Next-gen deep learning rooted in mathematical gnostic principles and thermodynamic stability constraints.
@@ -150,7 +151,6 @@
 							<span>Noise Immunity</span>
 						</div>
 						<a href="https://docs.machinegnostics.com/latest/magnet/magnet/" target="_blank" rel="noopener noreferrer">Explore MAGNET →</a>
-						<button class="gn-flip-toggle" type="button" aria-expanded="false">Back to outcomes</button>
 					</div>
 				</div>
 			</article>
