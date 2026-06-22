@@ -19,7 +19,7 @@
 					Founder, Creator, and Lead Researcher of Machine Gnostics.
 				</p>
 				<p>
-					Leads the Machine Gnostics project, its research agenda, and the translation of the. Mathematical Gnostics theory into practical tools for developers and industry.
+					Leads the Machine Gnostics project, its research agenda, and the translation of the Mathematical Gnostics theory into practical tools for developers and industry.
 				</p>
 				<p><a href="https://www.nirmalparmar.in" target="_blank" rel="noopener noreferrer">www.nirmalparmar.in →</a></p>
 			</article>
