@@ -38,9 +38,11 @@
       return true;
     }
 
-    // Play the global intro only once for this browser/profile.
+    // Play the intro once per browser session (new tab / direct URL visit).
+    // Using sessionStorage means it replays in every fresh session but not
+    // on in-page navigation or refresh within the same tab.
     try {
-      if (localStorage.getItem(PLAYED_KEY) === '1') {
+      if (sessionStorage.getItem(PLAYED_KEY) === '1') {
         return true;
       }
     } catch {
@@ -87,6 +89,10 @@
   };
 
   const runIntro = () => {
+    // Resolve the theme bg colour immediately so the overlay covers the page
+    // before the canvas paints its first frame — eliminates the 1-frame flash.
+    const initialBg = isLight() ? '#f5fffb' : '#00010a';
+
     const overlay = document.createElement('div');
     overlay.setAttribute('aria-hidden', 'true');
     overlay.style.cssText = [
@@ -96,7 +102,7 @@
       'pointer-events:none',
       'opacity:1',
       'transition:opacity 520ms ease-out',
-      'background:transparent',
+      `background:${initialBg}`,
     ].join(';');
 
     const canvas = document.createElement('canvas');
@@ -822,6 +828,9 @@
 
     resize();
     initCoreParticles();
+    // Paint the first frame synchronously so there is zero gap between the
+    // overlay being inserted into the DOM and the canvas covering the page.
+    drawFrame();
     window.addEventListener('resize', resize, { passive: true });
     raf = requestAnimationFrame(step);
   };
@@ -830,9 +839,9 @@
     markInternalNavLinks();
     if (shouldSkipIntro()) return;
 
-    // Mark as played before start so consent-triggered reloads don't replay.
+    // Mark as played for this session so consent-triggered reloads don't replay.
     try {
-      localStorage.setItem(PLAYED_KEY, '1');
+      sessionStorage.setItem(PLAYED_KEY, '1');
     } catch {
       /* no-op */
     }
