@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Machine Gnostics Benchmark</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bench-shell-bg: transparent;
+      }
+
+      body[data-theme="light"] {
+        color-scheme: light;
+        --bench-shell-bg:
+          radial-gradient(circle at 14% 18%, rgba(37, 99, 235, 0.08) 0, transparent 32%),
+          radial-gradient(circle at 86% 22%, rgba(5, 150, 105, 0.08) 0, transparent 28%),
+          linear-gradient(180deg, rgba(250, 252, 255, 0.98) 0%, rgba(238, 246, 251, 0.98) 100%);
+      }
+
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: var(--bench-shell-bg);
+        overflow-x: hidden;
+        min-height: 100%;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      #mg-benchmark-root {
+        position: relative;
+        z-index: 1;
+      }
+    </style>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="mg-benchmark-root"></div>
+    <script>
+      (async function bootstrapBenchmark() {
+        let currentTheme = "dark";
+
+        function getParentTheme() {
+          try {
+            const parentDocument = window.parent && window.parent.document;
+            const parentBody = parentDocument && parentDocument.body;
+            const parentHtml = parentDocument && parentDocument.documentElement;
+            const scheme =
+              (parentBody && parentBody.getAttribute("data-md-color-scheme")) ||
+              (parentHtml && parentHtml.getAttribute("data-md-color-scheme"));
+            return scheme === "default" ? "light" : "dark";
+          } catch (_) {
+            return "dark";
+          }
+        }
+
+        function applyTheme(theme) {
+          currentTheme = theme;
+          document.body.setAttribute("data-theme", theme);
+        }
+
+        function postHeight() {
+          const root = document.getElementById("mg-benchmark-root");
+          const appRoot = root && root.firstElementChild ? root.firstElementChild : root;
+          const contentHeight = appRoot ? Math.ceil(appRoot.getBoundingClientRect().height) : 0;
+          const fallbackHeight = Math.max(
+            document.documentElement.scrollHeight,
+            document.body.scrollHeight,
+            document.documentElement.offsetHeight,
+            document.body.offsetHeight
+          );
+          const height = Math.max(contentHeight, fallbackHeight > 0 ? Math.min(fallbackHeight, contentHeight + 80 || fallbackHeight) : 0);
+
+          try {
+            window.parent.postMessage({ type: "mg-benchmark-height", height }, "*");
+          } catch (_) {}
+        }
+
+        try {
+          applyTheme(getParentTheme());
+
+          const response = await fetch("./mg_benchmark.jsx?v=20260624c", { cache: "no-store" });
+          if (!response.ok) {
+            throw new Error("Failed to load benchmark source: HTTP " + response.status);
+          }
+          const source = await response.text();
+          const transformed = Babel.transform(source, {
+            presets: [
+              ["env", { modules: false }],
+              ["react", { runtime: "classic" }],
+            ],
+          }).code;
+
+          const script = document.createElement("script");
+          script.type = "text/javascript";
+          script.text = transformed;
+          document.body.appendChild(script);
+
+          window.addEventListener("load", postHeight);
+          window.addEventListener("resize", postHeight);
+          setTimeout(postHeight, 60);
+          setTimeout(postHeight, 250);
+          setTimeout(postHeight, 800);
+
+          if (window.ResizeObserver) {
+            const resizeObserver = new ResizeObserver(postHeight);
+            resizeObserver.observe(document.body);
+          }
+
+          if (window.MutationObserver) {
+            const mutationObserver = new MutationObserver(postHeight);
+            mutationObserver.observe(document.body, { childList: true, subtree: true, attributes: true });
+
+            try {
+              const parentDocument = window.parent && window.parent.document;
+              const parentBody = parentDocument && parentDocument.body;
+              const parentHtml = parentDocument && parentDocument.documentElement;
+              if (parentBody || parentHtml) {
+                const themeObserver = new MutationObserver(() => {
+                  const nextTheme = getParentTheme();
+                  if (nextTheme !== currentTheme) {
+                    window.location.reload();
+                  }
+                });
+                if (parentBody) {
+                  themeObserver.observe(parentBody, { attributes: true, attributeFilter: ["data-md-color-scheme"] });
+                }
+                if (parentHtml) {
+                  themeObserver.observe(parentHtml, { attributes: true, attributeFilter: ["data-md-color-scheme"] });
+                }
+              }
+            } catch (_) {}
+          }
+        } catch (error) {
+          const root = document.getElementById("mg-benchmark-root");
+          if (root) {
+            root.innerHTML =
+              '<div style="color:#EF4444;font-family:system-ui,sans-serif;padding:20px;line-height:1.5;">' +
+              "Benchmark failed to load. " +
+              String(error) +
+              "</div>";
+          }
+          postHeight();
+          console.error(error);
+        }
+      })();
+    </script>
+  </body>
+</html>

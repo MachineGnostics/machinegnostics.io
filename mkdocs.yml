@@ -40,6 +40,7 @@ repo_name: Machine Gnostics
 
 nav:
   - Home: index.md
+  - Benchmark: benchmark.md
   - Consult: consultancy.md
   - Develop: developers.md
   - People: people.md
@@ -121,3 +122,4 @@ extra_javascript:
   - javascripts/global-intro.js?v=20260528c
   - javascripts/home-dynamics.js?v=20260529m
   - javascripts/scifi-holographic.js
+  - javascripts/benchmark-embed.js?v=20260624b

@@ -10,7 +10,7 @@
 		</p>
 		<div class="gn-actions">
 			<a href="https://docs.machinegnostics.com/latest/installation/" class="md-button md-button--primary">Install Machine Gnostics</a>
-			<a href="https://machinegnostics-anscombe-banchmark.streamlit.app" class="md-button" target="_blank" rel="noopener noreferrer">Explore Benchmark</a>
+			<a href="/benchmark/" class="md-button" rel="noopener noreferrer">Explore Benchmark</a>
 		</div>
 	</section>
 
@@ -164,7 +164,7 @@
 			Benchmarking small datasets with the Anscombe Quartet — revealing insights statistics alone can't see.
 		</p>
 		<div class="gn-actions">
-			<a href="https://machinegnostics-anscombe-banchmark.streamlit.app" class="md-button md-button--primary" target="_blank" rel="noopener noreferrer">Run a Reproducible Worked Example</a>
+			<a href="/benchmark/" class="md-button md-button--primary" rel="noopener noreferrer">Check Benchmark Example</a>
 			<a href="https://docs.machinegnostics.com/latest/" class="md-button">See Technical Documentation</a>
 		</div>
 	</section>
