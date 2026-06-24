@@ -17,7 +17,7 @@
     <iframe
       src="../benchmark_app.html?v=20260624c"
       title="Machine Gnostics Benchmark"
-      style="width: 100%; min-height: 980px; border: 1px solid rgba(30, 35, 41, 0.48); border-radius: 16px; background: transparent; overflow: hidden; box-shadow: 0 18px 50px rgba(0, 0, 0, 0.14);"
+      style="display: block; width: 100%; min-height: clamp(640px, 78vh, 980px); border: 1px solid rgba(30, 35, 41, 0.48); border-radius: clamp(10px, 2vw, 16px); background: transparent; overflow: hidden; box-shadow: 0 12px 34px rgba(0, 0, 0, 0.14);"
       loading="eager"
     ></iframe>
   </section>

@@ -528,45 +528,116 @@ function OverviewBarChart() {
   }));
   useEffect(() => {
     const canvas = ref.current; if (!canvas) return;
-    const dpr = window.devicePixelRatio || 1;
-    const W = canvas.offsetWidth || 700, H = 300;
-    canvas.width = W * dpr; canvas.height = H * dpr;
-    canvas.style.width = W + "px"; canvas.style.height = H + "px";
-    const ctx = canvas.getContext("2d"); ctx.scale(dpr, dpr);
-    ctx.clearRect(0, 0, W, H);
-    const pad = { l: 42, r: 16, t: 28, b: 68 };
-    const cw = W - pad.l - pad.r, ch = H - pad.t - pad.b;
-    const n = avgPerDs.length, bw = cw / n, barW = bw * 0.28;
-    [0,2,4,6,8,10].forEach(v => {
-      const y = pad.t + ch * (1 - v/10);
-      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(pad.l+cw, y);
-      ctx.strokeStyle = v === 0 ? "#2A3040" : "#161B22"; ctx.lineWidth = 1; ctx.stroke();
-      ctx.fillStyle = C.muted; ctx.font = "10px system-ui"; ctx.textAlign = "right";
-      ctx.fillText(v, pad.l-6, y+3);
-    });
-    avgPerDs.forEach((d, i) => {
-      const cx2 = pad.l + i*bw + bw/2;
-      const sH = ch*(d.stat/10), mH = ch*(d.mg/10);
-      ctx.fillStyle = C.stat+"BB";
-      ctx.beginPath(); ctx.roundRect(cx2-barW-2, pad.t+ch-sH, barW, sH, [3,3,0,0]); ctx.fill();
-      ctx.fillStyle = C.mg+"BB";
-      ctx.beginPath(); ctx.roundRect(cx2+2, pad.t+ch-mH, barW, mH, [3,3,0,0]); ctx.fill();
-      ctx.fillStyle = C.stat; ctx.font="bold 9px system-ui"; ctx.textAlign="center";
-      ctx.fillText(d.stat.toFixed(1), cx2-barW/2-2, pad.t+ch-sH-5);
-      ctx.fillStyle = C.mg;
-      ctx.fillText(d.mg.toFixed(1),  cx2+barW/2+2,  pad.t+ch-mH-5);
-      ctx.fillStyle = C.muted; ctx.font="9px system-ui"; ctx.textAlign="center";
-      const short = d.name.length > 14 ? d.name.slice(0,14)+"…" : d.name;
-      ctx.fillText(short, cx2, pad.t+ch+13);
-    });
-    const lx = pad.l + cw/2 - 90, ly = H - 10;
-    [[C.stat,"Classical Statistics"],[C.mg,"Machine Gnostics"]].forEach(([col,lbl],i) => {
-      const x = lx + i*170;
-      ctx.fillStyle=col; ctx.fillRect(x, ly-8, 12, 8);
-      ctx.fillStyle=C.muted; ctx.font="10px system-ui"; ctx.textAlign="left";
-      ctx.fillText(lbl, x+15, ly);
-    });
-  }, []);
+    const draw = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const W = canvas.offsetWidth || 700;
+      const H = W < 560 ? 340 : 300;
+      const isCompactChart = W < 760;
+      const isPhoneChart = W < 560;
+
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + "px";
+      canvas.style.height = H + "px";
+
+      const ctx = canvas.getContext("2d");
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+
+      const pad = {
+        l: isPhoneChart ? 36 : 42,
+        r: 12,
+        t: 28,
+        b: isPhoneChart ? 114 : isCompactChart ? 96 : 76,
+      };
+      const cw = W - pad.l - pad.r;
+      const ch = H - pad.t - pad.b;
+      const n = avgPerDs.length;
+      const bw = cw / n;
+      const barW = bw * 0.28;
+
+      [0,2,4,6,8,10].forEach(v => {
+        const y = pad.t + ch * (1 - v/10);
+        ctx.beginPath();
+        ctx.moveTo(pad.l, y);
+        ctx.lineTo(pad.l + cw, y);
+        ctx.strokeStyle = v === 0 ? "#2A3040" : "#161B22";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        ctx.fillStyle = C.muted;
+        ctx.font = "10px system-ui";
+        ctx.textAlign = "right";
+        ctx.fillText(v, pad.l - 6, y + 3);
+      });
+
+      avgPerDs.forEach((d, i) => {
+        const cx2 = pad.l + i*bw + bw/2;
+        const sH = ch*(d.stat/10);
+        const mH = ch*(d.mg/10);
+        ctx.fillStyle = C.stat + "BB";
+        ctx.beginPath();
+        ctx.roundRect(cx2-barW-2, pad.t+ch-sH, barW, sH, [3,3,0,0]);
+        ctx.fill();
+        ctx.fillStyle = C.mg + "BB";
+        ctx.beginPath();
+        ctx.roundRect(cx2+2, pad.t+ch-mH, barW, mH, [3,3,0,0]);
+        ctx.fill();
+
+        ctx.fillStyle = C.stat;
+        ctx.font = "bold 9px system-ui";
+        ctx.textAlign = "center";
+        ctx.fillText(d.stat.toFixed(1), cx2-barW/2-2, pad.t+ch-sH-5);
+        ctx.fillStyle = C.mg;
+        ctx.fillText(d.mg.toFixed(1), cx2+barW/2+2, pad.t+ch-mH-5);
+
+        const maxChars = isPhoneChart ? 10 : isCompactChart ? 12 : 14;
+        const short = d.name.length > maxChars ? d.name.slice(0, maxChars) + "…" : d.name;
+        ctx.save();
+        ctx.translate(cx2 + 2, pad.t + ch + 28);
+        ctx.rotate(-Math.PI / 4);
+        ctx.fillStyle = C.muted;
+        ctx.font = (isPhoneChart ? "8px" : "9px") + " system-ui";
+        ctx.textAlign = "right";
+        ctx.textBaseline = "middle";
+        ctx.fillText(short, 0, 0);
+        ctx.restore();
+      });
+
+      const legendStep = isCompactChart ? 146 : 170;
+      const lx = pad.l + cw/2 - (legendStep - 14);
+      const ly = H - (isPhoneChart ? 14 : 12);
+      [[C.stat,"Classical Statistics"],[C.mg,"Machine Gnostics"]].forEach(([col,lbl], i) => {
+        const x = lx + i * legendStep;
+        ctx.fillStyle = col;
+        ctx.fillRect(x, ly - 8, 12, 8);
+        ctx.fillStyle = C.muted;
+        ctx.font = (isPhoneChart ? "9px" : "10px") + " system-ui";
+        ctx.textAlign = "left";
+        ctx.fillText(lbl, x + 15, ly);
+      });
+    };
+
+    draw();
+
+    const onResize = () => draw();
+    window.addEventListener("resize", onResize);
+
+    let ro;
+    if (window.ResizeObserver) {
+      ro = new ResizeObserver(onResize);
+      ro.observe(canvas);
+      if (canvas.parentElement) {
+        ro.observe(canvas.parentElement);
+      }
+    }
+
+    return () => {
+      window.removeEventListener("resize", onResize);
+      if (ro) {
+        ro.disconnect();
+      }
+    };
+  }, [avgPerDs]);
   return <canvas ref={ref} style={{ width:"100%", display:"block" }} />;
 }
 
