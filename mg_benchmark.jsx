@@ -944,8 +944,8 @@ function App() {
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "60vh", color: C.muted, gap: 12 }}>
-                <div style={{ width: 40, height: 40, borderRadius: "50%", border: `2px solid ${C.border2}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>←</div>
-                <p style={{ fontSize: 13, margin: 0 }}>Select a dataset from the sidebar to explore</p>
+                <div style={{ width: 40, height: 40, borderRadius: "50%", border: `2px solid ${C.border2}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18 }}>↑</div>
+                <p style={{ fontSize: 13, margin: 0 }}>Select a dataset from the above section to explore</p>
               </div>
             )}
           </div>
@@ -955,9 +955,6 @@ function App() {
       {/* Footer */}
       <footer style={{ borderTop: `1px solid ${C.border}`, padding: isCompact ? "14px" : "16px 32px", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 11, color: C.muted, flexWrap: "wrap", gap: 8 }}>
         <span>Machine Gnostics Benchmark</span>
-        <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-          <span>Anscombe (1973)</span><span>Bickel et al. (1975)</span><span>Burnham et al. (1991)</span><span>Autor et al. (2008)</span><span>Yang et al. (2020)</span>
-        </div>
       </footer>
     </div>
   );
