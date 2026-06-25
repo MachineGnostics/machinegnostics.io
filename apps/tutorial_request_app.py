@@ -14,6 +14,7 @@ st.set_page_config(
     page_title="Machine Gnostics Learning Hub",
     page_icon="MG",
     layout="centered",
+    initial_sidebar_state="collapsed",
 )
 
 
@@ -362,7 +363,7 @@ div[data-testid="stForm"] {
     unsafe_allow_html=True,
 )
 
-st.title("Machine Gnostics Learning Concierge")
+st.title("Machine Gnostics Learning Hub")
 st.markdown(
     "Choose the MG learning tracks you want, preview the exact resources before you send, and receive the pack by email."
 )
@@ -373,17 +374,17 @@ sender_email = get_secret_value("GMAIL_SENDER_EMAIL")
 app_password = get_secret_value("GMAIL_APP_PASSWORD")
 
 with st.sidebar:
-    st.header("Delivery Settings")
-    st.markdown(
-        "This app sends mail from the Machine Gnostics account configured in Streamlit secrets. "
-        "Set `GMAIL_SENDER_EMAIL` and `GMAIL_APP_PASSWORD` in your deployment secrets."
-    )
-    if sender_email and app_password:
-        st.success("Secrets loaded successfully.")
-    else:
-        st.warning(
-            "No secrets were found. Add them in `.streamlit/secrets.toml`, Streamlit Cloud secrets, or environment variables."
+    with st.expander("Delivery Settings", expanded=False):
+        st.markdown(
+            "This app sends mail from the Machine Gnostics account configured in Streamlit secrets. "
+            "Set `GMAIL_SENDER_EMAIL` and `GMAIL_APP_PASSWORD` in your deployment secrets."
         )
+        if sender_email and app_password:
+            st.success("Secrets loaded successfully.")
+        else:
+            st.warning(
+                "No secrets were found. Add them in `.streamlit/secrets.toml`, Streamlit Cloud secrets, or environment variables."
+            )
 
 st.subheader("Choose Your MG Learning Tracks")
 selected_tutorials = st.multiselect(
