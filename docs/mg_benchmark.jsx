@@ -355,16 +355,16 @@ const MASTER_LABELS = [
 
 // Manually mapped master scores per dataset (stat, mg) on 6 universal axes
 const MASTER_SCORES = [
-  { stat: [1,2,1,3,2,3], mg: [9,8,9,7,9,8] }, // berkeley_agg
-  { stat: [1,2,2,3,3,3], mg: [9,8,9,7,9,8] }, // berkeley_dept
-  { stat: [2,2,1,4,3,2], mg: [8,9,8,7,9,8] }, // ms_trial
-  { stat: [1,1,1,2,2,2], mg: [9,9,9,8,9,8] }, // pain_trial
-  { stat: [1,2,2,2,1,3], mg: [9,8,9,7,9,7] }, // vitamin_d
-  { stat: [1,2,1,3,1,2], mg: [9,8,9,7,9,8] }, // education_wage
-  { stat: [1,2,1,3,1,2], mg: [9,8,8,7,9,7] }, // basketball
-  { stat: [1,2,1,1,1,3], mg: [9,9,7,9,9,7] }, // chest_xray
-  { stat: [2,2,2,3,3,3], mg: [9,8,8,8,9,7] }, // psa
-  { stat: [1,1,1,2,1,3], mg: [9,9,8,8,9,8] }, // anscombe
+  { stat: [1,2,1,3,2,3], mg: [9,8,9,8,9,9] }, // berkeley_agg
+  { stat: [1,2,2,3,3,3], mg: [9,8,9,8,9,9] }, // berkeley_dept
+  { stat: [2,2,1,4,3,2], mg: [8,9,8,8,9,9] }, // ms_trial
+  { stat: [1,1,1,2,2,2], mg: [9,9,9,9,9,9] }, // pain_trial
+  { stat: [1,2,2,2,1,3], mg: [9,8,9,8,9,8] }, // vitamin_d
+  { stat: [1,2,1,3,1,2], mg: [9,8,9,8,9,9] }, // education_wage
+  { stat: [1,2,1,3,1,2], mg: [9,8,8,8,9,8] }, // basketball
+  { stat: [1,2,1,1,1,3], mg: [9,9,7,10,9,8] }, // chest_xray
+  { stat: [2,2,2,3,3,3], mg: [9,8,8,9,9,8] }, // psa
+  { stat: [1,1,1,2,1,3], mg: [9,9,8,9,9,9] }, // anscombe
 ];
 
 const masterAvg = (axis) => ({
@@ -851,12 +851,12 @@ function MasterRadarPanel({ isNarrow, isCompact }) {
               </div>
               <div style={{ display: "flex", gap: 8, flexShrink: 0, paddingTop: 2 }}>
                 <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: C.stat }}>{item.stat}</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: C.stat }}>{Number(item.stat).toFixed(1)}</div>
                   <div style={{ fontSize: 9, color: C.muted }}>STAT</div>
                 </div>
                 <div style={{ width: 1, background: C.border }} />
                 <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: C.mg }}>{item.mg}</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, color: C.mg }}>{Number(item.mg).toFixed(1)}</div>
                   <div style={{ fontSize: 9, color: C.muted }}>MG</div>
                 </div>
               </div>
