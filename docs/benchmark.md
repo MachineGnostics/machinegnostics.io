@@ -13,7 +13,7 @@
     </div> -->
   </section>
 
-  <section class="gn-section gn-reveal">
+  <section class="gn-reveal" style="margin-top: 2rem;">
     <iframe
       src="../benchmark_app.html?v=20260624c"
       title="Machine Gnostics Benchmark"

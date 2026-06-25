@@ -1025,7 +1025,7 @@ function App() {
 
                 {isNarrow ? (
                   <div style={{ marginBottom: 0 }}>
-                    <VerdictDeepDivePanel ds={ds} defaultOpen />
+                    <VerdictDeepDivePanel ds={ds} />
                   </div>
                 ) : null}
 
