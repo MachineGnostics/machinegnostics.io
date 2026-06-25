@@ -74,7 +74,7 @@
             document.documentElement.offsetHeight,
             document.body.offsetHeight
           );
-          const height = Math.max(contentHeight, fallbackHeight > 0 ? Math.min(fallbackHeight, contentHeight + 80 || fallbackHeight) : 0);
+          const height = Math.max(contentHeight, fallbackHeight > 0 ? Math.min(fallbackHeight, contentHeight + 160 || fallbackHeight) : 0);
 
           try {
             window.parent.postMessage({ type: "mg-benchmark-height", height }, "*");
