@@ -454,6 +454,147 @@ function KeyStat({ label, val, note }) {
   );
 }
 
+function buildVerdictDeepDive(ds) {
+  const issueMap = {
+    "Critical Reversal": "The aggregate result is factually backwards once the data is stratified.",
+    "Artefact Exposed": "Pooling creates a false signal that disappears inside the correct subgroup view.",
+    "Outlier Masking": "One extreme observation materially changes the headline result.",
+    "Bimodal Collapse": "A single mean compresses two distinct response populations into one misleading number.",
+    "Spurious Correlation": "A hidden confounder drives the association rather than the headline variable itself.",
+    "Composition Artefact": "The reported trend is driven by a changing mix of groups, not the within-group signal.",
+    "Marker vs Cause": "The predictor is a proxy for quality, not the causal lever the naive analysis suggests.",
+    "Tail-Risk Blind Spot": "The meaningful signal lives in the extremes rather than near the centre.",
+    "Prevalence Blind Spot": "The core issue is not the test calculation itself, but the omitted harm and base-rate context.",
+    "The Classic Proof": "The dataset shows why identical summary statistics can hide completely different structures.",
+  };
+
+  const summary = issueMap[ds.verdictTag] || "The benchmark outcome is driven by a structural failure mode that the classical summary misses.";
+  const radarLead = ds.radarAxisInfo.slice(0, 2).map((item) => item.axis).join(" and ");
+  const statsAvg = (ds.radar.stat.reduce((a, b) => a + b, 0) / ds.radar.stat.length).toFixed(1);
+  const mgAvg = (ds.radar.mg.reduce((a, b) => a + b, 0) / ds.radar.mg.length).toFixed(1);
+
+  return {
+    summary,
+    steps: [
+      { q: "What does the classical method conclude?", a: ds.classicalFinding },
+      { q: "Why is that conclusion incomplete or wrong?", a: ds.classicalError },
+      { q: "What does Machine Gnostics recover?", a: ds.mgFinding },
+      { q: "Which dimensions matter most here?", a: `The most relevant axes for this dataset are ${radarLead}. That is why the benchmark assigns MG an average of ${mgAvg}/10 versus STAT ${statsAvg}/10 across the domain-specific radar.` },
+      { q: "What should a reader conclude?", a: `This case is best read as ${summary.toLowerCase()} The detailed axis scores and the radar panel should be used together to understand the failure mode, not as a single headline number.` },
+    ],
+  };
+}
+
+function VerdictDeepDivePanel({ ds, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+  const deepDive = buildVerdictDeepDive(ds);
+
+  return (
+    <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, overflow: "hidden" }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        style={{
+          width: "100%", display: "flex", alignItems: "center", gap: 12,
+          padding: "16px 18px", background: "none", border: "none", cursor: "pointer", textAlign: "left",
+        }}
+      >
+        <div style={{ width: 7, height: 7, borderRadius: "50%", background: ds.verdictColor, flexShrink: 0, boxShadow: `0 0 8px ${ds.verdictColor}` }} />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, color: ds.verdictColor, textTransform: "uppercase", letterSpacing: "0.07em" }}>Verdict Deep Dive</div>
+          <div style={{ fontSize: 12, color: C.muted, marginTop: 3, lineHeight: 1.5 }}>{deepDive.summary}</div>
+        </div>
+        <div style={{ fontSize: 14, color: C.muted, flexShrink: 0, transform: open ? "rotate(180deg)" : "none", transition: "transform .2s" }}>▾</div>
+      </button>
+      {open && (
+        <div style={{ borderTop: `1px solid ${C.border}`, padding: "16px 18px" }}>
+          <div style={{ display: "grid", gap: 12 }}>
+            {deepDive.steps.map((step, i) => (
+              <div key={i} style={{ background: C.panel, border: `1px solid ${C.border}`, borderRadius: 10, padding: "14px 14px" }}>
+                <div style={{ fontSize: 12, fontWeight: 700, color: C.text, marginBottom: 5 }}>{step.q}</div>
+                <div style={{ fontSize: 12, color: C.muted, lineHeight: 1.7 }}>{step.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Scoring methodology panel ──────────────────────────────────────────────
+function ScoringMethodPanel() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div style={{ background: C.surface, border: `1px solid ${C.border2}`, borderRadius: 12, marginBottom: 24, overflow: "hidden" }}>
+      <button
+        onClick={() => setOpen((o) => !o)}
+        style={{
+          width: "100%", display: "flex", alignItems: "center", gap: 12,
+          padding: "16px 22px", background: "none", border: "none", cursor: "pointer", textAlign: "left",
+        }}
+      >
+        <div style={{ width: 7, height: 7, borderRadius: "50%", background: C.accent, flexShrink: 0 }} />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>How Scores Were Assigned — Methodology & Rubric</div>
+          <div style={{ fontSize: 12, color: C.muted, marginTop: 2 }}>Read this to understand what each number means and why the MG vs Stats gaps are sized the way they are</div>
+        </div>
+        <div style={{ fontSize: 14, color: C.muted, flexShrink: 0, transform: open ? "rotate(180deg)" : "none", transition: "transform .2s" }}>▾</div>
+      </button>
+      {open && (
+        <div style={{ borderTop: `1px solid ${C.border}`, padding: "20px 22px" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: C.text, marginBottom: 12 }}>The 1–10 Rubric</div>
+              {[
+                { range: "1–2", col: C.warn, label: "Method completely fails", desc: "Produces a wrong answer, no detection, or actively misleads. Score of 1 = structurally blind to this challenge." },
+                { range: "3–4", col: C.amber, label: "Partial detection", desc: "Gets the direction right or detects part of the signal, but with significant gaps, instability, or incomplete information." },
+                { range: "5–6", col: "#F59E0B", label: "Conditional success", desc: "Could detect the issue if the analyst already suspects it and runs the right post-hoc test. No automatic detection." },
+                { range: "7–8", col: C.mg, label: "Largely succeeds", desc: "Succeeds with minor caveats — may require a reasonable assumption or a secondary diagnostic step." },
+                { range: "9–10", col: "#22D3A5", label: "Succeeds cleanly", desc: "Succeeds robustly without special analyst effort. Scores of 9 rather than 10 reflect that real-world noise always exists." },
+              ].map((r) => (
+                <div key={r.range} style={{ display: "flex", gap: 12, marginBottom: 10, alignItems: "start" }}>
+                  <span style={{ fontSize: 13, fontWeight: 700, color: r.col, minWidth: 32, flexShrink: 0 }}>{r.range}</span>
+                  <div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: C.text }}>{r.label}</div>
+                    <div style={{ fontSize: 11, color: C.muted, lineHeight: 1.55 }}>{r.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 700, color: C.text, marginBottom: 12 }}>Assignment Process — 4 Steps</div>
+              {[
+                { n: "1", title: "Identify the primary failure mode", desc: "Each dataset was categorised by its core challenge: confounding, bimodality, outlier leverage, tail risk, composition effect, or spurious correlation. This determined which capabilities matter most." },
+                { n: "2", title: "Apply a naive-use test", desc: "Scores answer: 'If I ran this method naively on this data, would it detect or miss the issue?' Naive means no special tricks, no prior knowledge of the correct answer, and no manual stratification pre-specified." },
+                { n: "3", title: "Anchor to published evidence", desc: "Classical stats scores are based on the actual published findings. MG scores are based on the benchmark notebook outputs on these datasets." },
+                { n: "4", title: "Apply the rubric with partial credit", desc: "Binary scoring is avoided. A method can be directionally right, statistically valid, or clinically useful without being perfect, so the score reflects that nuance." },
+              ].map((s) => (
+                <div key={s.n} style={{ display: "flex", gap: 12, marginBottom: 12, alignItems: "start" }}>
+                  <div style={{
+                    width: 22, height: 22, borderRadius: "50%",
+                    background: C.accent + "22", border: `1px solid ${C.accent}55`,
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    fontSize: 11, fontWeight: 700, color: C.accent, flexShrink: 0,
+                  }}>{s.n}</div>
+                  <div>
+                    <div style={{ fontSize: 12, fontWeight: 600, color: C.text, marginBottom: 3 }}>{s.title}</div>
+                    <div style={{ fontSize: 11, color: C.muted, lineHeight: 1.55 }}>{s.desc}</div>
+                  </div>
+                </div>
+              ))}
+              <div style={{ marginTop: 4, background: "#0D0F12", borderRadius: 8, padding: "10px 12px", border: `1px solid ${C.border}` }}>
+                <div style={{ fontSize: 11, fontWeight: 600, color: C.amber, marginBottom: 4 }}>Important caveat</div>
+                <div style={{ fontSize: 11, color: C.muted, lineHeight: 1.55 }}>These are benchmark scores for comparison, not clinical or peer-reviewed ratings. The direction of the differences is the important result; the exact magnitude should be read as directional evidence.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Radar axis info panel ───────────────────────────────────────────────────
 function RadarAxisPanel({ items, statScores, mgScores }) {
   return (
@@ -807,18 +948,19 @@ function App() {
       </div>
 
       {/* Content */}
-      <div style={{ flex: 1, padding: isCompact ? "16px 10px" : isNarrow ? "18px 12px" : "30px 32px", maxWidth: 1280, width: "100%", boxSizing: "border-box", margin: "0 auto" }}>
+      <div style={{ flex: 1, padding: isCompact ? "16px 10px" : isNarrow ? "18px 12px" : "30px 32px", maxWidth: view === "detail" ? 1700 : 1280, width: "100%", boxSizing: "border-box", margin: "0 auto" }}>
 
         {/* ── OVERVIEW ── */}
         {view === "overview" && (
           <div>
+            <ScoringMethodPanel />
             {/* Master radar */}
             <MasterRadarPanel isNarrow={isNarrow} isCompact={isCompact} />
 
             {/* Bar chart */}
             <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 24px", marginBottom: 24, backdropFilter: "blur(12px)" }}>
               <h2 style={{ fontSize: isCompact ? 16 : 18, fontWeight: 700, color: C.text, marginBottom: 6, letterSpacing: "-0.02em" }}>Average Score Per Dataset</h2>
-              <p style={{ fontSize: 13, color: C.muted, marginBottom: 20, lineHeight: 1.7 }}>Mean of each dataset's 5 domain-specific radar scores. Higher is better.</p>
+              <p style={{ fontSize: 13, color: C.muted, marginBottom: 20, lineHeight: 1.7 }}>Mean of each dataset's domain-specific radar scores. The rubric above explains how each score was assigned.</p>
               <OverviewBarChart />
             </div>
 
@@ -857,18 +999,17 @@ function App() {
 
         {/* ── DETAIL ── */}
         {view === "detail" && (
-          <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "220px 1fr", gap: 22 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "280px minmax(0, 1.1fr) minmax(360px, 0.9fr)", gap: 24, alignItems: "start" }}>
             {/* Sidebar */}
-            <div>
+            <div style={{ position: isNarrow ? "static" : "sticky", top: isNarrow ? "auto" : 18, alignSelf: "start" }}>
               <div style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 12 }}>Select Dataset</div>
               {DATASETS.map(d => <DatasetCard key={d.id} ds={d} isActive={activeId===d.id} onClick={() => setActiveId(d.id)} />)}
             </div>
 
-            {/* Detail panel */}
+            {/* Main analysis panel */}
             {ds ? (
-              <div>
-                {/* Header */}
-                <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 26px", marginBottom: 16, backdropFilter: "blur(12px)" }}>
+              <div style={{ display: "grid", gap: 16 }}>
+                <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 26px", backdropFilter: "blur(12px)" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12 }}>
                     <div>
                       <div style={{ fontSize: 11, color: C.muted, marginBottom: 4 }}>{ds.domain} · n = {ds.n}</div>
@@ -882,11 +1023,16 @@ function App() {
                   </div>
                 </div>
 
-                {/* Radar + key stats */}
-                <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "minmax(240px, 280px) minmax(0, 1fr)", gap: 14, marginBottom: 16 }}>
+                {isNarrow ? (
+                  <div style={{ marginBottom: 0 }}>
+                    <VerdictDeepDivePanel ds={ds} defaultOpen />
+                  </div>
+                ) : null}
+
+                <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "minmax(300px, 360px) minmax(0, 1fr)", gap: 16, marginBottom: 0 }}>
                   <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "18px", display: "flex", flexDirection: "column", alignItems: "center", overflow: "hidden" }}>
                     <div style={{ fontSize: 12, fontWeight: 600, color: C.text, marginBottom: 12 }}>Radar Comparison</div>
-                    <RadarChart labels={ds.radar.labels} statData={ds.radar.stat} mgData={ds.radar.mg} size={isCompact ? 205 : isNarrow ? 220 : 240} />
+                    <RadarChart labels={ds.radar.labels} statData={ds.radar.stat} mgData={ds.radar.mg} size={isCompact ? 205 : isNarrow ? 220 : 250} />
                     <div style={{ display: "flex", gap: 16, marginTop: 14, fontSize: 11, flexWrap: "wrap", justifyContent: "center" }}>
                       <span style={{ color: C.stat, display: "flex", alignItems: "center", gap: 5 }}>
                         <span style={{ width: 10, height: 3, background: C.stat, display: "inline-block", borderRadius: 1 }} />Classical Stats
@@ -896,7 +1042,8 @@ function App() {
                       </span>
                     </div>
                   </div>
-                  <div>
+
+                  <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: 13, fontWeight: 700, color: C.text, marginBottom: 12, letterSpacing: "-0.01em" }}>Key Metrics</div>
                     <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "1fr 1fr", gap: 10 }}>
                       {ds.keyStats.map((k, i) => <KeyStat key={i} {...k} />)}
@@ -916,13 +1063,11 @@ function App() {
                   </div>
                 </div>
 
-                {/* Radar axis guide */}
                 <div style={{ marginBottom: 16 }}>
                   <RadarAxisPanel items={ds.radarAxisInfo} statScores={ds.radar.stat} mgScores={ds.radar.mg} />
                 </div>
 
-                {/* Analysis boxes */}
-                <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "1fr 1fr", gap: 14, marginBottom: 14 }}>
+                <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "1fr 1fr", gap: 14 }}>
                   <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: "16px 18px", borderLeft: `3px solid ${C.stat}` }}>
                     <div style={{ fontSize: 11, color: C.stat, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>Classical Statistics Finding</div>
                     <p style={{ fontSize: 14, color: C.text, lineHeight: 1.75, margin: 0 }}>{ds.classicalFinding}</p>
@@ -932,12 +1077,12 @@ function App() {
                     <p style={{ fontSize: 14, color: C.text, lineHeight: 1.75, margin: 0 }}>{ds.classicalError}</p>
                   </div>
                 </div>
-                <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: "16px 18px", marginBottom: 14, borderLeft: `3px solid ${C.mg}` }}>
+
+                <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: "16px 18px", borderLeft: `3px solid ${C.mg}` }}>
                   <div style={{ fontSize: 11, color: C.mg, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>Machine Gnostics Finding</div>
                   <p style={{ fontSize: 14, color: C.text, lineHeight: 1.75, margin: 0 }}>{ds.mgFinding}</p>
                 </div>
 
-                {/* Citation */}
                 <div style={{ fontSize: 11, color: C.muted, borderTop: `1px solid ${C.border}`, paddingTop: 12 }}>
                   <span style={{ fontWeight: 600 }}>Citation: </span>{ds.citation}
                 </div>
@@ -948,6 +1093,21 @@ function App() {
                 <p style={{ fontSize: 13, margin: 0 }}>Select a dataset from the above section to explore</p>
               </div>
             )}
+
+            {/* Deep dive panel */}
+            {!isNarrow && ds ? (
+              <div style={{ position: "sticky", top: 18, alignSelf: "start" }}>
+                <div style={{ display: "grid", gap: 12 }}>
+                  <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "16px 18px" }}>
+                    <div style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 8 }}>Verdict Deep Dive</div>
+                    <p style={{ fontSize: 13, color: C.text, lineHeight: 1.7, margin: 0 }}>
+                      The panel below stays visible while you read the main analysis. It keeps the explanation close to the selected dataset so you do not have to scroll back and forth.
+                    </p>
+                  </div>
+                  <VerdictDeepDivePanel ds={ds} />
+                </div>
+              </div>
+            ) : null}
           </div>
         )}
       </div>
