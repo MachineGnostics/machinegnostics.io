@@ -765,11 +765,11 @@ function App() {
             A structured benchmark across 10 datasets showing where Machine Gnostics and classical statistics agree, diverge, or reverse each other in practice.
           </p>
         </div>
-        <div style={{ display: "flex", gap: isCompact ? 14 : 24, flexWrap: "wrap" }}>
+        <div style={{ display: "flex", gap: isCompact ? 44 : 60, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
           {[{ label: "Datasets", val: "10" }, { label: "MG wins", val: `${totalMGWins}/10` }, { label: "Domains", val: "6" }].map(({ label, val }) => (
             <div key={label} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 22, fontWeight: 700, color: C.mg }}>{val}</div>
-              <div style={{ fontSize: 11, color: C.muted }}>{label}</div>
+              <div style={{ fontSize: 42, fontWeight: 700, color: C.mg }}>{val}</div>
+              <div style={{ fontSize: 15, color: C.muted }}>{label}</div>
             </div>
           ))}
         </div>
