@@ -646,7 +646,7 @@ function DatasetCard({ ds, isActive, onClick }) {
       background: isActive ? C.panel : C.surface,
       border: `1px solid ${isActive ? C.accent : C.border}`,
       borderRadius: 10, padding: "11px 13px", cursor: "pointer",
-      transition: "all .2s", marginBottom: 7, backdropFilter: "blur(10px)",
+      transition: "all .2s", backdropFilter: "blur(10px)",
     }}>
       <div style={{ fontSize: 10, color: C.muted, textTransform: "uppercase", letterSpacing: "0.05em", marginBottom: 2 }}>{ds.domain}</div>
       <div style={{ fontSize: 13, fontWeight: 600, color: C.text, marginBottom: 5, lineHeight: 1.3 }}>{ds.title}</div>
@@ -893,7 +893,7 @@ function App() {
     <div style={{ background: C.bg, color: C.text, fontFamily: "'Roboto', system-ui, sans-serif", display: "flex", flexDirection: "column", overflowX: "hidden", width: "100%" }}>
 
       {/* Header */}
-      <header style={{ borderBottom: `1px solid ${C.border}`, padding: isCompact ? "18px 14px" : "24px 32px 20px", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
+      <header style={{ borderBottom: `1px solid ${C.border}`, padding: isCompact ? "18px 14px" : "24px 32px 20px", display: "flex", alignItems: "flex-start", justifyContent: "space-between", flexWrap: "wrap", gap: 16 }}>
         <div>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: C.mg, boxShadow: `0 0 8px ${C.mg}` }} />
@@ -903,14 +903,35 @@ function App() {
             Machine Gnostics vs Classical Statistics
           </h1>
           <p style={{ fontSize: isCompact ? 14 : 15, color: C.muted, marginTop: 8, marginBottom: 0, lineHeight: 1.7, maxWidth: 760 }}>
-            A structured benchmark across 10 datasets showing where Machine Gnostics and classical statistics agree, diverge, or reverse each other in practice.
+            A structured benchmark across 10 datasets showing where Machine Gnostics and Classical Statistics agree, diverge, or reverse each other in practice.
           </p>
         </div>
-        <div style={{ display: "flex", gap: isCompact ? 44 : 60, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
-          {[{ label: "Datasets", val: "10" }, { label: "MG wins", val: `${totalMGWins}/10` }, { label: "Domains", val: "6" }].map(({ label, val }) => (
-            <div key={label} style={{ textAlign: "center" }}>
-              <div style={{ fontSize: 42, fontWeight: 700, color: C.mg }}>{val}</div>
-              <div style={{ fontSize: 15, color: C.muted }}>{label}</div>
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, minmax(0, 1fr))",
+          gap: isCompact ? 8 : 10,
+          width: "100%",
+          maxWidth: 460,
+          maxWidth: "100%",
+        }}>
+          {[
+            { label: "Datasets", val: "10", accent: C.accent, note: "benchmark cases" },
+            { label: "MG wins", val: `${totalMGWins}/10`, accent: C.mg, note: "clear reversals" },
+            { label: "Domains", val: "6", accent: C.stat, note: "research areas" },
+          ].map(({ label, val, accent, note }) => (
+            <div key={label} style={{
+              background: `linear-gradient(180deg, ${accent}18 0%, ${C.surface} 100%)`,
+              border: `1px solid ${accent}33`,
+              borderRadius: 14,
+              padding: isCompact ? "14px 12px" : "15px 14px",
+              boxShadow: `0 10px 24px ${accent}12`,
+              minWidth: 0,
+            }}>
+              <div style={{ fontSize: 10, color: accent, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.12em", marginBottom: 8 }}>{label}</div>
+              <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap" }}>
+                <div style={{ fontSize: isCompact ? 24 : 34, fontWeight: 800, lineHeight: 1, color: C.text, letterSpacing: "-0.04em" }}>{val}</div>
+                <div style={{ fontSize: 11, color: C.muted, fontWeight: 600 }}>{note}</div>
+              </div>
             </div>
           ))}
         </div>
@@ -953,16 +974,17 @@ function App() {
         {/* ── OVERVIEW ── */}
         {view === "overview" && (
           <div>
-            <ScoringMethodPanel />
             {/* Master radar */}
             <MasterRadarPanel isNarrow={isNarrow} isCompact={isCompact} />
 
             {/* Bar chart */}
             <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 24px", marginBottom: 24, backdropFilter: "blur(12px)" }}>
               <h2 style={{ fontSize: isCompact ? 16 : 18, fontWeight: 700, color: C.text, marginBottom: 6, letterSpacing: "-0.02em" }}>Average Score Per Dataset</h2>
-              <p style={{ fontSize: 13, color: C.muted, marginBottom: 20, lineHeight: 1.7 }}>Mean of each dataset's domain-specific radar scores. The rubric above explains how each score was assigned.</p>
+              <p style={{ fontSize: 13, color: C.muted, marginBottom: 20, lineHeight: 1.7 }}>Mean of each dataset's domain-specific radar scores. The rubric below explains how each score was assigned.</p>
               <OverviewBarChart />
             </div>
+
+            <ScoringMethodPanel />
 
             {/* Verdict grid */}
             <h2 style={{ fontSize: isCompact ? 16 : 18, fontWeight: 700, color: C.text, marginBottom: 16, letterSpacing: "-0.02em" }}>Dataset Verdicts</h2>
@@ -1001,9 +1023,11 @@ function App() {
         {view === "detail" && (
           <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "280px minmax(0, 1.1fr) minmax(360px, 0.9fr)", gap: 24, alignItems: "start" }}>
             {/* Sidebar */}
-            <div style={{ position: isNarrow ? "static" : "sticky", top: isNarrow ? "auto" : 18, alignSelf: "start" }}>
+            <div style={{ position: isNarrow ? "static" : "sticky", top: isNarrow ? "auto" : 18, alignSelf: "start", minWidth: 0 }}>
               <div style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 12 }}>Select Dataset</div>
-              {DATASETS.map(d => <DatasetCard key={d.id} ds={d} isActive={activeId===d.id} onClick={() => setActiveId(d.id)} />)}
+              <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "repeat(auto-fit, minmax(150px, 1fr))" : "repeat(auto-fit, minmax(124px, 1fr))", gap: 8 }}>
+                {DATASETS.map(d => <DatasetCard key={d.id} ds={d} isActive={activeId===d.id} onClick={() => setActiveId(d.id)} />)}
+              </div>
             </div>
 
             {/* Main analysis panel */}
