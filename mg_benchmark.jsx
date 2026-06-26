@@ -957,7 +957,7 @@ function App() {
           <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "1.4fr 1fr", gap: 16, alignItems: "start" }}>
             <div>
               <div style={{ fontSize: 11, color: C.accent, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>How To Read This Benchmark</div>
-              <p style={{ fontSize: isCompact ? 13 : 14, color: C.text, lineHeight: 1.8, margin: 0, maxWidth: 70 + "ch" }}>
+              <p style={{ fontSize: isCompact ? 13 : 14, color: C.text, lineHeight: 1.8, margin: 0 }}>
                 Each case compares the two approaches on decision-relevant dimensions such as confound detection, subgroup recovery, outlier stability, tail-risk sensitivity, and policy usefulness. The benchmark is designed to show not only score differences, but also where the interpretation itself changes.
               </p>
             </div>
