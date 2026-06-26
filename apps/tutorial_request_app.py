@@ -1,20 +1,22 @@
-import os
 import csv
 import json
+import os
 import re
 import smtplib
 import ssl
-from urllib.parse import quote
+from datetime import datetime, timezone
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from html import escape
 from pathlib import Path
-from datetime import datetime, timezone
+from urllib.parse import quote
 
+import requests
 import streamlit as st
+from google.auth.transport.requests import Request
+from google.oauth2.service_account import Credentials
 
 
-# ── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Machine Gnostics Learning Hub",
     page_icon="MG",
@@ -23,7 +25,6 @@ st.set_page_config(
 )
 
 
-# ── Tutorial data ────────────────────────────────────────────────────────────
 FREE_TUTORIAL_URL = "https://machinegnostics-learning-pack.streamlit.app/"
 DEFAULT_NEWSLETTER_STORAGE = Path(__file__).resolve().parent.parent / "data" / "newsletter_subscribers.csv"
 GOOGLE_SHEETS_SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
@@ -44,90 +45,25 @@ TUTORIALS = {
             ("Installation Guide", "https://docs.machinegnostics.com/latest/installation/", "Docs"),
             ("Tutorial Overview", "https://docs.machinegnostics.com/latest/tutorials/overview/", "Docs"),
             ("Tutorials Library", "https://docs.machinegnostics.com/latest/tutorials/tutorials/", "Library"),
-            ("Machine Gnostics Home", "https://machinegnostics.com/", "Website"),
-            ("GitHub Repository", "https://github.com/MachineGnostics/machinegnostics", "GitHub"),
         ],
     },
     "Gnostic Distribution Functions": {
         "badge": "GDF",
-        "description": "Study how GDFs expose structure with a hands-on notebook and an interactive Streamlit demo.",
+        "description": "Study how GDFs expose structure with a hands-on notebook and an interactive demo.",
         "resources": [
             ("Overview Tutorial", "https://docs.machinegnostics.com/latest/tutorials/overview/", "Docs"),
-            ("GDF Tutorial Section", "https://docs.machinegnostics.com/latest/tutorials/tutorials/#advanced-analysis", "Docs"),
             ("EGDF", "https://docs.machinegnostics.com/latest/da/egdf/", "Docs"),
             ("ELDF", "https://docs.machinegnostics.com/latest/da/eldf/", "Docs"),
-            ("QGDF", "https://docs.machinegnostics.com/latest/da/qgdf/", "Docs"),
-            ("QLDF", "https://docs.machinegnostics.com/latest/da/qldf/", "Docs"),
-            ("Google Colab Notebook", "https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb", "Colab"),
             ("Streamlit App", "https://machinegnosticsio-gdf.streamlit.app/", "Play"),
-            ("GitHub Notebook", "https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb", "GitHub"),
-
         ],
     },
     "Data Analysis Models": {
         "badge": "DA",
-        "description": "Explore the broader data analysis stack: models, tests, intervals, and homogeneity checks.",
+        "description": "Explore the broader data analysis stack: models, tests, intervals, and checks.",
         "resources": [
             ("Data Analysis Models", "https://docs.machinegnostics.com/latest/da/da_models/", "Docs"),
-            ("EGDF", "https://docs.machinegnostics.com/latest/da/egdf/", "Docs"),
-            ("ELDF", "https://docs.machinegnostics.com/latest/da/eldf/", "Docs"),
-            ("QGDF", "https://docs.machinegnostics.com/latest/da/qgdf/", "Docs"),
-            ("QLDF", "https://docs.machinegnostics.com/latest/da/qldf/", "Docs"),
-            ("Cluster Analysis", "https://docs.machinegnostics.com/latest/da/cluster_analysis/", "Docs"),
             ("Interval Analysis", "https://docs.machinegnostics.com/latest/da/interval_analysis/", "Docs"),
-            ("Data Homogeneity", "https://docs.machinegnostics.com/latest/da/homogeneity/", "Docs"),
-            ("Data Scedasticity", "https://docs.machinegnostics.com/latest/da/scedasticity/", "Docs"),
             ("Data Membership", "https://docs.machinegnostics.com/latest/da/membership/", "Docs"),
-        ],
-    },
-    "ML regression": {
-        "badge": "REG",
-        "description": "Work through regression-oriented Machine Gnostics models, datasets, and evaluation guidance.",
-        "resources": [
-            ("Regression Models", "https://docs.machinegnostics.com/latest/models/reg/lin_reg/", "Docs"),
-            ("Polynomial Regressor", "https://docs.machinegnostics.com/latest/models/reg/poly_reg/", "Docs"),
-            ("Decision Tree Regressor", "https://docs.machinegnostics.com/latest/models/cart/dt_reg/", "Docs"),
-            ("Random Forest Regressor", "https://docs.machinegnostics.com/latest/models/cart/rf_reg/", "Docs"),
-            ("Gnostic Boosting Regressor", "https://docs.machinegnostics.com/latest/models/cart/gb_reg/", "Docs"),
-            ("Regression Data", "https://docs.machinegnostics.com/latest/datasets/reg_data/", "Docs"),
-            ("R2 Score", "https://docs.machinegnostics.com/latest/metrics/r2/", "Docs"),
-            ("Model Gallery", "https://docs.machinegnostics.com/latest/tutorials/tutorials/#regression", "Library"),
-        ],
-    },
-    "ML classification": {
-        "badge": "CLS",
-        "description": "Use Machine Gnostics classification models, metrics, and datasets for decision-ready workflows.",
-        "resources": [
-            ("Classification Models", "https://docs.machinegnostics.com/latest/models/cls/log_reg/", "Docs"),
-            ("Multi Class Classifier", "https://docs.machinegnostics.com/latest/models/cls/multi_class/", "Docs"),
-            ("Decision Tree Classifier", "https://docs.machinegnostics.com/latest/models/cart/dt_cls/", "Docs"),
-            ("Random Forest Classifier", "https://docs.machinegnostics.com/latest/models/cart/rf_cls/", "Docs"),
-            ("Gnostic Boosting Classifier", "https://docs.machinegnostics.com/latest/models/cart/gb_cls/", "Docs"),
-            ("Classification Data", "https://docs.machinegnostics.com/latest/datasets/cls_data/", "Docs"),
-            ("Classification Report", "https://docs.machinegnostics.com/latest/metrics/classification_report/", "Docs"),
-            ("Model Gallery", "https://docs.machinegnostics.com/latest/tutorials/tutorials/#classification", "Library"),
-        ],
-    },
-    "ML Clustering": {
-        "badge": "CLU",
-        "description": "Explore clustering, local structure, and cluster quality measures in the MG framework.",
-        "resources": [
-            ("KMeans", "https://docs.machinegnostics.com/latest/models/cluster/kmeans/", "Docs"),
-            ("Estimating Local Clustering", "https://docs.machinegnostics.com/latest/models/cluster/glc/", "Docs"),
-            ("Moon Data", "https://docs.machinegnostics.com/latest/datasets/moon_data/", "Docs"),
-            ("Silhouette Score", "https://docs.machinegnostics.com/latest/metrics/silhouette_score/", "Docs"),
-            ("Cluster Gallery", "https://docs.machinegnostics.com/latest/tutorials/tutorials/#clustering", "Library"),
-        ],
-    },
-    "MlFlow Integration": {
-        "badge": "MLF",
-        "description": "Track runs, compare experiments, and connect Machine Gnostics workflows with Mlflow.",
-        "resources": [
-            ("MLflow Integration", "https://docs.machinegnostics.com/latest/tutorials/tutorials/#mlflow", "Library"),
-            ("Mlflow Tracking", "https://docs.machinegnostics.com/latest/models/sup/mlflow/", "Docs"),
-            ("Cross Validation", "https://docs.machinegnostics.com/latest/models/sup/cross_val/", "Docs"),
-            ("Train Test Split", "https://docs.machinegnostics.com/latest/models/sup/train_test_split/", "Docs"),
-            ("Tutorials Library", "https://docs.machinegnostics.com/latest/tutorials/tutorials/", "Library"),
         ],
     },
     "Web Apps": {
@@ -137,44 +73,6 @@ TUTORIALS = {
             ("Ideal Gnostic Cycle App", "https://machinegnosticsio-igc.streamlit.app/", "Play"),
             ("GDF Streamlit App", "https://machinegnosticsio-gdf.streamlit.app/", "Play"),
             ("Interval Analysis App", "https://machinegnosticsio-intv.streamlit.app/", "Play"),
-            ("Machine Gnostics Benchmark", "https://machinegnostics.com/benchmark/", "Website"),
-            ("Developer Entry Point", "https://machinegnostics.com/developers/", "Website"),
-        ],
-    },
-        "Non-coders Web Apps": {
-            "badge": "NO-CODE",
-            "description": "Explore ready-to-use web apps designed for non-coders who want to learn by clicking, comparing, and observing.",
-            "resources": [
-                ("Anscombe Exploration", "https://machinegnostics-anscombe-banchmark.streamlit.app/", "Play"),
-                ("Mean & Data Spread", "https://machinegnosticsio-data-spread-example.streamlit.app/", "Play"),
-                ("GDFs", "https://machinegnosticsio-gdf.streamlit.app/", "Play"),
-                ("IGC - Ideal Gnostic Cycle", "https://machinegnosticsio-igc.streamlit.app/", "Play"),
-                ("Marginal Interval Analysis", "https://machinegnosticsio-intv.streamlit.app/", "Play"),
-                ("Linear Regression", "https://machinegnosticsio-lin-reg.streamlit.app/", "Play"),
-                ("Polynomial Regression", "https://machinegnosticsio-poly-reg.streamlit.app/", "Play"),
-                ("Logistic Regression", "https://machinegnosticsio-logi-reg.streamlit.app/", "Play"),
-            ],
-        },
-    "AI Concept Videos": {
-        "badge": "VID",
-        "description": "Watch AI-generated, high-level conceptual videos that explain Machine Gnostics ideas in a visual format.",
-        "resources": [
-            ("Machine Gnostics - A step towards non-statistical AI!", "https://youtu.be/YRYL0Yz-1tw?si=GYufKEJojnkMZg-e", "Video"),
-            ("What is Machine Gnostics?", "https://youtu.be/CnXFweFXtYw?si=KfafAvHE4wgOvjYy", "Video"),
-            ("The End of Randomness", "https://youtu.be/ZweSmDETOKk?si=dwgBxPqANnAqozRa", "Video"),
-        ],
-    },
-    "Mathematical Gnostics Books": {
-        "badge": "BOOK",
-        "description": "Read the foundational theory behind Machine Gnostics and the mathematical ideas it is built on.",
-        "resources": [
-            ("Math Gnostics Books", "https://www.math-gnostics.eu/books/", "Books"),
-            ("Concepts", "https://docs.machinegnostics.com/latest/mg/concepts/", "Docs"),
-            ("Principles", "https://docs.machinegnostics.com/latest/mg/principles/", "Docs"),
-            ("Architecture", "https://docs.machinegnostics.com/latest/mg/architecture/", "Docs"),
-            ("Distributions Functions", "https://docs.machinegnostics.com/latest/mg/gdf/", "Docs"),
-            ("References", "https://docs.machinegnostics.com/latest/ref/references/", "Docs"),
-            ("History", "https://docs.machinegnostics.com/latest/stories/history/", "Docs"),
         ],
     },
     "Anscombe Case Study": {
@@ -182,11 +80,6 @@ TUTORIALS = {
         "description": "Follow a complete Anscombe Quartet case study that compares classical statistics and Machine Gnostics workflows.",
         "resources": [
             ("GitHub Repo", "https://github.com/nirmalparmarphd/machinegnostics-anscombe-data", "GitHub"),
-            ("Part 0 - Setup and Orientation", "https://colab.research.google.com/github/nirmalparmarphd/machinegnostics-anscombe-data/blob/main/part_0_setup.ipynb", "Colab"),
-            ("Part 1 - Gnostic Metrics", "https://colab.research.google.com/github/nirmalparmarphd/machinegnostics-anscombe-data/blob/main/part_1_gnostic_metrics.ipynb", "Colab"),
-            ("Part 2 - Distribution Functions", "https://colab.research.google.com/github/nirmalparmarphd/machinegnostics-anscombe-data/blob/main/part_2_gnostic_distribution_functions.ipynb", "Colab"),
-            ("Part 3 - Interval Analysis", "https://colab.research.google.com/github/nirmalparmarphd/machinegnostics-anscombe-data/blob/main/part_3_gnostic_marginal_interval_analysis.ipynb", "Colab"),
-            ("Part 4 - Linear Regression", "https://colab.research.google.com/github/nirmalparmarphd/machinegnostics-anscombe-data/blob/main/part_4_gnostic_linear_regression.ipynb", "Colab"),
             ("Quick Study Notebook", "https://colab.research.google.com/github/nirmalparmarphd/machinegnostics-anscombe-data/blob/main/anscombe_data.ipynb", "Colab"),
         ],
     },
@@ -206,11 +99,6 @@ def get_secret_value(key: str) -> str:
         return os.environ.get(key, "")
 
 
-def get_newsletter_storage_path() -> Path:
-    configured_path = get_secret_value("NEWSLETTER_SUBSCRIBERS_CSV").strip()
-    return Path(configured_path).expanduser() if configured_path else DEFAULT_NEWSLETTER_STORAGE
-
-
 def normalize_google_sheet_id(value: str) -> str:
     trimmed_value = value.strip()
     if "/spreadsheets/d/" in trimmed_value:
@@ -222,19 +110,86 @@ def normalize_google_sheet_id(value: str) -> str:
 
 def get_google_sheets_settings() -> dict[str, str] | None:
     spreadsheet_id = normalize_google_sheet_id(get_secret_value("GOOGLE_SHEET_ID"))
-    service_account_json = get_secret_value("GOOGLE_SERVICE_ACCOUNT_JSON").strip()
+    worksheet_name = get_secret_value("GOOGLE_WORKSHEET_NAME").strip() or "Tutorial_Requests"
     service_account_table = st.secrets.get("GOOGLE_SERVICE_ACCOUNT", None)
-    worksheet_name = get_secret_value("GOOGLE_WORKSHEET_NAME").strip() or "newsletter_subscribers"
+    service_account_json = get_secret_value("GOOGLE_SERVICE_ACCOUNT_JSON").strip()
 
-    if not spreadsheet_id or (not service_account_json and not service_account_table):
+    if not spreadsheet_id or (not service_account_table and not service_account_json):
         return None
 
     return {
         "spreadsheet_id": spreadsheet_id,
+        "worksheet_name": worksheet_name,
         "service_account_json": service_account_json,
         "service_account_table": service_account_table,
-        "worksheet_name": worksheet_name,
     }
+
+
+def get_service_account_info(settings: dict[str, str]) -> dict[str, str]:
+    if settings.get("service_account_table"):
+        return dict(settings["service_account_table"])
+    return json.loads(settings["service_account_json"])
+
+
+def make_credentials(settings: dict[str, str]) -> Credentials:
+    service_account_info = get_service_account_info(settings)
+    return Credentials.from_service_account_info(service_account_info, scopes=GOOGLE_SHEETS_SCOPES)
+
+
+def build_auth_headers(credentials: Credentials) -> dict[str, str]:
+    credentials.refresh(Request())
+    return {
+        "Authorization": f"Bearer {credentials.token}",
+        "Content-Type": "application/json",
+    }
+
+
+def ensure_worksheet_exists(spreadsheet_id: str, worksheet_name: str, headers: dict[str, str]) -> None:
+    metadata_url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}?fields=sheets.properties.title"
+    response = requests.get(metadata_url, headers=headers, timeout=30)
+    response.raise_for_status()
+    sheet_titles = [sheet["properties"]["title"] for sheet in response.json().get("sheets", [])]
+    if worksheet_name in sheet_titles:
+        return
+
+    create_url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}:batchUpdate"
+    payload = {
+        "requests": [
+            {
+                "addSheet": {
+                    "properties": {
+                        "title": worksheet_name,
+                        "gridProperties": {"rowCount": 1000, "columnCount": 10},
+                    }
+                }
+            }
+        ]
+    }
+    response = requests.post(create_url, headers=headers, json=payload, timeout=30)
+    response.raise_for_status()
+
+
+def get_sheet_rows(spreadsheet_id: str, worksheet_name: str, headers: dict[str, str]) -> list[list[str]]:
+    range_name = requests.utils.quote(worksheet_name, safe="")
+    values_url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range_name}!A:F"
+    response = requests.get(values_url, headers=headers, timeout=30)
+    response.raise_for_status()
+    return response.json().get("values", [])
+
+
+def append_sheet_row(
+    spreadsheet_id: str,
+    worksheet_name: str,
+    values: list[str],
+    headers: dict[str, str],
+) -> None:
+    range_name = requests.utils.quote(worksheet_name, safe="")
+    append_url = (
+        f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range_name}!A:F:append"
+        "?valueInputOption=RAW&insertDataOption=INSERT_ROWS"
+    )
+    response = requests.post(append_url, headers=headers, json={"values": [values]}, timeout=30)
+    response.raise_for_status()
 
 
 def append_newsletter_to_google_sheets(
@@ -243,47 +198,36 @@ def append_newsletter_to_google_sheets(
     email: str,
     selected: list[str],
 ) -> tuple[bool, str]:
-    try:
-        import gspread
-        from google.oauth2.service_account import Credentials
-    except ImportError:
-        return False, "google_libraries_missing"
-
     settings = get_google_sheets_settings()
     if not settings:
         return False, "google_settings_missing"
 
     try:
-        if settings.get("service_account_table"):
-            service_account_info = dict(settings["service_account_table"])
-        else:
-            service_account_info = json.loads(settings["service_account_json"])
-        credentials = Credentials.from_service_account_info(service_account_info, scopes=GOOGLE_SHEETS_SCOPES)
-        client = gspread.authorize(credentials)
-        spreadsheet = client.open_by_key(settings["spreadsheet_id"])
-    except PermissionError:
-        return False, "google_permission_denied"
-    except Exception:
-        return False, "google_write_failed"
+        credentials = make_credentials(settings)
+        headers = build_auth_headers(credentials)
+        ensure_worksheet_exists(settings["spreadsheet_id"], settings["worksheet_name"], headers)
+        rows = get_sheet_rows(settings["spreadsheet_id"], settings["worksheet_name"], headers)
+    except Exception as ex:
+        status_code = getattr(getattr(ex, "response", None), "status_code", None)
+        if status_code in {403, 404}:
+            return False, "google_permission_denied"
+        return False, f"google_write_failed:{type(ex).__name__}"
 
-    try:
-        worksheet = spreadsheet.worksheet(settings["worksheet_name"])
-    except gspread.WorksheetNotFound:
-        worksheet = spreadsheet.add_worksheet(title=settings["worksheet_name"], rows=1000, cols=10)
+    if not rows:
+        append_sheet_row(settings["spreadsheet_id"], settings["worksheet_name"], GOOGLE_SHEETS_HEADERS, headers)
+        rows = [GOOGLE_SHEETS_HEADERS]
 
-    headers = worksheet.row_values(1)
-    if not headers:
-        worksheet.append_row(GOOGLE_SHEETS_HEADERS, value_input_option="RAW")
-        headers = GOOGLE_SHEETS_HEADERS
-
+    header_row = rows[0]
     normalized_email = email.strip().lower()
-    if "email" in headers:
-        email_index = headers.index("email")
-        for row in worksheet.get_all_values()[1:]:
+    if "email" in header_row:
+        email_index = header_row.index("email")
+        for row in rows[1:]:
             if len(row) > email_index and row[email_index].strip().lower() == normalized_email:
                 return False, "duplicate"
 
-    worksheet.append_row(
+    append_sheet_row(
+        settings["spreadsheet_id"],
+        settings["worksheet_name"],
         [
             datetime.now(timezone.utc).isoformat(),
             first_name.strip(),
@@ -292,7 +236,7 @@ def append_newsletter_to_google_sheets(
             " | ".join(selected),
             "yes",
         ],
-        value_input_option="RAW",
+        headers,
     )
     return True, "saved"
 
@@ -307,10 +251,10 @@ def save_newsletter_subscriber(
     if google_status in {"saved", "duplicate"}:
         return google_saved, google_status
 
-    if get_google_sheets_settings():
+    if get_google_sheets_settings() is not None:
         return False, google_status
 
-    storage_path = get_newsletter_storage_path()
+    storage_path = DEFAULT_NEWSLETTER_STORAGE
     storage_path.parent.mkdir(parents=True, exist_ok=True)
 
     normalized_email = email.strip().lower()
@@ -329,15 +273,12 @@ def save_newsletter_subscriber(
         "selected_tracks": " | ".join(selected),
         "newsletter_opt_in": "yes",
     }
-    fieldnames = list(record.keys())
     write_header = not storage_path.exists() or storage_path.stat().st_size == 0
-
     with storage_path.open("a", newline="", encoding="utf-8") as handle:
-        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer = csv.DictWriter(handle, fieldnames=list(record.keys()))
         if write_header:
             writer.writeheader()
         writer.writerow(record)
-
     return True, "csv_saved"
 
 
@@ -357,12 +298,12 @@ def build_track_card(track_name: str) -> str:
         for name, url, kind in info["resources"]
     )
     return f"""
-        <div style="background:linear-gradient(180deg, rgba(15,23,42,.92) 0%, rgba(15,23,42,.84) 100%);border:1px solid rgba(124,231,223,.14);border-left:5px solid #0EA5A4;border-radius:18px;padding:20px 22px;margin-bottom:16px;box-shadow:0 18px 36px rgba(0,0,0,.22);">
+    <div style="background:linear-gradient(180deg, rgba(15,23,42,.92) 0%, rgba(15,23,42,.84) 100%);border:1px solid rgba(124,231,223,.14);border-left:5px solid #0EA5A4;border-radius:18px;padding:20px 22px;margin-bottom:16px;box-shadow:0 18px 36px rgba(0,0,0,.22);">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                <div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#0F172A,#0EA5A4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:.05em;">{info['badge']}</div>
+        <div style="width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#0F172A,#0EA5A4);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;letter-spacing:.05em;">{info['badge']}</div>
         <div>
-                    <div style="font-size:18px;font-weight:700;color:#f8fafc;line-height:1.2;">{escape(track_name)}</div>
-                    <div style="font-size:13px;color:#94a3b8;">{escape(info['description'])}</div>
+          <div style="font-size:18px;font-weight:700;color:#f8fafc;line-height:1.2;">{escape(track_name)}</div>
+          <div style="font-size:13px;color:#94a3b8;">{escape(info['description'])}</div>
         </div>
       </div>
       <ul style="padding-left:0;margin:14px 0 0;list-style:none;">{resources_html}</ul>
@@ -378,65 +319,60 @@ def build_email_html(first_name: str, last_name: str, selected: list[str], sende
         f"""
         <div style="background:#f4fbfa;border:1px solid rgba(14,165,164,.18);border-left:4px solid #0EA5A4;border-radius:12px;padding:20px 22px;margin:0 0 18px;">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-                        <div style="width:34px;height:34px;border-radius:10px;background:#0F172A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.05em;">{TUTORIALS[topic]['badge']}</div>
+            <div style="width:34px;height:34px;border-radius:10px;background:#0F172A;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.05em;">{TUTORIALS[topic]['badge']}</div>
             <h2 style="margin:0;color:#0F172A;font-size:20px;">{escape(topic)}</h2>
           </div>
           <p style="color:#334155;line-height:1.6;margin:0 0 14px;">{escape(TUTORIALS[topic]['description'])}</p>
           <div style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:#0F766E;">Learning Resources</div>
           <ul style="padding-left:18px;margin:0;">
-                        {''.join(f'<li style="margin:6px 0;"><span style="font-size:11px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:.06em;">{escape(get_resource_label(url, kind))}</span> · <a href="{url}" style="color:#0EA5A4;text-decoration:none;">{escape(name)}</a></li>' for name, url, kind in TUTORIALS[topic]['resources'])}
+            {''.join(f'<li style="margin:6px 0;"><span style="font-size:11px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:.06em;">{escape(get_resource_label(url, kind))}</span> · <a href="{url}" style="color:#0EA5A4;text-decoration:none;">{escape(name)}</a></li>' for name, url, kind in TUTORIALS[topic]['resources'])}
           </ul>
         </div>
         """
         for topic in selected
     )
-
     selected_summary = ", ".join(selected)
-
     return f"""
     <!DOCTYPE html>
     <html>
-        <head>
-            <meta name="color-scheme" content="light only">
-            <meta name="supported-color-schemes" content="light only">
-        </head>
+    <head>
+      <meta name="color-scheme" content="light only">
+      <meta name="supported-color-schemes" content="light only">
+    </head>
     <body style="font-family:'IBM Plex Sans',Arial,sans-serif;background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);margin:0;padding:28px;">
       <div style="max-width:680px;margin:auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 22px 50px rgba(15,23,42,.12);border:1px solid rgba(15,23,42,.08);">
-                <div style="background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);padding:38px 34px;border-bottom:1px solid rgba(15,23,42,.08);">
-                    <div style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#0f766e;font-weight:700;">Machine Gnostics</div>
-                    <h1 style="color:#0F172A;margin:10px 0 6px;font-size:30px;line-height:1.1;">Your Learning Pack</h1>
-                                        <p style="color:#334155;margin:0;line-height:1.6;">Curated for the tracks you selected. Free resources, OSS software, and GPLv3-licensed learning tools.</p>
+        <div style="background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);padding:38px 34px;border-bottom:1px solid rgba(15,23,42,.08);">
+          <div style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#0f766e;font-weight:700;">Machine Gnostics</div>
+          <h1 style="color:#0F172A;margin:10px 0 6px;font-size:30px;line-height:1.1;">Your Learning Pack</h1>
+          <p style="color:#334155;margin:0;line-height:1.6;">Curated for the tracks you selected. Free resources, OSS software, and GPLv3-licensed learning tools.</p>
         </div>
         <div style="padding:32px;">
           <p style="font-size:16px;color:#0F172A;margin-top:0;">Hi <strong>{safe_name}</strong>,</p>
-                    <p style="color:#334155;line-height:1.7;">Thanks for choosing Machine Gnostics learning tracks. Below is the exact set of resources that matches your selection.</p>
-                                        <p style="color:#334155;line-height:1.7;">If you have any questions or run into a blocker during the learning process, please reply to this email or write to us. We are happy to help you keep moving forward.</p>
-                    <div style="background:#f8fafc;border:1px solid rgba(15,23,42,.08);border-radius:14px;padding:14px 16px;margin:18px 0 22px;">
+          <p style="color:#334155;line-height:1.7;">Thanks for choosing Machine Gnostics learning tracks. Below is the exact set of resources that matches your selection.</p>
+          <div style="background:#f8fafc;border:1px solid rgba(15,23,42,.08);border-radius:14px;padding:14px 16px;margin:18px 0 22px;">
             <div style="font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;">Selected Tracks</div>
             <div style="font-size:14px;color:#0F172A;line-height:1.7;">{escape(selected_summary)}</div>
           </div>
-                    <div style="background:linear-gradient(180deg,#ecfdf5 0%,#f0fdfa 100%);border:1px solid rgba(14,165,164,.18);border-radius:16px;padding:18px 20px;margin:0 0 22px;">
-                        <div style="font-size:12px;color:#0f766e;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;">Need an extra free tutorial?</div>
-                        <p style="margin:0 0 14px;color:#334155;line-height:1.7;">If you want additional free tutorials, use the button below to open the Machine Gnostics Learning Pack request app.</p>
-                        <a href="{FREE_TUTORIAL_URL}" style="display:inline-block;background:#0f766e;color:#fff;text-decoration:none;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:12px 18px;border-radius:12px;">Order Free Tutorial</a>
-                    </div>
+          <div style="background:linear-gradient(180deg,#ecfdf5 0%,#f0fdfa 100%);border:1px solid rgba(14,165,164,.18);border-radius:16px;padding:18px 20px;margin:0 0 22px;">
+            <div style="font-size:12px;color:#0f766e;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;">Need an extra free tutorial?</div>
+            <p style="margin:0 0 14px;color:#334155;line-height:1.7;">If you want additional free tutorials, use the button below to open the Machine Gnostics Learning Pack request app.</p>
+            <a href="{FREE_TUTORIAL_URL}" style="display:inline-block;background:#0f766e;color:#fff;text-decoration:none;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:12px 18px;border-radius:12px;">Order Free Tutorial</a>
+          </div>
           {track_blocks}
-                    <div style="margin-top:16px;padding:16px 18px;border-top:1px solid rgba(15,23,42,.08);text-align:center;">
-                        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0f766e;margin-bottom:8px;">Follow Machine Gnostics</div>
-                        <div style="font-size:14px;line-height:1.9;color:#334155;margin:0 auto 12px;max-width:520px;">
-                            <a href="https://github.com/MachineGnostics/machinegnostics" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">GitHub</a>
-                            <a href="https://discord.gg/WMMUaeJe2X" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">Discord</a>
-                            <a href="https://www.linkedin.com/company/109036022/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">LinkedIn</a>
-                            <a href="https://pypi.org/project/machinegnostics/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">PyPI</a>
-                            <a href="https://www.instagram.com/machinegnostics/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">Instagram</a>
-                            <a href="https://www.youtube.com/@MachineGnostics" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">YouTube</a>
-                        </div>
-                        <div style="margin-top:10px;font-size:12px;line-height:1.6;color:#64748b;">
-                            If you prefer not to receive future emails, you can <a href="{unsubscribe_link}" style="color:#0F172A;text-decoration:underline;font-weight:600;">unsubscribe here</a> or reply to this message.
-                        </div>
-                        <div style="font-weight:700;color:#0F172A;">Machine Gnostics · <a href="https://machinegnostics.com/" style="color:#0EA5A4;text-decoration:none;">machinegnostics.com</a></div>
-                        <p style="margin:10px 0 0;color:#64748b;font-size:13px;">Small Data, Big Impact</p>
-                    </div>
+          <div style="margin-top:16px;padding:16px 18px;border-top:1px solid rgba(15,23,42,.08);text-align:center;">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0f766e;margin-bottom:8px;">Follow Machine Gnostics</div>
+            <div style="font-size:14px;line-height:1.9;color:#334155;margin:0 auto 12px;max-width:520px;">
+              <a href="https://github.com/MachineGnostics/machinegnostics" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">GitHub</a>
+              <a href="https://discord.gg/WMMUaeJe2X" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">Discord</a>
+              <a href="https://www.linkedin.com/company/109036022/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">LinkedIn</a>
+              <a href="https://pypi.org/project/machinegnostics/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">PyPI</a>
+              <a href="https://www.instagram.com/machinegnostics/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">Instagram</a>
+              <a href="https://www.youtube.com/@MachineGnostics" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">YouTube</a>
+            </div>
+            <div style="margin-top:10px;font-size:12px;line-height:1.6;color:#64748b;">
+              If you prefer not to receive future emails, you can <a href="{unsubscribe_link}" style="color:#0F172A;text-decoration:underline;font-weight:600;">unsubscribe here</a> or reply to this message.
+            </div>
+          </div>
         </div>
       </div>
     </body>
@@ -457,9 +393,7 @@ def send_email(
     msg["From"] = sender_email
     msg["To"] = recipient_email
     msg["List-Unsubscribe"] = f"<mailto:{sender_email}?subject={quote('Unsubscribe from Machine Gnostics emails')}>"
-
-    html = build_email_html(first_name=first_name, last_name=last_name, selected=selected, sender_email=sender_email)
-    msg.attach(MIMEText(html, "html"))
+    msg.attach(MIMEText(build_email_html(first_name, last_name, selected, sender_email), "html"))
 
     context = ssl.create_default_context()
     with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
@@ -467,123 +401,49 @@ def send_email(
         server.sendmail(sender_email, recipient_email, msg.as_string())
 
 
-# ── UI ───────────────────────────────────────────────────────────────────────
 st.markdown(
     """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
-
-.stApp {
-    background:
-        radial-gradient(circle at top left, rgba(14,165,164,.16), transparent 28%),
-        radial-gradient(circle at top right, rgba(56,189,248,.10), transparent 24%),
-        linear-gradient(180deg, #07111f 0%, #0b1726 45%, #0f172a 100%);
-    color: #e2e8f0;
-    font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif;
-}
-
-.stApp h1,
-.stApp h2,
-.stApp h3,
-.stApp h4,
-.stApp h5,
-.stApp h6,
-.stApp p,
-.stApp li,
-.stApp span,
-.stApp label {
-    color: #e2e8f0;
-}
-
-.stApp [data-testid="stMarkdownContainer"] p,
-.stApp [data-testid="stCaptionContainer"] p {
-    color: #cbd5e1;
-}
-
-.stApp hr {
-    border-color: rgba(148,163,184,.18) !important;
-}
-
-div[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, #07111f 0%, #0b1726 100%);
-}
-
-div[data-testid="stSidebar"] * {
-    color: #e2e8f0;
-}
-
-div[data-testid="stSidebar"] input,
-div[data-testid="stSidebar"] textarea {
-    color: #0f172a !important;
-}
-
-.stMultiSelect [data-baseweb="tag"] {
-    background: #0EA5A4 !important;
-}
-
-.stButton > button {
-    background: #0f766e;
-    color: #fff;
-    border: 1px solid rgba(124,231,223,.22);
-    border-radius: 16px;
-    padding: 0.95rem 1.25rem;
-    min-height: 3.2rem;
-    font-size: 0.98rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    box-shadow: 0 18px 32px rgba(8,15,30,.32);
-    transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease, border-color 160ms ease;
-}
-
-.stButton > button:hover {
-    border: 1px solid rgba(144,255,245,.42);
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 22px 40px rgba(8,15,30,.42);
-    filter: brightness(1.06);
-}
-
-.stButton > button:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(20,184,166,.28), 0 22px 40px rgba(8,15,30,.42);
-}
-
-div[data-testid="stForm"] {
-    border: none !important;
-    padding: 0 !important;
-}
+.stApp { background: linear-gradient(180deg, #07111f 0%, #0b1726 45%, #0f172a 100%); color: #e2e8f0; font-family: 'IBM Plex Sans', 'Helvetica Neue', sans-serif; }
+.stApp h1,.stApp h2,.stApp h3,.stApp h4,.stApp h5,.stApp h6,.stApp p,.stApp li,.stApp span,.stApp label { color: #e2e8f0; }
+.stApp [data-testid="stMarkdownContainer"] p,.stApp [data-testid="stCaptionContainer"] p { color: #cbd5e1; }
+.stButton > button { background: #0f766e; color: #fff; border: 1px solid rgba(124,231,223,.22); border-radius: 16px; padding: 0.95rem 1.25rem; min-height: 3.2rem; font-size: 0.98rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+div[data-testid="stForm"] { border: none !important; padding: 0 !important; }
 </style>
 """,
     unsafe_allow_html=True,
 )
 
 st.title("Machine Gnostics Learning Hub - Free Resources")
-st.markdown(
-    "Choose the MG learning tracks you want, preview the exact resources before you send, and receive the pack by email. Free resources, OSS software, and GPLv3 licensing are part of this learning hub."
-)
-
-st.divider()
+st.markdown("Choose the MG learning tracks you want, preview the exact resources before you send, and receive the pack by email.")
 
 sender_email = get_secret_value("GMAIL_SENDER_EMAIL")
 app_password = get_secret_value("GMAIL_APP_PASSWORD")
 
 with st.sidebar:
     with st.expander("Delivery Settings", expanded=False):
-        st.markdown(
-            "This app sends mail from the Machine Gnostics account configured in Streamlit secrets. "
-            "Set `GMAIL_SENDER_EMAIL` and `GMAIL_APP_PASSWORD` in your deployment secrets."
-        )
         if sender_email and app_password:
             st.success("Secrets loaded successfully.")
         else:
-            st.warning(
-                "No secrets were found. Add them in `.streamlit/secrets.toml`, Streamlit Cloud secrets, or environment variables."
-            )
-        st.caption(
-            "To save newsletter subscribers privately in Google Drive, add `GOOGLE_SHEET_ID`, `GOOGLE_SERVICE_ACCOUNT_JSON`, "
-            "and optionally `GOOGLE_WORKSHEET_NAME` to the same secrets store."
-        )
+            st.warning("Set GMAIL_SENDER_EMAIL and GMAIL_APP_PASSWORD in secrets.")
+        st.caption("To save subscribers privately in Google Sheets, add GOOGLE_SHEET_ID and GOOGLE_SERVICE_ACCOUNT.")
+        if st.button("Test Google Sheets connection", use_container_width=True):
+            settings = get_google_sheets_settings()
+            if not settings:
+                st.error("Google Sheets secrets are missing.")
+            else:
+                try:
+                    credentials = make_credentials(settings)
+                    headers = build_auth_headers(credentials)
+                    ensure_worksheet_exists(settings["spreadsheet_id"], settings["worksheet_name"], headers)
+                    st.success("Google Sheets connection is working.")
+                except Exception as ex:
+                    status_code = getattr(getattr(ex, "response", None), "status_code", None)
+                    if status_code in {403, 404}:
+                        st.error("Google Sheets is not shared with the service account email.")
+                    else:
+                        st.error(f"Google Sheets connection failed: {type(ex).__name__}")
 
 st.subheader("Choose Your MG Learning Tracks")
 selected_tutorials = st.multiselect(
@@ -609,23 +469,8 @@ with col2:
     last_name = st.text_input("Last Name", placeholder="Doe")
 
 recipient_email = st.text_input("Your Email Address", placeholder="jane.doe@example.com")
-
-# st.markdown(
-#     """
-#     <div style="margin-top:8px;padding:14px 16px;border:1px solid rgba(124,231,223,.14);border-radius:14px;background:rgba(15,23,42,.55);color:#cbd5e1;line-height:1.6;">
-#       <strong style="color:#f8fafc;">Consent note</strong><br>
-#       To receive this email and other Machine Gnostics communication, I agree to share my name and email address.
-#     </div>
-#     """,
-#     unsafe_allow_html=True,
-# )
-
-required_consent = st.checkbox(
-    "I agree to share my name and email address to receive Machine Gnostics tutorials and communication.",
-)
-receive_updates = st.checkbox(
-    "Optional: I want to receive updates and future communications from Machine Gnostics.",
-)
+required_consent = st.checkbox("I agree to share my name and email address to receive Machine Gnostics tutorials and communication.")
+receive_updates = st.checkbox("Optional: I want to receive updates and future communications from Machine Gnostics.")
 
 st.divider()
 
@@ -666,52 +511,22 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
                     last_name=last_name.strip(),
                     selected=selected_tutorials,
                 )
-                st.success(
-                    f"Email sent to **{recipient_email}**! "
-                    f"Check your inbox for: {', '.join(selected_tutorials)}."
-                )
+                st.success(f"Email sent to **{recipient_email}**! Check your inbox for: {', '.join(selected_tutorials)}.")
                 if newsletter_status in {"saved", "csv_saved"}:
                     st.info("Your details were saved privately for future updates.")
                 elif newsletter_status == "duplicate":
                     st.info("Your email was already on the newsletter list, so it was not added twice.")
                 elif newsletter_status == "google_permission_denied":
-                    st.error(
-                        "The app can reach Google Sheets, but the spreadsheet is not shared with the service account. "
-                        "Share the sheet with the service account email from secrets, then try again."
-                    )
-                elif newsletter_status in {"google_write_failed", "google_libraries_missing", "google_settings_missing"}:
-                    st.error(
-                        "The app could not save the subscriber row to Google Sheets. Check the Streamlit secrets and deployment logs."
-                    )
+                    st.error("The spreadsheet is not shared with the service account email.")
+                elif newsletter_status.startswith("google_write_failed"):
+                    st.error(f"The app could not save the subscriber row to Google Sheets ({newsletter_status}).")
+                elif newsletter_status in {"google_libraries_missing", "google_settings_missing"}:
+                    st.error("The app could not save the subscriber row to Google Sheets. Check the secrets and logs.")
                 if receive_updates:
                     st.info("You’ll also receive updates and future communications from Machine Gnostics.")
                 st.link_button("Need another free tutorial? Open the request app", FREE_TUTORIAL_URL, use_container_width=True)
                 st.balloons()
             except smtplib.SMTPAuthenticationError:
-                st.error(
-                    "Authentication failed. Make sure you're using a Gmail **App Password**, "
-                    "not your regular password. [Create one here](https://myaccount.google.com/apppasswords)."
-                )
+                st.error("Authentication failed. Make sure you're using a Gmail App Password, not your regular password.")
             except Exception as ex:
                 st.error(f"Failed to send email: {ex}")
-
-st.markdown(
-    """
-<div style="margin-top:28px;padding:18px 0 8px;border-top:1px solid rgba(15,23,42,.10);text-align:center;color:#475569;">
-  <div style="font-weight:700;color:#0F172A;">Machine Gnostics</div>
-  <a href="https://machinegnostics.com/" target="_blank" style="color:#0EA5A4;text-decoration:none;">machinegnostics.com</a>
-        <div style="margin-top:14px;padding:14px 16px;border:1px solid rgba(124,231,223,.14);border-radius:14px;background:rgba(15,23,42,.55);text-align:center;color:#cbd5e1;">
-        <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7ce7df;margin-bottom:10px;">Follow Machine Gnostics</div>
-        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;line-height:1.6;">
-            <a href="https://github.com/MachineGnostics/machinegnostics" target="_blank" style="color:#d8fffb;text-decoration:none;">GitHub</a>
-            <a href="https://discord.gg/WMMUaeJe2X" target="_blank" style="color:#d8fffb;text-decoration:none;">Discord</a>
-            <a href="https://www.linkedin.com/company/109036022/" target="_blank" style="color:#d8fffb;text-decoration:none;">LinkedIn</a>
-            <a href="https://pypi.org/project/machinegnostics/" target="_blank" style="color:#d8fffb;text-decoration:none;">PyPI</a>
-            <a href="https://www.instagram.com/machinegnostics/" target="_blank" style="color:#d8fffb;text-decoration:none;">Instagram</a>
-            <a href="https://www.youtube.com/@MachineGnostics" target="_blank" style="color:#d8fffb;text-decoration:none;">YouTube</a>
-        </div>
-    </div>
-</div>
-""",
-    unsafe_allow_html=True,
-)
