@@ -1,10 +1,15 @@
 import os
+import csv
+import json
+import re
 import smtplib
 import ssl
 from urllib.parse import quote
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from html import escape
+from pathlib import Path
+from datetime import datetime, timezone
 
 import streamlit as st
 
@@ -20,6 +25,16 @@ st.set_page_config(
 
 # ── Tutorial data ────────────────────────────────────────────────────────────
 FREE_TUTORIAL_URL = "https://machinegnostics-learning-pack.streamlit.app/"
+DEFAULT_NEWSLETTER_STORAGE = Path(__file__).resolve().parent.parent / "data" / "newsletter_subscribers.csv"
+GOOGLE_SHEETS_SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
+GOOGLE_SHEETS_HEADERS = [
+    "created_at_utc",
+    "first_name",
+    "last_name",
+    "email",
+    "selected_tracks",
+    "newsletter_opt_in",
+]
 
 TUTORIALS = {
     "Installation": {
@@ -189,6 +204,131 @@ def get_secret_value(key: str) -> str:
         return os.environ.get(key, "")
     except KeyError:
         return os.environ.get(key, "")
+
+
+def get_newsletter_storage_path() -> Path:
+    configured_path = get_secret_value("NEWSLETTER_SUBSCRIBERS_CSV").strip()
+    return Path(configured_path).expanduser() if configured_path else DEFAULT_NEWSLETTER_STORAGE
+
+
+def normalize_google_sheet_id(value: str) -> str:
+    trimmed_value = value.strip()
+    if "/spreadsheets/d/" in trimmed_value:
+        match = re.search(r"/spreadsheets/d/([a-zA-Z0-9-_]+)", trimmed_value)
+        if match:
+            return match.group(1)
+    return trimmed_value
+
+
+def get_google_sheets_settings() -> dict[str, str] | None:
+    spreadsheet_id = normalize_google_sheet_id(get_secret_value("GOOGLE_SHEET_ID"))
+    service_account_json = get_secret_value("GOOGLE_SERVICE_ACCOUNT_JSON").strip()
+    worksheet_name = get_secret_value("GOOGLE_WORKSHEET_NAME").strip() or "newsletter_subscribers"
+
+    if not spreadsheet_id or not service_account_json:
+        return None
+
+    return {
+        "spreadsheet_id": spreadsheet_id,
+        "service_account_json": service_account_json,
+        "worksheet_name": worksheet_name,
+    }
+
+
+def append_newsletter_to_google_sheets(
+    first_name: str,
+    last_name: str,
+    email: str,
+    selected: list[str],
+) -> bool:
+    try:
+        import gspread
+        from google.oauth2.service_account import Credentials
+    except ImportError:
+        return False
+
+    settings = get_google_sheets_settings()
+    if not settings:
+        return False
+
+    service_account_info = json.loads(settings["service_account_json"])
+    credentials = Credentials.from_service_account_info(service_account_info, scopes=GOOGLE_SHEETS_SCOPES)
+    client = gspread.authorize(credentials)
+    spreadsheet = client.open_by_key(settings["spreadsheet_id"])
+
+    try:
+        worksheet = spreadsheet.worksheet(settings["worksheet_name"])
+    except gspread.WorksheetNotFound:
+        worksheet = spreadsheet.add_worksheet(title=settings["worksheet_name"], rows=1000, cols=10)
+
+    headers = worksheet.row_values(1)
+    if not headers:
+        worksheet.append_row(GOOGLE_SHEETS_HEADERS, value_input_option="RAW")
+        headers = GOOGLE_SHEETS_HEADERS
+
+    normalized_email = email.strip().lower()
+    if "email" in headers:
+        email_index = headers.index("email")
+        for row in worksheet.get_all_values()[1:]:
+            if len(row) > email_index and row[email_index].strip().lower() == normalized_email:
+                return False
+
+    worksheet.append_row(
+        [
+            datetime.now(timezone.utc).isoformat(),
+            first_name.strip(),
+            last_name.strip(),
+            email.strip(),
+            " | ".join(selected),
+            "yes",
+        ],
+        value_input_option="RAW",
+    )
+    return True
+
+
+def save_newsletter_subscriber(
+    first_name: str,
+    last_name: str,
+    email: str,
+    selected: list[str],
+) -> bool:
+    google_saved = append_newsletter_to_google_sheets(first_name, last_name, email, selected)
+    if google_saved:
+        return True
+
+    if get_google_sheets_settings():
+        return False
+
+    storage_path = get_newsletter_storage_path()
+    storage_path.parent.mkdir(parents=True, exist_ok=True)
+
+    normalized_email = email.strip().lower()
+    if storage_path.exists():
+        with storage_path.open("r", newline="", encoding="utf-8") as handle:
+            reader = csv.DictReader(handle)
+            for row in reader:
+                if row.get("email", "").strip().lower() == normalized_email:
+                    return False
+
+    record = {
+        "created_at_utc": datetime.now(timezone.utc).isoformat(),
+        "first_name": first_name.strip(),
+        "last_name": last_name.strip(),
+        "email": email.strip(),
+        "selected_tracks": " | ".join(selected),
+        "newsletter_opt_in": "yes",
+    }
+    fieldnames = list(record.keys())
+    write_header = not storage_path.exists() or storage_path.stat().st_size == 0
+
+    with storage_path.open("a", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        if write_header:
+            writer.writeheader()
+        writer.writerow(record)
+
+    return True
 
 
 def get_resource_label(url: str, kind: str) -> str:
@@ -430,6 +570,10 @@ with st.sidebar:
             st.warning(
                 "No secrets were found. Add them in `.streamlit/secrets.toml`, Streamlit Cloud secrets, or environment variables."
             )
+        st.caption(
+            "To save newsletter subscribers privately in Google Drive, add `GOOGLE_SHEET_ID`, `GOOGLE_SERVICE_ACCOUNT_JSON`, "
+            "and optionally `GOOGLE_WORKSHEET_NAME` to the same secrets store."
+        )
 
 st.subheader("Choose Your MG Learning Tracks")
 selected_tutorials = st.multiselect(
@@ -496,6 +640,12 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
         for error in errors:
             st.error(error)
     else:
+        newsletter_saved = save_newsletter_subscriber(
+            first_name=first_name,
+            last_name=last_name,
+            email=recipient_email,
+            selected=selected_tutorials,
+        )
         with st.spinner("Sending your Machine Gnostics learning pack..."):
             try:
                 send_email(
@@ -510,9 +660,13 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
                     f"Email sent to **{recipient_email}**! "
                     f"Check your inbox for: {', '.join(selected_tutorials)}."
                 )
-                st.link_button("Need another free tutorial? Open the request app", FREE_TUTORIAL_URL, use_container_width=True)
+                if newsletter_saved:
+                    st.info("Your details were saved privately for future updates.")
+                else:
+                    st.info("Your email was already on the newsletter list, so it was not added twice.")
                 if receive_updates:
                     st.info("You’ll also receive updates and future communications from Machine Gnostics.")
+                st.link_button("Need another free tutorial? Open the request app", FREE_TUTORIAL_URL, use_container_width=True)
                 st.balloons()
             except smtplib.SMTPAuthenticationError:
                 st.error(
