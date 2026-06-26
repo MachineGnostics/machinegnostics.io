@@ -40,6 +40,16 @@
 					<li><strong>Chirag Vadera</strong><br>Business Strategy Advisor<br><span class="gn-meta">Advises on business direction, strategic positioning, and how Machine Gnostics can engage high-value industry problems.</span></li>
 				</ul>
 			</article>
+			<article class="gn-feature">
+				<h3>Expert Advisors</h3>
+				<p>
+					Senior expert advisors supporting research application and advanced data interpretation across scientific and industrial contexts.
+				</p>
+				<ul style="list-style: none; padding-left: 0; margin-bottom: 0;">
+					<li style="margin-bottom: 1rem;"><strong>Dr. Magdalena Bendova</strong><br>Research &amp; Application Advisor<br><span class="gn-meta">Provides guidance on the practical application of Mathematical Gnostics in scientific research, including thermophysical property measurements and related research methodologies.</span></li>
+					<li><strong>Dr. Zdenek Wagner</strong><br>Expert Advisor - Applied Data Analysis<br><span class="gn-meta">Provides expertise in non-statistical data analysis, the applied use of Mathematical Gnostics methods, and the interpretation of complex experimental data.</span></li>
+				</ul>
+			</article>
 		</div>
 	</section>
 
