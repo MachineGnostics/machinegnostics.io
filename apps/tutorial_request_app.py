@@ -126,6 +126,20 @@ TUTORIALS = {
             ("Developer Entry Point", "https://machinegnostics.com/developers/", "Website"),
         ],
     },
+        "Non-coders Web Apps": {
+            "badge": "NO-CODE",
+            "description": "Explore ready-to-use web apps designed for non-coders who want to learn by clicking, comparing, and observing.",
+            "resources": [
+                ("Anscombe Exploration", "https://machinegnostics-anscombe-banchmark.streamlit.app/", "Play"),
+                ("Mean & Data Spread", "https://machinegnosticsio-data-spread-example.streamlit.app/", "Play"),
+                ("GDFs", "https://machinegnosticsio-gdf.streamlit.app/", "Play"),
+                ("IGC - Ideal Gnostic Cycle", "https://machinegnosticsio-igc.streamlit.app/", "Play"),
+                ("Marginal Interval Analysis", "https://machinegnosticsio-intv.streamlit.app/", "Play"),
+                ("Linear Regression", "https://machinegnosticsio-lin-reg.streamlit.app/", "Play"),
+                ("Polynomial Regression", "https://machinegnosticsio-poly-reg.streamlit.app/", "Play"),
+                ("Logistic Regression", "https://machinegnosticsio-logi-reg.streamlit.app/", "Play"),
+            ],
+        },
     "AI Concept Videos": {
         "badge": "VID",
         "description": "Watch AI-generated, high-level conceptual videos that explain Machine Gnostics ideas in a visual format.",
