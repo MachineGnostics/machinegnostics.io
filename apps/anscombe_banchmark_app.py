@@ -1,7 +1,7 @@
 """
-Machine Gnostics Benchmark App
+Machine Gnostics Study App
 Interactive Streamlit application comparing Machine Gnostics vs Classical Statistics
-using the Anscombe Quartet as ground truth benchmark.
+using the Anscombe Quartet as a study set.
 """
 
 import streamlit as st
@@ -28,7 +28,7 @@ from mg_theme import apply_mg_theme, render_mg_hero
 # Page config (must be first Streamlit call)
 # ─────────────────────────────────────────────
 st.set_page_config(
-    page_title="Machine Gnostics Benchmark",
+    page_title="Machine Gnostics Exploration",
     page_icon="🧠",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -136,7 +136,7 @@ PAGES = {
 
 with st.sidebar:
     st.markdown("## 🥭 Machine Gnostics")
-    st.markdown("#### Benchmark App")
+    st.markdown("#### Exploration App")
     st.markdown("---")
 
     if "page" not in st.session_state:
@@ -148,7 +148,7 @@ with st.sidebar:
         "PRIMARY</div>",
         unsafe_allow_html=True,
     )
-    if st.button("▶ Run Benchmark", key="nav_overview", use_container_width=True, type="primary"):
+    if st.button("▶ Run Exploration", key="nav_overview", use_container_width=True, type="primary"):
         st.session_state.page = "overview"
 
     st.markdown("---")
@@ -179,7 +179,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown(
         "<div style='font-size:11px;color:#8ca0c0;text-align:center;'>"
-        "Benchmark: Anscombe Quartet<br>4 Datasets, 5 Metrics</div>",
+        "Study: Anscombe Quartet<br>4 Datasets, 5 Metrics</div>",
         unsafe_allow_html=True,
     )
     st.markdown(
@@ -212,7 +212,7 @@ if page == "overview":
             structurally completely different. This exposes a critical weakness of traditional statistics.<br><br>
             <b>Machine Gnostics</b> applies a Mathematical Gnostics framework that assigns adaptive weights
             to data points, producing metrics that are more sensitive to the true data structure.
-            This app benchmarks the MG change quantitatively using <b>%&nbsp;KPIs</b>.
+            This app studies the MG change quantitatively using <b>%&nbsp;KPIs</b>.
             </p>
         </div>
         """,
@@ -223,7 +223,7 @@ if page == "overview":
         """
         <div class="step-box">
         <b>👆 How to use this app:</b><br>
-        1. Use the <b>left sidebar</b> to navigate between benchmark sections.<br>
+        1. Use the <b>left sidebar</b> to navigate between study sections.<br>
         2. Each section shows a <b>side-by-side table</b> and <b>% KPI cards</b> comparing Classical vs Machine Gnostics.<br>
         3. Green % = Machine Gnostics outperforms Classical &nbsp;|&nbsp; Red % = Classical performs better.<br>
         4. The <b>Linear Regression</b> section shows visual regression fits per dataset with scatter weight coloring.
@@ -257,7 +257,7 @@ if page == "overview":
                     sp.set_edgecolor("#2d4a7a")
                 st.pyplot(fig_p, use_container_width=False)
 
-    st.markdown('<div class="section-title">📊 Full Benchmark KPI Summary (All Datasets)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">📊 Full Study KPI Summary (All Datasets)</div>', unsafe_allow_html=True)
 
     summary_rows = []
     for ds_id in [1, 2, 3, 4]:
@@ -309,7 +309,7 @@ elif page == "why_mg":
             <h3>Data Truth Revealed: Machine Gnostics vs Classical Statistics</h3>
             <p>
             Classical statistics treats all points equally. Machine Gnostics learns which points truly matter.
-            Below: benchmark numbers showing what each dataset really is, and how well each method reveals that truth.
+            Below: study numbers showing what each dataset really is, and how well each method reveals that truth.
             </p>
         </div>
         """,
@@ -382,7 +382,7 @@ elif page == "why_mg":
     st.markdown("### Summary: What Numbers Reveal")
     summary_df = pd.DataFrame(rows_all)
 
-    def color_benchmark(val):
+    def color_study(val):
         if isinstance(val, str) and val not in ["Dataset", "MG Data Insight"]:
             try:
                 num = float(val)
@@ -900,7 +900,7 @@ elif page == "regression":
 #  PAGE: ABOUT
 # ═══════════════════════════════════════════════════════════════════
 elif page == "about":
-    st.markdown('<div class="section-title">ℹ️ About this Benchmark App</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">ℹ️ About this Study App</div>', unsafe_allow_html=True)
 
     st.markdown(
         """
@@ -927,7 +927,7 @@ elif page == "about":
         - Same classical R² (~0.67) and RMSE
 
         Yet they are structurally completely different — I is linear, II is curved, III has one outlier,
-        IV is vertical with one leverage point. This quartet is the ideal benchmark to expose
+        IV is vertical with one leverage point. This quartet is the ideal study set to expose
         the limitations of classical statistics.
 
         ### KPI Glossary

@@ -1,7 +1,7 @@
 """
-Machine Gnostics Datasaurus Benchmark App
+Machine Gnostics Datasaurus Exploration App
 Interactive Streamlit application comparing Machine Gnostics vs Classical Statistics
-using the Datasaurus Dozen as benchmark.
+using the Datasaurus Dozen as a study set.
 """
 
 import matplotlib.pyplot as plt
@@ -24,7 +24,7 @@ from machinegnostics.models import LinearRegressor
 # Page config
 # -----------------------------------------------------------------------------
 st.set_page_config(
-    page_title="Machine Gnostics Datasaurus Benchmark",
+    page_title="Machine Gnostics Datasaurus Exploration",
     page_icon="🦕",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -240,7 +240,7 @@ def safe_dataframe(df, **kwargs):
 # -----------------------------------------------------------------------------
 with st.sidebar:
     st.markdown("## 🥭 Machine Gnostics")
-    st.markdown("#### Datasaurus Benchmark")
+    st.markdown("#### Datasaurus Exploration")
     st.markdown("---")
 
     if "page" not in st.session_state:
@@ -250,7 +250,7 @@ with st.sidebar:
         "<div style='margin-bottom:4px;font-size:12px;color:#8ca0c0;font-weight:bold;'>PRIMARY</div>",
         unsafe_allow_html=True,
     )
-    if st.button("▶ Run Benchmark", key="nav_overview", use_container_width=True, type="primary"):
+    if st.button("▶ Run Exploration", key="nav_overview", use_container_width=True, type="primary"):
         st.session_state.page = "overview"
 
     st.markdown("---")
@@ -277,7 +277,7 @@ with st.sidebar:
     st.markdown("---")
     st.markdown(
         "<div style='font-size:11px;color:#445566;text-align:center;'>"
-        "Benchmark: Datasaurus Dozen<br>13 Datasets, 5 Metrics</div>",
+        "Study: Datasaurus Dozen<br>13 Datasets, 5 Metrics</div>",
         unsafe_allow_html=True,
     )
 
@@ -360,7 +360,7 @@ if page == "overview":
                 st.pyplot(fig_p, use_container_width=False)
                 plt.close(fig_p)
 
-    st.markdown('<div class="section-title">📊 Full Benchmark KPI Summary (All Datasets)</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">📊 Full Study KPI Summary (All Datasets)</div>', unsafe_allow_html=True)
 
     summary_rows = []
     for ds_name in DS_NAMES:
@@ -739,12 +739,12 @@ elif page == "regression":
 # PAGE: ABOUT
 # =============================================================================
 elif page == "about":
-    st.markdown('<div class="section-title">ℹ️ About this Datasaurus Benchmark App</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-title">ℹ️ About this Datasaurus Exploration App</div>', unsafe_allow_html=True)
 
     st.markdown(
         """
         ### What is this app?
-        This Streamlit app benchmarks **Machine Gnostics** against classical statistics
+        This Streamlit app studies **Machine Gnostics** against classical statistics
         on the **Datasaurus Dozen** collection.
 
         ### Why Datasaurus?

@@ -15,7 +15,7 @@ water_ml = np.array([
     10.00113, 9.99505, 9.98862, 9.99095, 9.98135
 ])
 
-st.title("[Benchmark] - Mean and Data Spread Comparison Dashboard")
+st.title("[Study] - Mean and Data Spread Exploration Dashboard")
 
 # Sidebar for data selection and setup
 st.sidebar.header("Data & Setup")
@@ -23,7 +23,7 @@ dataset = st.sidebar.selectbox("Select Dataset", ["Water Mass (g)", "Water Volum
 use_custom = st.sidebar.checkbox("Use custom data instead")
 
 if use_custom:
-    st.sidebar.write("**Note:** Custom data works best with small datasets (less than 20 values) for stable benchmark comparisons.")
+    st.sidebar.write("**Note:** Custom data works best with small datasets (less than 20 values) for stable study comparisons.")
     custom_data_input = st.sidebar.text_area("Paste your data as comma-separated values (e.g., 1.2, 3.4, 5.6)", "")
     if custom_data_input:
         try:
@@ -76,7 +76,7 @@ st.sidebar.write(f"Using t-value: {t_value:.3f}")
 
 # Main content
 st.markdown("""
-This app gives an easy, high-level comparison of benchmark ranges from different methods: Statistical vs Mathematical Gnostics.
+This app gives an easy, high-level exploration of ranges from different methods: Statistical vs Mathematical Gnostics.
 Use it to quickly see how each method estimates the center and spread of your measurements.
 """)
 
@@ -104,7 +104,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("""
 ### What this dashboard helps you do
-- Compare benchmark results side by side in a clear visual format.
+- Compare study results side by side in a clear visual format.
 - Understand whether ranges are narrow, wide, or shifted between methods.
 - Communicate outcomes to mixed audiences without deep statistical language.
 
@@ -114,7 +114,7 @@ Machine Gnostics models are designed to be flexible and assumption-free, so they
 # Explanations in expanders
 with st.expander("Concept Overview"):
     st.markdown("""
-This comparison brings together two styles of benchmarking:
+This comparison brings together two styles of exploration:
 
 - Statistical method: builds a confidence-based range around the average.
 - Mathematical Gnostics method: builds ranges based on how values are distributed in the data.
@@ -126,13 +126,13 @@ distribution-focused analysis.
 - EGDF (Estimating Global Distribution Function): emphasizes the overall distribution shape.
 - ELDF (Estimating Local Distribution Function): emphasizes local structure and regional variation.
 
-The goal is not to pick a winner in every case, but to help you understand how method choice can change benchmark results.
+The goal is not to pick a winner in every case, but to help you understand how method choice can change the resulting ranges.
                 
 **Gnostic vs. Statistical Interval Analysis:**
     Gnostic interval analysis does not rely on probabilistic or statistical assumptions. Instead, it uses algebraic and geometric properties of the data and distribution functions, providing deterministic, reproducible, and interpretable intervals even for small, noisy, or non-Gaussian datasets. This is fundamentally different from classical statistical interval estimation, which depends on distributional assumptions and sampling theory.
 """)
 
-with st.expander("How to Read the Benchmark"):
+with st.expander("How to Read the Exploration"):
     st.markdown("""
 Focus on three simple parts:
 
@@ -145,8 +145,8 @@ If one method gives a wider range, it is expressing more uncertainty. If it give
 Tip: when data includes outliers or non-normal behavior, data-driven methods can reveal patterns that a purely symmetric statistical range may miss.
 """)
 
-# Run Benchmark Button in sidebar
-if st.sidebar.button("Run Benchmark Analysis"):
+# Run exploration button in sidebar
+if st.sidebar.button("Run Exploration Analysis"):
     # Computations
     mean_val = np.mean(data)
     std_val = np.std(data, ddof=1)
@@ -167,7 +167,7 @@ if st.sidebar.button("Run Benchmark Analysis"):
     eldf_res = ia_eldf.results()
 
     # Visualizations
-    st.header("Benchmark Results")
+    st.header("Exploration Results")
 
     # Bar Plot: Mean Value Comparison
     st.subheader("Mean Value Comparison: Statistical vs EGDF vs ELDF")
@@ -197,7 +197,7 @@ if st.sidebar.button("Run Benchmark Analysis"):
     ax.fill_between(range(len(data)), egdf_res['ZL'], egdf_res['ZU'], alpha=0.2, color='#66BB6A', label=f'EGDF Typical')
     ax.set_xlabel('Measurement Index')
     ax.set_ylabel(f'{title_suffix} ({unit})')
-    ax.set_title(f'Benchmark Comparison: Statistical vs EGDF - {title_suffix}')
+    ax.set_title(f'Exploration Comparison: Statistical vs EGDF - {title_suffix}')
     ax.legend(loc='upper right')
     ax.grid(True, alpha=0.3)
     st.pyplot(fig)
@@ -226,7 +226,7 @@ if st.sidebar.button("Run Benchmark Analysis"):
     st.pyplot(fig)
 
     # Metrics (range-based table for direct comparison)
-    st.subheader("Benchmark Metrics")
+    st.subheader("Exploration Metrics")
     stat_lower = mean_val - expanded_uncertainty
     stat_upper = mean_val + expanded_uncertainty
 

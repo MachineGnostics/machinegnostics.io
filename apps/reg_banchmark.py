@@ -1,4 +1,4 @@
-"""Regression benchmark app for the Anscombe Quartet.
+"""Regression study app for the Anscombe Quartet.
 
 Compares classical regression models against Machine Gnostics regression models
 on the four Anscombe datasets.
@@ -42,7 +42,7 @@ from mg_theme import apply_mg_theme, render_mg_hero
 
 
 st.set_page_config(
-	page_title="Regression Benchmark | Machine Gnostics",
+	page_title="Regression Study | Machine Gnostics",
 	page_icon="📈",
 	layout="wide",
 	initial_sidebar_state="expanded",
@@ -205,7 +205,7 @@ def kpi_card(label: str, model_val: float, classical_val: float, change_label: s
 		<div class="kpi-label">{label}</div>
 		<div class="kpi-value">{format_float(model_val)}{unit}</div>
 		<div class="kpi-sub">Classical: {format_float(classical_val)}{unit}</div>
-		<div class="kpi-sub {change_css}">Benchmark change: {change_label}</div>
+		<div class="kpi-sub {change_css}">Study change: {change_label}</div>
 	</div>
 	"""
 
@@ -611,12 +611,12 @@ def main() -> None:
 	data = load_anscombe()
 
 	with st.sidebar:
-		st.markdown("## Regression Benchmark")
-		st.markdown("Simple benchmark: classical vs MG models")
+		st.markdown("## Regression Study")
+		st.markdown("Simple study: classical vs MG models")
 		st.markdown("---")
 
 		dataset_id = st.selectbox("Dataset", [1, 2, 3, 4], format_func=lambda d: DS_NAMES[d], index=0)
-		run_clicked = st.button("Run Benchmark", use_container_width=True, type="primary")
+		run_clicked = st.button("Run Study", use_container_width=True, type="primary")
 
 		with st.expander("Additional options", expanded=False):
 			poly_degree = st.slider("Polynomial degree", min_value=2, max_value=6, value=3, step=1)
@@ -635,7 +635,7 @@ def main() -> None:
 		st.markdown("[www.machinegnostics.com](https://www.machinegnostics.com)")
 
 	if run_clicked:
-		st.session_state["reg_benchmark_cfg"] = {
+		st.session_state["reg_study_cfg"] = {
 			"dataset_id": dataset_id,
 			"poly_degree": poly_degree,
 			"rf_estimators": rf_estimators,
@@ -646,16 +646,16 @@ def main() -> None:
 			"show_weights": show_weights,
 		}
 
-	if "reg_benchmark_cfg" not in st.session_state:
+	if "reg_study_cfg" not in st.session_state:
 		render_mg_hero(
-			"Regression Benchmark for the Anscombe Quartet",
-			"Select a dataset, optionally adjust the knobs, then click Run Benchmark.",
-			eyebrow="Machine Gnostics Benchmark",
+			"Regression Study for the Anscombe Quartet",
+			"Select a dataset, optionally adjust the knobs, then click Run Study.",
+			eyebrow="Machine Gnostics Exploration",
 		)
-		st.info("Use the sidebar to run the benchmark.")
+		st.info("Use the sidebar to run the study.")
 		return
 
-	cfg = st.session_state["reg_benchmark_cfg"]
+	cfg = st.session_state["reg_study_cfg"]
 	dataset_id = int(cfg["dataset_id"])
 	poly_degree = int(cfg["poly_degree"])
 	rf_estimators = int(cfg["rf_estimators"])
@@ -680,9 +680,9 @@ def main() -> None:
 	pair_df, pair_details = evaluate_pairwise(x, y, model_specs, poly_degree)
 
 	render_mg_hero(
-		"Regression Benchmark for the Anscombe Quartet",
+		"Regression Study for the Anscombe Quartet",
 		"Simple comparison between classical regressors and their MG counterparts on one selected dataset. Each pair is run independently and shown with separate metrics and fit plots.",
-		eyebrow="Machine Gnostics Benchmark",
+		eyebrow="Machine Gnostics Exploration",
 	)
 
 	st.markdown(
@@ -795,7 +795,7 @@ def main() -> None:
 	show_detail_tables = st.toggle("Show additional detailed tables", value=False)
 
 	if show_detail_tables:
-		st.markdown('<div class="section-title">Benchmark table</div>', unsafe_allow_html=True)
+		st.markdown('<div class="section-title">Study table</div>', unsafe_allow_html=True)
 		table = current[["Model", "Family", "r2", "rmse", "mae", "corr", "robr2", "R2 Rank", "RMSE Rank", "Overall Rank"]].copy()
 		table = table.rename(columns={"r2": "R2", "rmse": "RMSE", "mae": "MAE", "corr": "Correlation", "robr2": "RobR2"})
 		for col in ["R2", "RMSE", "MAE", "Correlation", "RobR2"]:
@@ -865,7 +865,7 @@ def main() -> None:
 		"""
 		<div class="callout">
 		For each classical model, the paired MG model is re-run and compared directly. Use RMSE Improvement % as the main
-		benchmark, then validate with R2 Improvement % and the pairwise fit plots.
+		study, then validate with R2 Improvement % and the pairwise fit plots.
 		</div>
 		""",
 		unsafe_allow_html=True,
