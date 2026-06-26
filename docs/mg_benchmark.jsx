@@ -59,8 +59,8 @@ const DATASETS = [
     classicalFinding: "Males admitted 44.3% vs Females 34.6% — significant gender bias (χ²=92.2, p<0.0001, OR=1.48).",
     classicalError: "Aggregation reverses direction when stratified by department. Females are admitted at equal or higher rates in 4 of 6 departments — the classic Simpson's Paradox.",
     mgFinding: "MG detects department selectivity as the latent confounder. Within each department the female/male gap vanishes or reverses. The apparent 9.7-point gap is entirely a composition artefact driven by which departments each gender applied to.",
-    verdict: "Statistics WRONG · MG CORRECT",
-    verdictColor: C.warn, verdictTag: "Critical Reversal",
+    verdict: "Classical statistics gives an aggregate read; MG recovers the stratified pattern",
+    verdictColor: C.warn, verdictTag: "Aggregate vs Stratified",
     citation: "Bickel, Hammel & O'Connell (1975), Science 187:398",
     radar: {
       labels: ["Bias detection","Confound ID","Sub-group analysis","Correct direction","Practical utility"],
@@ -88,8 +88,8 @@ const DATASETS = [
     classicalFinding: "Aggregate analysis shows strong male bias (p<0.0001) across all departments combined.",
     classicalError: "Dept C alone: males 37% vs females 34% — t=0.89, p=0.37, NOT significant. Pooling across departments manufactures an artefact that vanishes inside any single department.",
     mgFinding: "MG stratifies by department and recovers the within-dept null result. It flags the aggregate analysis as a composition-effect illusion, not true bias.",
-    verdict: "Statistics MISLEADING · MG CORRECT",
-    verdictColor: C.amber, verdictTag: "Artefact Exposed",
+    verdict: "Classical statistics overstates the aggregate signal; MG clarifies the subgroup view",
+    verdictColor: C.amber, verdictTag: "Within-Department View",
     citation: "Bickel et al. (1975) — Dept C detail, n=918",
     radar: {
       labels: ["Stratification","Composition effect","Type-I error control","True effect","Interpretability"],
@@ -117,8 +117,8 @@ const DATASETS = [
     classicalFinding: "Interferon-β reduces relapse rate 36.8% (t=2.31, p=0.042). Drug declared effective.",
     classicalError: "Patient 4 (outlier, worsened) shifts the group mean by 0.19 relapses/yr. Remove them → 47.2% reduction. A single data point changes the headline number by 28% in a trial of only 7 treated patients.",
     mgFinding: "MG down-weights Patient 4 automatically. It identifies two latent phenotypes: responders (n=6, 47% reduction) and non-responders (n=1, 0% reduction). The reported mean of 36.8% describes neither group accurately.",
-    verdict: "Statistics PARTIALLY RIGHT · MG NUANCED",
-    verdictColor: C.amber, verdictTag: "Outlier Masking",
+    verdict: "Classical statistics gives a mixed read; MG separates the responder structure",
+    verdictColor: C.amber, verdictTag: "Outlier Sensitivity",
     citation: "Burnham et al. (1991), J Clin Immunol 11:338",
     radar: {
       labels: ["Outlier robustness","Small-N stability","Subgroup ID","Effect accuracy","Clinical safety"],
@@ -146,8 +146,8 @@ const DATASETS = [
     classicalFinding: "Drug beats placebo significantly (Cohen's d=1.13, p=0.031). Large effect size. Drug declared effective.",
     classicalError: "High SD (23.1) hides a bimodal distribution: 56% of patients get 61% pain relief, while 44% get only 16% relief — worse than placebo. The pooled mean of 39.9 VAS describes no real patient in the trial.",
     mgFinding: "MG detects bimodality and separates the responder phenotype (mean 30.6 VAS, −61%) from non-responders (mean 67.5 VAS, −16%). True responder Cohen's d ≈ 2.9 vs pooled d=1.13. Clinical decision reverses for 44% of patients.",
-    verdict: "Statistics DANGEROUSLY WRONG · MG CORRECT",
-    verdictColor: C.warn, verdictTag: "Bimodal Collapse",
+    verdict: "Classical statistics gives a pooled read; MG reveals the subgroup split",
+    verdictColor: C.warn, verdictTag: "Responder Split",
     citation: "Kent et al. (2010), J Clin Epidemiol 63:575",
     radar: {
       labels: ["Bimodal detection","True effect size","Subgroup accuracy","Precision medicine","Patient safety"],
@@ -175,8 +175,8 @@ const DATASETS = [
     classicalFinding: "r = −0.78, p=0.0001. 'Vitamin D strongly protects against respiratory infections.' Clinical recommendation: maintain serum VitD > 50 ng/mL.",
     classicalError: "Physical activity confounds both variables. Within each activity stratum: Low r=+0.23, Moderate r=−0.34, High r=−0.12. None are significant. The aggregate r=−0.78 is entirely a composition artefact.",
     mgFinding: "MG identifies physical activity as the latent clustering variable. Gnostic weights expose the three activity regimes. True vitamin D–infection relationship within groups is near zero. Active lifestyle drives both variables — vitamin D alone is not causally protective.",
-    verdict: "Statistics WRONG (causal inference) · MG CORRECT",
-    verdictColor: C.warn, verdictTag: "Spurious Correlation",
+    verdict: "Classical statistics flags an association; MG separates confounding from pattern",
+    verdictColor: C.warn, verdictTag: "Confounding Check",
     citation: "Vieth et al. (2011), Epidemiol Infect 139:1027",
     radar: {
       labels: ["Confound detection","Causal inference","Spurious r flag","Stratification","Policy advice"],
@@ -204,8 +204,8 @@ const DATASETS = [
     classicalFinding: "HS wages fell −3.2% from 2000–2010. Education premium: Bachelor's earns $14.30/hr more than HS.",
     classicalError: "The HS workforce aged over the decade (more older, higher-paid workers). Within every age cohort HS wages grew +3–4%. The aggregate decline is a population-structure artefact, not a real wage fall.",
     mgFinding: "MG separates compositional aging effects from genuine within-cohort growth. Real wage growth (+4.2% for age 25–34, +3.4% for age 45–54) is recovered. Policy implication reverses: HS workers' real wages improved.",
-    verdict: "Statistics MISLEADING · MG CORRECT",
-    verdictColor: C.amber, verdictTag: "Composition Artefact",
+    verdict: "Classical statistics shows an aggregate trend; MG restores the within-group view",
+    verdictColor: C.amber, verdictTag: "Composition Shift",
     citation: "Autor, Katz & Kearney (2008), AER 98:394; U.S. Census CPS",
     radar: {
       labels: ["Composition effect","Age stratification","Real-growth recovery","Policy direction","Simpson ID"],
@@ -233,8 +233,8 @@ const DATASETS = [
     classicalFinding: "FT% vs Wins: r=0.98, p<0.001. 'Improve free throw shooting to win more games.'",
     classicalError: "Team offensive quality (PPG) confounds both FT% and wins. Within elite offenses r=−0.98 (negative!). Within poor offenses r=0.52 (modest). The pooled r=0.98 is entirely driven by team-strength stratification.",
     mgFinding: "MG identifies offensive PPG as the latent confounder. Within-strata gnostic correlations reveal FT% is a marker of team quality, not a cause of wins. The management recommendation reverses.",
-    verdict: "Statistics WRONG (causal inference) · MG CORRECT",
-    verdictColor: C.warn, verdictTag: "Marker vs Cause",
+    verdict: "Classical statistics treats FT% as a signal; MG reframes it as a quality marker",
+    verdictColor: C.warn, verdictTag: "Marker vs Causal Lever",
     citation: "NBA 2019-20 Season data; NBC Sports",
     radar: {
       labels: ["Spurious r detection","Confounder ID","Within-strata analysis","Policy advice","Small-N risk"],
@@ -262,8 +262,8 @@ const DATASETS = [
     classicalFinding: "Mean radiodensity r=−0.14 with O₂ saturation (p=0.41). Conclusion: 'Radiodensity does not predict patient outcomes.'",
     classicalError: "All deceased patients and all ICU/ARDS patients sit at the extremes of the density distribution (< −630 HU or > −410 HU). The mean is clinically misleading — the tail, not the centre, contains the mortality signal.",
     mgFinding: "MG assigns elevated gnostic weights to density extremes. Patients #8, #10 (deceased) and #11, #12 (ICU/ARDS) are all flagged as high-weight tail observations. The tail-weighted signal is clinically actionable; the Gaussian mean is not.",
-    verdict: "Statistics MISSES CRITICAL SIGNAL · MG CATCHES IT",
-    verdictColor: C.warn, verdictTag: "Tail-Risk Blind Spot",
+    verdict: "Classical statistics misses the tail signal; MG brings it into view",
+    verdictColor: C.warn, verdictTag: "Tail-Risk Signal",
     citation: "Yang et al. (2020), Radiology 296:E65",
     radar: {
       labels: ["Tail-risk detection","Outlier importance","Extreme-value signal","Clinical alert","Distribution shape"],
@@ -291,8 +291,8 @@ const DATASETS = [
     classicalFinding: "PSA sensitivity 80%, specificity 90%. PPV=14%. 'If positive, 14% chance of cancer — biopsy recommended.'",
     classicalError: "At 2% cancer prevalence, 86 of every 114 positive tests are false alarms. Each biopsy risks infection, bleeding, and sepsis. In a cohort of n=32, you could observe zero true positives and 3–5 false alarms, making PPV completely unstable.",
     mgFinding: "MG quantifies false-positive harm explicitly: 3–5 men harmed per true positive found at 2% prevalence. It recommends restricting screening to high-risk subgroups (prevalence > 10%), where PPV rises to ~47% and the risk–benefit calculation shifts fundamentally.",
-    verdict: "Statistics INCOMPLETE · MG ADDS HARM QUANTIFICATION",
-    verdictColor: C.amber, verdictTag: "Prevalence Blind Spot",
+    verdict: "Classical statistics gives a limited screening read; MG adds harm and prevalence context",
+    verdictColor: C.amber, verdictTag: "Prevalence Context",
     citation: "Catalona et al. (2012), JAMA 303:1929",
     radar: {
       labels: ["False-positive harm","Prevalence awareness","PPV stability","Risk stratification","Decision support"],
@@ -320,8 +320,8 @@ const DATASETS = [
     classicalFinding: "All four datasets: mean x≈9, mean y≈7.5, r²≈0.67, regression slope≈0.5. Classical statistics reports identical summary results for all four.",
     classicalError: "Dataset I: linear (statistics valid). Dataset II: perfect parabola (linear fit is structurally wrong). Dataset III: one high-leverage outlier distorts the line. Dataset IV: vertical cluster with one outlier — regression is meaningless. Same numbers, four completely different realities.",
     mgFinding: "MG's gnostic weights differentiate all four immediately. DS-II: weights form a parabolic pattern, exposing the curve. DS-III: the outlier receives weight ≈0.04, removing its leverage. DS-IV: vertical cluster flagged as structurally degenerate. Each dataset receives a structurally honest fit.",
-    verdict: "Statistics BLIND · MG DISTINGUISHES ALL FOUR",
-    verdictColor: C.warn, verdictTag: "The Classic Proof",
+    verdict: "Classical statistics gives identical summaries; MG distinguishes the structures",
+    verdictColor: C.warn, verdictTag: "Four-Case Structure",
     citation: "Anscombe, F.J. (1973), American Statistician 27:17",
     radar: {
       labels: ["Shape detection","Outlier flagging","Fit quality","Structural honesty","Diagnostic power"],
@@ -949,7 +949,7 @@ function App() {
             <div style={{ background: C.panel, border: `1px solid ${C.border}`, borderRadius: 12, padding: "14px 15px" }}>
               <div style={{ fontSize: 11, color: C.mg, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>Note</div>
               <p style={{ fontSize: isCompact ? 12 : 13, color: C.text, lineHeight: 1.8, margin: 0 }}>
-                This is a Machine Gnostics benchmark. It uses a different analytical perspective than classical statistics, so the meaning of a result and the correct interpretation can differ. Readers should approach the findings as a new framework, not just a different wording of standard statistical output.
+                This is a Machine Gnostics benchmark. It uses a different analytical perspective than classical statistics, so the meaning of a result and the correct interpretation can differ. In this report, MG is presented as an additional lens that extends classical statistics with extra capability, not as a replacement. The VS wording is used only for comparison and context. Future benchmarks may extend this approach to ML- and DL-specific models as well.
               </p>
             </div>
           </div>
@@ -1043,7 +1043,7 @@ function App() {
                     <span style={{ fontSize: 11, padding: "5px 12px", borderRadius: 6, fontWeight: 700, background: ds.verdictColor+"22", color: ds.verdictColor, border: `1px solid ${ds.verdictColor}44` }}>{ds.verdictTag}</span>
                   </div>
                   <div style={{ marginTop: 14, fontSize: 12, color: ds.verdictColor, fontWeight: 600, borderTop: `1px solid ${C.border}`, paddingTop: 12 }}>
-                    VERDICT: {ds.verdict}
+                    INTERPRETATION: {ds.verdict}
                   </div>
                 </div>
 
@@ -1069,7 +1069,7 @@ function App() {
 
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: 13, fontWeight: 700, color: C.text, marginBottom: 12, letterSpacing: "-0.01em" }}>Key Metrics</div>
-                    <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "1fr 1fr", gap: 10 }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 10 }}>
                       {ds.keyStats.map((k, i) => <KeyStat key={i} {...k} />)}
                     </div>
                     <div style={{ marginTop: 12, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: "12px 14px", backdropFilter: "blur(10px)" }}>
@@ -1097,7 +1097,7 @@ function App() {
                     <p style={{ fontSize: 14, color: C.text, lineHeight: 1.75, margin: 0 }}>{ds.classicalFinding}</p>
                   </div>
                   <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: "16px 18px", borderLeft: `3px solid ${C.warn}` }}>
-                    <div style={{ fontSize: 11, color: C.warn, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>Why Statistics Fails Here</div>
+                    <div style={{ fontSize: 11, color: C.warn, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: 8 }}>Classical Statistics Finding</div>
                     <p style={{ fontSize: 14, color: C.text, lineHeight: 1.75, margin: 0 }}>{ds.classicalError}</p>
                   </div>
                 </div>
