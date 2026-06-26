@@ -19,6 +19,8 @@ st.set_page_config(
 
 
 # ── Tutorial data ────────────────────────────────────────────────────────────
+FREE_TUTORIAL_URL = "https://machinegnostics-learning-pack.streamlit.app/"
+
 TUTORIALS = {
     "Installation": {
         "badge": "INST",
@@ -37,9 +39,14 @@ TUTORIALS = {
         "resources": [
             ("Overview Tutorial", "https://docs.machinegnostics.com/latest/tutorials/overview/", "Docs"),
             ("GDF Tutorial Section", "https://docs.machinegnostics.com/latest/tutorials/tutorials/#advanced-analysis", "Docs"),
+            ("EGDF", "https://docs.machinegnostics.com/latest/da/egdf/", "Docs"),
+            ("ELDF", "https://docs.machinegnostics.com/latest/da/eldf/", "Docs"),
+            ("QGDF", "https://docs.machinegnostics.com/latest/da/qgdf/", "Docs"),
+            ("QLDF", "https://docs.machinegnostics.com/latest/da/qldf/", "Docs"),
             ("Google Colab Notebook", "https://colab.research.google.com/github/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb", "Colab"),
             ("Streamlit App", "https://machinegnosticsio-gdf.streamlit.app/", "Play"),
             ("GitHub Notebook", "https://github.com/MachineGnostics/machinegnostics/blob/dev-002/tutorials/tutorial_magcal_02_gnostic_distribution_functions.ipynb", "GitHub"),
+
         ],
     },
     "Data Analysis Models": {
@@ -119,6 +126,15 @@ TUTORIALS = {
             ("Developer Entry Point", "https://machinegnostics.com/developers/", "Website"),
         ],
     },
+    "AI Concept Videos": {
+        "badge": "VID",
+        "description": "Watch AI-generated, high-level conceptual videos that explain Machine Gnostics ideas in a visual format.",
+        "resources": [
+            ("Machine Gnostics - A step towards non-statistical AI!", "https://youtu.be/YRYL0Yz-1tw?si=GYufKEJojnkMZg-e", "Video"),
+            ("What is Machine Gnostics?", "https://youtu.be/CnXFweFXtYw?si=KfafAvHE4wgOvjYy", "Video"),
+            ("The End of Randomness", "https://youtu.be/ZweSmDETOKk?si=dwgBxPqANnAqozRa", "Video"),
+        ],
+    },
     "Mathematical Gnostics Books": {
         "badge": "BOOK",
         "description": "Read the foundational theory behind Machine Gnostics and the mathematical ideas it is built on.",
@@ -161,10 +177,19 @@ def get_secret_value(key: str) -> str:
         return os.environ.get(key, "")
 
 
+def get_resource_label(url: str, kind: str) -> str:
+    lowered_url = url.lower()
+    if "youtu.be" in lowered_url or "youtube.com" in lowered_url:
+        return "VIDEO"
+    if "colab.research.google.com" in lowered_url:
+        return "CODE"
+    return kind.upper()
+
+
 def build_track_card(track_name: str) -> str:
     info = TUTORIALS[track_name]
     resources_html = "".join(
-                f'<li style="margin:6px 0;"><span style="display:inline-block;min-width:72px;padding:2px 8px;margin-right:8px;border-radius:999px;background:rgba(14,165,164,.16);color:#7ce7df;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">{escape(kind)}</span><a href="{url}" style="color:#d8fffb;text-decoration:none;font-weight:600;">{escape(name)}</a></li>'
+        f'<li style="margin:6px 0;"><span style="display:inline-block;min-width:72px;padding:2px 8px;margin-right:8px;border-radius:999px;background:rgba(14,165,164,.16);color:#7ce7df;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;">{escape(get_resource_label(url, kind))}</span><a href="{url}" style="color:#d8fffb;text-decoration:none;font-weight:600;">{escape(name)}</a></li>'
         for name, url, kind in info["resources"]
     )
     return f"""
@@ -195,7 +220,7 @@ def build_email_html(first_name: str, last_name: str, selected: list[str], sende
           <p style="color:#334155;line-height:1.6;margin:0 0 14px;">{escape(TUTORIALS[topic]['description'])}</p>
           <div style="margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:#0F766E;">Learning Resources</div>
           <ul style="padding-left:18px;margin:0;">
-            {''.join(f'<li style="margin:6px 0;"><span style="font-size:11px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:.06em;">{escape(kind)}</span> · <a href="{url}" style="color:#0EA5A4;text-decoration:none;">{escape(name)}</a></li>' for name, url, kind in TUTORIALS[topic]['resources'])}
+                        {''.join(f'<li style="margin:6px 0;"><span style="font-size:11px;font-weight:700;color:#0f766e;text-transform:uppercase;letter-spacing:.06em;">{escape(get_resource_label(url, kind))}</span> · <a href="{url}" style="color:#0EA5A4;text-decoration:none;">{escape(name)}</a></li>' for name, url, kind in TUTORIALS[topic]['resources'])}
           </ul>
         </div>
         """
@@ -216,15 +241,21 @@ def build_email_html(first_name: str, last_name: str, selected: list[str], sende
                 <div style="background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);padding:38px 34px;border-bottom:1px solid rgba(15,23,42,.08);">
                     <div style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#0f766e;font-weight:700;">Machine Gnostics</div>
                     <h1 style="color:#0F172A;margin:10px 0 6px;font-size:30px;line-height:1.1;">Your Learning Pack</h1>
-                    <p style="color:#334155;margin:0;line-height:1.6;">Curated for the tracks you selected.</p>
+                                        <p style="color:#334155;margin:0;line-height:1.6;">Curated for the tracks you selected. Free resources, OSS software, and GPLv3-licensed learning tools.</p>
         </div>
         <div style="padding:32px;">
           <p style="font-size:16px;color:#0F172A;margin-top:0;">Hi <strong>{safe_name}</strong>,</p>
                     <p style="color:#334155;line-height:1.7;">Thanks for choosing Machine Gnostics learning tracks. Below is the exact set of resources that matches your selection.</p>
+                                        <p style="color:#334155;line-height:1.7;">If you have any questions or run into a blocker during the learning process, please reply to this email or write to us. We are happy to help you keep moving forward.</p>
                     <div style="background:#f8fafc;border:1px solid rgba(15,23,42,.08);border-radius:14px;padding:14px 16px;margin:18px 0 22px;">
             <div style="font-size:12px;color:#64748b;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;">Selected Tracks</div>
             <div style="font-size:14px;color:#0F172A;line-height:1.7;">{escape(selected_summary)}</div>
           </div>
+                    <div style="background:linear-gradient(180deg,#ecfdf5 0%,#f0fdfa 100%);border:1px solid rgba(14,165,164,.18);border-radius:16px;padding:18px 20px;margin:0 0 22px;">
+                        <div style="font-size:12px;color:#0f766e;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:8px;">Need an extra free tutorial?</div>
+                        <p style="margin:0 0 14px;color:#334155;line-height:1.7;">If you want additional free tutorials, use the button below to open the Machine Gnostics Learning Pack request app.</p>
+                        <a href="{FREE_TUTORIAL_URL}" style="display:inline-block;background:#0f766e;color:#fff;text-decoration:none;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:12px 18px;border-radius:12px;">Order Free Tutorial</a>
+                    </div>
           {track_blocks}
                     <div style="margin-top:16px;padding:16px 18px;border-top:1px solid rgba(15,23,42,.08);text-align:center;">
                         <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0f766e;margin-bottom:8px;">Follow Machine Gnostics</div>
@@ -363,9 +394,9 @@ div[data-testid="stForm"] {
     unsafe_allow_html=True,
 )
 
-st.title("Machine Gnostics Learning Hub")
+st.title("Machine Gnostics Learning Hub - Free Resources")
 st.markdown(
-    "Choose the MG learning tracks you want, preview the exact resources before you send, and receive the pack by email."
+    "Choose the MG learning tracks you want, preview the exact resources before you send, and receive the pack by email. Free resources, OSS software, and GPLv3 licensing are part of this learning hub."
 )
 
 st.divider()
@@ -465,6 +496,7 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
                     f"Email sent to **{recipient_email}**! "
                     f"Check your inbox for: {', '.join(selected_tutorials)}."
                 )
+                st.link_button("Need another free tutorial? Open the request app", FREE_TUTORIAL_URL, use_container_width=True)
                 if receive_updates:
                     st.info("You’ll also receive updates and future communications from Machine Gnostics.")
                 st.balloons()
