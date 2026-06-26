@@ -278,7 +278,7 @@ def build_email_html(
                 </div>
                 """
 
-        return f"""
+    return f"""
         <!DOCTYPE html>
         <html>
         <head>
