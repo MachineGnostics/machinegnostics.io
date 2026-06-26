@@ -1,4 +1,5 @@
 import json
+import base64
 import os
 import re
 import smtplib
@@ -9,10 +10,10 @@ from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from html import escape
-from urllib.parse import quote
 
 import requests
 import streamlit as st
+import streamlit.components.v1 as components
 from google.auth.transport.requests import Request
 from google.oauth2.service_account import Credentials
 
@@ -221,75 +222,87 @@ def load_recipients() -> list[dict[str, str]]:
 
 def build_email_html(
     subject: str,
+    opening_statement: str,
     body_text: str,
     author_name: str,
-    author_title: str,
     author_email: str,
+    image_src: str | None,
     image_cid: str | None,
 ) -> str:
-    safe_subject = escape(subject)
-    safe_author_name = escape(author_name)
-    safe_author_title = escape(author_title)
-    safe_author_email = escape(author_email)
-    body_html = escape(body_text).replace("\n", "<br>")
+        safe_subject = escape(subject)
+        safe_opening_statement = escape(opening_statement)
+        safe_author_name = escape(author_name)
+        safe_author_email = escape(author_email)
+        body_html = escape(body_text).replace("\n", "<br>")
 
-    image_html = ""
-    if image_cid:
-        image_html = f"""
-        <div style="margin:24px 0 0;">
-          <img src="cid:{image_cid}" alt="Newsletter image" style="width:100%;max-width:560px;border-radius:18px;display:block;border:1px solid rgba(15,23,42,.08);box-shadow:0 18px 36px rgba(0,0,0,.12);">
-        </div>
-        """
+        image_html = ""
+        if image_src:
+                image_html = f"""
+                <div style="margin:24px 0 0;">
+                    <img src="{image_src}" alt="Newsletter image" style="width:100%;max-width:560px;border-radius:18px;display:block;border:1px solid rgba(15,23,42,.08);box-shadow:0 18px 36px rgba(0,0,0,.12);">
+                </div>
+                """
+        elif image_cid:
+                image_html = f"""
+                <div style="margin:24px 0 0;">
+                    <img src="cid:{image_cid}" alt="Newsletter image" style="width:100%;max-width:560px;border-radius:18px;display:block;border:1px solid rgba(15,23,42,.08);box-shadow:0 18px 36px rgba(0,0,0,.12);">
+                </div>
+                """
 
-    return f"""
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta name="color-scheme" content="light only">
-      <meta name="supported-color-schemes" content="light only">
-    </head>
-    <body style="font-family:'IBM Plex Sans',Arial,sans-serif;background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);margin:0;padding:28px;">
-      <div style="max-width:700px;margin:auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 22px 50px rgba(15,23,42,.12);border:1px solid rgba(15,23,42,.08);">
-        <div style="background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);padding:38px 34px;border-bottom:1px solid rgba(15,23,42,.08);">
-          <div style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#0f766e;font-weight:700;">Machine Gnostics Newsletter</div>
-          <h1 style="color:#0F172A;margin:10px 0 6px;font-size:30px;line-height:1.1;">{safe_subject}</h1>
-          <p style="color:#334155;margin:0;line-height:1.6;">Curated for your subscribers with the same clean Machine Gnostics style.</p>
-        </div>
-        <div style="padding:32px;">
-          <div style="background:#f8fafc;border:1px solid rgba(15,23,42,.08);border-radius:16px;padding:18px 20px;margin:0 0 20px;">
-            <div style="font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:#0f766e;margin-bottom:8px;">Author Details</div>
-            <div style="font-size:16px;font-weight:700;color:#0F172A;">{safe_author_name}</div>
-            <div style="font-size:14px;color:#334155;line-height:1.6;">{safe_author_title}</div>
-            <div style="font-size:14px;color:#334155;line-height:1.6;">{safe_author_email}</div>
-          </div>
-          <div style="font-size:16px;line-height:1.8;color:#0F172A;white-space:normal;">{body_html}</div>
-          {image_html}
-          <div style="margin-top:28px;padding:16px 18px;border-top:1px solid rgba(15,23,42,.08);text-align:center;">
+        return f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta name="color-scheme" content="light only">
+            <meta name="supported-color-schemes" content="light only">
+        </head>
+        <body style="font-family:'IBM Plex Sans',Arial,sans-serif;background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);margin:0;padding:28px;">
+            <div style="max-width:700px;margin:auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 22px 50px rgba(15,23,42,.12);border:1px solid rgba(15,23,42,.08);">
+                <div style="background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);padding:38px 34px;border-bottom:1px solid rgba(15,23,42,.08);">
+                    <div style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#0f766e;font-weight:700;">Machine Gnostics Newsletter</div>
+                    <h1 style="color:#0F172A;margin:10px 0 6px;font-size:30px;line-height:1.1;">{safe_subject}</h1>
+                    <p style="color:#334155;margin:0;line-height:1.6;">{safe_opening_statement}</p>
+                </div>
+                <div style="padding:32px;">
+                    {f'''<div style="background:#f8fafc;border:1px solid rgba(15,23,42,.08);border-radius:16px;padding:18px 20px;margin:0 0 20px;">
+                        <div style="font-size:12px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:#0f766e;margin-bottom:8px;">Author Details</div>
+                        <div style="font-size:16px;font-weight:700;color:#0F172A;">{safe_author_name}</div>
+                        <div style="font-size:14px;color:#334155;line-height:1.6;">{safe_author_email}</div>
+                    </div>''' if safe_author_name.strip() else ''}
+                    <div style="font-size:16px;line-height:1.8;color:#0F172A;white-space:normal;">{body_html}</div>
+                    {image_html}
+                    <div style="margin-top:28px;padding:16px 18px;border-top:1px solid rgba(15,23,42,.08);text-align:center;">
                         <div style="font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0f766e;margin-bottom:8px;">Stay Connected</div>
-            <div style="font-size:14px;line-height:1.9;color:#334155;margin:0 auto 12px;max-width:520px;">
-              <a href="https://github.com/MachineGnostics/machinegnostics" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">GitHub</a>
-              <a href="https://discord.gg/WMMUaeJe2X" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">Discord</a>
-              <a href="https://www.linkedin.com/company/109036022/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">LinkedIn</a>
-              <a href="https://pypi.org/project/machinegnostics/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">PyPI</a>
-              <a href="https://www.instagram.com/machinegnostics/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">Instagram</a>
-              <a href="https://www.youtube.com/@MachineGnostics" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">YouTube</a>
-            </div>
+                        <div style="font-size:14px;line-height:1.9;color:#334155;margin:0 auto 12px;max-width:520px;">
+                            <a href="https://github.com/MachineGnostics/machinegnostics" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">GitHub</a>
+                            <a href="https://discord.gg/WMMUaeJe2X" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">Discord</a>
+                            <a href="https://www.linkedin.com/company/109036022/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">LinkedIn</a>
+                            <a href="https://pypi.org/project/machinegnostics/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">PyPI</a>
+                            <a href="https://www.instagram.com/machinegnostics/" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">Instagram</a>
+                            <a href="https://www.youtube.com/@MachineGnostics" style="color:#0EA5A4;text-decoration:none;margin:0 10px;">YouTube</a>
+                        </div>
                         <div style="font-size:13px;line-height:1.7;color:#475569;max-width:560px;margin:0 auto;">
                             You are receiving this newsletter because you subscribed, opted in, or otherwise agreed to receive updates from Machine Gnostics.
                         </div>
-          </div>
-        </div>
-      </div>
-    </body>
-    </html>
-    """
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
 
 
-def build_plain_text(subject: str, body_text: str, author_name: str, author_title: str) -> str:
+def build_plain_text(
+    subject: str,
+    opening_statement: str,
+    body_text: str,
+    author_name: str,
+) -> str:
+    author_line = f"Author: {author_name}\n\n" if author_name.strip() else ""
     return (
         f"Subject: {subject}\n\n"
-        f"Author: {author_name}\n"
-        f"Title: {author_title}\n\n"
+        f"{opening_statement}\n\n"
+        f"{author_line}"
         f"{body_text}\n\n"
         "You are receiving this newsletter because you subscribed, opted in, or otherwise agreed to receive updates from Machine Gnostics.\n"
     )
@@ -300,9 +313,9 @@ def send_newsletter(
     app_password: str,
     recipients: list[dict[str, str]],
     subject: str,
+    opening_statement: str,
     body_text: str,
     author_name: str,
-    author_title: str,
     author_email: str,
     image_name: str | None,
     image_bytes: bytes | None,
@@ -317,7 +330,7 @@ def send_newsletter(
         ).strip()
         personal_salutation = f"Hi {full_name}," if full_name else "Hello,"
 
-        message = MIMEMultipart("mixed")
+        message = MIMEMultipart("related")
         message["Subject"] = subject
         message["From"] = sender_email
         message["To"] = recipient["email"]
@@ -326,21 +339,31 @@ def send_newsletter(
         message["Precedence"] = "personal"
 
         personalized_body = f"{personal_salutation}\n\n{body_text}"
-        plain_text = build_plain_text(subject, personalized_body, author_name, author_title)
-        html_body = build_email_html(
-            subject=subject,
-            body_text=personalized_body,
-            author_name=author_name,
-            author_title=author_title,
-            author_email=author_email,
-            image_cid="newsletter-image" if image_bytes else None,
+        plain_text = build_plain_text(
+            subject,
+            opening_statement,
+            personalized_body,
+            author_name,
         )
 
-        related = MIMEMultipart("related")
+        email_image_cid = None
+        if image_bytes:
+            email_image_cid = "newsletter-image"
+
+        html_body = build_email_html(
+            subject=subject,
+            opening_statement=opening_statement,
+            body_text=personalized_body,
+            author_name=author_name,
+            author_email=author_email,
+            image_src=None,
+            image_cid=email_image_cid,
+        )
+
         alternative = MIMEMultipart("alternative")
         alternative.attach(MIMEText(plain_text, "plain"))
         alternative.attach(MIMEText(html_body, "html"))
-        related.attach(alternative)
+        message.attach(alternative)
 
         if image_bytes and image_name:
             mime_root = (image_mime or "image/jpeg").split("/")[0]
@@ -349,11 +372,9 @@ def send_newsletter(
                 image_part = MIMEImage(image_bytes, _subtype=subtype)
             else:
                 image_part = MIMEApplication(image_bytes)
-            image_part.add_header("Content-Disposition", "attachment", filename=image_name)
+            image_part.add_header("Content-Disposition", "inline")
             image_part.add_header("Content-ID", "<newsletter-image>")
-            related.attach(image_part)
-
-        message.attach(related)
+            message.attach(image_part)
 
         try:
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=ssl.create_default_context()) as server:
@@ -404,16 +425,12 @@ def main() -> None:
         "Compose a newsletter, choose the recipients from the Google Sheet used by the tutorial app, and send it from your Gmail account."
     )
 
-    settings = get_google_settings()
-
     with st.sidebar:
-        with st.expander("Newsletter Settings", expanded=True):
-            st.caption("Uses the Google Sheet that stores tutorial app subscribers.")
-            if settings:
-                st.write(f"Spreadsheet ID: {settings['spreadsheet_id']}")
-                st.write(f"Worksheet: {settings['worksheet_name']}")
-            else:
-                st.warning("Google Sheet secrets are incomplete.")
+        st.warning(
+            "Broadcasting tool: double-check the subject, audience, author details, and message before sending."
+        )
+
+    countdown_placeholder = st.sidebar.empty()
 
     if not authenticate_user():
         st.info("Log in with the app-specific username and password to access the newsletter composer.")
@@ -434,8 +451,8 @@ def main() -> None:
 
     st.subheader("Newsletter Composer")
     subject = st.text_input("Subject", value=DEFAULT_NEWSLETTER_SUBJECT)
-    author_name = st.text_input("Author name", placeholder="Jane Doe")
-    author_title = st.text_input("Author title / role", placeholder="Machine Gnostics Team")
+    opening_statement = st.text_input("Opening statement", value="Small Data, Big Impact")
+    author_name = st.text_input("Author name", placeholder="Machine Gnostics Team")
     author_email = st.text_input("Author email", value=sender_email)
     body_text = st.text_area(
         "Body message",
@@ -452,20 +469,21 @@ def main() -> None:
     image_name = uploaded_image.name if uploaded_image else None
     image_mime = uploaded_image.type if uploaded_image else None
 
-    if uploaded_image and image_bytes:
-        st.caption("Image preview")
-        st.image(image_bytes, caption=image_name, use_container_width=True)
-
+    preview_image_src = None
+    if image_bytes:
+        mime_type = image_mime or "image/png"
+        preview_image_src = f"data:{mime_type};base64,{base64.b64encode(image_bytes).decode('utf-8')}"
     st.subheader("Preview")
     preview_html = build_email_html(
         subject=subject or DEFAULT_NEWSLETTER_SUBJECT,
+        opening_statement=opening_statement or "Small Data, Big Impact",
         body_text=body_text or "",
-        author_name=author_name or "Author",
-        author_title=author_title or "",
+        author_name=author_name or "",
         author_email=author_email,
         image_cid="newsletter-image" if image_bytes else None,
+        image_src=preview_image_src,
     )
-    st.markdown(preview_html, unsafe_allow_html=True)
+    components.html(preview_html, height=900, scrolling=True)
 
     st.caption(
         "Send note: emails are sent one at a time with a short pause between messages to reduce the chance of Gmail throttling or account blocking."
@@ -477,8 +495,6 @@ def main() -> None:
             errors.append("Subject is required.")
         if not body_text.strip():
             errors.append("Body message is required.")
-        if not author_name.strip():
-            errors.append("Author name is required.")
         if not author_email.strip() or not is_valid_email(author_email.strip()):
             errors.append("Author email must be valid.")
         if not recipients:
@@ -489,15 +505,32 @@ def main() -> None:
                 st.error(error)
             return
 
+        stop_requested = False
+        cancel_button = st.sidebar.button("Stop broadcast", use_container_width=True)
+        countdown_box = st.sidebar.empty()
+
+        for remaining_seconds in range(10, 0, -1):
+            countdown_box.error(f"Sending in {remaining_seconds} second(s). Click Stop broadcast now to cancel.")
+            if cancel_button:
+                stop_requested = True
+                break
+            time.sleep(1)
+
+        if stop_requested:
+            countdown_box.error("Broadcast canceled.")
+            return
+
+        countdown_box.error("Sending now...")
+
         with st.spinner("Sending newsletter..."):
             delivered, failed = send_newsletter(
                 sender_email=sender_email,
                 app_password=app_password,
                 recipients=recipients,
                 subject=subject.strip(),
+                opening_statement=opening_statement.strip() or "Small Data, Big Impact",
                 body_text=body_text.strip(),
                 author_name=author_name.strip(),
-                author_title=author_title.strip(),
                 author_email=author_email.strip(),
                 image_name=image_name,
                 image_bytes=image_bytes,
