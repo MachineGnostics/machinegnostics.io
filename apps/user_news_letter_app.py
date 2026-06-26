@@ -5,6 +5,7 @@ import re
 import smtplib
 import ssl
 import time
+from pathlib import Path
 from email.mime.application import MIMEApplication
 from email.mime.image import MIMEImage
 from email.mime.multipart import MIMEMultipart
@@ -32,6 +33,14 @@ GOOGLE_SHEETS_SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 SEND_DELAY_SECONDS = 2
 SEND_PAUSE_EVERY = 10
 SEND_PAUSE_SECONDS = 20
+
+
+def load_logo_image_src() -> str | None:
+    logo_path = Path(__file__).resolve().parents[1] / "docs" / "images" / "logo.png"
+    if not logo_path.exists():
+        return None
+    logo_bytes = logo_path.read_bytes()
+    return f"data:image/png;base64,{base64.b64encode(logo_bytes).decode('utf-8')}"
 
 st.set_page_config(page_title="Machine Gnostics Newsletter Studio", page_icon="MG", layout="wide")
 
@@ -226,6 +235,7 @@ def build_email_html(
     body_text: str,
     author_name: str,
     author_email: str,
+    logo_src: str | None,
     image_src: str | None,
     image_cid: str | None,
 ) -> str:
@@ -234,6 +244,14 @@ def build_email_html(
         safe_author_name = escape(author_name)
         safe_author_email = escape(author_email)
         body_html = escape(body_text).replace("\n", "<br>")
+
+        logo_html = ""
+        if logo_src:
+            logo_html = f"""
+                        <div style="flex:0 0 auto;margin-left:18px;">
+                            <img src="{logo_src}" alt="Machine Gnostics logo" style="width:56px;height:56px;object-fit:contain;display:block;">
+            </div>
+            """
 
         image_html = ""
         if image_src:
@@ -259,9 +277,14 @@ def build_email_html(
         <body style="font-family:'IBM Plex Sans',Arial,sans-serif;background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);margin:0;padding:28px;">
             <div style="max-width:700px;margin:auto;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 22px 50px rgba(15,23,42,.12);border:1px solid rgba(15,23,42,.08);">
                 <div style="background:linear-gradient(180deg,#f8fbfc 0%,#edf6f5 100%);padding:38px 34px;border-bottom:1px solid rgba(15,23,42,.08);">
-                    <div style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#0f766e;font-weight:700;">Machine Gnostics Newsletter</div>
-                    <h1 style="color:#0F172A;margin:10px 0 6px;font-size:30px;line-height:1.1;">{safe_subject}</h1>
-                    <p style="color:#334155;margin:0;line-height:1.6;">{safe_opening_statement}</p>
+                    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:18px;">
+                        <div style="min-width:0;flex:1 1 auto;">
+                            <div style="font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:#0f766e;font-weight:700;">Machine Gnostics Newsletter</div>
+                            <h1 style="color:#0F172A;margin:10px 0 6px;font-size:30px;line-height:1.1;">{safe_subject}</h1>
+                            <p style="color:#334155;margin:0;line-height:1.6;">{safe_opening_statement}</p>
+                        </div>
+                        {logo_html}
+                    </div>
                 </div>
                 <div style="padding:32px;">
                     {f'''<div style="background:#f8fafc;border:1px solid rgba(15,23,42,.08);border-radius:16px;padding:18px 20px;margin:0 0 20px;">
@@ -356,6 +379,7 @@ def send_newsletter(
             body_text=personalized_body,
             author_name=author_name,
             author_email=author_email,
+            logo_src=load_logo_image_src(),
             image_src=None,
             image_cid=email_image_cid,
         )
@@ -470,6 +494,7 @@ def main() -> None:
     image_mime = uploaded_image.type if uploaded_image else None
 
     preview_image_src = None
+    logo_image_src = load_logo_image_src()
     if image_bytes:
         mime_type = image_mime or "image/png"
         preview_image_src = f"data:{mime_type};base64,{base64.b64encode(image_bytes).decode('utf-8')}"
@@ -480,10 +505,42 @@ def main() -> None:
         body_text=body_text or "",
         author_name=author_name or "",
         author_email=author_email,
+                logo_src=logo_image_src,
         image_cid="newsletter-image" if image_bytes else None,
         image_src=preview_image_src,
     )
     components.html(preview_html, height=900, scrolling=True)
+
+    copyable_body = (
+            f"Subject: {subject or DEFAULT_NEWSLETTER_SUBJECT}\n\n"
+            f"{opening_statement or 'Small Data, Big Impact'}\n\n"
+            f"{('Author: ' + author_name + '\n\n') if author_name.strip() else ''}"
+            f"{body_text or ''}\n\n"
+            "You are receiving this newsletter because you subscribed, opted in, or otherwise agreed to receive updates from Machine Gnostics."
+    )
+    components.html(
+            f"""
+            <div style="display:flex;justify-content:flex-end;margin:8px 0 0;">
+                <button id="copy-body-btn" style="background:#0f766e;color:#fff;border:none;border-radius:12px;padding:0.7rem 1rem;font-weight:700;cursor:pointer;">
+                    Copy email body
+                </button>
+            </div>
+            <script>
+                const copyButton = document.getElementById('copy-body-btn');
+                copyButton.addEventListener('click', async () => {{
+                    try {{
+                        await navigator.clipboard.writeText({json.dumps(copyable_body)});
+                        copyButton.textContent = 'Copied';
+                        setTimeout(() => copyButton.textContent = 'Copy email body', 1500);
+                    }} catch (error) {{
+                        copyButton.textContent = 'Copy failed';
+                        setTimeout(() => copyButton.textContent = 'Copy email body', 1500);
+                    }}
+                }});
+            </script>
+            """,
+            height=70,
+    )
 
     st.caption(
         "Send note: emails are sent one at a time with a short pause between messages to reduce the chance of Gmail throttling or account blocking."
