@@ -242,24 +242,29 @@ def append_newsletter_to_google_sheets(
     last_name: str,
     email: str,
     selected: list[str],
-) -> bool:
+) -> tuple[bool, str]:
     try:
         import gspread
         from google.oauth2.service_account import Credentials
     except ImportError:
-        return False
+        return False, "google_libraries_missing"
 
     settings = get_google_sheets_settings()
     if not settings:
-        return False
+        return False, "google_settings_missing"
 
-    if settings.get("service_account_table"):
-        service_account_info = dict(settings["service_account_table"])
-    else:
-        service_account_info = json.loads(settings["service_account_json"])
-    credentials = Credentials.from_service_account_info(service_account_info, scopes=GOOGLE_SHEETS_SCOPES)
-    client = gspread.authorize(credentials)
-    spreadsheet = client.open_by_key(settings["spreadsheet_id"])
+    try:
+        if settings.get("service_account_table"):
+            service_account_info = dict(settings["service_account_table"])
+        else:
+            service_account_info = json.loads(settings["service_account_json"])
+        credentials = Credentials.from_service_account_info(service_account_info, scopes=GOOGLE_SHEETS_SCOPES)
+        client = gspread.authorize(credentials)
+        spreadsheet = client.open_by_key(settings["spreadsheet_id"])
+    except PermissionError:
+        return False, "google_permission_denied"
+    except Exception:
+        return False, "google_write_failed"
 
     try:
         worksheet = spreadsheet.worksheet(settings["worksheet_name"])
@@ -276,7 +281,7 @@ def append_newsletter_to_google_sheets(
         email_index = headers.index("email")
         for row in worksheet.get_all_values()[1:]:
             if len(row) > email_index and row[email_index].strip().lower() == normalized_email:
-                return False
+                return False, "duplicate"
 
     worksheet.append_row(
         [
@@ -289,7 +294,7 @@ def append_newsletter_to_google_sheets(
         ],
         value_input_option="RAW",
     )
-    return True
+    return True, "saved"
 
 
 def save_newsletter_subscriber(
@@ -297,13 +302,13 @@ def save_newsletter_subscriber(
     last_name: str,
     email: str,
     selected: list[str],
-) -> bool:
-    google_saved = append_newsletter_to_google_sheets(first_name, last_name, email, selected)
-    if google_saved:
-        return True
+) -> tuple[bool, str]:
+    google_saved, google_status = append_newsletter_to_google_sheets(first_name, last_name, email, selected)
+    if google_status in {"saved", "duplicate"}:
+        return google_saved, google_status
 
     if get_google_sheets_settings():
-        return False
+        return False, google_status
 
     storage_path = get_newsletter_storage_path()
     storage_path.parent.mkdir(parents=True, exist_ok=True)
@@ -314,7 +319,7 @@ def save_newsletter_subscriber(
             reader = csv.DictReader(handle)
             for row in reader:
                 if row.get("email", "").strip().lower() == normalized_email:
-                    return False
+                    return False, "duplicate"
 
     record = {
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -333,7 +338,7 @@ def save_newsletter_subscriber(
             writer.writeheader()
         writer.writerow(record)
 
-    return True
+    return True, "csv_saved"
 
 
 def get_resource_label(url: str, kind: str) -> str:
@@ -645,7 +650,7 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
         for error in errors:
             st.error(error)
     else:
-        newsletter_saved = save_newsletter_subscriber(
+        newsletter_saved, newsletter_status = save_newsletter_subscriber(
             first_name=first_name,
             last_name=last_name,
             email=recipient_email,
@@ -665,10 +670,19 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
                     f"Email sent to **{recipient_email}**! "
                     f"Check your inbox for: {', '.join(selected_tutorials)}."
                 )
-                if newsletter_saved:
+                if newsletter_status in {"saved", "csv_saved"}:
                     st.info("Your details were saved privately for future updates.")
-                else:
+                elif newsletter_status == "duplicate":
                     st.info("Your email was already on the newsletter list, so it was not added twice.")
+                elif newsletter_status == "google_permission_denied":
+                    st.error(
+                        "The app can reach Google Sheets, but the spreadsheet is not shared with the service account. "
+                        "Share the sheet with the service account email from secrets, then try again."
+                    )
+                elif newsletter_status in {"google_write_failed", "google_libraries_missing", "google_settings_missing"}:
+                    st.error(
+                        "The app could not save the subscriber row to Google Sheets. Check the Streamlit secrets and deployment logs."
+                    )
                 if receive_updates:
                     st.info("You’ll also receive updates and future communications from Machine Gnostics.")
                 st.link_button("Need another free tutorial? Open the request app", FREE_TUTORIAL_URL, use_container_width=True)
