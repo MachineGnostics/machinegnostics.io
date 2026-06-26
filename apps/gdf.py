@@ -8,6 +8,7 @@ import contextlib
 
 # GDF classes
 from machinegnostics.magcal import ELDF, EGDF, QLDF, QGDF
+from mg_theme import apply_mg_theme, render_mg_hero
 
 
 def _parse_numbers(text: str) -> np.ndarray:
@@ -82,11 +83,11 @@ LEARN_TEXT = {
 
 def main():
     st.set_page_config(page_title="GDF Explorer | Machine Gnostics", layout="wide")
+    apply_mg_theme()
 
-    st.title("Gnostic Distribution Functions (GDF) Explorer")
-    st.markdown(
-        "Explore and learn four GDFs — ELDF, EGDF, QLDF, and QGDF. "
-        "Paste your data below, tune parameters, fit models, and visualize results."
+    render_mg_hero(
+        "Gnostic Distribution Functions (GDF) Explorer",
+        "Explore and learn four GDFs — ELDF, EGDF, QLDF, and QGDF. Paste your data below, tune parameters, fit models, and visualize results.",
     )
 
     # Learning panel (top, not at bottom)
@@ -158,6 +159,12 @@ def main():
                 - If you want to find distinct groups within the data, use **ELDF**.
                 """
             )
+
+            # Actions live in the sidebar in the same order users operate the app.
+            with st.sidebar:
+                st.markdown("### Operations")
+                do_fit = st.button("1. Fit Model", type="primary", use_container_width=True)
+                do_plot = st.button("2. Plot Results", use_container_width=True)
 
     # Select GDF type
     gdf_choice = st.radio("Select Distribution Function", ["ELDF", "EGDF", "QLDF", "QGDF"], horizontal=True)
@@ -248,13 +255,6 @@ def main():
 
     # All base plot implementations expect 'gdf', 'pdf', or 'both'
     plot_kind = st.selectbox("Plot kind", ["gdf", "pdf", "both"], index=2)
-
-    # Actions
-    run_cols = st.columns(2)
-    with run_cols[0]:
-        do_fit = st.button("Fit Model", type="primary")
-    with run_cols[1]:
-        do_plot = st.button("Plot Results")
 
     # Persist fitted objects across reruns
     if "gdf_state" not in st.session_state:

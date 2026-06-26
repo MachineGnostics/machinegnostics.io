@@ -22,6 +22,7 @@ from machinegnostics.metrics import (
     robr2,
     root_mean_squared_error as mg_rmse,
 )
+from mg_theme import apply_mg_theme, render_mg_hero
 
 # ─────────────────────────────────────────────
 # Page config (must be first Streamlit call)
@@ -33,68 +34,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ─────────────────────────────────────────────
-# CSS styling
-# ─────────────────────────────────────────────
-st.markdown(
-    """
-    <style>
-    /* Sidebar style */
-    [data-testid="stSidebar"] {
-        background-color: #0f1a2e;
-    }
-    [data-testid="stSidebar"] * {
-        color: #e0e6f0 !important;
-    }
-    /* KPI card */
-    .kpi-card {
-        background: linear-gradient(135deg, #1a2f52, #0f1a2e);
-        border: 1px solid #2d4a7a;
-        border-radius: 10px;
-        padding: 18px 14px;
-        text-align: center;
-        margin-bottom: 8px;
-    }
-    .kpi-label  { font-size: 12px; color: #8ca0c0; letter-spacing: 0.05em; }
-    .kpi-value  { font-size: 30px; font-weight: 700; color: #4fc3f7; margin: 4px 0; }
-    .kpi-sub    { font-size: 11px; color: #6a8ab0; }
-    .kpi-good   { color: #66bb6a; }
-    .kpi-warn   { color: #ffa726; }
-    .kpi-diff   { color: #ef5350; }
-    /* Problem banner */
-    .problem-banner {
-        background: linear-gradient(90deg, #0d47a1, #1565c0);
-        border-left: 5px solid #4fc3f7;
-        border-radius: 6px;
-        padding: 14px 20px;
-        margin-bottom: 20px;
-    }
-    .problem-banner h3 { color: #e3f2fd; margin: 0 0 6px 0; }
-    .problem-banner p  { color: #b3d4f5; margin: 0; font-size: 14px; }
-    /* Step instruction */
-    .step-box {
-        background: #1e2d45;
-        border: 1px solid #2d4a7a;
-        border-radius: 8px;
-        padding: 12px 16px;
-        font-size: 13px;
-        color: #b0c4de;
-        margin-bottom: 14px;
-    }
-    .step-box b { color: #4fc3f7; }
-    /* Section header */
-    .section-title {
-        font-size: 22px;
-        font-weight: 700;
-        color: #4fc3f7;
-        border-bottom: 2px solid #1e3a5f;
-        padding-bottom: 6px;
-        margin-bottom: 16px;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+apply_mg_theme()
 
 # ─────────────────────────────────────────────
 # Data & metric computation (cached)
@@ -238,13 +178,13 @@ with st.sidebar:
 
     st.markdown("---")
     st.markdown(
-        "<div style='font-size:11px;color:#445566;text-align:center;'>"
+        "<div style='font-size:11px;color:#8ca0c0;text-align:center;'>"
         "Benchmark: Anscombe Quartet<br>4 Datasets, 5 Metrics</div>",
         unsafe_allow_html=True,
     )
     st.markdown(
-        "<div style='font-size:11px;color:#445566;text-align:center;margin-top:6px;'>"
-        "Docs: <a href='https://docs.machinegnostics.com' style='color:#4fc3f7;'>docs.machinegnostics.com</a></div>",
+        "<div style='font-size:11px;color:#8ca0c0;text-align:center;margin-top:6px;'>"
+        "Docs: <a href='https://docs.machinegnostics.com' style='color:#7ce7df;'>docs.machinegnostics.com</a></div>",
         unsafe_allow_html=True,
     )
 
@@ -316,9 +256,7 @@ if page == "overview":
                 for sp in ax_p.spines.values():
                     sp.set_edgecolor("#2d4a7a")
                 st.pyplot(fig_p, use_container_width=False)
-                plt.close(fig_p)
 
-    # ── Full KPI summary table ───────────────────────────────────
     st.markdown('<div class="section-title">📊 Full Benchmark KPI Summary (All Datasets)</div>', unsafe_allow_html=True)
 
     summary_rows = []
@@ -326,22 +264,22 @@ if page == "overview":
         cls = data[ds_id]["classical"]
         mg = data[ds_id]["mg"]
         _, p_mean, _ = pct_diff(cls["mean_y"], mg["mean_y"])
-        _, p_med, _ = pct_diff(cls["median_y"], mg["median_y"])
+        _, p_median, _ = pct_diff(cls["median_y"], mg["median_y"])
         _, p_corr, _ = pct_diff(cls["corr"], mg["corr"])
         _, p_r2, _ = pct_diff(cls["r2"], mg["robr2"])
         _, p_rmse, _ = pct_diff(cls["rmse"], mg["rmse"], lower_is_better=True)
-        summary_rows.append({
-            "Dataset": DS_NAMES[ds_id],
-            "Mean Δ%": p_mean,
-            "Median Δ%": p_med,
-            "Corr Δ%": p_corr,
-            "R²→RobR² Δ%": p_r2,
-            "RMSE Δ% (↓better)": p_rmse,
-            "MG R²": f"{mg['robr2']:.4f}",
-            "CLS R²": f"{cls['r2']:.4f}",
-            "MG RMSE": f"{mg['rmse']:.4f}",
-            "CLS RMSE": f"{cls['rmse']:.4f}",
-        })
+        summary_rows.append(
+            {
+                "Dataset": DS_NAMES[ds_id],
+                "Mean Δ%": p_mean,
+                "Median Δ%": p_median,
+                "Corr Δ%": p_corr,
+                "R²→RobR² Δ%": p_r2,
+                "RMSE Δ% (↓better)": p_rmse,
+                "MG R²": f"{mg['robr2']:.4f}",
+                "CLS R²": f"{cls['r2']:.4f}",
+            }
+        )
 
     summary_df = pd.DataFrame(summary_rows)
     delta_cols = ["Mean Δ%", "Median Δ%", "Corr Δ%", "R²→RobR² Δ%", "RMSE Δ% (↓better)"]
@@ -349,7 +287,7 @@ if page == "overview":
     def color_positive(val):
         try:
             num = float(str(val).replace("%", "").replace("−", "-").strip())
-        except ValueError:
+        except Exception:
             return ""
         return "color: #66bb6a; font-weight: 600;" if num > 0 else ""
 

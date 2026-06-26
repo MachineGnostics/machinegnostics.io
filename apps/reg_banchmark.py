@@ -38,6 +38,7 @@ from machinegnostics.models import (
 	LinearRegressor,
 	PolynomialRegressor,
 )
+from mg_theme import apply_mg_theme, render_mg_hero
 
 
 st.set_page_config(
@@ -46,6 +47,8 @@ st.set_page_config(
 	layout="wide",
 	initial_sidebar_state="expanded",
 )
+
+apply_mg_theme()
 
 
 st.markdown(
@@ -644,14 +647,10 @@ def main() -> None:
 		}
 
 	if "reg_benchmark_cfg" not in st.session_state:
-		st.markdown(
-			"""
-			<div class="hero">
-				<h1>Regression Benchmark for the Anscombe Quartet</h1>
-				<p>Select a dataset, optionally adjust the knobs, then click <b>Run Benchmark</b>.</p>
-			</div>
-			""",
-			unsafe_allow_html=True,
+		render_mg_hero(
+			"Regression Benchmark for the Anscombe Quartet",
+			"Select a dataset, optionally adjust the knobs, then click Run Benchmark.",
+			eyebrow="Machine Gnostics Benchmark",
 		)
 		st.info("Use the sidebar to run the benchmark.")
 		return
@@ -680,22 +679,15 @@ def main() -> None:
 	current = evaluate_dataset(x, y, model_specs)
 	pair_df, pair_details = evaluate_pairwise(x, y, model_specs, poly_degree)
 
-	st.markdown(
-		"""
-		<div class="hero">
-			<h1>Regression Benchmark for the Anscombe Quartet</h1>
-			<p>
-				Simple comparison between classical regressors and their MG counterparts on one selected dataset.
-				Each pair is run independently and shown with separate metrics and fit plots.
-			</p>
-		</div>
-		""",
-		unsafe_allow_html=True,
+	render_mg_hero(
+		"Regression Benchmark for the Anscombe Quartet",
+		"Simple comparison between classical regressors and their MG counterparts on one selected dataset. Each pair is run independently and shown with separate metrics and fit plots.",
+		eyebrow="Machine Gnostics Benchmark",
 	)
 
 	st.markdown(
-		f"""
-		<div class="callout">
+		"""
+		<div class="mg-callout">
 		Selected dataset: <b>{DS_NAMES[dataset_id]}</b>. KPI cards below summarize how much MG improves vs classical models.
 		</div>
 		""",
@@ -704,7 +696,7 @@ def main() -> None:
 
 	st.markdown(
 		"""
-		<div class="callout">
+		<div class="mg-callout">
 		<b>NOTE:</b> The excellence of MG is not always captured by a single number. Use these KPI cards for quick direction,
 		then rely on the visual fit plots to understand how each model behaves on the data geometry.
 		</div>
@@ -714,7 +706,7 @@ def main() -> None:
 
 	st.markdown(
 		"""
-		<div class="callout">
+		<div class="mg-callout">
 		<b>NOTE:</b> Machine Gnostics is a newer modeling approach designed to work especially well on small datasets.
 		Its objective and weighting strategy are different from regular ML, so MG metrics can differ from classical
 		or standard machine learning metrics even on the same data.

@@ -8,8 +8,10 @@ from typing import Optional, Tuple
 
 from machinegnostics.magcal import DataConversion
 from machinegnostics.magcal import GnosticsCharacteristics
+from mg_theme import apply_mg_theme, render_mg_hero
 
 st.set_page_config(page_title="Ideal Gnostic Cycle Explorer [Machine Gnostics]", layout="wide")
+apply_mg_theme()
 
 # --- Helpers ---
 def _to_fininf(values: np.ndarray, data_form: str, DL: float, DU: float) -> Tuple[np.ndarray, float, float]:
@@ -85,8 +87,10 @@ def _parse_values(text: str) -> np.ndarray:
         return np.array([], dtype=float)
 
 # --- Sidebar ---
-st.title("Ideal Gnostic Cycle Explorer - [Machine Gnostics]")
-st.markdown("Explore bi-geometric movement of a datum across fidelity (fi) and irrelevance (hi) coordinates, and understand how the Scale parameter (S) shapes local distributions.")
+render_mg_hero(
+    "Ideal Gnostic Cycle Explorer",
+    "Explore bi-geometric movement of a datum across fidelity (fi) and irrelevance (hi) coordinates, and understand how the Scale parameter (S) shapes local distributions.",
+)
 
 with st.sidebar:
     st.header("Data Input")

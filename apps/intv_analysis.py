@@ -7,6 +7,7 @@ import logging
 import contextlib
 
 from machinegnostics.magcal.gdf.marginal_intv_analysis import IntervalAnalysis
+from mg_theme import apply_mg_theme, render_mg_hero
 
 
 def _parse_numbers(text: str) -> np.ndarray:
@@ -63,11 +64,17 @@ LEARN_TEXT = (
 
 def main():
     st.set_page_config(page_title="Marginal Interval Analysis | Machine Gnostics", layout="wide")
+    apply_mg_theme()
 
-    st.title("Gnostic Marginal Interval Analysis")
-    st.markdown(
-        "Estimate robust intervals (tolerance/typical) via EGDF + ELDF with diagnostics."
+    render_mg_hero(
+        "Gnostic Marginal Interval Analysis",
+        "Estimate robust intervals (tolerance/typical) via EGDF + ELDF with diagnostics.",
     )
+
+    with st.sidebar:
+        st.markdown("### Operations")
+        do_fit = st.button("1. Fit Analysis", type="primary", use_container_width=True)
+        do_plot = st.button("2. Plot", use_container_width=True)
 
     # Learn panel
     with st.container(border=True):
@@ -216,13 +223,6 @@ def main():
     st.subheader("Plot Options")
     plot_GDF = st.checkbox("Plot GDF (ELDF)", value=True)
     plot_intervals = st.checkbox("Plot intervals", value=True)
-
-    # Actions
-    buttons = st.columns(2)
-    with buttons[0]:
-        do_fit = st.button("Fit Analysis", type="primary")
-    with buttons[1]:
-        do_plot = st.button("Plot")
 
     # Session state for caching
     if "ia_state" not in st.session_state:

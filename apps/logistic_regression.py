@@ -7,6 +7,7 @@ import streamlit as st
 from contextlib import redirect_stdout, redirect_stderr
 
 from machinegnostics.models import LogisticRegressor
+from mg_theme import apply_mg_theme, render_mg_hero
 
 
 def _parse_matrix(text: str) -> np.ndarray:
@@ -60,9 +61,19 @@ def _parse_float(text: str, default: float = None):
 
 def main():
     st.set_page_config(page_title="Logistic Regression | Machine Gnostics", layout="wide")
+    apply_mg_theme()
 
-    st.title("Gnostic Logistic Regression")
-    st.markdown("Robust binary classification with multivariate features, probability visualization, automatic weights, and training history.")
+    render_mg_hero(
+        "Gnostic Logistic Regression",
+        "Robust binary classification with multivariate features, probability visualization, automatic weights, and training history.",
+    )
+
+    with st.sidebar:
+        st.markdown("### Operations")
+        do_fit = st.button("1. Fit Model", type="primary", use_container_width=True)
+        do_plot_pred = st.button("2. Plot Probabilities", use_container_width=True)
+        do_plot_w = st.button("3. Plot Weights", use_container_width=True)
+        do_plot_hist = st.button("4. Plot Loss & Entropy", use_container_width=True)
 
     # Learn panel
     with st.container(border=True):
@@ -152,17 +163,6 @@ def main():
         data_form = st.selectbox("data_form", ["a", "m"], index=0)
     with c_opts2[3]:
         gnostic_characteristics = st.checkbox("gnostic_characteristics", value=False)
-
-    # Actions
-    a_cols = st.columns(4)
-    with a_cols[0]:
-        do_fit = st.button("Fit Model", type="primary")
-    with a_cols[1]:
-        do_plot_pred = st.button("Plot Probabilities")
-    with a_cols[2]:
-        do_plot_w = st.button("Plot Weights")
-    with a_cols[3]:
-        do_plot_hist = st.button("Plot Loss & Entropy")
 
     # Session cache
     if "logr_state" not in st.session_state:
