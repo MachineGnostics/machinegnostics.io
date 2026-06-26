@@ -223,14 +223,16 @@ def normalize_google_sheet_id(value: str) -> str:
 def get_google_sheets_settings() -> dict[str, str] | None:
     spreadsheet_id = normalize_google_sheet_id(get_secret_value("GOOGLE_SHEET_ID"))
     service_account_json = get_secret_value("GOOGLE_SERVICE_ACCOUNT_JSON").strip()
+    service_account_table = st.secrets.get("GOOGLE_SERVICE_ACCOUNT", None)
     worksheet_name = get_secret_value("GOOGLE_WORKSHEET_NAME").strip() or "newsletter_subscribers"
 
-    if not spreadsheet_id or not service_account_json:
+    if not spreadsheet_id or (not service_account_json and not service_account_table):
         return None
 
     return {
         "spreadsheet_id": spreadsheet_id,
         "service_account_json": service_account_json,
+        "service_account_table": service_account_table,
         "worksheet_name": worksheet_name,
     }
 
@@ -251,7 +253,10 @@ def append_newsletter_to_google_sheets(
     if not settings:
         return False
 
-    service_account_info = json.loads(settings["service_account_json"])
+    if settings.get("service_account_table"):
+        service_account_info = dict(settings["service_account_table"])
+    else:
+        service_account_info = json.loads(settings["service_account_json"])
     credentials = Credentials.from_service_account_info(service_account_info, scopes=GOOGLE_SHEETS_SCOPES)
     client = gspread.authorize(credentials)
     spreadsheet = client.open_by_key(settings["spreadsheet_id"])
