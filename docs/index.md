@@ -193,6 +193,14 @@
 				<p><a href="/consultancy/">Get Actionable Insights →</a></p>
 			</article>
 		</div>
+		<article class="gn-card gn-card--accent" style="margin-top: 1rem; text-align: center;">
+			<h3>Free Tutorial</h3>
+			<p>Request a guided walkthrough and get a practical introduction to Machine Gnostics for small-data projects.</p>
+			<div class="gn-actions" style="justify-content: center; margin-top: 0.9rem;">
+				<a href="https://machinegnostics-learning-pack.streamlit.app/" class="md-button md-button--primary" target="_blank" rel="noopener noreferrer">Request Your Free Tutorial</a>
+			</div>
+			<p class="gn-meta" style="font-size: 0.65rem;">This tutorial opens in a Streamlit app, so it may take a moment to wake up.</p>
+		</article>
 	</section>
 
 	<section class="gn-section gn-reveal" id="methodological-foundation">
