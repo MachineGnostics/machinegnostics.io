@@ -49,342 +49,45 @@ function detectParentTheme() {
 
 const C = detectParentTheme() === "light" ? LIGHT_C : DARK_C;
 
-// ─── All 10 datasets ────────────────────────────────────────────────────────
-const DATASETS = [
-  {
-    id: "berkeley_agg",
-    title: "UC Berkeley Admissions",
-    subtitle: "Simpson's Paradox — Aggregate",
-    dataLevel: "Aggregate",
-    domain: "Social Science", n: "13 763",
-    classicalFinding: "Males admitted 44.3% vs Females 34.6% — significant gender bias (χ²=92.2, p<0.0001, OR=1.48).",
-    classicalError: "Aggregation reverses direction when stratified by department. Females are admitted at equal or higher rates in 4 of 6 departments — the classic Simpson's Paradox.",
-    mgFinding: "MG detects department selectivity as the latent confounder. Within each department the female/male gap vanishes or reverses. The apparent 9.7-point gap is entirely a composition artefact driven by which departments each gender applied to.",
-    verdict: "Classical statistics gives an aggregate read; MG recovers the stratified pattern",
-    verdictColor: C.warn, verdictTag: "Aggregate vs Stratified",
-    citation: "Bickel, Hammel & O'Connell (1975), Science 187:398",
-    radar: {
-      labels: ["Bias detection","Confound ID","Sub-group analysis","Correct direction","Practical utility"],
-      stat: [2,1,1,1,2], mg: [9,9,9,9,9],
-    },
-    radarAxisInfo: [
-      { axis: "Bias detection", what: "Does the method correctly assess whether real gender bias exists — or mistake a composition effect for discrimination? Classical stats calls it significant bias; MG finds no systemic bias." },
-      { axis: "Confound ID", what: "Can the method identify department selectivity as the true driver of the admission gap, rather than gender itself? This is the core confounding variable in the dataset." },
-      { axis: "Sub-group analysis", what: "Does the method disaggregate data by department, revealing that the direction of the gender effect reverses in 4 of 6 departments when you look within each group?" },
-      { axis: "Correct direction", what: "Does the method reach the right conclusion — no systemic gender bias against females — rather than the false conclusion that males are 48% more likely to be admitted?" },
-      { axis: "Practical utility", what: "How useful is the output for a policy-maker, researcher, or administrator who needs an accurate finding to decide whether corrective action is required?" },
-    ],
-    keyStats: [
-      { label: "Classical OR", val: "1.48", note: "Males 48% more likely — WRONG" },
-      { label: "Dept A female admit", val: "82%", note: "vs 62% male — reversal" },
-      { label: "Depts female ≥ male", val: "4 / 6", note: "Stratified truth" },
-      { label: "MG confound detected", val: "Yes", note: "Dept selectivity" },
-    ],
+// ─── Anscombe quartet only ──────────────────────────────────────────────────
+const ANSCOMBE_CASE = {
+  id: "anscombe",
+  title: "Anscombe's Quartet",
+  subtitle: "Identical Statistics, Radically Different Data",
+  dataLevel: "Quartet",
+  domain: "Statistical Foundations",
+  n: "11 × 4 datasets",
+  classicalFinding: "All four datasets: mean x≈9, mean y≈7.5, r²≈0.67, regression slope≈0.5. Classical statistics reports identical summary results for all four.",
+  classicalError: "Dataset I: linear (statistics valid). Dataset II: perfect parabola (linear fit is structurally wrong). Dataset III: one high-leverage outlier distorts the line. Dataset IV: vertical cluster with one outlier — regression is meaningless. Same numbers, four completely different realities.",
+  mgFinding: "MG's gnostic weights differentiate all four immediately. DS-II: weights form a parabolic pattern, exposing the curve. DS-III: the outlier receives weight ≈0.04, removing its leverage. DS-IV: vertical cluster flagged as structurally degenerate. Each dataset receives a structurally honest fit.",
+  verdict: "Classical statistics gives the shared summary; MG adds the structural read that tells you which of the four datasets you are actually looking at.",
+  verdictColor: C.warn,
+  verdictTag: "Four-Case Structure",
+  citation: "Anscombe, F.J. (1973), American Statistician 27:17",
+  radar: {
+    labels: ["Shape detection","Outlier flagging","Fit quality","Structural honesty","Diagnostic power"],
+    stat: [1,1,3,1,1],
+    mg: [9,9,9,9,9],
   },
-  {
-    id: "berkeley_dept",
-    title: "UC Berkeley — Dept C",
-    subtitle: "Simpson's Paradox — Department Detail",
-    dataLevel: "Stratified",
-    domain: "Social Science", n: "918",
-    classicalFinding: "Aggregate analysis shows strong male bias (p<0.0001) across all departments combined.",
-    classicalError: "Dept C alone: males 37% vs females 34% — t=0.89, p=0.37, NOT significant. Pooling across departments manufactures an artefact that vanishes inside any single department.",
-    mgFinding: "MG stratifies by department and recovers the within-dept null result. It flags the aggregate analysis as a composition-effect illusion, not true bias.",
-    verdict: "Classical statistics is adequate at the department level; MG confirms the same conclusion and shows the aggregate gap is structural",
-    verdictColor: C.amber, verdictTag: "Within-Department View",
-    citation: "Bickel et al. (1975) — Dept C detail, n=918",
-    radar: {
-      labels: ["Stratification","Composition effect","Type-I error control","True effect","Interpretability"],
-      stat: [1,1,2,2,3], mg: [9,9,9,9,8],
-    },
-    radarAxisInfo: [
-      { axis: "Stratification", what: "Can the method break results down by department, showing that within Dept C the admission gap is a non-significant +2.8% — not the alarming aggregate result?" },
-      { axis: "Composition effect", what: "Does the method detect that the aggregate signal is caused by which departments each gender applied to, rather than by admission bias inside any department?" },
-      { axis: "Type-I error control", what: "Does the method avoid a false positive? Within Dept C the true p-value is 0.37. Classical pooling produces a spurious p<0.0001 — a textbook Type-I inflation." },
-      { axis: "True effect", what: "How accurately does the method estimate the real within-department gender effect (≈0 in Dept C) rather than the pooled artefact (highly significant but wrong)?" },
-      { axis: "Interpretability", what: "How clearly can a researcher or administrator understand the output and make the correct policy decision — that Dept C shows no admission bias?" },
-    ],
-    keyStats: [
-      { label: "Aggregate p-value", val: "<0.0001", note: "Spurious significance" },
-      { label: "Dept C p-value", val: "0.37", note: "No effect — correct" },
-      { label: "Male advantage Dept C", val: "+2.8%", note: "Not significant" },
-      { label: "MG reversal flag", val: "Yes", note: "Paradox detected" },
-    ],
-  },
-  {
-    id: "ms_trial",
-    title: "MS Drug Trial",
-    subtitle: "Outlier Sensitivity — n=14",
-    dataLevel: "Small-N",
-    domain: "Clinical Trial", n: "14",
-    classicalFinding: "Interferon-β reduces relapse rate 36.8% (t=2.31, p=0.042). Drug declared effective.",
-    classicalError: "Patient 4 (outlier, worsened) shifts the group mean by 0.19 relapses/yr. Remove them → 47.2% reduction. A single data point changes the headline number by 28% in a trial of only 7 treated patients.",
-    mgFinding: "MG down-weights Patient 4 automatically. It identifies two latent phenotypes: responders (n=6, 47% reduction) and non-responders (n=1, 0% reduction). The reported mean of 36.8% describes neither group accurately.",
-    verdict: "Classical statistics gives a mixed read; MG separates the responder structure",
-    verdictColor: C.amber, verdictTag: "Outlier Sensitivity",
-    citation: "Burnham et al. (1991), J Clin Immunol 11:338",
-    radar: {
-      labels: ["Outlier robustness","Small-N stability","Subgroup ID","Effect accuracy","Clinical safety"],
-      stat: [2,2,1,4,3], mg: [9,8,8,9,9],
-    },
-    radarAxisInfo: [
-      { axis: "Outlier robustness", what: "How resistant is the method to a single atypical patient (Patient 4) who worsened on treatment? Classical mean is pulled 0.19 relapses/yr by one person in a 7-patient group." },
-      { axis: "Small-N stability", what: "With only 14 total patients, how stable is the estimate? MG uses gnostic weighting to reduce leverage of extreme observations, producing more stable inference under low n." },
-      { axis: "Subgroup ID", what: "Can the method detect that two distinct phenotypes exist — genuine responders (6 patients, −47%) and a non-responder (1 patient, 0%) — rather than treating all as homogeneous?" },
-      { axis: "Effect accuracy", what: "How close is the reported effect size to the truth for each sub-population? Classical mean (36.8%) is wrong for both groups; MG recovers the true responder rate of 47%." },
-      { axis: "Clinical safety", what: "Does the output enable safe clinical decisions? A reported mean of 36.8% that hides a 14% non-responder rate could lead to harmful prescribing for that subgroup." },
-    ],
-    keyStats: [
-      { label: "Classical reduction", val: "36.8%", note: "Biased by Patient 4" },
-      { label: "MG responder effect", val: "47.2%", note: "True responders only" },
-      { label: "Non-responder rate", val: "~14%", note: "Hidden by mean" },
-      { label: "Single-patient leverage", val: "0.19 rel/yr", note: "In n=7 group" },
-    ],
-  },
-  {
-    id: "pain_trial",
-    title: "Pain Medication Trial",
-    subtitle: "Bimodal Response — n=18",
-    dataLevel: "Subgroup",
-    domain: "Clinical Trial", n: "18",
-    classicalFinding: "Drug beats placebo significantly (Cohen's d=1.13, p=0.031). Large effect size. Drug declared effective.",
-    classicalError: "High SD (23.1) hides a bimodal distribution: 56% of patients get 61% pain relief, while 44% get only 16% relief — worse than placebo. The pooled mean of 39.9 VAS describes no real patient in the trial.",
-    mgFinding: "MG detects bimodality and separates the responder phenotype (mean 30.6 VAS, −61%) from non-responders (mean 67.5 VAS, −16%). True responder Cohen's d ≈ 2.9 vs pooled d=1.13. Clinical decision reverses for 44% of patients.",
-    verdict: "Classical statistics gives a pooled read; MG reveals the subgroup split",
-    verdictColor: C.warn, verdictTag: "Responder Split",
-    citation: "Kent et al. (2010), J Clin Epidemiol 63:575",
-    radar: {
-      labels: ["Bimodal detection","True effect size","Subgroup accuracy","Precision medicine","Patient safety"],
-      stat: [1,3,1,1,2], mg: [9,9,9,9,9],
-    },
-    radarAxisInfo: [
-      { axis: "Bimodal detection", what: "Can the method recognise that the distribution of pain responses has two separate peaks — strong responders and non-responders — rather than one normal distribution?" },
-      { axis: "True effect size", what: "How accurately does the method estimate the drug's effect for each sub-population? The pooled Cohen's d=1.13 is misleadingly moderate; true responder d≈2.9, non-responder d≈0.2." },
-      { axis: "Subgroup accuracy", what: "How precisely can the method assign each of the 18 patients to the correct response phenotype? MG uses gnostic weights as soft membership scores rather than hard binary cutoffs." },
-      { axis: "Precision medicine", what: "Does the output support personalised treatment — identifying which patients should receive the drug vs placebo — rather than a one-size-fits-all prescribing decision?" },
-      { axis: "Patient safety", what: "How well does the method protect the 44% of patients who respond poorly and would be better served by a different treatment? Classical approval harms this group." },
-    ],
-    keyStats: [
-      { label: "Pooled Cohen's d", val: "1.13", note: "Misleadingly moderate" },
-      { label: "True responder d", val: "~2.9", note: "MG stratified" },
-      { label: "Non-responder relief", val: "16%", note: "Worse than placebo" },
-      { label: "Patients wrongly treated", val: "44%", note: "If naively approved" },
-    ],
-  },
-  {
-    id: "vitamin_d",
-    title: "Vitamin D & Infections",
-    subtitle: "Confounding — Physical Activity",
-    dataLevel: "Stratified",
-    domain: "Epidemiology", n: "19",
-    classicalFinding: "r = −0.78, p=0.0001. 'Vitamin D strongly protects against respiratory infections.' Clinical recommendation: maintain serum VitD > 50 ng/mL.",
-    classicalError: "Physical activity confounds both variables. Within each activity stratum: Low r=+0.23, Moderate r=−0.34, High r=−0.12. None are significant. The aggregate r=−0.78 is entirely a composition artefact.",
-    mgFinding: "MG identifies physical activity as the latent clustering variable. Gnostic weights expose the three activity regimes. True vitamin D–infection relationship within groups is near zero. Active lifestyle drives both variables — vitamin D alone is not causally protective.",
-    verdict: "Classical statistics flags an association; MG separates confounding from pattern",
-    verdictColor: C.warn, verdictTag: "Confounding Check",
-    citation: "Vieth et al. (2011), Epidemiol Infect 139:1027",
-    radar: {
-      labels: ["Confound detection","Causal inference","Spurious r flag","Stratification","Policy advice"],
-      stat: [1,1,1,1,1], mg: [9,8,9,9,9],
-    },
-    radarAxisInfo: [
-      { axis: "Confound detection", what: "Can the method identify that physical activity simultaneously raises vitamin D (via outdoor sun exposure) and lowers infection risk (via immune fitness), making it the true cause of both?" },
-      { axis: "Causal inference", what: "Does the method correctly distinguish correlation from causation? Classical r=−0.78 implies vitamin D is protective; MG shows the within-activity-group relationship is near zero." },
-      { axis: "Spurious r flag", what: "Does the method flag that the aggregate correlation is a spurious artefact of the unstratified data rather than a genuine signal? MG's regime detection raises this alert; classical stats does not." },
-      { axis: "Stratification", what: "Can the method break the data into three activity-level strata (Low, Moderate, High) and recover the near-zero within-stratum vitamin D effect in each?" },
-      { axis: "Policy advice", what: "Does the method lead to the correct public health advice — that promoting exercise is the intervention, not vitamin D supplementation alone — rather than a potentially wasteful supplement campaign?" },
-    ],
-    keyStats: [
-      { label: "Naive Pearson r", val: "−0.78", note: "Spurious — activity drives both" },
-      { label: "Within Low-activity r", val: "+0.23", note: "Direction reverses" },
-      { label: "Within High-activity r", val: "−0.12", note: "Essentially zero" },
-      { label: "True VitD causal effect", val: "≈ 0", note: "MG stratified" },
-    ],
-  },
-  {
-    id: "education_wage",
-    title: "Education & Wages",
-    subtitle: "Compositional Shift — Simpson's Paradox",
-    dataLevel: "Aggregate",
-    domain: "Economics", n: ">100 M",
-    classicalFinding: "HS wages fell −3.2% from 2000–2010. Education premium: Bachelor's earns $14.30/hr more than HS.",
-    classicalError: "The HS workforce aged over the decade (more older, higher-paid workers). Within every age cohort HS wages grew +3–4%. The aggregate decline is a population-structure artefact, not a real wage fall.",
-    mgFinding: "MG separates compositional aging effects from genuine within-cohort growth. Real wage growth (+4.2% for age 25–34, +3.4% for age 45–54) is recovered. Policy implication reverses: HS workers' real wages improved.",
-    verdict: "Classical statistics shows an aggregate trend; MG restores the within-group view",
-    verdictColor: C.amber, verdictTag: "Composition Shift",
-    citation: "Autor, Katz & Kearney (2008), AER 98:394; U.S. Census CPS",
-    radar: {
-      labels: ["Composition effect","Age stratification","Real-growth recovery","Policy direction","Simpson ID"],
-      stat: [1,1,1,1,1], mg: [9,9,9,9,9],
-    },
-    radarAxisInfo: [
-      { axis: "Composition effect", what: "Can the method detect that the HS workforce aged between 2000 and 2010, shifting the mix toward older (higher-paid) workers — which paradoxically makes the aggregate wage appear to fall even as individual wages rise?" },
-      { axis: "Age stratification", what: "Does the method break the workforce into age cohorts (25–34, 35–44, 45–54, 55–64) and show that every cohort experienced positive wage growth over the decade?" },
-      { axis: "Real-growth recovery", what: "Can the method recover the true signal — +4.2% real wage growth for younger HS workers, +3.4% for middle-aged — that the aggregate −3.2% headline obscures?" },
-      { axis: "Policy direction", what: "Does the method lead to the correct policy conclusion — that HS worker wages are improving within cohorts — rather than alarming but false narrative of wage decline for the less-educated?" },
-      { axis: "Simpson ID", what: "Does the method explicitly flag this as a Simpson's Paradox scenario where the aggregate trend is in the opposite direction to every within-group trend?" },
-    ],
-    keyStats: [
-      { label: "Aggregate HS wage Δ", val: "−3.2%", note: "Misleading headline" },
-      { label: "Age 25–34 within-cohort Δ", val: "+4.2%", note: "True growth" },
-      { label: "Age 45–54 within-cohort Δ", val: "+3.4%", note: "True growth" },
-      { label: "Root cause", val: "Aging mix", note: "Detected by MG" },
-    ],
-  },
-  {
-    id: "basketball",
-    title: "Basketball Free-Throw Paradox",
-    subtitle: "Spurious Correlation — Team Strength",
-    dataLevel: "Subgroup",
-    domain: "Sports Analytics", n: "8 teams",
-    classicalFinding: "FT% vs Wins: r=0.98, p<0.001. 'Improve free throw shooting to win more games.'",
-    classicalError: "Team offensive quality (PPG) confounds both FT% and wins. Within elite offenses r=−0.98 (negative!). Within poor offenses r=0.52 (modest). The pooled r=0.98 is entirely driven by team-strength stratification.",
-    mgFinding: "MG identifies offensive PPG as the latent confounder. Within-strata gnostic correlations reveal FT% is a marker of team quality, not a cause of wins. The management recommendation reverses.",
-    verdict: "Classical statistics treats FT% as a signal; MG reframes it as a quality marker",
-    verdictColor: C.warn, verdictTag: "Marker vs Causal Lever",
-    citation: "NBA 2019-20 Season data; NBC Sports",
-    radar: {
-      labels: ["Spurious r detection","Confounder ID","Within-strata analysis","Policy advice","Small-N risk"],
-      stat: [1,1,1,1,2], mg: [9,9,9,9,8],
-    },
-    radarAxisInfo: [
-      { axis: "Spurious r detection", what: "Can the method flag that r=0.98 between FT% and wins is a spurious artefact of team strength rather than a genuine causal relationship? Classical stats treats it as a strong finding." },
-      { axis: "Confounder ID", what: "Does the method identify that overall offensive quality (PPG) drives both free throw accuracy (better players shoot more accurately) and win total — making FT% a proxy, not a cause?" },
-      { axis: "Within-strata analysis", what: "Can the method compute correlations within each quality tier? Within elite teams r=−0.98 (negative); within poor teams r=+0.52. These contradict the pooled r=0.98 entirely." },
-      { axis: "Policy advice", what: "Does the output lead to the correct management decision — invest in overall team quality, not specifically free throw training — rather than wasting resources on the wrong lever?" },
-      { axis: "Small-N risk", what: "With only 8 teams in the sample, how vulnerable is the analysis to small-sample instability? MG's gnostic weighting provides some protection; classical OLS is fully exposed." },
-    ],
-    keyStats: [
-      { label: "Pooled r (FT% vs Wins)", val: "0.98", note: "Looks conclusive" },
-      { label: "Within elite teams r", val: "−0.98", note: "Reverses completely" },
-      { label: "Within poor teams r", val: "+0.52", note: "Modest only" },
-      { label: "True causal driver", val: "Team quality", note: "Recovered by MG" },
-    ],
-  },
-  {
-    id: "chest_xray",
-    title: "Chest X-Ray Pneumonia",
-    subtitle: "Tail Risk — Averages Hide Critical Cases",
-    dataLevel: "Tail-focused",
-    domain: "Medical Imaging", n: "24",
-    classicalFinding: "Mean radiodensity r=−0.14 with O₂ saturation (p=0.41). Conclusion: 'Radiodensity does not predict patient outcomes.'",
-    classicalError: "All deceased patients and all ICU/ARDS patients sit at the extremes of the density distribution (< −630 HU or > −410 HU). The mean is clinically misleading — the tail, not the centre, contains the mortality signal.",
-    mgFinding: "MG assigns elevated gnostic weights to density extremes. Patients #8, #10 (deceased) and #11, #12 (ICU/ARDS) are all flagged as high-weight tail observations. The tail-weighted signal is clinically actionable; the Gaussian mean is not.",
-    verdict: "Classical statistics misses the tail signal; MG brings it into view",
-    verdictColor: C.warn, verdictTag: "Tail-Risk Signal",
-    citation: "Yang et al. (2020), Radiology 296:E65",
-    radar: {
-      labels: ["Tail-risk detection","Outlier importance","Extreme-value signal","Clinical alert","Distribution shape"],
-      stat: [1,1,1,1,2], mg: [9,9,9,9,8],
-    },
-    radarAxisInfo: [
-      { axis: "Tail-risk detection", what: "Can the method detect that the mortality and ICU signal lives entirely in the tails of the CT density distribution, not around the mean? Classical r=−0.14 misses this completely." },
-      { axis: "Outlier importance", what: "Does the method recognise that the most extreme density values are the most important observations — the opposite of classical statistics, which treats them as noise to be averaged away?" },
-      { axis: "Extreme-value signal", what: "Can the method extract a clinically actionable threshold (e.g. density < −630 HU → high mortality risk) from what classical analysis calls an insignificant dataset?" },
-      { axis: "Clinical alert", what: "Does the method produce an alert system that flags specific patients (Patients #8, #10, #11, #12) for urgent review, rather than declaring 'no relationship' and sending them home?" },
-      { axis: "Distribution shape", what: "Does the method characterise the full shape of the density distribution — potentially U-shaped or heavy-tailed — rather than forcing a linear fit through a non-linear risk landscape?" },
-    ],
-    keyStats: [
-      { label: "Classical r (density/O₂)", val: "−0.14", note: "p=0.41 — 'no signal'" },
-      { label: "Deceased at extremes", val: "2 / 2", note: "100% in distribution tails" },
-      { label: "ICU/ARDS at extremes", val: "2 / 2", note: "100% in distribution tails" },
-      { label: "MG high-risk flags", val: "4 correct", note: "All critical cases caught" },
-    ],
-  },
-  {
-    id: "psa",
-    title: "PSA Cancer Screening",
-    subtitle: "Prevalence Paradox — n=32",
-    dataLevel: "Small-N",
-    domain: "Diagnostics", n: "32 / 1 000",
-    classicalFinding: "PSA sensitivity 80%, specificity 90%. PPV=14%. 'If positive, 14% chance of cancer — biopsy recommended.'",
-    classicalError: "At 2% cancer prevalence, 86 of every 114 positive tests are false alarms. Each biopsy risks infection, bleeding, and sepsis. In a cohort of n=32, you could observe zero true positives and 3–5 false alarms, making PPV completely unstable.",
-    mgFinding: "MG quantifies false-positive harm explicitly: 3–5 men harmed per true positive found at 2% prevalence. It recommends restricting screening to high-risk subgroups (prevalence > 10%), where PPV rises to ~47% and the risk–benefit calculation shifts fundamentally.",
-    verdict: "Classical statistics gives a limited screening read; MG adds harm and prevalence context",
-    verdictColor: C.amber, verdictTag: "Prevalence Context",
-    citation: "Catalona et al. (2012), JAMA 303:1929",
-    radar: {
-      labels: ["False-positive harm","Prevalence awareness","PPV stability","Risk stratification","Decision support"],
-      stat: [2,2,2,2,3], mg: [9,9,8,9,9],
-    },
-    radarAxisInfo: [
-      { axis: "False-positive harm", what: "Does the method quantify the concrete harm done to false-positive patients — biopsy infection rates of 2–3%, bleeding 1–2%, sepsis 0.1% — and weigh this against the benefit to true positives?" },
-      { axis: "Prevalence awareness", what: "Does the method account for the fact that at 2% baseline cancer prevalence, even a test with 80% sensitivity and 90% specificity produces 86% false positives among all positives?" },
-      { axis: "PPV stability", what: "Does the method flag that PPV is highly unstable in small cohorts? In n=32 with expected 0–1 true positives, PPV could be 0%, 25%, or 50% by chance alone — making it unreliable." },
-      { axis: "Risk stratification", what: "Does the method recommend restricting screening to high-risk subgroups where prevalence exceeds 10%, raising PPV to ~47% and making the test clinically useful?" },
-      { axis: "Decision support", what: "Does the method provide actionable guidance — specific prevalence thresholds, subgroup criteria, and harm-benefit trade-offs — rather than just reporting PPV=14% and leaving the decision to the clinician?" },
-    ],
-    keyStats: [
-      { label: "PPV at 2% prevalence", val: "14%", note: "86% are false positives" },
-      { label: "Harm per true positive", val: "3–5 men", note: "Biopsy complications" },
-      { label: "PPV at 10% prevalence", val: "~47%", note: "High-risk subgroup" },
-      { label: "n=32 expected true +", val: "0–1", note: "Critically unstable" },
-    ],
-  },
-  {
-    id: "anscombe",
-    title: "Anscombe's Quartet",
-    subtitle: "Identical Statistics, Radically Different Data",
-    dataLevel: "Subgroup",
-    domain: "Statistical Foundations", n: "11 × 4 datasets",
-    classicalFinding: "All four datasets: mean x≈9, mean y≈7.5, r²≈0.67, regression slope≈0.5. Classical statistics reports identical summary results for all four.",
-    classicalError: "Dataset I: linear (statistics valid). Dataset II: perfect parabola (linear fit is structurally wrong). Dataset III: one high-leverage outlier distorts the line. Dataset IV: vertical cluster with one outlier — regression is meaningless. Same numbers, four completely different realities.",
-    mgFinding: "MG's gnostic weights differentiate all four immediately. DS-II: weights form a parabolic pattern, exposing the curve. DS-III: the outlier receives weight ≈0.04, removing its leverage. DS-IV: vertical cluster flagged as structurally degenerate. Each dataset receives a structurally honest fit.",
-    verdict: "Classical statistics is adequate for Dataset I; MG distinguishes the other structures and preserves that baseline distinction",
-    verdictColor: C.warn, verdictTag: "Four-Case Structure",
-    citation: "Anscombe, F.J. (1973), American Statistician 27:17",
-    radar: {
-      labels: ["Shape detection","Outlier flagging","Fit quality","Structural honesty","Diagnostic power"],
-      stat: [1,1,3,1,1], mg: [9,9,9,9,9],
-    },
-    radarAxisInfo: [
-      { axis: "Shape detection", what: "Can the method detect the underlying geometric structure of each dataset — linear (DS-I), parabolic (DS-II), linear-with-outlier (DS-III), degenerate-vertical (DS-IV) — rather than forcing a single linear fit on all four?" },
-      { axis: "Outlier flagging", what: "Does the method identify and downweight the single high-leverage outlier in Dataset III that pulls the regression line away from the true linear relationship followed by the other 10 points?" },
-      { axis: "Fit quality", what: "How well does the method's fitted model actually describe the data in each case? Classical r²=0.67 looks identical for all four but is only a good fit for Dataset I. MG fits each appropriately." },
-      { axis: "Structural honesty", what: "Does the method tell the truth about when a linear model is inappropriate — signalling 'this dataset is not linear' for DS-II, 'one outlier dominates' for DS-III, 'this is degenerate' for DS-IV?" },
-      { axis: "Diagnostic power", what: "Does the method produce diagnostics (weight distributions, residual patterns, gnostic divergence measures) that reveal the true nature of each dataset, rather than a single identical summary number?" },
-    ],
-    keyStats: [
-      { label: "Classical r² (all 4)", val: "≈ 0.67", note: "Identical — meaningless" },
-      { label: "DS-II MG shape", val: "Parabolic", note: "Linear fit is wrong" },
-      { label: "DS-III outlier weight", val: "≈ 0.04", note: "MG excludes it" },
-      { label: "DS-IV structure", val: "Degenerate", note: "MG flags as invalid" },
-    ],
-  },
-];
+  radarAxisInfo: [
+    { axis: "Shape detection", what: "Can the method detect the underlying geometric structure of each dataset — linear (DS-I), parabolic (DS-II), linear-with-outlier (DS-III), degenerate-vertical (DS-IV) — rather than forcing a single linear fit on all four?" },
+    { axis: "Outlier flagging", what: "Does the method identify and downweight the single high-leverage outlier in Dataset III that pulls the regression line away from the true linear relationship followed by the other 10 points?" },
+    { axis: "Fit quality", what: "How well does the method's fitted model actually describe the data in each case? Classical r²=0.67 looks identical for all four but is only a good fit for Dataset I. MG fits each appropriately." },
+    { axis: "Structural honesty", what: "Does the method tell the truth about when a linear model is inappropriate — signalling 'this dataset is not linear' for DS-II, 'one outlier dominates' for DS-III, 'this is degenerate' for DS-IV?" },
+    { axis: "Diagnostic power", what: "Does the method produce diagnostics (weight distributions, residual patterns, gnostic divergence measures) that reveal the true nature of each dataset, rather than a single identical summary number?" },
+  ],
+  keyStats: [
+    { label: "Classical r² (all 4)", val: "≈ 0.67", note: "Shared summary, not the full story" },
+    { label: "DS-II MG shape", val: "Parabolic", note: "Linear fit is wrong" },
+    { label: "DS-III outlier weight", val: "≈ 0.04", note: "MG downweights leverage" },
+    { label: "DS-IV structure", val: "Degenerate", note: "MG flags the mismatch" },
+  ],
+};
 
-// ─── Master radar: 6 universal dimensions averaged across all datasets ───────
-const MASTER_LABELS = [
-  "Confound / Bias ID",
-  "Outlier Robustness",
-  "Sub-population ID",
-  "Tail / Distribution",
-  "Policy Accuracy",
-  "Small-N Reliability",
-  "Incremental Utility",
-];
-
-// Manually mapped master scores per dataset (stat, mg) on 6 universal axes
-const MASTER_SCORES = [
-  { stat: [1,2,1,3,2,3,2], mg: [9,8,9,8,9,9,9] }, // berkeley_agg
-  { stat: [1,2,2,3,3,3,7], mg: [9,8,9,8,9,9,8] }, // berkeley_dept
-  { stat: [2,2,1,4,3,2,7], mg: [8,9,8,8,9,9,8] }, // ms_trial
-  { stat: [1,1,1,2,2,2,4], mg: [9,9,9,9,9,9,8] }, // pain_trial
-  { stat: [1,2,2,2,1,3,3], mg: [9,8,9,8,9,8,9] }, // vitamin_d
-  { stat: [1,2,1,3,1,2,3], mg: [9,8,9,8,9,9,9] }, // education_wage
-  { stat: [1,2,1,3,1,2,4], mg: [9,8,8,8,9,8,9] }, // basketball
-  { stat: [1,2,1,1,1,3,4], mg: [9,9,7,10,9,8,9] }, // chest_xray
-  { stat: [2,2,2,3,3,3,5], mg: [9,8,8,9,9,8,8] }, // psa
-  { stat: [1,1,1,2,1,3,6], mg: [9,9,8,9,9,9,9] }, // anscombe
-];
-
-const masterAvg = (axis) => ({
-  stat: Math.round(MASTER_SCORES.reduce((s, d) => s + d.stat[axis], 0) / MASTER_SCORES.length * 10) / 10,
-  mg:   Math.round(MASTER_SCORES.reduce((s, d) => s + d.mg[axis], 0)   / MASTER_SCORES.length * 10) / 10,
-});
-
-const MASTER_AVG_STAT = MASTER_LABELS.map((_, i) => masterAvg(i).stat);
-const MASTER_AVG_MG   = MASTER_LABELS.map((_, i) => masterAvg(i).mg);
+const DATASETS = [ANSCOMBE_CASE];
+const MASTER_LABELS = ANSCOMBE_CASE.radar.labels;
+const MASTER_AVG_STAT = ANSCOMBE_CASE.radar.stat;
+const MASTER_AVG_MG = ANSCOMBE_CASE.radar.mg;
 
 // ─── Radar chart (pure Canvas) ───────────────────────────────────────────────
 function RadarChart({ labels, statData, mgData, size = 260 }) {
@@ -578,7 +281,7 @@ function ScoringMethodPanel() {
               {[
                 { n: "1", title: "Identify the primary failure mode", desc: "Each dataset was categorised by its core challenge: confounding, bimodality, outlier leverage, tail risk, composition effect, or spurious correlation. This determined which capabilities matter most." },
                 { n: "2", title: "Apply a naive-use test", desc: "Scores answer: 'If I ran this method naively on this data, would it detect or miss the issue?' Naive means no special tricks, no prior knowledge of the correct answer, and no manual stratification pre-specified." },
-                { n: "3", title: "Anchor to published evidence", desc: "Classical stats scores are based on the actual published findings. MG scores are based on the benchmark notebook outputs on these datasets." },
+                { n: "3", title: "Anchor to published evidence", desc: "Classical stats scores are based on the actual published findings. MG scores are based on the benchmark notebook outputs for this quartet." },
                 { n: "4", title: "Apply the rubric with partial credit", desc: "Binary scoring is avoided. A method can be directionally right, statistically valid, clinically useful, or add incremental value without being perfect, so the score reflects that nuance." },
               ].map((s) => (
                 <div key={s.n} style={{ display: "flex", gap: 12, marginBottom: 12, alignItems: "start" }}>
@@ -796,25 +499,33 @@ function OverviewBarChart() {
   return <canvas ref={ref} style={{ width:"100%", display:"block" }} />;
 }
 
-// ─── Master radar (all 10 datasets averaged, 6 universal axes) ───────────────
+// ─── Master radar (Anscombe quartet, 5 axes) ────────────────────────────────
 function MasterRadarPanel({ isNarrow, isCompact }) {
+  const [axesOpen, setAxesOpen] = useState(false);
+  const axes = [
+    { axis: "Shape / fit mismatch", stat: 1.0, mg: 9, what: "Whether the method notices that a shared summary can hide linear, parabolic, and degenerate structures inside the four panels." },
+    { axis: "Outlier robustness", stat: 1.0, mg: 9, what: "Resistance to the high-leverage point in Dataset III, which can dominate a fitted line and distort the interpretation." },
+    { axis: "Sub-population read", stat: 1.0, mg: 9, what: "Ability to separate the four panels conceptually instead of collapsing them into one misleading regression story." },
+    { axis: "Tail / leverage", stat: 1.0, mg: 9, what: "Ability to treat the unusual point, curved pattern, and vertical cluster as signal rather than noise." },
+    { axis: "Interpretation accuracy", stat: 1.0, mg: 9, what: "Whether the method leads to the correct reading of the quartet: same headline numbers, different structures." },
+    { axis: "Small-N reliability", stat: 1.0, mg: 9, what: "MG is designed to work on very small samples, and Anscombe's quartet has n=4 per panel in the benchmarked structure." },
+    { axis: "Incremental utility", stat: 1.0, mg: 9, what: "MG adds value by correctly distinguishing all four datasets, even though the classical summary is identical across them." },
+  ];
+
   return (
     <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 26px", marginBottom: 24, backdropFilter: "blur(12px)" }}>
       <div style={{ marginBottom: 6 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
           <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.mg, boxShadow: `0 0 8px ${C.mg}` }} />
-          <span style={{ fontSize: 11, color: C.mg, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>Master Benchmark Radar</span>
+          <span style={{ fontSize: 11, color: C.mg, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>Anscombe Benchmark Radar</span>
         </div>
-        <h2 style={{ fontSize: 15, fontWeight: 700, color: C.text, margin: 0 }}>
-          Overall Performance — Averaged Across All 10 Datasets
-        </h2>
+        <h2 style={{ fontSize: 15, fontWeight: 700, color: C.text, margin: 0 }}>Shared Summary vs Structural Read</h2>
         <p style={{ fontSize: 12, color: C.muted, marginTop: 4, marginBottom: 0, lineHeight: 1.5 }}>
-          Seven universal dimensions capture every failure mode in the benchmark. Scores are the mean across all 10 datasets for each axis (0 = method fails, 10 = method succeeds).
+          The chart uses the Anscombe quartet scores directly. Classical statistics captures the shared summary; MG complements it by recovering shape, leverage, and structural differences.
         </p>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "300px 1fr", gap: 24, alignItems: "start", marginTop: 20 }}>
-        {/* Radar */}
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
           <RadarChart labels={MASTER_LABELS} statData={MASTER_AVG_STAT} mgData={MASTER_AVG_MG} size={isCompact ? 210 : isNarrow ? 240 : 280} />
           <div style={{ display: "flex", gap: 18, marginTop: 14, fontSize: 11, flexWrap: "wrap", justifyContent: "center" }}>
@@ -827,11 +538,10 @@ function MasterRadarPanel({ isNarrow, isCompact }) {
               Machine Gnostics
             </span>
           </div>
-          {/* Overall scores */}
           <div style={{ marginTop: 16, display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center" }}>
             {[
-              { label: "STAT overall", val: (MASTER_AVG_STAT.reduce((a,b)=>a+b,0)/MASTER_AVG_STAT.length).toFixed(1), col: C.stat },
-              { label: "MG overall", val: (MASTER_AVG_MG.reduce((a,b)=>a+b,0)/MASTER_AVG_MG.length).toFixed(1), col: C.mg },
+              { label: "STAT summary", val: (MASTER_AVG_STAT.reduce((a, b) => a + b, 0) / MASTER_AVG_STAT.length).toFixed(1), col: C.stat },
+              { label: "MG structure", val: (MASTER_AVG_MG.reduce((a, b) => a + b, 0) / MASTER_AVG_MG.length).toFixed(1), col: C.mg },
             ].map(({ label, val, col }) => (
               <div key={label} style={{ textAlign: "center", background: C.panel, borderRadius: 8, padding: "10px 18px", border: `1px solid ${C.border}` }}>
                 <div style={{ fontSize: 24, fontWeight: 700, color: col }}>{val}<span style={{ fontSize: 13, color: C.muted }}>/10</span></div>
@@ -841,42 +551,43 @@ function MasterRadarPanel({ isNarrow, isCompact }) {
           </div>
         </div>
 
-        {/* Axis explanations */}
         <div>
-          <div style={{ fontSize: 11, fontWeight: 700, color: C.text, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 12 }}>
-            Universal Axis Definitions
+          <div style={{ background: C.panel, border: `1px solid ${C.border}`, borderRadius: 10, overflow: "hidden" }}>
+            <button
+              onClick={() => setAxesOpen((open) => !open)}
+              style={{ width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "12px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left" }}
+            >
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: C.accent, flexShrink: 0 }} />
+              <div style={{ flex: 1 }}>
+                <div style={{ fontSize: 11, fontWeight: 700, color: C.text, textTransform: "uppercase", letterSpacing: "0.07em" }}>Anscombe Axis Definitions</div>
+                <div style={{ fontSize: 11, color: C.muted, marginTop: 3 }}>Closed by default so the overview stays compact; open to read the detailed axis meanings.</div>
+              </div>
+              <div style={{ fontSize: 14, color: C.muted, flexShrink: 0, transform: axesOpen ? "rotate(180deg)" : "none", transition: "transform .2s" }}>▾</div>
+            </button>
+            {axesOpen && (
+              <div style={{ borderTop: `1px solid ${C.border}`, padding: "12px 14px" }}>
+                {axes.map((item, i) => (
+                  <div key={i} style={{ marginBottom: 10, background: C.panel, borderRadius: 8, border: `1px solid ${C.border}`, padding: "11px 14px", display: "grid", gridTemplateColumns: "1fr auto", gap: 12, alignItems: "start" }}>
+                    <div>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: C.text, marginBottom: 3 }}>{item.axis}</div>
+                      <div style={{ fontSize: 11, color: C.muted, lineHeight: 1.6 }}>{item.what}</div>
+                    </div>
+                    <div style={{ display: "flex", gap: 8, flexShrink: 0, paddingTop: 2 }}>
+                      <div style={{ textAlign: "center" }}>
+                        <div style={{ fontSize: 16, fontWeight: 700, color: C.stat }}>{item.stat.toFixed(1)}</div>
+                        <div style={{ fontSize: 9, color: C.muted }}>STAT</div>
+                      </div>
+                      <div style={{ width: 1, background: C.border }} />
+                      <div style={{ textAlign: "center" }}>
+                        <div style={{ fontSize: 16, fontWeight: 700, color: C.mg }}>{item.mg}</div>
+                        <div style={{ fontSize: 9, color: C.muted }}>MG</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          {[
-            { axis: "Confound / Bias ID", stat: MASTER_AVG_STAT[0], mg: MASTER_AVG_MG[0], what: "Ability to detect hidden confounding variables and identify when an observed association (correlation, odds ratio) is driven by a lurking third variable rather than a true causal relationship." },
-            { axis: "Outlier Robustness", stat: MASTER_AVG_STAT[1], mg: MASTER_AVG_MG[1], what: "Resistance to high-leverage outliers that disproportionately shift the fitted model. Particularly critical in small samples (n<20) where a single atypical observation can reverse a finding." },
-            { axis: "Sub-population ID", stat: MASTER_AVG_STAT[2], mg: MASTER_AVG_MG[2], what: "Ability to detect and separate latent sub-groups within a dataset — responders vs non-responders, seasonal clusters, department tiers — rather than collapsing everything into one aggregate estimate." },
-            { axis: "Tail / Distribution", stat: MASTER_AVG_STAT[3], mg: MASTER_AVG_MG[3], what: "Ability to characterise the full shape of a distribution including its tails, rather than summarising it by mean and variance alone. Critical when the important signal lives at the extremes, not the centre." },
-            { axis: "Policy Accuracy", stat: MASTER_AVG_STAT[4], mg: MASTER_AVG_MG[4], what: "Whether the method leads to the correct real-world decision — the right drug approval, the right screening policy, the right investment, the right interpretation of bias — rather than a statistically significant but wrong conclusion." },
-            { axis: "Small-N Reliability", stat: MASTER_AVG_STAT[5], mg: MASTER_AVG_MG[5], what: "Stability of estimates when sample sizes are very small (n=8 to n=32). Small-N amplifies every weakness: outlier leverage, distribution misspecification, and false-positive rates all increase rapidly as n falls." },
-            { axis: "Incremental Utility", stat: MASTER_AVG_STAT[6], mg: MASTER_AVG_MG[6], what: "How much additional value the method adds beyond a classical baseline: clearer structure, better subgroup resolution, stronger triage, or a more useful decision layer when the baseline is already adequate." },
-          ].map((item, i) => (
-            <div key={i} style={{
-              marginBottom: 10, background: C.panel, borderRadius: 8,
-              border: `1px solid ${C.border}`, padding: "11px 14px",
-              display: "grid", gridTemplateColumns: "1fr auto", gap: 12, alignItems: "start",
-            }}>
-              <div>
-                <div style={{ fontSize: 12, fontWeight: 700, color: C.text, marginBottom: 3 }}>{item.axis}</div>
-                <div style={{ fontSize: 11, color: C.muted, lineHeight: 1.6 }}>{item.what}</div>
-              </div>
-              <div style={{ display: "flex", gap: 8, flexShrink: 0, paddingTop: 2 }}>
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: C.stat }}>{Number(item.stat).toFixed(1)}</div>
-                  <div style={{ fontSize: 9, color: C.muted }}>STAT</div>
-                </div>
-                <div style={{ width: 1, background: C.border }} />
-                <div style={{ textAlign: "center" }}>
-                  <div style={{ fontSize: 16, fontWeight: 700, color: C.mg }}>{Number(item.mg).toFixed(1)}</div>
-                  <div style={{ fontSize: 9, color: C.muted }}>MG</div>
-                </div>
-              </div>
-            </div>
-          ))}
         </div>
       </div>
     </div>
@@ -885,7 +596,7 @@ function MasterRadarPanel({ isNarrow, isCompact }) {
 
 // ─── Main app ────────────────────────────────────────────────────────────────
 function App() {
-  const [activeId, setActiveId] = useState(null);
+  const [activeId, setActiveId] = useState(ANSCOMBE_CASE.id);
   const [view, setView] = useState("overview");
   const [viewportWidth, setViewportWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1440);
   const isNarrow = viewportWidth < 1120;
@@ -898,11 +609,10 @@ function App() {
   }, []);
 
   const ds = DATASETS.find(d => d.id === activeId);
-  const totalMGWins = DATASETS.filter(d => {
-    const s = d.radar.stat.reduce((a,b)=>a+b,0)/d.radar.stat.length;
-    const m = d.radar.mg.reduce((a,b)=>a+b,0)/d.radar.mg.length;
-    return m - s >= 5;
-  }).length;
+  const statAvg = ds ? (ds.radar.stat.reduce((a,b)=>a+b,0)/ds.radar.stat.length).toFixed(1) : "0.0";
+  const mgAvg = ds ? (ds.radar.mg.reduce((a,b)=>a+b,0)/ds.radar.mg.length).toFixed(1) : "0.0";
+  const complementarityGap = ds ? (ds.radar.mg.reduce((a,b)=>a+b,0) - ds.radar.stat.reduce((a,b)=>a+b,0)) / ds.radar.stat.length : 0;
+  const agreementAxes = ds ? ds.radar.labels.filter((_, i) => ds.radar.stat[i] >= 3 && ds.radar.mg[i] >= 8).length : 0;
 
   return (
     <div style={{ background: C.bg, color: C.text, fontFamily: "'Roboto', system-ui, sans-serif", display: "flex", flexDirection: "column", overflowX: "hidden", width: "100%" }}>
@@ -915,10 +625,10 @@ function App() {
             <span style={{ fontSize: 11, color: C.mg, letterSpacing: "0.1em", fontWeight: 600, textTransform: "uppercase" }}>Benchmark · v1.0</span>
           </div>
           <h1 style={{ fontSize: isCompact ? 24 : 30, fontWeight: 700, color: C.text, letterSpacing: "-0.03em", lineHeight: 1.1, margin: 0 }}>
-            Machine Gnostics vs Classical Statistics
+            Machine Gnostics and Classical Statistics on Anscombe's Quartet
           </h1>
           <p style={{ fontSize: isCompact ? 14 : 15, color: C.muted, marginTop: 8, marginBottom: 0, lineHeight: 1.7, maxWidth: 760 }}>
-            A structured benchmark across 10 datasets showing where Machine Gnostics and Classical Statistics agree, diverge, or reverse each other in practice.
+            A single-case benchmark showing how Classical Statistics gives the shared summary while Machine Gnostics adds the structural read that explains why the four panels are not the same.
           </p>
         </div>
         <div style={{
@@ -930,9 +640,9 @@ function App() {
           maxWidth: "100%",
         }}>
           {[
-            { label: "Datasets", val: "10", accent: C.accent, note: "benchmark cases" },
-            { label: "MG adds value", val: `${totalMGWins}/10`, accent: C.mg, note: "clear extensions" },
-            { label: "Domains", val: "6", accent: C.stat, note: "research areas" },
+            { label: "Agreement", val: `${agreementAxes}/5`, accent: C.accent, note: "shared headline" },
+            { label: "Complement", val: `${mgAvg}/${statAvg}`, accent: C.mg, note: "MG adds structure" },
+            { label: "Gap", val: `${complementarityGap.toFixed(1)}`, accent: C.stat, note: "points of extra read" },
           ].map(({ label, val, accent, note }) => (
             <div key={label} style={{
               background: `linear-gradient(180deg, ${accent}18 0%, ${C.surface} 100%)`,
@@ -956,9 +666,9 @@ function App() {
         <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 14, padding: isCompact ? "16px 14px" : "18px 20px", backdropFilter: "blur(12px)", boxShadow: "0 12px 34px rgba(0,0,0,0.10)" }}>
           <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "1.4fr 1fr", gap: 16, alignItems: "start" }}>
             <div>
-              <div style={{ fontSize: 11, color: C.accent, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>How To Read This Benchmark</div>
+              <div style={{ fontSize: 11, color: C.accent, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 8 }}>How To Read This Report</div>
               <p style={{ fontSize: isCompact ? 13 : 14, color: C.text, lineHeight: 1.8, margin: 0 }}>
-                Each case compares the two approaches on decision-relevant dimensions such as confound detection, subgroup recovery, outlier stability, tail-risk sensitivity, and policy usefulness. The benchmark is designed to show not only score differences, but also where the interpretation itself changes.
+                The classical view gives one regression summary for all four panels. The MG view does not compete with that summary; it complements it by surfacing shape, leverage, and structural mismatch so the shared headline can be interpreted correctly.
               </p>
             </div>
           </div>
@@ -967,7 +677,7 @@ function App() {
 
       {/* Nav */}
       <div style={{ borderBottom: `1px solid ${C.border}`, padding: isCompact ? "0 10px" : "0 32px", display: "flex", flexWrap: "wrap" }}>
-        {[["overview","Overview"],["detail","Dataset Explorer"]].map(([v, lbl]) => (
+        {[["overview","Overview"],["detail","Detail View"]].map(([v, lbl]) => (
           <button key={v} onClick={() => setView(v)} style={{
             background: "none", border: "none", color: view===v ? C.text : C.muted,
             padding: "12px 16px", fontSize: 13, fontWeight: view===v ? 600 : 400,
@@ -988,21 +698,21 @@ function App() {
 
             {/* Bar chart */}
             <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 24px", marginBottom: 24, backdropFilter: "blur(12px)" }}>
-              <h2 style={{ fontSize: isCompact ? 16 : 18, fontWeight: 700, color: C.text, marginBottom: 6, letterSpacing: "-0.02em" }}>Average Score Per Dataset</h2>
-              <p style={{ fontSize: 13, color: C.muted, marginBottom: 20, lineHeight: 1.7 }}>Mean of each dataset's domain-specific radar scores. The rubric below explains how each score was assigned.</p>
+              <h2 style={{ fontSize: isCompact ? 16 : 18, fontWeight: 700, color: C.text, marginBottom: 6, letterSpacing: "-0.02em" }}>Anscombe Score Profile</h2>
+              <p style={{ fontSize: 13, color: C.muted, marginBottom: 20, lineHeight: 1.7 }}>The bar plot uses the Anscombe quartet scores directly. STAT captures the shared summary; MG shows the added structural read.</p>
               <OverviewBarChart />
             </div>
 
             <ScoringMethodPanel />
 
             {/* Verdict grid */}
-            <h2 style={{ fontSize: isCompact ? 16 : 18, fontWeight: 700, color: C.text, marginBottom: 16, letterSpacing: "-0.02em" }}>Dataset Verdicts</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 1fr))", gap: 14 }}>
+            <h2 style={{ fontSize: isCompact ? 16 : 18, fontWeight: 700, color: C.text, marginBottom: 16, letterSpacing: "-0.02em" }}>Anscombe Verdict</h2>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               {DATASETS.map(d => {
                 const avgS = (d.radar.stat.reduce((a,b)=>a+b,0)/d.radar.stat.length).toFixed(1);
                 const avgM = (d.radar.mg.reduce((a,b)=>a+b,0)/d.radar.mg.length).toFixed(1);
                 return (
-                  <div key={d.id} style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "18px 20px", borderLeft: `3px solid ${d.verdictColor}` }}>
+                  <div key={d.id} style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "18px 20px", borderLeft: `3px solid ${d.verdictColor}`, width: "100%", maxWidth: 1280, boxSizing: "border-box" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
                       <div>
                         <div style={{ fontSize: 11, color: C.muted, marginBottom: 3 }}>{d.domain}</div>
@@ -1033,16 +743,7 @@ function App() {
 
         {/* ── DETAIL ── */}
         {view === "detail" && (
-          <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "280px minmax(0, 1.1fr) minmax(360px, 0.9fr)", gap: 24, alignItems: "start" }}>
-            {/* Sidebar */}
-            <div style={{ position: isNarrow ? "static" : "sticky", top: isNarrow ? "auto" : 18, alignSelf: "start", minWidth: 0 }}>
-              <div style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 12 }}>Select Dataset</div>
-              <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "repeat(auto-fit, minmax(150px, 1fr))" : "repeat(auto-fit, minmax(124px, 1fr))", gap: 8 }}>
-                {DATASETS.map(d => <DatasetCard key={d.id} ds={d} isActive={activeId===d.id} onClick={() => setActiveId(d.id)} />)}
-              </div>
-            </div>
-
-            {/* Main analysis panel */}
+          <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "minmax(0, 1fr) minmax(360px, 0.9fr)", gap: 24, alignItems: "start" }}>
             {ds ? (
               <div style={{ display: "grid", gap: 16 }}>
                 <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 26px", backdropFilter: "blur(12px)" }}>
@@ -1083,20 +784,20 @@ function App() {
                   </div>
 
                   <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: 13, fontWeight: 700, color: C.text, marginBottom: 12, letterSpacing: "-0.01em" }}>Key Metrics</div>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: C.text, marginBottom: 12, letterSpacing: "-0.01em" }}>Complementary KPIs</div>
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))", gap: 10 }}>
                       {ds.keyStats.map((k, i) => <KeyStat key={i} {...k} />)}
                     </div>
                     <div style={{ marginTop: 12, background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: "12px 14px", backdropFilter: "blur(10px)" }}>
                       <div style={{ display: "flex", gap: 12, alignItems: "baseline", marginBottom: 5 }}>
-                        <span style={{ fontSize: 11, color: C.mg, fontWeight: 700, textTransform: "uppercase" }}>MG avg</span>
-                        <span style={{ fontSize: 22, fontWeight: 700, color: C.mg }}>{(ds.radar.mg.reduce((a,b)=>a+b,0)/ds.radar.mg.length).toFixed(1)}/10</span>
-                        <span style={{ fontSize: 11, color: C.muted }}>vs</span>
                         <span style={{ fontSize: 11, color: C.stat, fontWeight: 700, textTransform: "uppercase" }}>STAT avg</span>
-                        <span style={{ fontSize: 22, fontWeight: 700, color: C.stat }}>{(ds.radar.stat.reduce((a,b)=>a+b,0)/ds.radar.stat.length).toFixed(1)}/10</span>
+                        <span style={{ fontSize: 22, fontWeight: 700, color: C.stat }}>{statAvg}/10</span>
+                        <span style={{ fontSize: 11, color: C.muted }}>vs</span>
+                        <span style={{ fontSize: 11, color: C.mg, fontWeight: 700, textTransform: "uppercase" }}>MG avg</span>
+                        <span style={{ fontSize: 22, fontWeight: 700, color: C.mg }}>{mgAvg}/10</span>
                       </div>
                       <div style={{ fontSize: 11, color: C.muted }}>
-                        MG advantage: +{((ds.radar.mg.reduce((a,b)=>a+b,0) - ds.radar.stat.reduce((a,b)=>a+b,0)) / ds.radar.mg.length).toFixed(1)} points across all dimensions
+                        MG complement: +{complementarityGap.toFixed(1)} points across the quartet dimensions
                       </div>
                     </div>
                   </div>
@@ -1138,9 +839,9 @@ function App() {
               <div style={{ position: "sticky", top: 18, alignSelf: "start" }}>
                 <div style={{ display: "grid", gap: 12 }}>
                   <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: "16px 18px" }}>
-                    <div style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 8 }}>Verdict Deep Dive</div>
+                    <div style={{ fontSize: 11, color: C.muted, textTransform: "uppercase", letterSpacing: "0.07em", marginBottom: 8 }}>Why MG Helps Here</div>
                     <p style={{ fontSize: 13, color: C.text, lineHeight: 1.7, margin: 0 }}>
-                      The panel below stays visible while you read the main analysis. It keeps the explanation close to the selected dataset so you do not have to scroll back and forth.
+                      The panel stays visible while you read the main analysis. It frames MG as an added structural lens, not a replacement for the classical regression summary.
                     </p>
                   </div>
                   <VerdictDeepDivePanel ds={ds} />
