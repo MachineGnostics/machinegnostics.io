@@ -3,8 +3,8 @@
 	<canvas class="gn-web-canvas" aria-hidden="true"></canvas>
 	<section class="gn-hero gn-reveal">
 		<div class="gn-hero-bg"></div>
-		<p class="gn-overline">SMALL DATA, BIG IMPACT</p>
-		<h1>Detect critical failures early, even with small data.</h1>
+		<p class="gn-overline">The world's first open-source library for mathematical gnostics.</p>
+		<h1>Small Data, Big Impact.</h1>
 		<p class="gn-subtitle">
 			Machine Gnostics finds hidden patterns in small, noisy, high-value datasets where traditional AI and statistics struggle. Open-source, Python-native, explainable by design.
 		</p>
