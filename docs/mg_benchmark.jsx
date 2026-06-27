@@ -89,6 +89,40 @@ const MASTER_LABELS = ANSCOMBE_CASE.radar.labels;
 const MASTER_AVG_STAT = ANSCOMBE_CASE.radar.stat;
 const MASTER_AVG_MG = ANSCOMBE_CASE.radar.mg;
 
+const NOTEBOOK_RADAR = {
+  title: "Metrics Radar",
+  subtitle: "Regression and interval analysis distilled into benchmark metrics",
+  labels: ["Robust R²", "Error control", "Correlation alignment", "Mean estimate", "Outlier robustness", "Interval separation"],
+  stat: [7, 5, 8, 5, 2, 3],
+  mg: [9, 9, 9, 9, 9, 9],
+  axisInfo: [
+    {
+      axis: "Robust R²",
+      what: "Classical R² stays around the same headline value, while MG's robust fit keeps the structure readable across the four panels and surfaces the difference between a shared summary and a trustworthy fit.",
+    },
+    {
+      axis: "Error control",
+      what: "Classical RMSE is useful as a baseline, but MG can reduce error dramatically when the structural pattern is handled correctly, especially in the panels where the classical line misses the geometry.",
+    },
+    {
+      axis: "Correlation alignment",
+      what: "The correlation summary looks similar in the classical table, yet MG uses the same signal with a structural read that helps separate linear, nonlinear, and leverage-driven patterns instead of flattening them into one number.",
+    },
+    {
+      axis: "Mean estimate",
+      what: "The classical mean stays near 7.5 in every panel, while MG mean shifts with the structure and gives a more faithful center for each dataset.",
+    },
+    {
+      axis: "Outlier robustness",
+      what: "Lower weights on unusual leverage or residuals protect the fit from a single dominating point, with Dataset III being the clearest example.",
+    },
+    {
+      axis: "Interval separation",
+      what: "Classical 95% confidence intervals can be compared with MG typical and tolerance intervals, showing how MG separates the central interval from the broader tolerance band instead of collapsing them together.",
+    },
+  ],
+};
+
 // ─── Radar chart (pure Canvas) ───────────────────────────────────────────────
 function RadarChart({ labels, statData, mgData, size = 260 }) {
   const ref = useRef(null);
@@ -251,7 +285,7 @@ function ScoringMethodPanel() {
         <div style={{ width: 7, height: 7, borderRadius: "50%", background: C.accent, flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 13, fontWeight: 700, color: C.text }}>How Scores Were Assigned — Methodology & Rubric</div>
-          <div style={{ fontSize: 12, color: C.muted, marginTop: 2 }}>Read this to understand what each number means and why the MG vs Stats gaps are sized the way they are, including the incremental utility axis</div>
+          <div style={{ fontSize: 12, color: C.muted, marginTop: 2 }}>Read this to understand what each number means in this single-case benchmark and why the MG vs Stats gaps are sized the way they are, including the incremental utility axis</div>
         </div>
         <div style={{ fontSize: 14, color: C.muted, flexShrink: 0, transform: open ? "rotate(180deg)" : "none", transition: "transform .2s" }}>▾</div>
       </button>
@@ -261,8 +295,8 @@ function ScoringMethodPanel() {
             <div>
               <div style={{ fontSize: 12, fontWeight: 700, color: C.text, marginBottom: 12 }}>The 1–10 Rubric</div>
               {[
-                { range: "1–2", col: C.warn, label: "Method completely fails", desc: "Produces a wrong answer, no detection, or actively misleads. Score of 1 = structurally blind to this challenge." },
-                { range: "3–4", col: C.amber, label: "Partial detection", desc: "Gets the direction right or detects part of the signal, but with significant gaps, instability, or incomplete information." },
+                { range: "1–2", col: C.warn, label: "Method completely fails", desc: "Produces a wrong answer, no detection, or actively misleads. Score of 1 = structurally blind to this benchmark case." },
+                { range: "3–4", col: C.amber, label: "Partial detection", desc: "Gets the direction right or detects part of the signal, but with significant gaps, instability, or incomplete information for this case." },
                 { range: "5–6", col: "#F59E0B", label: "Conditional success", desc: "Could detect the issue if the analyst already suspects it and runs the right post-hoc test. No automatic detection." },
                 { range: "7–8", col: C.mg, label: "Largely succeeds", desc: "Succeeds with minor caveats — may require a reasonable assumption or a secondary diagnostic step." },
                 { range: "9–10", col: "#22D3A5", label: "Succeeds cleanly", desc: "Succeeds robustly without special analyst effort. Scores of 9 rather than 10 reflect that real-world noise always exists." },
@@ -279,9 +313,9 @@ function ScoringMethodPanel() {
             <div>
               <div style={{ fontSize: 12, fontWeight: 700, color: C.text, marginBottom: 12 }}>Assignment Process — 4 Steps</div>
               {[
-                { n: "1", title: "Identify the primary failure mode", desc: "Each dataset was categorised by its core challenge: confounding, bimodality, outlier leverage, tail risk, composition effect, or spurious correlation. This determined which capabilities matter most." },
-                { n: "2", title: "Apply a naive-use test", desc: "Scores answer: 'If I ran this method naively on this data, would it detect or miss the issue?' Naive means no special tricks, no prior knowledge of the correct answer, and no manual stratification pre-specified." },
-                { n: "3", title: "Anchor to published evidence", desc: "Classical stats scores are based on the actual published findings. MG scores are based on the benchmark notebook outputs for this quartet." },
+                { n: "1", title: "Identify the primary failure mode", desc: "This benchmark case is scored by its core challenge: shape mismatch, outlier leverage, tail risk, or structural degeneration. That determines which capabilities matter most." },
+                { n: "2", title: "Apply a naive-use test", desc: "Scores answer: 'If I ran this method naively on this case, would it detect or miss the issue?' Naive means no special tricks, no prior knowledge of the correct answer, and no manual stratification pre-specified." },
+                { n: "3", title: "Anchor to published evidence", desc: "Classical stats scores are based on the actual published findings. MG scores are based on the benchmark outputs for this case." },
                 { n: "4", title: "Apply the rubric with partial credit", desc: "Binary scoring is avoided. A method can be directionally right, statistically valid, clinically useful, or add incremental value without being perfect, so the score reflects that nuance." },
               ].map((s) => (
                 <div key={s.n} style={{ display: "flex", gap: 12, marginBottom: 12, alignItems: "start" }}>
@@ -346,6 +380,107 @@ function RadarAxisPanel({ items, statScores, mgScores }) {
           </div>
         </div>
       ))}
+    </div>
+  );
+}
+
+function CollapsibleAxisGuide({ title, summary, items, statScores, mgScores, defaultOpen = false }) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  return (
+    <div style={{ background: C.panel, border: `1px solid ${C.border}`, borderRadius: 10, overflow: "hidden", backdropFilter: "blur(10px)" }}>
+      <button
+        onClick={() => setOpen((value) => !value)}
+        style={{
+          width: "100%", display: "flex", alignItems: "center", gap: 8,
+          padding: "10px 14px", background: "none", border: "none", cursor: "pointer", textAlign: "left",
+        }}
+      >
+        <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.accent }} />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 11, fontWeight: 700, color: C.text, textTransform: "uppercase", letterSpacing: "0.07em" }}>{title}</div>
+          <div style={{ fontSize: 10, color: C.muted, marginTop: 3, lineHeight: 1.5 }}>{summary}</div>
+        </div>
+        <div style={{ fontSize: 14, color: C.muted, flexShrink: 0, transform: open ? "rotate(180deg)" : "none", transition: "transform .2s" }}>▾</div>
+      </button>
+      {open && (
+        <div style={{ borderTop: `1px solid ${C.border}`, padding: "10px 14px" }}>
+          {items.map((item, i) => (
+            <div key={i} style={{ marginBottom: i < items.length - 1 ? 10 : 0, background: C.surface, borderRadius: 8, border: `1px solid ${C.border}`, padding: "10px 12px", display: "grid", gridTemplateColumns: "1fr auto", gap: 12, alignItems: "start" }}>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 700, color: C.text, marginBottom: 3 }}>{item.axis}</div>
+                <div style={{ fontSize: 11, color: C.muted, lineHeight: 1.6 }}>{item.what}</div>
+              </div>
+              {statScores && mgScores ? (
+                <div style={{ display: "flex", gap: 8, flexShrink: 0, paddingTop: 2 }}>
+                  <div style={{ textAlign: "center" }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: C.stat }}>{statScores[i].toFixed ? statScores[i].toFixed(1) : statScores[i]}</div>
+                    <div style={{ fontSize: 9, color: C.muted }}>STAT</div>
+                  </div>
+                  <div style={{ width: 1, background: C.border }} />
+                  <div style={{ textAlign: "center" }}>
+                    <div style={{ fontSize: 16, fontWeight: 700, color: C.mg }}>{mgScores[i].toFixed ? mgScores[i].toFixed(1) : mgScores[i]}</div>
+                    <div style={{ fontSize: 9, color: C.muted }}>MG</div>
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function NotebookRadarPanel({ isNarrow, isCompact }) {
+  return (
+    <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 26px", marginBottom: 24, backdropFilter: "blur(12px)" }}>
+      <div style={{ marginBottom: 6 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
+          <div style={{ width: 6, height: 6, borderRadius: "50%", background: C.accent, boxShadow: `0 0 8px ${C.accent}` }} />
+          <span style={{ fontSize: 11, color: C.accent, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.08em" }}>{NOTEBOOK_RADAR.title}</span>
+        </div>
+        <h2 style={{ fontSize: 15, fontWeight: 700, color: C.text, margin: 0 }}>Regression metrics and interval learning</h2>
+        <p style={{ fontSize: 12, color: C.muted, marginTop: 4, marginBottom: 0, lineHeight: 1.5 }}>{NOTEBOOK_RADAR.subtitle}</p>
+      </div>
+
+      <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "300px 1fr", gap: 24, alignItems: "start", marginTop: 20 }}>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <RadarChart labels={NOTEBOOK_RADAR.labels} statData={NOTEBOOK_RADAR.stat} mgData={NOTEBOOK_RADAR.mg} size={isCompact ? 210 : isNarrow ? 240 : 280} />
+          <div style={{ display: "flex", gap: 18, marginTop: 14, fontSize: 11, flexWrap: "wrap", justifyContent: "center" }}>
+            <span style={{ color: C.stat, display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 12, height: 3, background: C.stat, display: "inline-block", borderRadius: 1 }} />
+              Classical / baseline
+            </span>
+            <span style={{ color: C.mg, display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 12, height: 3, background: C.mg, display: "inline-block", borderRadius: 1 }} />
+              Machine Gnostics
+            </span>
+          </div>
+          <div style={{ marginTop: 16, display: "flex", gap: 20, flexWrap: "wrap", justifyContent: "center" }}>
+            {[
+              { label: "STAT avg", val: (NOTEBOOK_RADAR.stat.reduce((a, b) => a + b, 0) / NOTEBOOK_RADAR.stat.length).toFixed(1), col: C.stat },
+              { label: "MG avg", val: (NOTEBOOK_RADAR.mg.reduce((a, b) => a + b, 0) / NOTEBOOK_RADAR.mg.length).toFixed(1), col: C.mg },
+            ].map(({ label, val, col }) => (
+              <div key={label} style={{ textAlign: "center", background: C.panel, borderRadius: 8, padding: "10px 18px", border: `1px solid ${C.border}` }}>
+                <div style={{ fontSize: 24, fontWeight: 700, color: col }}>{val}<span style={{ fontSize: 13, color: C.muted }}>/10</span></div>
+                <div style={{ fontSize: 10, color: C.muted, marginTop: 2 }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <CollapsibleAxisGuide
+            title="Axis Read Guide"
+            summary="Closed by default; open to read the metric definitions used in this benchmark report."
+            items={NOTEBOOK_RADAR.axisInfo}
+            statScores={NOTEBOOK_RADAR.stat}
+            mgScores={NOTEBOOK_RADAR.mg}
+            defaultOpen={false}
+          />
+        </div>
+      </div>
     </div>
   );
 }
@@ -451,11 +586,10 @@ function OverviewBarChart() {
         const maxChars = isPhoneChart ? 10 : isCompactChart ? 12 : 14;
         const short = d.name.length > maxChars ? d.name.slice(0, maxChars) + "…" : d.name;
         ctx.save();
-        ctx.translate(cx2 + 2, pad.t + ch + 28);
-        ctx.rotate(-Math.PI / 4);
+        ctx.translate(cx2 + 2, pad.t + ch + 22);
         ctx.fillStyle = C.muted;
         ctx.font = (isPhoneChart ? "8px" : "9px") + " system-ui";
-        ctx.textAlign = "right";
+        ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         ctx.fillText(short, 0, 0);
         ctx.restore();
@@ -696,6 +830,9 @@ function App() {
             {/* Master radar */}
             <MasterRadarPanel isNarrow={isNarrow} isCompact={isCompact} />
 
+            {/* Metrics radar */}
+            <NotebookRadarPanel isNarrow={isNarrow} isCompact={isCompact} />
+
             {/* Bar chart */}
             <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 12, padding: isCompact ? "18px 14px" : "22px 24px", marginBottom: 24, backdropFilter: "blur(12px)" }}>
               <h2 style={{ fontSize: isCompact ? 16 : 18, fontWeight: 700, color: C.text, marginBottom: 6, letterSpacing: "-0.02em" }}>Anscombe Score Profile</h2>
@@ -806,6 +943,8 @@ function App() {
                 <div style={{ marginBottom: 16 }}>
                   <RadarAxisPanel items={ds.radarAxisInfo} statScores={ds.radar.stat} mgScores={ds.radar.mg} />
                 </div>
+
+                <NotebookRadarPanel isNarrow={isNarrow} isCompact={isCompact} />
 
                 <div style={{ display: "grid", gridTemplateColumns: isNarrow ? "1fr" : "1fr 1fr", gap: 14 }}>
                   <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: "16px 18px", borderLeft: `3px solid ${C.stat}` }}>
