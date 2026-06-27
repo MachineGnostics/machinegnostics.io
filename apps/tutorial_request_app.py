@@ -33,8 +33,18 @@ GOOGLE_SHEETS_HEADERS = [
     "first_name",
     "last_name",
     "email",
+    "user_profile",
     "selected_tracks",
     "newsletter_opt_in",
+]
+
+USER_PROFILE_OPTIONS = [
+    "Developer",
+    "Researcher",
+    "Business",
+    "Enthusiast",
+    "Student",
+    "Collaborator",
 ]
 
 TUTORIALS = {
@@ -171,7 +181,7 @@ def ensure_worksheet_exists(spreadsheet_id: str, worksheet_name: str, headers: d
 
 def get_sheet_rows(spreadsheet_id: str, worksheet_name: str, headers: dict[str, str]) -> list[list[str]]:
     range_name = requests.utils.quote(worksheet_name, safe="")
-    values_url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range_name}!A:F"
+    values_url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range_name}!A:G"
     response = requests.get(values_url, headers=headers, timeout=30)
     response.raise_for_status()
     return response.json().get("values", [])
@@ -185,10 +195,17 @@ def append_sheet_row(
 ) -> None:
     range_name = requests.utils.quote(worksheet_name, safe="")
     append_url = (
-        f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range_name}!A:F:append"
+        f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range_name}!A:G:append"
         "?valueInputOption=RAW&insertDataOption=INSERT_ROWS"
     )
     response = requests.post(append_url, headers=headers, json={"values": [values]}, timeout=30)
+    response.raise_for_status()
+
+
+def update_sheet_header_row(spreadsheet_id: str, worksheet_name: str, headers: list[str], auth_headers: dict[str, str]) -> None:
+    range_name = requests.utils.quote(worksheet_name, safe="")
+    update_url = f"https://sheets.googleapis.com/v4/spreadsheets/{spreadsheet_id}/values/{range_name}!A1:Z1?valueInputOption=RAW"
+    response = requests.put(update_url, headers=auth_headers, json={"values": [headers]}, timeout=30)
     response.raise_for_status()
 
 
@@ -196,6 +213,7 @@ def append_newsletter_to_google_sheets(
     first_name: str,
     last_name: str,
     email: str,
+    user_profile: str,
     selected: list[str],
 ) -> tuple[bool, str]:
     settings = get_google_sheets_settings()
@@ -218,6 +236,10 @@ def append_newsletter_to_google_sheets(
         rows = [GOOGLE_SHEETS_HEADERS]
 
     header_row = rows[0]
+    if "user_profile" not in header_row:
+        update_sheet_header_row(settings["spreadsheet_id"], settings["worksheet_name"], GOOGLE_SHEETS_HEADERS, headers)
+        header_row = GOOGLE_SHEETS_HEADERS
+
     normalized_email = email.strip().lower()
     if "email" in header_row:
         email_index = header_row.index("email")
@@ -233,6 +255,7 @@ def append_newsletter_to_google_sheets(
             first_name.strip(),
             last_name.strip(),
             email.strip(),
+            user_profile.strip(),
             " | ".join(selected),
             "yes",
         ],
@@ -245,9 +268,10 @@ def save_newsletter_subscriber(
     first_name: str,
     last_name: str,
     email: str,
+    user_profile: str,
     selected: list[str],
 ) -> tuple[bool, str]:
-    google_saved, google_status = append_newsletter_to_google_sheets(first_name, last_name, email, selected)
+    google_saved, google_status = append_newsletter_to_google_sheets(first_name, last_name, email, user_profile, selected)
     if google_status in {"saved", "duplicate"}:
         return google_saved, google_status
 
@@ -270,6 +294,7 @@ def save_newsletter_subscriber(
         "first_name": first_name.strip(),
         "last_name": last_name.strip(),
         "email": email.strip(),
+        "user_profile": user_profile.strip(),
         "selected_tracks": " | ".join(selected),
         "newsletter_opt_in": "yes",
     }
@@ -468,6 +493,13 @@ with col1:
 with col2:
     last_name = st.text_input("Last Name", placeholder="Doe")
 
+user_profile = st.selectbox(
+    "User Profile",
+    options=USER_PROFILE_OPTIONS,
+    index=None,
+    placeholder="Choose the profile that best describes you...",
+)
+
 recipient_email = st.text_input("Your Email Address", placeholder="jane.doe@example.com")
 required_consent = st.checkbox("I agree to share my name and email address to receive Machine Gnostics tutorials and communication.")
 receive_updates = st.checkbox("Optional: I want to receive updates and future communications from Machine Gnostics.")
@@ -482,6 +514,8 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
         errors.append("First name is required.")
     if not last_name.strip():
         errors.append("Last name is required.")
+    if not user_profile:
+        errors.append("Please select a user profile.")
     if not recipient_email.strip() or not is_valid_email(recipient_email.strip()):
         errors.append("Please enter a valid recipient email.")
     if not required_consent:
@@ -499,6 +533,7 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
             first_name=first_name,
             last_name=last_name,
             email=recipient_email,
+            user_profile=user_profile,
             selected=selected_tutorials,
         )
         with st.spinner("Sending your Machine Gnostics learning pack..."):
