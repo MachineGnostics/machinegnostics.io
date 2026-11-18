@@ -206,6 +206,14 @@ def get_secret_value(key: str) -> str:
         return os.environ.get(key, "")
 
 
+def get_smtp_host() -> str:
+    return get_secret_value("SMTP_HOST") or "smtp.zoho.com"
+
+
+def get_smtp_port() -> int:
+    return int(get_secret_value("SMTP_PORT") or 465)
+
+
 def normalize_google_sheet_id(value: str) -> str:
     trimmed_value = value.strip()
     if "/spreadsheets/d/" in trimmed_value:
@@ -518,7 +526,7 @@ def send_email(
     msg.attach(MIMEText(build_email_html(first_name, last_name, selected, sender_email), "html"))
 
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
+    with smtplib.SMTP_SSL(get_smtp_host(), get_smtp_port(), context=context) as server:
         server.login(sender_email, app_password)
         server.sendmail(sender_email, recipient_email, msg.as_string())
 
@@ -540,15 +548,15 @@ div[data-testid="stForm"] { border: none !important; padding: 0 !important; }
 st.title("Machine Gnostics Learning Hub - Free Resources")
 st.markdown("Choose the MG learning tracks you want, preview the exact resources before you send, and receive the pack by email.")
 
-sender_email = get_secret_value("GMAIL_SENDER_EMAIL")
-app_password = get_secret_value("GMAIL_APP_PASSWORD")
+sender_email = get_secret_value("SMTP_USER")
+app_password = get_secret_value("SMTP_PASSWORD")
 
 with st.sidebar:
     with st.expander("Delivery Settings", expanded=False):
         if sender_email and app_password:
             st.success("Secrets loaded successfully.")
         else:
-            st.warning("Set GMAIL_SENDER_EMAIL and GMAIL_APP_PASSWORD in secrets.")
+            st.warning("Set SMTP_USER and SMTP_PASSWORD in secrets.")
         st.caption("To save subscribers privately in Google Sheets, add GOOGLE_SHEET_ID and GOOGLE_SERVICE_ACCOUNT.")
         if st.button("Test Google Sheets connection", use_container_width=True):
             settings = get_google_sheets_settings()
@@ -618,9 +626,9 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
     if not required_consent:
         errors.append("Please tick the consent checkbox to continue.")
     if not sender_email.strip() or not is_valid_email(sender_email.strip()):
-        errors.append("Please enter your Gmail address in the sidebar.")
+        errors.append("SMTP_USER is missing or invalid in secrets.")
     if not app_password.strip():
-        errors.append("Please enter your Gmail App Password in the sidebar.")
+        errors.append("SMTP_PASSWORD is missing in secrets.")
 
     if errors:
         for error in errors:
@@ -659,6 +667,6 @@ if st.button("Send Learning Pack", type="primary", use_container_width=True):
                 st.link_button("Need another free tutorial? Open the request app", FREE_TUTORIAL_URL, use_container_width=True)
                 st.balloons()
             except smtplib.SMTPAuthenticationError:
-                st.error("Authentication failed. Make sure you're using a Gmail App Password, not your regular password.")
+                st.error("Authentication failed. Check SMTP_USER and SMTP_PASSWORD in secrets. If two-step login is on, use a Zoho app password.")
             except Exception as ex:
                 st.error(f"Failed to send email: {ex}")
