@@ -965,7 +965,7 @@
 	<div class="contact-modal-content">
 		<button type="button" class="contact-modal-close" onclick="closeContactModal()">✕</button>
 		<h2>Get in Touch</h2>
-		<form id="globalContactForm" action="https://formsubmit.co/info.machinegnostics@gmail.com" method="POST">
+		<form id="globalContactForm" action="https://formsubmit.co/info@machinegnostics.com" method="POST">
 			<div class="gn-form-row">
 				<div class="gn-form-group">
 					<label for="globalName">First Name</label>
@@ -1047,7 +1047,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			var controller = new AbortController();
 			var timeoutId = setTimeout(function() { controller.abort(); }, 8000);
 			
-			fetch('https://formsubmit.co/info.machinegnostics@gmail.com', {
+			fetch('https://formsubmit.co/info@machinegnostics.com', {
 				method: 'POST',
 				body: formData,
 				signal: controller.signal
