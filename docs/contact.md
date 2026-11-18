@@ -23,7 +23,7 @@
 			For general inquiries, business opportunities, or technical questions:
 		</p>
 		<div class="gn-email-box">
-			<a href="mailto:info.machinegnostics@gmail.com" class="gn-email-link">info.machinegnostics@gmail.com</a>
+			<a href="mailto:info@machinegnostics.com" class="gn-email-link">info@machinegnostics.com</a>
 		</div>
 	</section>
 
@@ -32,7 +32,7 @@
 		<p>
 			Prefer to fill out a form? Use this to tell us more about your inquiry, and we'll get back to you promptly.
 		</p>
-		<form action="https://formsubmit.co/info.machinegnostics@gmail.com" method="POST" class="gn-contact-form">
+		<form action="https://formsubmit.co/info@machinegnostics.com" method="POST" class="gn-contact-form">
 			<div class="gn-form-group">
 				<label for="inquiry-type">Inquiry Type</label>
 				<select id="inquiry-type" name="inquiry_type" required>
@@ -133,7 +133,7 @@
 				const timeoutId = setTimeout(() => controller.abort(), 8000);
 				
 				// Submit form
-				fetch('https://formsubmit.co/info.machinegnostics@gmail.com', {
+				fetch('https://formsubmit.co/info@machinegnostics.com', {
 					method: 'POST',
 					body: formData,
 					signal: controller.signal
@@ -149,7 +149,7 @@
 					clearTimeout(timeoutId);
 					button.disabled = false;
 					button.textContent = originalText;
-					showErrorMessage('We could not confirm delivery. Please try again or email us directly at info.machinegnostics@gmail.com.');
+					showErrorMessage('We could not confirm delivery. Please try again or email us directly at info@machinegnostics.com.');
 				});
 				
 				function showSuccessMessage() {
