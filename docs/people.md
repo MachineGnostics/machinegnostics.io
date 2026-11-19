@@ -18,7 +18,7 @@
 				<h3>Dr. Nirmal Parmar</h3>
 				<p class="gn-founder-role">Founder, Creator, and Lead Researcher of Machine Gnostics</p>
 				<p class="gn-founder-bio">
-					Leads the Machine Gnostics project, its research agenda, and the translation of the Mathematical Gnostics theory into practical tools for developers and industry.
+					Leads the Machine Gnostics project across research, development, and business, turning the Mathematical Gnostics theory into practical tools for developers and industry.
 				</p>
 				<div class="gn-founder-links">
 					<a class="gn-founder-link gn-founder-link--web" href="https://www.nirmalparmar.in" target="_blank" rel="noopener noreferrer">
@@ -55,7 +55,7 @@
 		<div class="gn-features gn-compact-grid">
 			<article class="gn-feature">
 				<h3>Dr. Kamlesh Parmar</h3>
-				<p class="gn-meta">Assistant Professor - India</p>
+				<p class="gn-meta">Academic Research Advisor - India</p>
 				<p>Supports research collaboration and advises on how Machine Gnostics can be applied in scientific and engineering applications.</p>
 			</article>
 		</div>
@@ -66,8 +66,8 @@
 		<div class="gn-features gn-compact-grid">
 			<article class="gn-feature">
 				<h3>Chirag Vadera</h3>
-				<p class="gn-meta">Business Strategy Advisor</p>
-				<p>Advises on business direction, strategic positioning, and how Machine Gnostics can engage high-value industry problems.</p>
+				<p class="gn-meta">Marketing &amp; Website Advisor</p>
+				<p>Helps with marketing and website content optimization, making the website more business-friendly for visitors and potential partners.</p>
 			</article>
 			<article class="gn-feature">
 				<h3>Kevin Shah</h3>

@@ -187,7 +187,7 @@
 }
 
 .gn-home .gn-features.gn-compact-grid {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .gn-home .gn-compact-grid .gn-feature {
